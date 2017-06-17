@@ -1,18 +1,17 @@
 {
-  "name": "konami-code-lab",
+  "name": "moving-things-with-java-script",
   "version": "0.1.0",
-  "description": "Using event listeners, implement the Konami Code on a page",
+  "description": "Practice animating elements on the page with JavaScript",
   "engines": {
     "node": "6.x",
     "npm": "3.x"
   },
   "main": "index.js",
   "scripts": {
-    "test": "mocha -R mocha-multi --reporter-options nyan=-,json=.results.json"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/learn-co-curriculum/konami-code-lab.git"
+    "url": "git+ssh://git@github.com/learn-co-curriculum/moving-things-with-java-script.git"
   },
   "keywords": [
     "javascript",
@@ -22,11 +21,11 @@
   "author": "pletcher",
   "license": "SEE LICENSE IN LICENSE.md",
   "bugs": {
-    "url": "https://github.com/learn-co-curriculum/konami-code-lab/issues"
+    "url": "https://github.com/learn-co-curriculum/moving-things-with-java-script/issues"
   },
-  "homepage": "https://github.com/learn-co-curriculum/konami-code-lab#readme",
+  "homepage": "https://github.com/learn-co-curriculum/moving-things-with-java-script#readme",
   "devDependencies": {
-    "expect": "^1.20.2",
+    "expect": "^1.20.1",
     "jsdom": "^9.2.1",
     "mocha": "^2.5.3",
     "mocha-jsdom": "^1.1.0",
