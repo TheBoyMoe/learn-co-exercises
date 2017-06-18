@@ -26,12 +26,12 @@ function checkCollision(rock) {
 	// DODGER is 20px high
 	// GAME_HEIGHT - 20 - 20 = 360px;
 	if (top > 360) {
-		const dodgerLeftEdge = positionToInteger(DODGER.style.left)
+		const dodgerLeftEdge = positionToInteger(DODGER.style.left);
 		
 		// FIXME: The DODGER is 40 pixels wide -- how do we get the right edge?
 		const dodgerRightEdge = 0;
 		
-		const rockLeftEdge = positionToInteger(rock.style.left)
+		const rockLeftEdge = positionToInteger(rock.style.left);
 		
 		// FIXME: The rock is 20 pixel's wide -- how do we get the right edge?
 		const rockRightEdge = 0;
@@ -82,16 +82,12 @@ function createRock(x) {
 			endGame();
 		/**
 		 * Otherwise, if the rock hasn't reached the bottom of
-		 * the GAME, we want to move it again.
-		 */
-		move(rock);
-		/**
-		 * But if the rock *has* reached the bottom of the GAME,
+		 * the GAME, we want to move it again. But if the rock
+		 * *has* reached the bottom of the GAME,
 		 * we should remove the rock from the DOM
 		 */
-		//removeRock(rock);
+		move(rock);
 	}
-	
 	
 	// We should kick of the animation of the rock around here
 	moveRock();
@@ -99,20 +95,11 @@ function createRock(x) {
 	// Add the rock to ROCKS so that we can remove all rocks
 	// when there's a collision
 	ROCKS.push(rock);
-	// console.log('Add rock', ROCKS);
 	
 	// Finally, return the rock element you've created
 	return rock
 }
 
-function removeRock(elm) {
-	console.log(elm.style.top);
-	if(elm.style.top > GAME_HEIGHT){
-		GAME.removeChild(elm);
-		ROCKS.unshift();
-		console.log('Remove rock', ROCKS);
-	}
-}
 
 function move(elm) {
 	let top = elm.style.top.replace('px', '');
@@ -121,6 +108,9 @@ function move(elm) {
 		elm.style.top = `${top += 2}px`;
 		if(top < GAME_HEIGHT)
 			window.requestAnimationFrame(step);
+		else {
+			GAME.removeChild(elm);
+		}
 	}
 	window.requestAnimationFrame(step);
 }
@@ -197,9 +187,9 @@ function positionToInteger(p) {
 }
 
 function start() {
-	window.addEventListener('keydown', moveDodger)
+	window.addEventListener('keydown', moveDodger);
 	
-	START.style.display = 'none'
+	START.style.display = 'none';
 	
 	gameInterval = setInterval(function() {
 		createRock(Math.floor(Math.random() *  (GAME_WIDTH - 20)))
