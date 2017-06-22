@@ -34,6 +34,12 @@ array.each do |value|
     puts "#{value * 2} using each loop"
 end    
 
+# each loop with an index
+X.each_with_index do |item, index|
+  puts "current_index: #{index}"
+end
+
+
 # execute a loop a set number of times
 10.times do
     puts "#{counter} using times loop"

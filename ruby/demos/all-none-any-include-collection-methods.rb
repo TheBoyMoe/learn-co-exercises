@@ -50,5 +50,5 @@ end
 ####################################################
 
 # returns true if a given element exists in the array, false otherwise
-[1,2,4,6,7,8].any?(6) #=> true
-[1,2,4,5,6,7].any?(12) #=> false
+[1,2,4,6,7,8].include?(6) #=> true
+[1,2,4,5,6,7].include?(12) #=> false
