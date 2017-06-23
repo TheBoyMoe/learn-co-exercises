@@ -1,3 +1,6 @@
+# to execute individual methods, launch IRB, from the prompt type
+# load './methods.rb'
+
 def myFirstMethod
     put 'This is my First Method'
 end
