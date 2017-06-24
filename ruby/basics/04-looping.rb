@@ -10,13 +10,19 @@ loop do
     end
 end
 
-# while loop
+loop {
+    # .. do something
+    # do/end mark the beggining and end of a block    
+}
+
+
+# while loop - continues running while the condition is true
 while counter < 20
     puts "#{counter} looping using while"
     counter += 1
 end
 
-#until loop
+#until loop - continues running while the condition is false
 until counter == 30
     puts "#{counter} looping using until"
     counter += 1
