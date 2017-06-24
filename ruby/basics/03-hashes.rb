@@ -1,3 +1,17 @@
+=begin
+    References
+    [1] http://ruby-doc.org/core-2.1.2/Hash.html
+        
+=end
+
+rescue => exception
+    
+else
+    
+ensure
+    
+end
+
 # create a hash by instantiating a new instance of the Hash class:
 item = Hash.new
 
