@@ -1,6 +1,11 @@
 # to execute individual methods, launch IRB, from the prompt type
 # load './methods.rb'
 
+# to find out if a particular object responds to a particular method
+str = 'Hello world'
+str.respond_to?("upcase") #=> upcase
+
+
 def myFirstMethod
     put 'This is my First Method'
 end
