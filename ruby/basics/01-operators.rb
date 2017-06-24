@@ -28,3 +28,31 @@ a == b #=> true
 c = {"name" => "John"}
 d = {"name" => "John"}
 c == d #=> true
+
+
+puts "Enter your age at the prompt"
+age gets.chmop
+age = age.to_i
+
+if age > 60
+    puts "You old dog!"
+else
+    puts "You're still wet behind the ears"
+end
+
+# using case statement 
+print "Modify your name. Type 'uppercase' or 'reverse': "
+answer = gets.chomp.downcase
+
+case answer 
+when "reverse"
+  puts "This is your name backwards:"
+  puts name.reverse
+when "uppercase"
+  puts "This is your name in all uppercase letters:"
+  puts name.upcase
+when "both"
+  puts name.reverse.upcase
+else
+  puts "Ok, maybe later."
+end
