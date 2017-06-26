@@ -2,6 +2,8 @@
     References
     [1] http://ruby-doc.org/core-2.1.5/TrueClass.html
     [2] http://ruby-doc.org/core-2.1.5/FalseClass.html
+    [3] http://ruby-doc.org/core-2.1.5/NilClass.html
+    
 
     - true and false classes in ruby are examples of singletons, only one instance of each can exist in the app at any moment in time.
     - you cannot instantiate tru and false like other classes with the .new method, r.g TrueClass.new => NoMethodError
