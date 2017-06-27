@@ -1,0 +1,23 @@
+---
+- !ruby/object:Contact
+  phone_numbers:
+  - !ruby/object:PhoneNumber
+    kind: home
+    number: 123-456-7896
+  - !ruby/object:PhoneNumber
+    kind: mobile
+    number: 077 9526 9856
+  - !ruby/object:PhoneNumber
+    kind: work
+    number: 456-7896-6547
+  addresses:
+  - !ruby/object:Address
+    kind: home
+    street_1: 1 the street
+    city: London
+    state: ''
+    postal_code: N4 4BW
+    street_2: ''
+  first_name: Tom
+  middle_name: ''
+  last_name: Jones
