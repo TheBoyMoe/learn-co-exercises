@@ -1,6 +1,11 @@
 =begin
     YAML - a class found in the std ruby library, it will serialise our ruby objects into a text based format which can be written out to a file
     IO   - a class found in the std library, it is used to read/write to the file system
+
+    References:
+    [1] https://ruby-doc.org/core-2.3.1/IO.html
+    [2] http://ruby-doc.org/stdlib-2.2.0/libdoc/yaml/rdoc/YAML.html
+    [3] http://ruby-doc.org/stdlib-2.2.0/libdoc/psych/rdoc/Psych.html
 =end
 
 require "./contact"
