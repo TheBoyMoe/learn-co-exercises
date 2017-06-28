@@ -1,0 +1,25 @@
+<%#
+    POST requests are intended for brand new resources that you haven't assigned a path to. 
+    But this time we're modifying an existing resource on the server, one we have already 
+    assigned a path for (a slash followed by the page title). When you're modifying an 
+    existing resource with a known URL, it's recommended to use a PUT request, not a POST request.
+    Form only supports GET and POST method requests. Sinatra can handle PUT requests, 
+    it will look for an additional parameter _method. Sinatra will treat POSt requests as PUT 
+    if it sees an _method attribute set to PUT.
+
+    Use an input field with type attribute set to hidden, name to _method and a value of PUT
+%>
+
+<div>
+    <h1>Edit Page: <%= @title %></h1>
+    <form method="post" action="/<%= @title %>">
+        <input type="hidden" name="_method" value="put">
+        <fieldset>
+            <label for="content">Content:</label>
+            <textarea rows="10" columns="50" id="content" name="content"><%= @content %></textarea>
+        </fieldset>
+        <input type="submit">
+    </form>
+
+    <p><a href="/">Back to index</a></p>
+</div>

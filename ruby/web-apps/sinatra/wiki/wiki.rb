@@ -66,6 +66,14 @@ get('/:title') do
     erb :show
 end
 
+# load the pages content into a form to allow editing
+get('/:title/edit') do
+    @title = params[:title]
+    @content = page_content(@title)
+    erb :edit
+end
+
+
 # form data submitted via POST method is accessible via the params hash, review using params.inspect
 post('/create') do
     # save the submitted data to text file
@@ -74,3 +82,10 @@ post('/create') do
     # invalid charaters, e.g spaces, are encoded using the uri library
     redirect URI.escape("/#{params['title']}")
 end
+
+put('/:title') do
+    save_content(params['title'], params['content'])
+    redirect URI.escape("/#{params['title']}")
+end
+
+
