@@ -26,6 +26,7 @@ gem check [gem_name] #=> Check and repair a gem repository for added or missing 
 gem cleanup [gem_name] #=> removes old versions of gems not req'd to meet a dependency, removes all if name not specified
 gem install [gem_name]
 gem install [gem_name] -v [ver_no] #=> to install a specific version
+gem install [gem_name] -N #=> prevent doc generation 
 gem uninstall [gem_name]
 gem uninstall [gem_name] -v [ver_no] #=> to uninstall a particular version
 gem update [gem_name] #=>  update your gem(s) to the latest version, name optional. Use cleanup to remove old versions
