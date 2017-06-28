@@ -20,11 +20,13 @@
     [2] http://www.sinatrarb.com/
     [3] https://developer.chrome.com/devtools
     [4] http://phrogz.net/programmingruby/tut_exceptions.html (exceptions in ruby)
+    [5] http://ruby-doc.org/core-2.3.3/IO.html#method-i-print
 
 
 =end
 
 require 'sinatra'
+require 'uri'
 
 set :bind, '0.0.0.0'
 
@@ -36,9 +38,24 @@ rescue Errno::ENOENT
     return "No content found"
 end
 
+=begin
+    Call File.open with the name of a file you want to save text to. The 2nd arg is the mode to open the file in, write in this case. 
+    If you provide a block to File.open, it will pass the open file object to the block, and automatically close the file when the block is done.
+    Whatever string you pass to print will be written to the file
+=end
+def save_content(title, content)
+  File.open("pages/#{title}.txt", "w") do |file|
+    file.print(content)
+  end
+end
+
 # the first route to match the http verb and the request path will be run
 get('/') do 
     erb :welcome
+end
+
+get('/new') do
+    erb :new
 end
 
 # will accept any string the user appends to the url
@@ -47,4 +64,13 @@ get('/:title') do
     @title = params[:title]
     @content = page_content(@title)
     erb :show
+end
+
+# form data submitted via POST method is accessible via the params hash, review using params.inspect
+post('/create') do
+    # save the submitted data to text file
+    save_content(params['title'], params['content'])
+    # display the files contents using redirect - causes browser to make a GET request for the specified path
+    # invalid charaters, e.g spaces, are encoded using the uri library
+    redirect URI.escape("/#{params['title']}")
 end

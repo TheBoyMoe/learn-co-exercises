@@ -1,0 +1,29 @@
+<%#
+    By default forms are submitted using http's GET verb. This means that form fields a re encoded and appended tot the url and so visible in the address bar.
+    When your fetching data from a server or submitting a seach request, using a GET request is fine. But when submitting data, use the http POST method.
+    The resulting form data will be encoded in the body of the request, and not visible in the url.
+    Add the method="post" attribute to the form element to specify the method used to submit the form
+    Use the action="" to specify the route the server will receive the data on
+
+    When submitting new data (form or otherwise) to a server, which will be accessible at a new path you're supposed to use the POST method
+    The action attribute determines the path (the route) the request will be submitted to.
+    In Sinatra form submission data is accessible in the route block from the params hash
+    Use a redirect when you want to send a response that doesn't contain any HTML, but instead tells the browser to set a GET request for a new path
+%>
+
+<div>
+    <h1>Add New Page</h1>
+    <form method="post" action="/create">
+        <fieldset>
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title">
+        </fieldset>
+        <fieldset>
+            <label for="content">Content:</label>
+            <textarea rows="10" columns="50" id="content" name="content"></textarea>
+        </fieldset>
+        <input type="submit">
+    </form>
+
+    <p><a href="/">Back to index</a></p>
+</div>
