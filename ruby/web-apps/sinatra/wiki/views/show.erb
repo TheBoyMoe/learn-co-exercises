@@ -1,6 +1,30 @@
+<%#
+    Here we're including the contents of a text file into the show.erb page
+    verbatim, which would allow malicious users to embed HTML or JavaScript 
+    into the page, which will be run when other users view the page.
+
+    We can prevent this by escaping any HTML code that appears in a page's content. thus:
+    <script>alert('boo');</script> 
+    
+    would be replaced with:
+    &lt;script&gt;alert(&#x27;boo&#x27;);&lt;&#x2F;script&gt;
+
+    But would look exactly like the original code when viewed in a browser.
+    To can call Rack::Utils.escape_html method on the string to escape any html.
+    Rack:: Utils lib is loaded with Sinatra, a require statement is NOT req'd.
+
+    Add the following method to your ruby file:
+    def escape(string)
+        Rack::Utils.escape_html(string)
+    end
+
+    In the template, you can replace any instance of @content with escape(@content)
+    
+%>
+
 <h1><%= @title %></h1>
 
-<p><%= @content %></p>
+<p><%= escape @content %></p>
 
 <div>
     <a href="<%= @title %>/edit">Edit this page</a>

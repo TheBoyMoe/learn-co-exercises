@@ -54,30 +54,37 @@ def delete_content(title)
     File.delete("pages/#{title}.txt")
 end
 
+# escape any html characters to malicious use
+def escape(string)
+    Rack::Utils.escape_html(string)
+end
+
 ### Routes ###
 
 # the first route to match the http verb and the request path will be run
 get('/') do 
-    erb :welcome
+    erb :welcome, layout: :page
 end
 
 get('/new') do
-    erb :new
+    erb :new, layout: :page
 end
 
 # will accept any string the user appends to the url
 # in sinatra every route receives the params obj automatically
+# if your using a default layout, layout.erb there is no need to set
+# the layout statment, Sinatra will use it automatically
 get('/:title') do
     @title = params[:title]
     @content = page_content(@title)
-    erb :show
+    erb :show, layout: :page
 end
 
 # load the pages content into a form to allow editing
 get('/:title/edit') do
     @title = params[:title]
     @content = page_content(@title)
-    erb :edit
+    erb :edit, layout: :page
 end
 
 
