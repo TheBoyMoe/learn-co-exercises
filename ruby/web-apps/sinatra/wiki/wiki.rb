@@ -30,7 +30,7 @@ require 'uri'
 
 set :bind, '0.0.0.0'
 
-# open the contents of a text file as a string
+# Load the contents of a text file as a string
 def page_content(title)
     File.read("pages/#{title}.txt")
 rescue Errno::ENOENT
@@ -48,6 +48,13 @@ def save_content(title, content)
     file.print(content)
   end
 end
+
+# delete the contents of a file
+def delete_content(title)
+    File.delete("pages/#{title}.txt")
+end
+
+### Routes ###
 
 # the first route to match the http verb and the request path will be run
 get('/') do 
@@ -88,4 +95,8 @@ put('/:title') do
     redirect URI.escape("/#{params['title']}")
 end
 
+delete('/:title') do
+    delete_content(params[:title])
+    redirect '/'
+end
 

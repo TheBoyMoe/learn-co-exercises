@@ -3,11 +3,14 @@
     But this time we're modifying an existing resource on the server, one we have already 
     assigned a path for (a slash followed by the page title). When you're modifying an 
     existing resource with a known URL, it's recommended to use a PUT request, not a POST request.
-    Form only supports GET and POST method requests. Sinatra can handle PUT requests, 
+    Form elements only support GET and POST method requests. Sinatra can handle PUT requests, 
     it will look for an additional parameter _method. Sinatra will treat POSt requests as PUT 
     if it sees an _method attribute set to PUT.
 
     Use an input field with type attribute set to hidden, name to _method and a value of PUT
+
+    As with put, form elements do not recognise the DELETE http method. We can get around that by adding
+    an input element to the form with the 'hidden' input type.
 %>
 
 <div>
