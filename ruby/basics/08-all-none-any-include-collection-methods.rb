@@ -9,7 +9,7 @@ all_odd = true
     end    
 end    
 
-# all? must reurn true for every iteration 
+# all? must return true for every iteration 
 # for the entire expression to return true
 all_odd = [1,2,3,4,5,6,7,8,9].all? do |value|
     value.odd?
