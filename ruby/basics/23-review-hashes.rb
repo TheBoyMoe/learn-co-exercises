@@ -17,7 +17,7 @@ simon_jones = {:name => 'Simon Jones', 'age' => 65}
 simon_jones[:address] = 'The street, in the town, in the country'
 puts simon_jones
 
-tom_jones = {name: 'Tom Jones', age: 65} # shortcut
+tom_jones = {name: 'Tom Jones', age: 65} # shorthand
 tom_jones[:address] = '1 The Street, Town, City'
 tom_jones.store(:phone, 123456789)
 puts tom_jones

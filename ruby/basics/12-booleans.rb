@@ -6,7 +6,7 @@
     
 
     - true and false classes in ruby are examples of singletons, only one instance of each can exist in the app at any moment in time.
-    - you cannot instantiate tru and false like other classes with the .new method, r.g TrueClass.new => NoMethodError
+    - you cannot instantiate true and false like other classes with the .new method, e.g TrueClass.new => NoMethodError
     - false is an instance of FalseClass, true of TrueClass
     - ruby also provides the nil value, an instance of the NilClass, it is also a singleton, and is the absence of a value
 =end
