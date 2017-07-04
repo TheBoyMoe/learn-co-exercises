@@ -79,3 +79,6 @@ To delete a local branch
     git branch -d branch_name
 ```
 
+Pull requests are used solely on Github. It is a request for the owner(s) of a repo to pull a change you've made to a fork of their repo, and merge it into the original - you're basically asking the repo owner to accept some changes you've made and combine them into the original repo. Through this process anyone can fork a repo, make some changes and then submit those changes.
+
+To carry out a pull request, commit and push any changes you've made to the fork. On the Github page fot the fork, click on the 'New pull request' button. Set the base as the fork you cloned, and the head as the branch you changed. Then click on tht 'Create pull request' button.
