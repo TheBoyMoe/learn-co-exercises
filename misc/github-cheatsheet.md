@@ -51,7 +51,7 @@ Create a new branch and switch to it
     git checkout -b branch_name
 ```
 
-To create a new branch, but not switch
+To create a new branch, but not switch(replace 'checkout' with 'co')_
 
 ```markdown
     git checkout branch_name
