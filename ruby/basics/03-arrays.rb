@@ -14,7 +14,7 @@ array = ["milk", "eggs", "bread"]
 array = %w(milk eggs bread)
 
 # Create an array using the %W notation which contains three strings and one is interpolated:
-item = “milk”
+item = 'milk'
 array = %W(#{item} eggs bread)
 
 # or
@@ -76,7 +76,7 @@ array.include?("eggs")  # => true
 
 # insert values into the array at a particular index
 array.insert(4, 'orange juice') # following items shift to right
-
+puts array.inspect
 
 #### Removing values from an array  #######
 
@@ -97,3 +97,33 @@ items = array.drop(2)
 # returns a new array, original is unchanged
 first_three_items = array.slice(0, 3)
 
+
+#### Miscelaneous Array methods ###### 
+
+# determine the index of an item in the array
+puts array.index('orange juice') # 3, returns nil if not found
+
+# sort an array - returns a sorted copy using <=> operator, ascending for numbers, alphabetically for strings
+array.sort
+array.sort! #=> execute the sort in-place, changes original
+
+# reverse an array - reurns a reversed copy, append ! operator to do an in-place reverse
+array.reverse
+array.reverse! #=> in-place reverse
+
+# combining the two - in-place sort-reverse
+array.sort!.reverse!
+
+# determine if an array contains a particular value, returns boolean
+array.include?('bread')
+
+# convert string to array - use the split method
+string = "hippo,giraffe,monkey,horse"
+"hippo,giraffe,monkey,horse".split(",") #=> ["hippo", "giraffe", "monkey", "horse"]
+
+# convert a range to an array, use to_a method
+(1..10).to_a #=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# convert an array to a string, use join method
+["a", "b", "c"].join #=> 'abc'
+["a", "b", "c"].join(' ') #=> 'a b c'

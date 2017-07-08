@@ -5,8 +5,8 @@
     [3] http://ruby-doc.org/core-2.0.0/Hash.html#method-i-each_value
 =end
 
-# iterate over an array using each -  does not affaect the array
-# a copy of the value is passed in to the loop
+# iterate over an array using each -  does not affect the array
+# a copy of the value is passed in to the loop, each returns the original array
 array = [1,2,3,4,5,6,7,8]
 
 array.each do |val|
