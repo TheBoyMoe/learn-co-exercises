@@ -42,7 +42,8 @@ class Album
         @@album_count += 1
         @@artists << artist
         @@genres << genre
-        @@all << self
+        # @@all << self
+        self.class.all << self # within initialize self referes to the actual instance not the class
     end
 
     ## class methods ################
@@ -51,10 +52,11 @@ class Album
     end
 
     def self.all
-        @@all.each do |album|
-            puts "#{album.name} by #{album.artist}"
-        end
-        nil
+        # @@all.each do |album|
+        #     puts "#{album.name} by #{album.artist}"
+        # end
+        # nil
+        @@all
     end
 
     # return the number of unique artists
@@ -86,6 +88,17 @@ class Album
         end
         hash
     end
+
+    ## encapsulate logic in class methods ##
+
+    # find & return the album instance
+    def self.find_by_name(name)
+        # @@all.detect do |album|
+        #     album.name == name
+        # end
+        self.all.detect {|album| album.name == name}
+    end
+
 end
 
 
