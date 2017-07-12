@@ -33,6 +33,7 @@ class Album
     @@album_count = 0 
     @@artists = []
     @@genres = []
+    @@all = [] # keep track of each album instance
 
     def initialize(name, artist, genre)
         @name = name
@@ -41,14 +42,22 @@ class Album
         @@album_count += 1
         @@artists << artist
         @@genres << genre
+        @@all << self
     end
 
-    # class method
+    ## class methods ################
     def self.count
         @@album_count
     end
 
-    # class method - return the number of unique artists
+    def self.all
+        @@all.each do |album|
+            puts "#{album.name} by #{album.artist}"
+        end
+        nil
+    end
+
+    # return the number of unique artists
     def self.artists
         Set.new(@@artists).to_a
     end
@@ -58,7 +67,7 @@ class Album
         Set.new(@@genres).to_a
     end
 
-    # class method - return a hash displaying number of albums by each artist    
+    # return a hash displaying number of albums by each artist    
     def self.album_count
         hash = {}
         @@artists.each do |artist|
@@ -68,7 +77,7 @@ class Album
         hash
     end
 
-    # class method - return a hash displaying number of albums per genre
+    # return a hash displaying number of albums per genre
     def self.genre_count
         hash = {}
         @@genres.each do |genre|
@@ -77,4 +86,45 @@ class Album
         end
         hash
     end
+end
+
+
+class Bartender
+    attr_accessor :name
+    @@bartenders = []
+
+    def initialize(name)
+       @name = name 
+       @@bartenders << name
+    end
+
+    def self.all
+        @@bartenders
+    end
+
+    def intro
+        puts "hi, my name is #{@name}"
+    end
+
+    def mix_drink
+        @cocktail = []
+        choose_liquor
+        choose_mixer
+        choose_garnish
+        puts "Here's your drink, it contains #{@cocktail}"
+    end
+
+    private # makes all subsequent methods private - only accessible from within the class
+    def choose_liquor
+        @cocktail << 'Whiskey'
+    end
+
+    def choose_mixer
+        @cocktail << 'Vermouth'
+    end
+
+    def choose_garnish
+        @cocktail << 'Olives'
+    end
+
 end
