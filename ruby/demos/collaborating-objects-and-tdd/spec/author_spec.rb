@@ -7,12 +7,18 @@ describe Author do
         expect(author.name).to eq('Hemingway')
     end
 
-    describe 'author with stories' do
+    describe 'has many stories' do
         describe '#stories' do
             it 'has an empty array of stories when initialized' do
                 author = Author.new
 
                 expect(author.stories).to match_array([])
+            end
+
+            it 'returns a frozen copy of the stories array' do
+                author = Author.new
+
+                expect(author.stories).to be_frozen
             end
         end
     end

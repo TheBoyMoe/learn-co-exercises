@@ -3,15 +3,20 @@ require_relative './story.rb'
 
 class Author
     attr_accessor :name
-    attr_reader :stories
 
     def initialize
        @stories = [] 
     end
 
+    def stories
+        # return a frozen duplicate of soties, only way to add a story instance is through #add_story
+        @stories.dup.freeze
+    end
+
+    # has many interface
     def add_story(story)
         raise AssociationTypeMismatchError if !story.is_a?(Story)
-        self.stories << story
+        @stories << story
     end
 
     def bibliography
