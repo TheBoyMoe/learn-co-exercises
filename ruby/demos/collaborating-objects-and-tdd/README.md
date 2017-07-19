@@ -17,4 +17,6 @@ categories
 example
 
 hemingway = Author.new
-hemingway.stories #=> [#<Story>, #<Story>]    
+hemingway.stories #=> [#<Story>, #<Story>]
+
+hemingway.categories #=> [#<Category 'Fiction'>, #<Category 'Non Fiction'>]
