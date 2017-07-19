@@ -1,5 +1,3 @@
-require 'pry'
-require_relative './story.rb'
 
 class Author
     attr_accessor :name
@@ -15,7 +13,7 @@ class Author
 
     # has many interface
     def add_story(story)
-        raise AssociationTypeMismatchError if !story.is_a?(Story)
+        raise AssociationTypeMismatchError, "#{story.class} received, Story expected" if !story.is_a?(Story)
         @stories << story
     end
 
@@ -24,5 +22,3 @@ class Author
     end
 
 end
-
-# binding.pry
