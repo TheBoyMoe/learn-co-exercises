@@ -17,6 +17,11 @@ describe Story do
             it 'throws an error if assigned anything other than an author instance' do
                 expect{story.author = 'Ernest Hemingway'}.to raise_error(AssociationTypeMismatchError)
             end
+
+            it 'adds the story to the author\'s stories collection' do
+                story.author = author
+                expect(author.stories).to include(story)
+            end
         end
     end
 
