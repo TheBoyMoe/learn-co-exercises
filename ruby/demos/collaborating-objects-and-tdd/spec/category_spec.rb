@@ -38,4 +38,22 @@ describe Category do
         end
     end
 
+
+    describe 'has many authors through stories' do
+        it 'returns the callection of unique author instances based on the stories' do
+            king = Author.new.tap{|a| a.name = 'Stephen King'}
+            hemingway = Author.new.tap{|a| a.name = 'Ernest Hemingway'}
+
+            s1 = Story.new.tap {|s| s.name = 'Old Man and the Sea'; s.author = hemingway}
+            s2 = Story.new.tap {|s| s.name = 'For Whom the Bell Tolls'; s.author = hemingway}
+            s3 = Story.new.tap {|s| s.name = 'The Shining'; s.author = king}
+
+            s1.category = category
+            s2.category = category
+            s3.category = category
+
+            expect(category.authors).to match_array([king, hemingway])
+        end
+    end
+
 end

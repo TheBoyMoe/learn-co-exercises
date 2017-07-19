@@ -38,7 +38,7 @@ describe Author do
 
     end
 
-     describe '#bibliography' do
+    describe '#bibliography' do
         it 'returns an array of all the author\'s stories names' do
             s1 = Story.new.tap {|s| s.name = 'Old Man and the Sea'}
             s2 = Story.new.tap {|s| s.name = 'For Whom the Bell Tolls'}
@@ -56,4 +56,21 @@ describe Author do
         end
     end
     
+    describe 'has many categories through stories' do
+        it 'returns the callection of unique category instances based on the stories' do
+            fiction = Category.new.tap{|c| c.name = 'Fiction'}
+            non_fiction = Category.new.tap{|c| c.name = 'Non fiction'}
+
+            s1 = Story.new.tap {|s| s.name = 'Old Man and the Sea'; s.category = fiction}
+            s2 = Story.new.tap {|s| s.name = 'For Whom the Bell Tolls'; s.category = fiction}
+            s3 = Story.new.tap {|s| s.name = 'A Moveable Feast'; s.category = non_fiction}
+
+            author.add_story(s1)
+            author.add_story(s2)
+            author.add_story(s3)
+
+            expect(author.categories).to match_array([fiction, non_fiction])
+        end
+    end
+
 end

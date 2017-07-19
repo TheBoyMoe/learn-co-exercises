@@ -11,11 +11,16 @@ class Author
         @stories.dup.freeze
     end
 
-    # has many interface
+    # has many stories interface
     def add_story(story)
         raise AssociationTypeMismatchError, "#{story.class} received, Story expected" if !story.is_a?(Story)
         @stories << story
         story.author = self unless story.author == self
+    end
+
+    # has many categories interface through stories
+    def categories
+        self.stories.collect {|s| s.category}.uniq
     end
 
     def bibliography
