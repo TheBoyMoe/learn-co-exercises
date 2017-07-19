@@ -34,4 +34,23 @@ describe Author do
         end
     end
 
+     describe '#bibliography' do
+        it 'returns an array of all the author\'s stories names' do
+            author = Author.new
+            s1 = Story.new.tap {|s| s.name = 'Old Man and the Sea'}
+            s2 = Story.new.tap {|s| s.name = 'For Whom the Bell Tolls'}
+            s3 = Story.new.tap {|s| s.name = 'The Sun also Rises'}
+
+            author.add_story(s1)
+            author.add_story(s2)
+            author.add_story(s3)
+
+            expect(author.bibliography).to match_array([
+                'Old Man and the Sea',
+                'For Whom the Bell Tolls',
+                'The Sun also Rises'
+            ])
+        end
+    end
+    
 end

@@ -14,6 +14,10 @@ class Author
         self.stories << story
     end
 
+    def bibliography
+        self.stories.collect {|story| story.name}
+    end
+
 end
 
 # binding.pry
