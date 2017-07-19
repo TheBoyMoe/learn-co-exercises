@@ -6,7 +6,7 @@ class Story
     def author=(author)
         raise AssociationTypeMismatchError, "#{author.class} received, Author Expected" if !author.is_a?(Author)
         @author = author
-        author.add_story(self)
+        author.add_story(self) unless author.stories.include?(self)
     end
 
 end

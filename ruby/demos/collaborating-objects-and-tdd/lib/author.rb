@@ -15,6 +15,7 @@ class Author
     def add_story(story)
         raise AssociationTypeMismatchError, "#{story.class} received, Story expected" if !story.is_a?(Story)
         @stories << story
+        story.author = self unless story.author == self
     end
 
     def bibliography

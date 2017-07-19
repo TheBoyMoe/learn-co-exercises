@@ -22,14 +22,20 @@ describe Author do
 
     describe '#add_story' do
         it 'can add a story instance on to the author' do
-            story.author = author
+            author.add_story(story)
             expect(author.stories).to include(story)
+        end
+
+        it 'reciprocates and adds the author as the stories author' do
+            author.add_story(story)
+            expect(story.author).to eq(author)
         end
 
         it 'only allows instances of story to be pushed on to author' do
             story = 'Old Man of the Sea'
             expect{author.add_story(story)}.to raise_error(AssociationTypeMismatchError)
         end
+
     end
 
      describe '#bibliography' do
