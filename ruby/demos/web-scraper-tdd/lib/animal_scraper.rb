@@ -1,0 +1,3 @@
+class AnimalScrapper
+
+end
