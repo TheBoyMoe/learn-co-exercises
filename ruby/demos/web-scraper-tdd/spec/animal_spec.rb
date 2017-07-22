@@ -39,4 +39,20 @@ describe Animal do
 
   end
 
+  describe '#new_from_wikipedia' do
+    it 'instantiates an animal based on a wikipedia url' do
+      hippo = Animal.new_from_wikipedia('https://en.wikipedia.org/wiki/Hippopotamus')
+
+      expect(hippo).to be_an_instance_of(Animal)
+      expect(hippo.name).to eq('Hippopotamus')
+      expect(hippo.kingdom).to eq('Animalia')
+      expect(hippo.phylum).to eq('Chordata')
+      expect(hippo.klass).to eq('Mammalia')
+      expect(hippo.order).to eq('Artiodactyla')
+      expect(hippo.family).to eq('Hippopotamidae')
+      expect(hippo.genus).to eq('Hippopotamus')
+      # expect(hippo.species).to eq('H.&nbsp;amphibius')
+    end
+  end
+
 end
