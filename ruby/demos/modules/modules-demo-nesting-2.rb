@@ -1,10 +1,26 @@
 require 'pry'
 
+=begin
+modules can not be instantiated, they no notheing of instances or ClassMethods calling modules Instance/ClassMethods has no bearing on whether the methods are class or instance methods the use of the 'extend' abd 'include' keywords determine whethre the methods are class or instance methods and 'self' is the instance or class - extend == class, include == instance
+
+mixing in (include) and extnding classes with modules is refered to as the
+Mixin/Builder/Module Pattern
+
+Order of method lookup
+1. the object itself
+2. the class
+3. any specified modules
+4. any parent classes of the objet (any super classes)
+=end
+
 module Memorable
   module InstanceMethods
     def initialize(name)
       @name = name
       self.class.all << self
+    end
+    def tester
+      puts "called from the module InstanceMethods"
     end
   end
 
@@ -15,6 +31,10 @@ module Memorable
 
     def count
       self.all.count
+    end
+
+    def tester
+      puts "called from the module ClassMethods"
     end
   end
 
@@ -62,6 +82,14 @@ class Artist
 
   def add_songs(songs)
     self.songs.each { |song| add_song(song) }
+  end
+
+  def tester
+    puts "called from the instance"
+  end
+
+  def self.tester
+    puts "called from the class"
   end
 
 end
