@@ -18,6 +18,7 @@ require 'rspec'
 
 $count = 0
 describe "let" do
+  # using let or let! produces the same results
   let(:count) { $count += 1 }
 
   it "memoizes the value" do
