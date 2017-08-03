@@ -1,5 +1,3 @@
-require "daily_deal/version"
-
-module DailyDeal
-  # Your code goes here...
-end
+# loads the environment dependencies
+require_relative "./daily_deal/version"
+require_relative './daily_deal/cli'
