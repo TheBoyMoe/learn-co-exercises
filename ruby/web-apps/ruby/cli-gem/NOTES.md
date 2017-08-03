@@ -8,3 +8,8 @@
 3. start with the entry point file - './bin/daily/deal'
 4. which loads the cli interface - loads the environment and launches the app
 5. stub out the cli interface
+
+
+
+## References
+1. [Multiline strings - here docs](http://blog.jayfields.com/2006/12/ruby-multiline-strings-here-doc-or.html)
