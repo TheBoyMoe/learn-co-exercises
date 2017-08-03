@@ -10,10 +10,9 @@ class DailyDeal::CLI
   def list_deals
     # use gsub to strip out the leading spaces
     puts "Today's daily deal:"
-    puts <<-doc.gsub(/^\s*/, '')
-      1. Apple Mac Book Pro, 17in screen - $1200 - a few remain!
-      2. Dell Inspiron laptop 15in screen - $299 - one left - grab a bargin!
-    doc
+
+    # define a Deal class with a class method 'today'
+    @deals = DailyDeal::Deal.today
   end
 
   def menu

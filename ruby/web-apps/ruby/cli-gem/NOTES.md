@@ -8,6 +8,12 @@
 3. start with the entry point file - './bin/daily/deal'
 4. which loads the cli interface - loads the environment and launches the app
 5. stub out the cli interface
+6. define the model
+    - a deal has a name
+    - a deal has a description
+    - a deal has a price
+    - a deal has a URL
+    - a deal has an availability
 
 
 
