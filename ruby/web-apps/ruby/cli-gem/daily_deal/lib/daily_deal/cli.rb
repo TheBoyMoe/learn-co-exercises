@@ -9,27 +9,27 @@ class DailyDeal::CLI
 
   def list_deals
     # use gsub to strip out the leading spaces
+    puts '----------------------------------------------------'
     puts "Today's daily deal:"
 
     # define a Deal class with a class method 'today'
     @deals = DailyDeal::Deal.today
+    puts '----------------------------------------------------'
   end
 
   def menu
-    input = ''
+    input = nil
     while input != 'exit'
       puts "Enter the number of the deal you would like more info on"
       puts "Enter 'list' to see deals, or enter 'exit'"
       input = gets.strip.downcase
-      case input
-      when '1'
-        puts 'Display more info on deal 1...'
-      when '2'
-        puts 'Display more info on deal 2...'
-      when 'list'
+
+      if input.to_i > 0
+        puts "#{@deals[input.to_i - 1]}"
+      elsif input == 'list'
         self.list_deals
-      when 'exit'
-        # input = 'exit'
+      elsif input == 'exit'
+
       else
         puts "Unknown selection"
       end
