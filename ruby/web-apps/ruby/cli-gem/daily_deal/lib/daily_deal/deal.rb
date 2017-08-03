@@ -3,10 +3,10 @@ class DailyDeal::Deal
 
   def self.today
     # should return an array of instances of Deal
-    puts <<-doc.gsub(/^\s*/, '')
-      1. Three pairs of Huggie Earings - $18 - a few remain!
-      2. iJoy Logo - wireless headphones - $17 - one left - grab a bargin!
-    doc
+    # puts <<-doc.gsub(/^\s*/, '')
+    #   1. Three pairs of Huggie Earings - $18 - a few remain!
+    #   2. iJoy Logo - wireless headphones - $17 - one left - grab a bargin!
+    # doc
 
     deal_1 = self.new
     deal_1.name = 'Three pairs of Huggie Earings'

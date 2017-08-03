@@ -11,9 +11,11 @@ class DailyDeal::CLI
     # use gsub to strip out the leading spaces
     puts '----------------------------------------------------'
     puts "Today's daily deal:"
-
     # define a Deal class with a class method 'today'
     @deals = DailyDeal::Deal.today
+    @deals.each.with_index(1) do |deal, i| # start with index of 1
+      puts "#{i}. #{deal.name} - #{deal.price} - #{deal.availability}"
+    end
     puts '----------------------------------------------------'
   end
 
@@ -25,11 +27,13 @@ class DailyDeal::CLI
       input = gets.strip.downcase
 
       if input.to_i > 0
-        puts "#{@deals[input.to_i - 1]}"
+        deal = @deals[input.to_i - 1]
+        puts '----------------------------------------------------'
+        puts "#{deal.name} - #{deal.price} - #{deal.availability}"
+        puts '----------------------------------------------------'
       elsif input == 'list'
         self.list_deals
       elsif input == 'exit'
-
       else
         puts "Unknown selection"
       end
