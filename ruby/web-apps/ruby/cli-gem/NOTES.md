@@ -18,4 +18,5 @@
 
 
 ## References
-1. [Multiline strings - here docs](http://blog.jayfields.com/2006/12/ruby-multiline-strings-here-doc-or.html)
+1. [Daily Deal Github Repo](https://github.com/learn-co-curriculum/daily_deal/blob/master/lib/daily_deal/deal.rb)
+2. [Multiline strings - here docs](http://blog.jayfields.com/2006/12/ruby-multiline-strings-here-doc-or.html)
