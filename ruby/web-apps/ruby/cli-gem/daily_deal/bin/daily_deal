@@ -1,7 +1,11 @@
 #!/usr/bin/env ruby
 
 # load the environment
-require './lib/daily_deal'
+# require './lib/daily_deal'
+
+# load environment
+require "bundler/setup"
+require "daily_deal"
 
 # launch the app
 DailyDeal::CLI.new.call
