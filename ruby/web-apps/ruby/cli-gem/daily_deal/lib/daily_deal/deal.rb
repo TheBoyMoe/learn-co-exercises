@@ -7,7 +7,7 @@ class DailyDeal::Deal
     #   1. Three pairs of Huggie Earings - $18 - a few remain!
     #   2. iJoy Logo - wireless headphones - $17 - one left - grab a bargin!
     # doc
-
+    # TODO scrape woot and meh
     deal_1 = self.new
     deal_1.name = 'Three pairs of Huggie Earings'
     deal_1.price = '$18'

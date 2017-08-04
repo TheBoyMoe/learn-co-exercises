@@ -26,7 +26,7 @@ class DailyDeal::CLI
       puts "Enter 'list' to see deals, or enter 'exit'"
       input = gets.strip.downcase
 
-      if input.to_i > 0
+      if input.to_i > 0 && input.to_i <= @deals.size
         deal = @deals[input.to_i - 1]
         puts '----------------------------------------------------'
         puts "#{deal.name} - #{deal.price} - #{deal.availability}"
