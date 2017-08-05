@@ -6,10 +6,10 @@ RSpec.describe SeatgeekCli do
   end
 
   context SeatgeekCli::CLI do
+    let(:cli){SeatgeekCli::CLI.new('146.90.135.180')}
 
     describe '#initialize' do
       it 'accepts an IP address for the user' do
-        cli = SeatgeekCli::CLI.new('146.90.135.180')
         expect(cli.external_ip).to eq('146.90.135.180')
       end
 
@@ -23,9 +23,14 @@ RSpec.describe SeatgeekCli do
     end
 
     describe '#call' do
-      let(:cli){SeatgeekCli::CLI.new('146.90.135.180')}
       it 'welcomes the user upon the launch of the app' do
         expect{cli.call}.to output("Welcome to seatgeek, the fan site where you can select from millions of tickets for purchase\n").to_stdout
+      end
+    end
+
+    describe '#user_location' do
+      it 'returns the user location based on their external ip address' do
+        expect{cli.user_location}.to output("Your location is: Wimbledon, GB\n").to_stdout
       end
     end
 
