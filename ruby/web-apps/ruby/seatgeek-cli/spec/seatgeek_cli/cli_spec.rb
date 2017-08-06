@@ -44,6 +44,22 @@ RSpec.describe SeatgeekCli do
       end
     end
 
+    describe '#list_events' do
+      it "prints out all the event titles" do
+        SeatgeekCli::Event.clear_all
+
+        event_1 = SeatgeekCli::Event.new
+        event_1.title = 'U2 at Wembley Stadium'
+        event_1.save
+
+        event_2 = SeatgeekCli::Event.new
+        event_2.title = 'U2 at the Brixton Academy'
+        event_2.save
+
+        expect{cli.list_events}.to output("Events near you:\n1. U2 at Wembley Stadium\n2. U2 at the Brixton Academy\n").to_stdout
+      end
+    end
+
   end
 
 end

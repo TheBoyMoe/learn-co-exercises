@@ -44,4 +44,11 @@ class SeatgeekCli::CLI
     @user_location = json['meta']['geolocation']['display_name']
     puts "Your location is: #{@user_location}"
   end
+
+  def list_events
+    puts 'Events near you:'
+    SeatgeekCli::Event.all.each.with_index(1) do |event, i|
+      puts "#{i}. #{event.title}"
+    end
+  end
 end

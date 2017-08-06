@@ -1,7 +1,7 @@
 require "spec_helper"
 
 RSpec.describe SeatgeekCli::Event do
-  let (:event){SeatgeekCli::Event.new}
+  let(:event){SeatgeekCli::Event.new}
 
   context 'properties' do
     it 'has a title' do
@@ -56,6 +56,13 @@ RSpec.describe SeatgeekCli::Event do
     it 'returns all my event instances' do
       event.save
       expect(SeatgeekCli::Event.all).to include(event)
+    end
+  end
+
+  describe '.clear_all' do
+    it 'clears all the events from @@all' do
+      SeatgeekCli::Event.clear_all
+      expect(SeatgeekCli::Event.all).to eq([])
     end
   end
 
