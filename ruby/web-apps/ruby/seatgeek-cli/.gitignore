@@ -8,6 +8,7 @@
 /spec/reports/
 /tmp/
 app_info.txt
+/spec/fixtures/vcr_cassettes/
 
 # rspec failure tracking
 .rspec_status

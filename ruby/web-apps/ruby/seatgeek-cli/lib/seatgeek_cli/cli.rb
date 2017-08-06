@@ -9,6 +9,7 @@ class SeatgeekCli::CLI
 
   def call
     puts 'Welcome to seatgeek, the fan site where you can select from millions of tickets for purchase'
+    puts 'Your location is: Wimbledon, GB'
   end
 
   def self.get_external_ip
@@ -34,7 +35,7 @@ class SeatgeekCli::CLI
     #   }
     # }
 
-    my_clientid = 'xxxx-xxxxx-xxxxx'
+    my_clientid = 'ODQwNzg1NnwxNTAxOTQ1NjUwLjI0 '
     url = "https://api.seatgeek.com/2/events?client_id=#{my_clientid}&geoip=#{self.external_ip}"
     uri = URI.parse(url)
     response = Net::HTTP.get_response(uri)

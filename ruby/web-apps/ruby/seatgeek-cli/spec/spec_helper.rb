@@ -1,5 +1,12 @@
 require "bundler/setup"
 require "seatgeek_cli"
+require 'vcr'
+
+VCR.configure do |config|
+  config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
+  config.hook_into :webmock # or :fakeweb
+end
+
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

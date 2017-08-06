@@ -5,7 +5,7 @@
 1. [Seatgeek Api documentaion](http://platform.seatgeek.com/)
 2. [Seatgeek Cli Gem code along by Avi Flombaum](https://www.youtube.com/watch?v=LJBU8lsNwJk)
 3. [Seatgeek Cli Gem git repo](https://github.com/aviflombaum/seatgeek_cli)
-
+4. [Ruby VCR gem](https://github.com/vcr/vcr)
 
 ### API endpoints
 
