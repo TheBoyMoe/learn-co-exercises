@@ -15,7 +15,7 @@ class SeatgeekCli::Event
   end
 
   def local_time_to_s
-    DateTime.parse(self.local_time).strftime("%A %B %d %I:%M")
+    self.local_time.strftime("%A %B %d %I:%M")
   end
 
 end

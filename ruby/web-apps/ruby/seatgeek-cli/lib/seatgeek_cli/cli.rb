@@ -13,6 +13,7 @@ class SeatgeekCli::CLI
     self.greet_user
     self.print_location
     self.list_events
+    self.menu
   end
 
   def greet_user
@@ -25,6 +26,42 @@ class SeatgeekCli::CLI
 
   def self.get_external_ip
     `curl https://api.ipify.org --silent`
+  end
+
+  def prompt_user
+    puts "What would you like to do?"
+    puts " Either type 'list' to view the events again, or type the event number for more information"
+  end
+
+  def menu
+    self.prompt_user
+    input = gets.strip
+    while input != 'exit'
+      if input == 'list'
+        self.list_events
+      else
+        # if an event is found, print it
+        if event = SeatgeekCli::Event.all[input.to_i - 1]
+          self.print_details(event)
+        else
+          puts "Can't find an event, try numbers between 1-#{SeatgeekCLI::Event.all.size}"
+        end
+      end
+      self.prompt_user
+      input = gets.strip
+    end
+    puts 'Goodbye!'
+  end
+
+  def print_details(event)
+    puts "#{event.title}"
+    puts "#{event.url}"
+    puts "#{event.local_time_to_s}"
+    puts "#{event.venue_name}"
+    puts "#{event.venue_address}"
+    puts "#{event.venue_city}"
+    puts "#{event.venue_state}"
+    puts "#{event.venue_url}"
   end
 
   def user_location
