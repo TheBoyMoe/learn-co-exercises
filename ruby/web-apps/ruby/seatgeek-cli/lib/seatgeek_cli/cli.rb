@@ -6,12 +6,21 @@ class SeatgeekCli::CLI
   def initialize(ip = nil)
     @external_ip = ip || self.class.get_external_ip
     @wrapper = SeatgeekCli::Wrapper.new(self.external_ip)
-    # @wrapper.load_events
+    @wrapper.load_events
   end
 
   def call
+    self.greet_user
+    self.print_location
+    self.list_events
+  end
+
+  def greet_user
     puts 'Welcome to seatgeek, the fan site where you can select from millions of tickets for purchase'
-    puts 'Your location is: Wimbledon, GB'
+  end
+
+  def print_location
+    puts "Your location is: #{self.user_location}"
   end
 
   def self.get_external_ip
@@ -45,8 +54,9 @@ class SeatgeekCli::CLI
     # json = JSON.parse(data)
     # @user_location = json['meta']['geolocation']['display_name']
 
-    @user_location = self.wrapper.user_location
-    puts "Your location is: #{@user_location}"
+    # @user_location = self.wrapper.user_location
+    # puts "Your location is: #{@user_location}"
+    self.wrapper.user_location
   end
 
   def list_events

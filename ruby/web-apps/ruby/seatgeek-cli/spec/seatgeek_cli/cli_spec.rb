@@ -6,6 +6,7 @@ RSpec.describe SeatgeekCli do
   end
 
   context SeatgeekCli::CLI do
+
     let(:cli){SeatgeekCli::CLI.new('146.90.135.180')}
 
     describe '#initialize' do
@@ -23,11 +24,15 @@ RSpec.describe SeatgeekCli do
       end
     end
 
-    describe '#call' do
+    describe '#greet_user' do
       it 'welcomes the user upon the launch of the app' do
-        VCR.use_cassette('get_user_location') do
-          expect{cli.call}.to output("Welcome to seatgeek, the fan site where you can select from millions of tickets for purchase\nYour location is: Wimbledon, GB\n").to_stdout
-        end
+          expect{cli.greet_user}.to output("Welcome to seatgeek, the fan site where you can select from millions of tickets for purchase\n").to_stdout
+      end
+    end
+
+    describe '#print_location' do
+      it 'print the user\'s location upon the launch of the app' do
+          expect{cli.print_location}.to output("Your location is: Wimbledon, GB\n").to_stdout
       end
     end
 
@@ -38,25 +43,27 @@ RSpec.describe SeatgeekCli do
       # stub out the call by using the VCR gem - makes the call
       # and saves the data for future use
       it 'returns the user location based on their external ip address' do
-        VCR.use_cassette('get_user_location') do
-          expect{cli.user_location}.to output("Your location is: Wimbledon, GB\n").to_stdout
-        end
+          expect(cli.user_location).to eq("Wimbledon, GB")
       end
     end
 
     describe '#list_events' do
       it "prints out all the event titles" do
-        SeatgeekCli::Event.clear_all
+        expect{
+         cli #=> trigger the events to load
+         SeatgeekCli::Event.clear_all
 
-        event_1 = SeatgeekCli::Event.new
-        event_1.title = 'U2 at Wembley Stadium'
-        event_1.save
+         # Creating some known data.
+         event_1 = SeatgeekCli::Event.new
+         event_1.title = "Event 1"
+         event_1.save
 
-        event_2 = SeatgeekCli::Event.new
-        event_2.title = 'U2 at the Brixton Academy'
-        event_2.save
+         event_2 = SeatgeekCli::Event.new
+         event_2.title = "Event 2"
+         event_2.save
 
-        expect{cli.list_events}.to output("Events near you:\n1. U2 at Wembley Stadium\n2. U2 at the Brixton Academy\n").to_stdout
+         cli.list_events
+       }.to output("Events near you:\n1. Event 1\n2. Event 2\n").to_stdout
       end
     end
 

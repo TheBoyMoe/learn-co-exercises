@@ -19,9 +19,9 @@ RSpec.describe SeatgeekCli::Event do
       expect(event.local_time).to eq('Event time')
     end
 
-    it 'has venue_time' do
-      event.venue_time = 'Event venue time'
-      expect(event.venue_time).to eq('Event venue time')
+    it 'has venue_name' do
+      event.venue_name = 'Event venue name'
+      expect(event.venue_name).to eq('Event venue name')
     end
 
     it 'has a venue_address' do
@@ -65,14 +65,5 @@ RSpec.describe SeatgeekCli::Event do
       expect(SeatgeekCli::Event.all).to eq([])
     end
   end
-
-  # describe '.load_from_seatgeek' do
-  #   it "loads events from seatgeek" do
-  #     SeatgeekCli::Event.clear_all
-  #
-  #     SeatgeekCli::Event.load_from_seatgeek
-  #     expect(SeatgeekCli::Event.all).not_to eq([])
-  #   end
-  # end
 
 end
