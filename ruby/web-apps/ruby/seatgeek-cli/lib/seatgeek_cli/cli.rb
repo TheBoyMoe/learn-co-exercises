@@ -1,10 +1,12 @@
 require "seatgeek_cli/version"
 
 class SeatgeekCli::CLI
-  attr_reader :external_ip
+  attr_reader :external_ip, :wrapper
 
   def initialize(ip = nil)
     @external_ip = ip || self.class.get_external_ip
+    @wrapper = SeatgeekCli::Wrapper.new(self.external_ip)
+    # @wrapper.load_events
   end
 
   def call
@@ -35,13 +37,15 @@ class SeatgeekCli::CLI
     #   }
     # }
 
-    my_clientid = 'xxxx-xxxx-xxxxx-xxxx'
-    url = "https://api.seatgeek.com/2/events?client_id=#{my_clientid}&geoip=#{self.external_ip}"
-    uri = URI.parse(url)
-    response = Net::HTTP.get_response(uri)
-    data = response.body
-    json = JSON.parse(data)
-    @user_location = json['meta']['geolocation']['display_name']
+    # my_clientid = 'xxxx-xxxx-xxxxx-xxxx'
+    # url = "https://api.seatgeek.com/2/events?client_id=#{my_clientid}&geoip=#{self.external_ip}"
+    # uri = URI.parse(url)
+    # response = Net::HTTP.get_response(uri)
+    # data = response.body
+    # json = JSON.parse(data)
+    # @user_location = json['meta']['geolocation']['display_name']
+
+    @user_location = self.wrapper.user_location
     puts "Your location is: #{@user_location}"
   end
 

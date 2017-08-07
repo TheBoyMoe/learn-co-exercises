@@ -66,4 +66,13 @@ RSpec.describe SeatgeekCli::Event do
     end
   end
 
+  # describe '.load_from_seatgeek' do
+  #   it "loads events from seatgeek" do
+  #     SeatgeekCli::Event.clear_all
+  #
+  #     SeatgeekCli::Event.load_from_seatgeek
+  #     expect(SeatgeekCli::Event.all).not_to eq([])
+  #   end
+  # end
+
 end

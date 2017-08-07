@@ -14,4 +14,7 @@ class SeatgeekCli::Event
     self.all.clear
   end
 
+  # def self.load_from_seatgeek
+  #
+  # end
 end
