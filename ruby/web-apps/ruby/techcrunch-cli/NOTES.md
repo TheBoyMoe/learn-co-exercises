@@ -16,12 +16,14 @@
 
 ## Summary
 
-* what do we mean by anti-patterns
+* what do we mean by anti-patterns - poorly though out/implemented
 * explain our gem functionality
 * explain our classes
 * find flaws in gem
  * bunch of different arrays of data instead of unified objects
   * explain zipper pattern
+    - fetch different properties individually, then combine them all together
+    - error prone, depends on the result arrays being in sequence
   * too many calls to website
   * We never instantiate instances of our class
   * a ton of scraping methods in our story object

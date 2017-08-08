@@ -11,7 +11,7 @@ class TechcrunchCli::Story
   end
 
   def self.scrape_urls
-    @doc = Nokogiri::HTML(open('http://techcrunch.com/'))
+    @doc = Nokogiri::HTML(open('https://techcrunch.com/'))
 
     hrefs = [] # always the same
     @doc.search("ul#river1 h2.post-title a").each do |a|
@@ -21,7 +21,7 @@ class TechcrunchCli::Story
   end
 
   def self.scrape_titles
-    @doc = Nokogiri::HTML(open('http://techcrunch.com/'))
+    @doc = Nokogiri::HTML(open('https://techcrunch.com/'))
 
     titles = [] # always the same
     @doc.search("ul#river1 h2.post-title").each do |h2|
@@ -31,13 +31,13 @@ class TechcrunchCli::Story
   end
 
   def self.scrape_authors
-    @doc = Nokogiri::HTML(open('http://techcrunch.com/'))
+    @doc = Nokogiri::HTML(open('https://techcrunch.com/'))
     authors = @doc.search("ul#river1 div.byline").text.split("by")
     authors
   end
 
   def self.scrape_summaries
-    @doc = Nokogiri::HTML(open('http://techcrunch.com/'))
+    @doc = Nokogiri::HTML(open('https://techcrunch.com/'))
     summaries = @doc.search("ul#river1 p.excerpt").text
     summaries.split("Read More")
   end
