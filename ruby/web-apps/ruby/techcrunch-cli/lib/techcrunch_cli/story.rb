@@ -9,4 +9,13 @@ class TechcrunchCli::Story
   def save
     self.class.all << self
   end
+
+  def content
+    @content ||= TechcrunchCli::Scraper.new(self.url).scrape_article
+  end
+
+  def open_in_browser
+    system("gnome-open '#{self.url}'")
+  end
+
 end
