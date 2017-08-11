@@ -7,7 +7,7 @@ class SeatgeekCli::Wrapper
 
   def data
     unless @data
-      my_clientid = 'ODQwNzg1NnwxNTAxOTQ1NjUwLjI0'
+      my_clientid = 'xxx-xxxx-xxxx-xxxx'
       url = "https://api.seatgeek.com/2/events?client_id=#{my_clientid}&geoip=#{self.external_ip}"
       uri = URI.parse(url)
       response = Net::HTTP.get_response(uri)
