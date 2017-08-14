@@ -6,6 +6,7 @@
 2. [SQLite tutorial](http://zetcode.com/db/sqlite/)
 3. [SQLite Keywords](https://www.sqlite.org/lang_keywords.html)
 4. [SQLite Datatypes](https://sqlite.org/datatype3.html)
+5. [SQL Guide](http://www.sqlclauses.com/)
 
 ## Basics
 
@@ -114,6 +115,14 @@ General form:
   SELECT * FROM cats WHERE age > 4;
 ```
 
+Select allows you to explicitly state tableName.columName you want to select. You can use this technique when you want data from two different tables, e.g.
+
+```sql
+  SELECT cats.name, dogs.name FROM cats, dogs;
+```
+
+
+
 3. Updating records
 
 General form:
@@ -199,4 +208,36 @@ SQLite treats any column with no value as NULL. If NULL was not set, SQLite will
 
 ```sql
   SELECT * FROM cats WHERE owner_id IS NULL;
+```
+
+## Aggregate Functions
+
+Are SQL statements that return the min, max, sum or average of the values of a column. We also have COUNT and GROUP BY.
+
+1. Count
+
+Returns the number of records that meet a condition.
+
+General form:
+
+```sql
+  SELECT COUNT([column name]) FROM [table name] WHERE [column name] = [value]
+```
+
+Example:
+
+```sql
+  SELECT COUNT(age) FROM cats WHERE age > 3;
+  SELECT COUNT(owner_id) FROM cats WHERE owner_id = 1;
+```
+
+2. Group by
+
+Use in conjunction to SELECT to group you results by column. You can also use it on multiple columns.
+
+Example:
+
+```sql
+  SELECT breed, COUNT(breed) FROM cats GROUP BY breed;
+  SELECT breed, owner_id, COUNT(breed) FROM cats GROUP BY breed, owner_id;
 ```
