@@ -7,6 +7,8 @@
 3. [SQLite Keywords](https://www.sqlite.org/lang_keywords.html)
 4. [SQLite Datatypes](https://sqlite.org/datatype3.html)
 
+## Basics
+
 * Use lower case and snake_case(link multiple words with underscores) for column names
 * SQLite is NOT case sensitive with it's commands, although convention is to capitalize them.
 * Before being able to store any data in the database, you need to define the columns and their specific data type.
@@ -24,3 +26,18 @@
   NOTE 2: SQLite does not have a separate Date/Time datatype. Use TEXT, INTEGER or REAL datatypes.
 
   NOTE 3:  You can use INT as the datatype to accommodate other SQL databases
+
+## Inserting, updating and selecting records
+
+1. Insert into
+
+```sql
+  INSERT INTO cats (name, age, breed) VALUES ('Maru', 3, 'Scottish Fold');
+```
+
+Following the 'INSERT INTO' keyword is the table name, the first parenthesis are the column headings, the second are the values.
+  * the column names can be in any order, order of the values must match
+  * you don't have to specify every column, the field is left empty for that particular column.
+  * an error is thrown if you specify a column which has not been defined.
+  * each record is automatically given an id field as long as you specified an 'id' column in the 'CREATE TABLE' statement that was 'INTEGER PRIMARY KEY' - auto increments when a record is added.
+  * you can run the command from within a file or from the sqlite prompt
