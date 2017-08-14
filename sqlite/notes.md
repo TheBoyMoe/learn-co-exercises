@@ -27,7 +27,36 @@
 
   NOTE 3:  You can use INT as the datatype to accommodate other SQL databases
 
-## Inserting, updating and selecting records
+
+## Creating a database and table
+
+Create a database:
+
+```sql
+sqlite> CREATE TABLE cats (
+      id INTEGER PRIMARY KEY,
+              name TEXT,
+              age INTEGER
+          );
+
+sqlite> ALTER TABLE cats ADD COLUMN breed TEXT;
+```
+
+To create a table from a file, enter the 'CREATE TABLE' command above into a file with the .sql extension. After creating the database, execute the file as below. Note: make sure you exit the sqlite prompt between commands.
+
+
+```sql
+  sqlite3 pets_database.db
+```
+
+Create a table:
+
+```sql
+  sqlite3 pets_database.db < create_cats_table.sql
+```
+
+
+## Inserting, updating, deleting and selecting records
 
 1. Insert into
 
@@ -41,3 +70,67 @@ Following the 'INSERT INTO' keyword is the table name, the first parenthesis are
   * an error is thrown if you specify a column which has not been defined.
   * each record is automatically given an id field as long as you specified an 'id' column in the 'CREATE TABLE' statement that was 'INTEGER PRIMARY KEY' - auto increments when a record is added.
   * you can run the command from within a file or from the sqlite prompt
+
+2. Select from
+
+General form:
+
+```sql
+  SELECT [names of columns we are going to select] FROM [table we are selecting from];
+```
+
+```sql
+  SELECT * FROM cats;
+```  
+Where * (wildcard selector) selects all columns from table 'cats'. We can pass the name of the columns explicitly to return only those, e.g
+
+```sql
+  SELECT id, name, age FROM cats;
+```
+
+Only the values for the columns specified are returned.
+
+Where you have columns with duplicate values/fields, specify a query that only returns unique values, e.g.
+
+```sql
+  SELECT DISTINCT name FROM cats;
+```
+
+Using the 'WHERE' Clause: when you want to select the row(s) that match a particular condition, e.g. breed = 'Tom Cat'. You can use comparison operators, such as > or <.
+
+General form:
+
+```sql
+  SELECT * FROM [table name] WHERE [column name] = [some value];
+```
+```sql
+  SELECT * FROM cats WHERE age > 4;
+```
+
+3. Updating records
+
+General form:
+
+```sql
+  UPDATE [table name] SET [column name] = [new value] WHERE [column name] = [value];
+```
+
+Example:
+
+```sql
+  UPDATE cats SET name = 'Max' WHERE name = 'Sylvester';
+```
+
+4. Deleting records
+
+General form:
+
+```sql
+  DELETE FROM [table name] WHERE [column name] = [value];
+```
+
+Example:
+
+```sql
+  DELETE FROM cats WHERE id = 4;
+```

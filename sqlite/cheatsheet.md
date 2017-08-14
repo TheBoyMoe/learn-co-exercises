@@ -22,35 +22,3 @@
   UPDATE                  update data within a table
   DELETE                  delete data from a table
 ```
-
-## Examples
-
-```sql
-sqlite> CREATE TABLE cats (
-      id INTEGER PRIMARY KEY,
-              name TEXT,
-              age INTEGER
-          );
-
-sqlite> ALTER TABLE cats ADD COLUMN breed TEXT;
-```
-
-To create a table from a file, enter the 'CREATE TABLE' command above into a file with the .sql extension. After creating the database, execute the file as below. Note: make sure you exit the sqlite prompt between commands.
-
-Create a database:
-
-```sql
-  sqlite3 pets_database.db
-```
-
-Create a table:
-
-```sql
-  sqlite3 pets_database.db < create_cats_table.sql
-```
-
-Insert a record into a table:
-
-```sql
-  INSERT INTO cats (name, age, breed) VALUES ('Felix', 3, 'Tom Cat');
-```
