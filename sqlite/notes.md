@@ -33,17 +33,16 @@
 Create a database:
 
 ```sql
-sqlite> CREATE TABLE cats (
+  CREATE TABLE cats (
       id INTEGER PRIMARY KEY,
               name TEXT,
               age INTEGER
           );
-
-sqlite> ALTER TABLE cats ADD COLUMN breed TEXT;
 ```
 
 To create a table from a file, enter the 'CREATE TABLE' command above into a file with the .sql extension. After creating the database, execute the file as below. Note: make sure you exit the sqlite prompt between commands.
 
+Create a database (.db file is a binary file):
 
 ```sql
   sqlite3 pets_database.db
@@ -54,6 +53,14 @@ Create a table:
 ```sql
   sqlite3 pets_database.db < create_cats_table.sql
 ```
+
+Amend a table with the 'ALTER' command:
+
+```sql
+ALTER TABLE cats ADD COLUMN breed TEXT;
+```
+
+SQLite does not support deleting columns, 'DROP' the table and re-create it.
 
 
 ## Inserting, updating, deleting and selecting records
@@ -133,4 +140,63 @@ Example:
 
 ```sql
   DELETE FROM cats WHERE id = 4;
+```
+
+## Basic SQL Queries
+
+A query is an sql statement that retrieves data from the database, such as a 'SELECT' command. We include a 'WHERE' clause to limit the results returned to those matching a particular condition.
+
+1. Order by
+
+General form ('ASC' is default):
+
+```sql
+  SELECT column_name FROM table_name ORDER BY column_name ASC|DESC;
+```
+
+Example;
+
+```sql
+  SELECT * FROM cats ORDER BY name DESC;
+  SELECT name FROM cats ORDER BY name ASC;
+  SELECT * FROM cats ORDER BY breed DESC;
+```
+
+2. Limit
+
+To limit the number of rows returned, include the 'LIMIT' modifier, .e.g. return the 10 oldest cats in the list, the first being the oldest.
+
+```sql
+  SELECT * FROM cats ORDER BY age DESC LIMIT 10;
+```
+
+3. Between
+
+Used in conjunction with the 'WHERE' clause, return one or more columns where a particular column value lies between a set of values.
+
+General form:
+
+```sql
+  SELECT column_name(s) FROM table_name WHERE column_name BETWEEN value1 AND value2;
+```
+
+Example:
+
+```sql
+  SELECT name FROM cats WHERE age BETWEEN 1 AND 3;
+```
+
+4. Null
+
+Used to specify a column field where there is no value.
+Example:
+
+```sql
+  INSERT INTO cats (name, age, breed) VALUES (NULL, NULL, "Tabby");
+```
+
+SQLite treats any column with no value as NULL. If NULL was not set, SQLite will return the record following a SELECT query, e.g. SQLite returns all records from the cats table for any record that does not have value set for owner_id.
+
+```sql
+  SELECT * FROM cats WHERE owner_id IS NULL;
 ```
