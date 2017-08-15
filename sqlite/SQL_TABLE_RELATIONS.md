@@ -58,3 +58,54 @@ Example:
   LEFT OUTER JOIN Owners
   ON Cats.owner_id = Owners.id;
 ```
+
+In addition to returning records that match, we'll also have cats returned without owners.
+
+
+### Right Outer Join
+
+NOT SUPPORTED by SQLite3. Supported in other RDBMS such as PostgreSql.
+This is the opposite the opposite of the Left Outer Join. The query will return all records from the 2nd(right) table whether or not they match the condition and the records from the first(left) table that do match.
+
+```sql
+  SELECT [column_name(s)]
+  FROM [first_table]
+  RIGHT JOIN [second_table]
+  ON [first_table.column_name] = [second_table.column_name];
+```
+Example:
+
+```sql
+  SELECT Cats.name, Cats.breed, Owners.name
+  FROM Cats
+  RIGHT OUTER JOIN Owners
+  ON Cats.owner_id = Owners.id;
+```
+
+In addition to returning records that match, we'll have owners without cats.
+
+
+### Full Outer Join
+
+NOT SUPPORTED by SQLite3. Supported in other RDBMS such as PostgreSql.
+Returns all records from both the first and second tables. Only those records that meet the condition will have values for that particular column's field. The other records will display empty fields for that particular column's field.
+
+General form:
+
+```sql
+  SELECT [column_name(s)]
+  FROM [first_table]
+  FULL OUTER JOIN [second_table]
+  ON [first_table.column_name] = [second_table.column_name];
+```
+
+Example:
+
+```sql
+  SELECT Cats.name, Cats.breed, Owners.name
+  FROM Cats
+  FULL OUTER JOIN Owners
+  ON Cats.owner_id = Owners.id;
+```
+
+In this example the results will include cats without owners and owners without cats.
