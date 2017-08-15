@@ -1,4 +1,4 @@
-## SQL Table Relations
+## SQL joins
 
 We create relationships between tables through the use of a foreign key column. It uses the primary key of a record in one table to refer to that record in another table.   The foreign key column has a datatype of integer.
 
@@ -121,8 +121,8 @@ In this example the results will include cats without owners and owners without 
 Create the database and tables:
 
 ```text
-  SQLite3 students_database.db < 04_create_students_table.sql
-  SQLite3 students_database.db < 05_create_teachers_table.sql
+  SQLite3 students_database.db < 05_create_students_table.sql
+  SQLite3 students_database.db < 06_create_teachers_table.sql
 ```
 
 Left outer join:
