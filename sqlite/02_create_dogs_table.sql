@@ -6,7 +6,7 @@ CREATE TABLE dogs (
     breed TEXT
 );
 
-ALTER TABLE dogs ADD COLUMN height INTEGER;
+ALTER TABLE dogs ADD COLUMN owner_id INTEGER;
 INSERT INTO dogs (name, age, weight, breed) VALUES ('Fido', 2, 2.34, 'Dashund');
 INSERT INTO dogs (name, age, weight, breed) VALUES ('Max', 4, 4.34, 'Beagle');
 INSERT INTO dogs (name, age, weight, breed) VALUES ('Spot', 7, 34.4, 'Great Dane');

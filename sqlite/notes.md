@@ -49,13 +49,13 @@ Create a database (.db file is a binary file):
   sqlite3 pets_database.db
 ```
 
-Create a table:
+Create a table (creates database & table if it does not already exist):
 
 ```sql
   sqlite3 pets_database.db < create_cats_table.sql
 ```
 
-Amend a table with the 'ALTER' command:
+Amend a table with the 'ALTER' command (requires SQLite3):
 
 ```sql
 ALTER TABLE cats ADD COLUMN breed TEXT;
@@ -75,6 +75,7 @@ SQLite does not support deleting columns, 'DROP' the table and re-create it.
 Following the 'INSERT INTO' keyword is the table name, the first parenthesis are the column headings, the second are the values.
   * the column names can be in any order, order of the values must match
   * you don't have to specify every column, the field is left empty for that particular column.
+  * where you specify a column name, and have no value, enter NULL.
   * an error is thrown if you specify a column which has not been defined.
   * each record is automatically given an id field as long as you specified an 'id' column in the 'CREATE TABLE' statement that was 'INTEGER PRIMARY KEY' - auto increments when a record is added.
   * you can run the command from within a file or from the sqlite prompt
@@ -84,7 +85,7 @@ Following the 'INSERT INTO' keyword is the table name, the first parenthesis are
 General form:
 
 ```sql
-  SELECT [names of columns we are going to select] FROM [table we are selecting from];
+  SELECT [names of column(s), comma separated] FROM [table];
 ```
 
 ```sql
@@ -160,7 +161,7 @@ A query is an sql statement that retrieves data from the database, such as a 'SE
 General form ('ASC' is default):
 
 ```sql
-  SELECT column_name FROM table_name ORDER BY column_name ASC|DESC;
+  SELECT [column_name] FROM [table_name] ORDER BY [column_name] ASC|DESC;
 ```
 
 Example;
@@ -186,7 +187,7 @@ Used in conjunction with the 'WHERE' clause, return one or more columns where a 
 General form:
 
 ```sql
-  SELECT column_name(s) FROM table_name WHERE column_name BETWEEN value1 AND value2;
+  SELECT [column_name(s)] FROM [table_name] WHERE [column_name] BETWEEN [value1] AND [value2];
 ```
 
 Example:
