@@ -61,7 +61,11 @@ Amend a table with the 'ALTER' command (requires SQLite3):
 ALTER TABLE cats ADD COLUMN breed TEXT;
 ```
 
-SQLite does not support deleting columns, 'DROP' the table and re-create it.
+SQLite does not support deleting or renaming columns, 'DROP' the table and re-create it. The ALTER command does support renaming the table. To drop the table:
+
+```sql
+  DROP TABLE [table_name];
+```
 
 
 ## Inserting, updating, deleting and selecting records
@@ -215,9 +219,47 @@ SQLite treats any column with no value as NULL. If NULL was not set, SQLite will
 
 Are SQL statements that return the min, max, sum or average of the values of a column. We also have COUNT and GROUP BY.
 
-1. Count
+1. AVG()
 
-Returns the number of records that meet a condition.
+Returns the average value of a column
+
+General form:
+
+```sql
+  SELECT AVG([column_name]) FROM [table_name];
+```
+
+The result returns the avg value, together with a column heading of avg([column_name]), in order to give it a more descriptive meaning, we can use the 'AS' keyword to rename the heading.
+
+```sql
+  SELECT AVG([column_name]) AS [alias_name] FROM [table_name];
+```
+
+Example:
+
+```sql
+  SELECT AVG(age) AS average_age FROM cats;
+```
+
+2. SUM()
+
+Return the sum of all the values in a particular column.
+
+```sql
+  SELECT SUM([column_name]) FROM [table_name];
+```
+
+3. MIN() and MAX()
+
+Return the min/max values of the specified column.
+
+```sql
+  SELECT MIN([column_name]) FROM [table_name];
+```
+
+4. Count
+
+Returns the number of records that meet a condition. Count returns the total number of rows in a table that are not null for the specified column if no 'WHERE' clause is specified.
 
 General form:
 
@@ -232,7 +274,21 @@ Example:
   SELECT COUNT(owner_id) FROM cats WHERE owner_id = 1;
 ```
 
-2. Group by
+To count the total number of rows/records in a database, set the column name to *
+
+```sql
+  SELECT COUNT(*) FROM cats;
+```
+
+We can also set COUNT() to * to simply count the number of rows that meet a certain criteria
+
+```sql
+  SELECT COUNT(*) FROM cats WHERE age > 4;
+  SELECT COUNT(*) AS age_greater_than_4 FROM cats WHERE age > 4;
+```
+
+
+5. Group by
 
 Use in conjunction to SELECT to group you results by column. You can also use it on multiple columns.
 
