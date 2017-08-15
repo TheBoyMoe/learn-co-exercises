@@ -4,11 +4,16 @@ We create relationships between tables through the use of a foreign key column. 
 
 When deciding which table to add the foreign key column, think about the relationship that exists. When an object 'has many' relationship to another object it is seen as the parent. The foreign key (primary key of the parent) is thus added to the 'child'.
 
-SQL join clauses/statements are a means of combining the data from multiple tables based on the common column between them. There a re several types of join:
-  * inner join - returns all rows from both tables when a condition is met.
-  * left join - returns all rows from the left table, and the matched rows from the right table
-  * right join - returns all rows from the right table, and the matched rows from the left table
-  * full join - returns all rows when there is a match in ONE of the tables
+SQL join clauses/statements are a means of combining the data from multiple tables based on the common column between them. There are several types of join:
+  * inner join
+    - returns all rows from both tables that match the query.
+    - in a Venn Diagram its the intersection, A n B
+  * complex or outer joins
+    - return all of the matching rows, and all of the rows from the specified table.
+    - of which there are a number of different types:
+      * left outer join - returns all rows from the left/first table, and the matched rows from the right table
+      * right outer join - returns all rows from the right/second table, and the matched rows from the left table
+      * full outer join - returns all rows when there is a match in ONE of the tables
 
 ### Inner join
 
