@@ -114,3 +114,89 @@ Example:
 ```
 
 In this example the results will include cats without owners and owners without cats.
+
+
+### Student/Teacher Example
+
+Create the database and tables:
+
+```text
+  SQLite3 students_database.db < 04_create_students_table.sql
+  SQLite3 students_database.db < 05_create_teachers_table.sql
+```
+
+Left outer join:
+
+```sql
+  SELECT *
+  FROM teachers
+  LEFT OUTER JOIN students
+  ON teachers.id = students.teacher_id;
+```
+
+Results:
+
+```text
+  id  teacher_name    id      name     teacher_id
+  --- ------------   ----    ------    -----------
+  1      Joe           3       Bob          1
+  1      Joe           1       Dave         1
+  1      Joe           2       Jessie       1
+  2      Steven        5       George       2
+  2      Steven        4       Sara         2
+  3      Jeff          NULL    NULL         NULL
+```
+
+Returns all records from the left(teachers) table (those teachers with no matching student) and any matching records from the students table (those that meet the condition)
+
+
+
+Right outer join (not supported in SQLite3):
+
+```sql
+  SELECT *
+  FROM teachers
+  RIGHT OUTER JOIN students
+  ON teachers.id = students.teacher_id;
+```
+
+Results:
+
+```text
+  id    teacher_name   id      name     teacher_id
+  ---   ------------  ----    ------    -----------
+  1        Joe         3       Bob          1
+  1        Joe         1       Dave         1
+  1        Joe         2       Jessie       1
+  2        Steven      5       George       2
+  2        Steven      4       Sara         2
+  NULL     NULL        6       Alexis       NULL
+```
+
+Returns all records from the right/students table (including those students with no teacher), and any matching records from the teachers table.
+
+
+Full Join (not supported in SQLite3):
+
+```sql
+  SELECT *
+  FROM teachers
+  FULL OUTER JOIN students
+  ON teachers.id = students.teacher_id;
+```
+
+Results:
+
+```text
+  id    teacher_name   id      name     teacher_id
+  ---   ------------  ----    ------    -----------
+  1        Joe         3       Bob          1
+  1        Joe         1       Dave         1
+  1        Steven      2       Jessie       1
+  2        Steven      5       George       2
+  2        Steven      4       Sara         2
+  3        Jeff       NULL     NULL        NULL
+  NULL     NULL        6       Alexis      NULL
+```
+
+Returns all records from both tables.
