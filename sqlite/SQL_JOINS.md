@@ -4,7 +4,7 @@ We create relationships between tables through the use of a foreign key column. 
 
 When deciding which table to add the foreign key column, think about the relationship that exists. When an object 'has many' relationship to another object it is seen as the parent. The foreign key (primary key of the parent) is thus added to the 'child'.
 
-SQL join clauses/statements are a means of combining the data from multiple tables based on the common column between them. There are several types of join:
+SQL join clauses/statements are a means of combining the data from multiple tables based on the common column between them - allowing you to return values from these tables with a single query. There are several types of join:
   * inner join
     - returns all rows from both tables that match the query.
     - in a Venn Diagram its the intersection, A n B
