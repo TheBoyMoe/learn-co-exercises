@@ -7,6 +7,7 @@
 3. [SQLite Keywords](https://www.sqlite.org/lang_keywords.html)
 4. [SQLite Datatypes](https://sqlite.org/datatype3.html)
 5. [SQL Guide](http://www.sqlclauses.com/)
+6. [Where vs Having Cluse](http://www.programmerinterview.com/index.php/database-sql/having-vs-where-clause/)
 
 ## Basics
 
@@ -162,10 +163,11 @@ A query is an sql statement that retrieves data from the database, such as a 'SE
 
 1. Order by
 
-General form ('ASC' is default):
+General form ('ORDER BY' automatically sorts the returned values in 'ASC' order). Where you two columns are specified following 'ORDER BY', sql order by the first. Where any values are the same, those values are sorted by the second column. Where one column is specified, any values that are the same are ordered by 'id' in 'ASC' order.
 
 ```sql
-  SELECT [column_name] FROM [table_name] ORDER BY [column_name] ASC|DESC;
+  SELECT [column_name(s)] FROM [table_name] ORDER BY [column_name] ASC|DESC;
+  SELECT [column_name(s)] FROM [table_name] ORDER BY [column_name] ASC|DESC, [column_name] ASC|DESC;
 ```
 
 Example;
@@ -174,6 +176,7 @@ Example;
   SELECT * FROM cats ORDER BY name DESC;
   SELECT name FROM cats ORDER BY name ASC;
   SELECT * FROM cats ORDER BY breed DESC;
+  SELECT * FROM cats ORDER BY net_worth DESC;
 ```
 
 2. Limit
@@ -257,6 +260,13 @@ Return the min/max values of the specified column.
   SELECT MIN([column_name]) FROM [table_name];
 ```
 
+Example - return the oldest cat
+
+```sql
+  SELECT * FROM cats ORDER BY age DESC LIMIT 1;
+  SELECT name, MAX(age) FROM cats;
+```
+
 4. Count
 
 Returns the number of records that meet a condition. Count returns the total number of rows in a table that are not null for the specified column if no 'WHERE' clause is specified.
@@ -290,11 +300,46 @@ We can also set COUNT() to * to simply count the number of rows that meet a cert
 
 5. Group by
 
-Use in conjunction to SELECT to group you results by column. You can also use it on multiple columns.
+Similar to ORDER BY. Whereas ORDER BY sorts the results of basic sql queries, GROUP BY sorts the result of aggregate functions. You can also use it on multiple columns.
+
+General form:
+
+```sql
+  SELECT [column_name(s)], AGGREGATE_FUNCTION(column_name)
+  FROM [table_name]
+  WHERE [column_name] operator [value]
+  GROUP BY [column_name(s)];
+```
 
 Example:
 
 ```sql
   SELECT breed, COUNT(breed) FROM cats GROUP BY breed;
   SELECT breed, owner_id, COUNT(breed) FROM cats GROUP BY breed, owner_id;
+  SELECT owner_id, COUNT(owner_id) AS number_of_pets FROM cats GROUP BY owner_id;
 ```
+
+```sql
+  SELECT SUM(cats.net_worth)
+  FROM owners
+  INNER JOIN cats_owners
+  ON owners.id = cats_owners.owner_id
+  JOIN cats ON cats_owners.cat_id = cats.id
+  WHERE cats_owners.owner_id = 2;
+```
+
+### Where and Having
+
+If you wanted to sum the bonuses received by employees, you might use a sql statement like:
+
+```sql
+  SELECT employee, SUM(bonus) FROM employees_bonus GROUP BY employee;
+```
+
+If you then wanted to refine this  to only return employees whose bonuses were greater than $1000, you might try:
+
+```sql
+  SELECT employee, SUM(bonus) FROM employees_bonus GROUP BY employee WHERE SUM(bonus) > 1000;
+```
+
+However, this will not work. the WHERE clause does not work with aggregate functions such as SUM, AVG, MIN, MAX, etc. Instead use the HAVING clause.
