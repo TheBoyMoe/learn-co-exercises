@@ -8,6 +8,8 @@
 4. [SQLite Datatypes](https://sqlite.org/datatype3.html)
 5. [SQL Guide](http://www.sqlclauses.com/)
 6. [Where vs Having Cluse](http://www.programmerinterview.com/index.php/database-sql/having-vs-where-clause/)
+7. [SQL Joins](http://geekyisawesome.blogspot.co.uk/2011/03/sql-joins-tutorial.html)
+8. [More on SQL Joins](https://blog.codinghorror.com/a-visual-explanation-of-sql-joins/)
 
 ## Basics
 
