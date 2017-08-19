@@ -1,12 +1,12 @@
 ## ORM
 
-Object Relational Mapping (ORM) is simply a technique of 'mapping' ruby classes and instances to SQL tables and rows respectively. Classes are equated with tables and instances with rows. It's a design pattern. Thus ensuring that code is better organised and avoids code duplication. Thus a Cat class is mapped to a cats (plural) table. Each cat instance is stored as a row, the individual property values mapping to column values.
+Object Relational Mapping (ORM) is simply a technique of 'mapping' ruby classes and instances to SQL tables and rows respectively. Classes are equated with tables and instances with rows. The class is mapped to a table, not the database - we may want to add other tables/classes later. It's a design pattern. Thus ensuring that code is better organised and avoids code duplication. Thus a Cat class is mapped to a cats (convention to pluralize class name) table. Each cat instance is stored as(mapped to) a row, the individual property values mapping to column fields.
 
 A simple class that saves instances of the 'Cat' class might look like this:
 
 ```ruby
 class Cat
-
+  attr_accessor :name, :breed, :age
   @@all = []
 
   def initialize(name, breed, age)
@@ -41,3 +41,138 @@ end
 ```
 
 First establish the connection, create the instances and then iterate over the Cat instances stored in @@all. The .save method calling 'INSERT INTO' for each instance.
+
+
+## Creating the Database and Table
+
+The class is responsible for mapping to the database table, not for creating the database. In our program we'll have a 'config' folder that contains an 'environment.rb' file responsible for establishing the connection to the database - creating the database if it does not exist.
+
+```sql
+  require 'sqlite3'
+  require_relative '../lib/song.rb'
+
+  DB = {:conn => SQLite3::Database.new('../db/music.db')}
+```
+
+We set up a constant, 'DB', to reference a hash that contains the connection to the database. The 'lib/song.rb' file is our Song class, it can access the database connection via 'DB[:conn]'. To map a class to a table, create a table whose name is a pluralized version of the class name, and the table column names match the attr_accessor of the class.
+
+
+```sql
+  class Song
+    attr_accessor :name, :album, :id
+
+    def initialize(name, album, id = nil)
+      @id = id
+      @name = name
+      @album = album
+    end
+
+    def self.create_table
+      sql =  <<-SQL
+        CREATE TABLE IF NOT EXISTS songs (
+          id INTEGER PRIMARY KEY,
+          name TEXT,
+          album TEXT
+          )
+          SQL
+      DB[:conn].execute(sql)
+    end
+  end
+```
+
+When saving class instances, we're not actually saving the actual ruby object but the values of the objects instance attributes. A new row is created in the table, and each attributes value saved to the corresponding column field.
+
+```sql
+  INSERT INTO songs (name, album) VALUES ('song name', 'album name');
+```
+
+We can abstract this functionality into an instance method, e.g.
+
+```sql
+  def save
+    sql <<-SQL
+      INSERT INTO songs (name, album)
+      VALUES (?, ?)
+    SQL
+
+    DB[:conn].execute(sql, self.name, self.name)
+  end
+```
+
+We're using bound parameters to protect our database from SQl injection attacks by malicious users. Instead of interpolating variables into SQL, we use ? as placeholders and rely on #execute method to substitute in the values we pass in as arguments. We didn't insert an id. That's automatically inserted during the insert operation. Creating the object instance and saving it to the database are two separate processes. We can save the record at the same time as it's creation. Generally, we don't want to be saving records every time we create them, thus coupling the two processes, since we may want to at times create instances and not save them. Thus to create and save a song:
+
+```sql
+  Song.create_table
+  song = Song.new('99 Problems', 'The Black Album')
+  song.save
+```
+
+When a song is inserted into the table, we create a new row which is given a new id automatically. In order to update the instance's id attribute we can grab the record's id value when the record is created:
+
+```sql
+  def save
+    sql = <<- SQL
+      INSERT INTO songs (name, album)
+      VALUES (?, ?)
+    SQL
+
+    DB[:conn].execute(sql, self.name, self.album)
+
+    @id = DB[:conn].execute("SELECT last_insert_rowid() FROM songs")[0][0]
+
+  end
+```
+
+The process of creating and then saving an instance can can be abstracted further into a single method:
+
+```sql
+  def self.create(name:, album:)
+    song = Song.new(name, album)
+    song.save
+    song
+  end
+```
+
+We use keyword arguments to pass the name and album to #create, with the method returning an instance of the new object( saves having to run a database query to fetch the newly created record from the database).
+
+The complete Class:
+
+```sql
+  class Song
+    attr_accessor :name, :album, :id
+
+    def initialize(name, album, id = nil)
+      @id = id
+      @name = name
+      @album = album
+    end
+
+    def self.create_table
+      sql =  <<-SQL
+        CREATE TABLE IF NOT EXISTS songs (
+          id INTEGER PRIMARY KEY,
+          name TEXT,
+          album TEXT
+          )
+          SQL
+      DB[:conn].execute(sql)
+    end
+
+    def self.create(name:, album:)
+      song = Song.new(name, album)
+      song.save
+      song
+    end
+
+    def save
+      sql = <<- SQL
+        INSERT INTO songs (name, album)
+        VALUES (?, ?)
+      SQL
+
+      DB[:conn].execute(sql, self.name, self.album)
+      self.id = DB[:conn].execute("SELECT last_insert_rowid() FROM songs")[0][0]
+    end
+
+  end
+```

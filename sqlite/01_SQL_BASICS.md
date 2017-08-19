@@ -64,6 +64,18 @@ Amend a table with the 'ALTER' command (requires SQLite3):
 ALTER TABLE cats ADD COLUMN breed TEXT;
 ```
 
+Add a column with a default value:
+
+```sql
+  ALTER TABLE cats ADD COLUMN value INTEGER DEFAULT 100;
+```
+
+Add a column where a value must be provided:
+
+```sql
+  ALTER TABLE cats ADD COLUMN value INTEGER NOT NULL;
+```
+
 SQLite does not support deleting or renaming columns, 'DROP' the table and re-create it. The ALTER command does support renaming the table. To drop the table:
 
 ```sql
