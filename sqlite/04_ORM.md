@@ -43,7 +43,7 @@ end
 First establish the connection, create the instances and then iterate over the Cat instances stored in @@all. The .save method calling 'INSERT INTO' for each instance.
 
 
-## Creating the Database and Table
+### Creating the Database and Table
 
 The class is responsible for mapping to the database table, not for creating the database. In our program we'll have a 'config' folder that contains an 'environment.rb' file responsible for establishing the connection to the database - creating the database if it does not exist.
 
@@ -79,6 +79,8 @@ We set up a constant, 'DB', to reference a hash that contains the connection to 
     end
   end
 ```
+
+### Saving Instances/Ruby objects to the Database
 
 When saving class instances, we're not actually saving the actual ruby object but the values of the objects instance attributes. A new row is created in the table, and each attributes value saved to the corresponding column field.
 
@@ -135,6 +137,67 @@ The process of creating and then saving an instance can can be abstracted furthe
 
 We use keyword arguments to pass the name and album to #create, with the method returning an instance of the new object( saves having to run a database query to fetch the newly created record from the database).
 
+
+### Updating a Record
+
+To update a record, first retrieve it, update the object instance before saving it to the database, e.g.
+
+```sql
+  song = Song.find_by_name('99 Problems')
+  song.album = 'The Black Album'
+
+  sql = "UPDATE songs SET album = ? WHERE name = ?"
+  DB[:conn].execute(sql, song.album, song.name)
+```
+
+To update another song attribute we would need a different sql statement, e.g.
+
+```sql
+  song = Song.find_by_name('99 Problems')
+
+  sql = "UPDATE songs SET name = ? WHERE name = ?"
+  DB[:conn].execute(sql, 'Encore', song.name)
+```
+
+This particular pattern results in a lot of duplication of code. A simpler technique is simply to update all the records attributes, using the instances id to identify it in the database, .e.g.
+
+```sql
+  def update
+    sql = "UPDATE songs SET name = ?, album = ? WHERE id = ?"
+    DB[:conn].execute(sql, self.name, self.album, self.id)
+  end
+```
+
+Result, retrieve the song as before, update the parameter ans call #update to update the corresponding database record, e.g.
+
+```sql
+  song = Song.find_by_name('99 Problems')
+  song.name = 'Encore'
+  song.update
+```
+
+## Refactor #save method
+
+The current #save method will always insert a new row into the table, resulting in duplicate records if that record already exists (the only difference being the record id). We need to check if that record already exists first, if so simply call #update otherwise insert the instance. This can be simply done by checking if the instance has an id of 'nil', i.e. it's not been saved(inserted into the database).
+
+The updated #save method:
+
+```sql
+  def save
+    if self.id
+      self.update
+    else
+      sql = <<-SQL
+        INSERT INTO songs (name, album)
+        VALUES (?, ?)
+      SQL
+      DB[:conn].execute(sql, self.name, self.album)
+      @id = DB[:conn].execute("SELECT last_insert_rowid() FROM songs")[0][0]
+    end
+  end
+```
+
+
 The complete Class:
 
 ```sql
@@ -177,9 +240,8 @@ The complete Class:
     end
 
     def self.find_by_name(name)
-      sql <<-SQL
-        SELECT *
-        FROM songs
+      sql = <<-SQL
+        SELECT * FROM songs
         WHERE name = ?
         LIMIT 1
       SQL
@@ -190,13 +252,23 @@ The complete Class:
     end
 
     def save
-      sql = <<- SQL
+      if self.id
+        self.update
+      else
+      sql = <<-SQL
         INSERT INTO songs (name, album)
         VALUES (?, ?);
       SQL
 
       DB[:conn].execute(sql, self.name, self.album)
+      -- request the last inserted row's id, returns [[id]]
       @id = DB[:conn].execute("SELECT last_insert_rowid() FROM songs")[0][0]
+      end
+    end
+
+    def update
+      sql = "UPDATE songs SET name = ?, album = ? WHERE id = ?"
+      DB[:conn].execute(sql, self.name, self.album, self.id)
     end
 
   end
