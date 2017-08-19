@@ -21,7 +21,7 @@ class Cat
   end
 
   def self.save(name, breed, age, database_connection)
-    database_connection.execute("INSERT INTO cats (name, breed, age) VALUES (?, ?, ?)",name, breed, age)
+    database_connection.execute("INSERT INTO cats (name, breed, age) VALUES (?, ?, ?)",name, breed, age);
   end
 end
 
@@ -54,7 +54,7 @@ The class is responsible for mapping to the database table, not for creating the
   DB = {:conn => SQLite3::Database.new('../db/music.db')}
 ```
 
-We set up a constant, 'DB', to reference a hash that contains the connection to the database. The 'lib/song.rb' file is our Song class, it can access the database connection via 'DB[:conn]'. To map a class to a table, create a table whose name is a pluralized version of the class name, and the table column names match the attr_accessor of the class.
+We set up a constant, 'DB', to reference a hash that contains the connection to the database. The 'lib/song.rb' file is our Song class, it can access the database connection via 'DB[:conn]'. You can access the database throughout the app using 'DB[:conn]. To map a class to a table, create a table whose name is a pluralized version of the class name, and the table column names match the attr_accessor of the class.
 
 
 ```sql
@@ -73,7 +73,7 @@ We set up a constant, 'DB', to reference a hash that contains the connection to 
           id INTEGER PRIMARY KEY,
           name TEXT,
           album TEXT
-          )
+        );
           SQL
       DB[:conn].execute(sql)
     end
@@ -92,7 +92,7 @@ We can abstract this functionality into an instance method, e.g.
   def save
     sql <<-SQL
       INSERT INTO songs (name, album)
-      VALUES (?, ?)
+      VALUES (?, ?);
     SQL
 
     DB[:conn].execute(sql, self.name, self.name)
@@ -113,7 +113,7 @@ When a song is inserted into the table, we create a new row which is given a new
   def save
     sql = <<- SQL
       INSERT INTO songs (name, album)
-      VALUES (?, ?)
+      VALUES (?, ?);
     SQL
 
     DB[:conn].execute(sql, self.name, self.album)
@@ -139,7 +139,8 @@ The complete Class:
 
 ```sql
   class Song
-    attr_accessor :name, :album, :id
+    attr_accessor :name, :album
+    attr_reader = :id
 
     def initialize(name, album, id = nil)
       @id = id
@@ -153,7 +154,7 @@ The complete Class:
           id INTEGER PRIMARY KEY,
           name TEXT,
           album TEXT
-          )
+        );
           SQL
       DB[:conn].execute(sql)
     end
@@ -167,11 +168,11 @@ The complete Class:
     def save
       sql = <<- SQL
         INSERT INTO songs (name, album)
-        VALUES (?, ?)
+        VALUES (?, ?);
       SQL
 
       DB[:conn].execute(sql, self.name, self.album)
-      self.id = DB[:conn].execute("SELECT last_insert_rowid() FROM songs")[0][0]
+      @id = DB[:conn].execute("SELECT last_insert_rowid() FROM songs")[0][0]
     end
 
   end
