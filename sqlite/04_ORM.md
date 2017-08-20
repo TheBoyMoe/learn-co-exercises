@@ -176,7 +176,7 @@ Result, retrieve the song as before, update the parameter ans call #update to up
   song.update
 ```
 
-## Refactor #save method
+### Refactor #save method
 
 The current #save method will always insert a new row into the table, resulting in duplicate records if that record already exists (the only difference being the record id). We need to check if that record already exists first, if so simply call #update otherwise insert the instance. This can be simply done by checking if the instance has an id of 'nil', i.e. it's not been saved(inserted into the database).
 
@@ -196,6 +196,43 @@ The updated #save method:
     end
   end
 ```
+
+
+### Prevent Record Duplication
+
+Before creating a new record and saving it to the database, we need to check that it does not already exist, e.g. in the case of the song class we'd query the database for a record with matching attributes.
+
+```sql
+  SELECT * FROM songs WHERE name = '99 Problems' AND album = 'The Black Album';
+```
+
+The #find_or_create_by method either creates and saves an instance of the song if no matching record is found in the database, otherwise it simply returns an instance of the song, without saving the song so preventing duplicate records being created in the database.
+
+```sql
+
+  def.find_or_create_by(name:, album:)
+    sql = <<-SQL
+      SELECT * FROM songs
+      WHERE name = ? AND album = ?
+    SQL
+    array = DB[:conn].execute(sql, name, album)
+    -- query returns an array, nil/empty array if no matching record found
+    if array.empty?
+      -- the record does not exist create, save and return an instance
+      song = Song.create(name: name, album: album)
+    else
+      -- the record exists, return an instance
+      data = array.first
+      song = self.new(song[1], song[2], song[0])
+    end
+    song
+  end
+```
+
+
+
+
+
 
 
 The complete Class:
@@ -237,6 +274,14 @@ The complete Class:
       DB[:conn].execute("SELECT * FROM songs;").map do |row|
         self.new_from_db(row)
       end
+    end
+
+    def self.find_by_id(id)
+      sql = <<-SQL
+        SELECT * FROM songs
+        WHERE id = ?
+      SQL
+      DB[:conn].execute(sql, id).map {|row| self.new_from_db(row)}.first
     end
 
     def self.find_by_name(name)

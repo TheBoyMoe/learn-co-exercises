@@ -29,8 +29,8 @@ class Song
     self.new(row[1], row[2], row[0])
   end
 
-  # returns an array of song instances
   def self.all
+    # returns an array of song instances
     DB[:conn].execute("SELECT * FROM songs;").map do |row|
       self.new_from_db(row)
     end
@@ -42,23 +42,28 @@ class Song
       WHERE name = ?
       LIMIT 1
     SQL
+    DB[:conn].execute(sql, name).map {|row| self.new_from_db(row)}.first
+  end
 
-    DB[:conn].execute(sql, name).map do |row|
-      self.new_from_db(row)
-    end.first
+  def self.find_by_id(id)
+    sql = <<-SQL
+      SELECT * FROM songs
+      WHERE id = ?
+    SQL
+    DB[:conn].execute(sql, id).map {|row| self.new_from_db(row)}.first
   end
 
   def save
     if self.id
       self.update
     else
-    sql = <<-SQL
-      INSERT INTO songs (name, album)
-      VALUES (?, ?);
-    SQL
+      sql = <<-SQL
+        INSERT INTO songs (name, album)
+        VALUES (?, ?)
+      SQL
 
-    DB[:conn].execute(sql, self.name, self.album)
-    @id = DB[:conn].execute("SELECT last_insert_rowid() FROM songs")[0][0]
+      DB[:conn].execute(sql, self.name, self.album)
+      @id = DB[:conn].execute("SELECT last_insert_rowid() FROM songs")[0][0]
     end
   end
 
