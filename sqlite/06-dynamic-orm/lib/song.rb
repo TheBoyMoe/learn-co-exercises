@@ -21,7 +21,7 @@ class Song
   end
 
   # This method is moved into the class that inherits from this one so as
-  # to create the attr_accessor methods, othewise it stay here 
+  # to create the attr_accessor methods, othewise it stays here
   self.column_names.each do |col_name|
     attr_accessor col_name.to_sym
   end
@@ -56,6 +56,13 @@ class Song
 
   def self.find_by_name(name)
     sql = "SELECT * FROM #{self.table_name} WHERE name = '#{name}'"
+    DB[:conn].execute(sql)
+  end
+
+  def self.find_by(attributes)
+    value = attributes.values.first
+    formatted_value = (value.class == Fixnum)? value : "'#{value}'"
+    sql = "SELECT * FROM #{self.table_name} WHERE #{attributes.keys.first} = #{formatted_value}"
     DB[:conn].execute(sql)
   end
 

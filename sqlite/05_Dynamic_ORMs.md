@@ -129,6 +129,7 @@ Creating an abstract ORM in this manner allows us to use it with multiple classe
   end
 ```
 
+The majority of the code lives in the super class since it's not specific to any one class. Any class requiring access to those methods can simply inherit them.
 
 ### References
 
