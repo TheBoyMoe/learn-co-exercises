@@ -20,6 +20,8 @@ class Song
     column_names.compact
   end
 
+  # This method is moved into the class that inherits from this one so as
+  # to create the attr_accessor methods, othewise it stay here 
   self.column_names.each do |col_name|
     attr_accessor col_name.to_sym
   end

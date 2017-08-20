@@ -111,3 +111,26 @@ The result is that #new is called with a a hash, which defaults to empty. We ite
     DB[:conn].execute(sql)
   end
 ```
+
+Check song.rb in the 06-dynamic-orm/lib folder for the complete class.
+
+
+### Dynamic ORMs and Inheritance
+
+Creating an abstract ORM in this manner allows us to use it with multiple classes that can inherit from it since none of the methods are specific to any one class. The only code that any sub-class need to contain is to call the self.column_names method and iterate over the resulting array so as to create the attr_accessor methods, e.g.
+
+```sql
+  class Song < InteractiveRecord
+
+    self.column_names.each do |col_name|
+      attr_accessor col_name.to_sym
+    end
+
+  end
+```
+
+
+### References
+
+1. [Dynamic ORMs](https://github.com/theBoyMo/dynamic-orms-readme-cb-000)
+2. [Dynamic ORMs and Inheritance](https://github.com/learn-co-students/dynamic-orm-inheritance-cb-000)
