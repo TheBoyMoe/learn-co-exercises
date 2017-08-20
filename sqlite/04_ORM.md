@@ -210,7 +210,7 @@ The #find_or_create_by method either creates and saves an instance of the song i
 
 ```sql
 
-  def.find_or_create_by(name:, album:)
+  def self.find_or_create_by(name:, album:)
     sql = <<-SQL
       SELECT * FROM songs
       WHERE name = ? AND album = ?
@@ -223,16 +223,11 @@ The #find_or_create_by method either creates and saves an instance of the song i
     else
       -- the record exists, return an instance
       data = array.first
-      song = self.new(song[1], song[2], song[0])
+      song = self.new(data[1], data[2], data[0])
     end
     song
   end
 ```
-
-
-
-
-
 
 
 The complete Class:
