@@ -17,12 +17,20 @@ class Post
     DB[:conn].execute(sql)
   end
 
+  def self.instance_from_row(row)
+    self.new.tap do |post|
+      post.id = row[0]
+      post.title = row[1]
+      post.content = row[2]
+    end
+  end
+
   def self.find(id)
     sql = <<-SQL
       SELECT * FROM #{self.table_name}
       WHERE id = ?
     SQL
-    DB[:conn].execute(sql, id)
+    DB[:conn].execute(sql, id).map {|row| self.instance_from_row(row)}.first
   end
 
   def save
