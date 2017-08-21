@@ -89,6 +89,11 @@ class Post
     !!self.id
   end
 
+  def delete
+    sql = "DELETE FROM #{self.class.table_name} WHERE id = ?"
+    DB[:conn].execute(sql, self.id)
+  end
+
   private
     def insert
       sql = <<-SQL
