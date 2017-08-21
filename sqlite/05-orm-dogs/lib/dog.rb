@@ -84,4 +84,9 @@ class Dog
     DB[:conn].execute(sql, self.name, self.breed, self.id)
   end
 
+  # check for equality
+  def ==(other_instance)
+    self.id == other_instance.id
+  end
+
 end
