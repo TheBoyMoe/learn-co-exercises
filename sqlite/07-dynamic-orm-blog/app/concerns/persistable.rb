@@ -11,6 +11,15 @@ module Persistable
       DB[:conn].execute(sql)
     end
 
+    def create(attributes_hash)
+      self.new.tap do |instance|
+        attributes_hash.each do |attribute_name, value|
+          instance.send("#{attribute_name}=", value)
+        end
+        instance.save
+      end
+    end
+
     # return the table_name
     def table_name
       "#{self.to_s.downcase}s"
