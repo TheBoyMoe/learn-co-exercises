@@ -1,5 +1,5 @@
 class Room
-  attr_accessor :title, :date_created, :price, :url
+  attr_accessor :id, :title, :date_created, :price, :url
 
   def self.create_from_hash(hash)
     # save each record in turn to the database
@@ -16,6 +16,29 @@ class Room
     room
   end
 
+  def self.new_from_db(row)
+    self.new.tap do |room|
+      room.id = row[0]
+      room.title = row[1]
+      room.date_created = row[2]
+      room.price = row[3]
+      room.url = row[4]
+    end
+  end
+
+  def self.create_table
+    sql = <<-SQL
+      CREATE TABLE IF NOT EXISTS rooms (
+        id INTEGER PRIMARY KEY,
+        title TEXT,
+        date_created TEXT,
+        price TEXT,
+        url TEXT
+      )
+    SQL
+    DB[:conn].execute(sql)
+  end
+
   def save
     self.insert
   end
@@ -29,18 +52,11 @@ class Room
     DB[:conn].execute(sql, self.title, self.date_created, self.price, self.url)
   end
 
-  # TODO
-  def self.create_table
-    sql = <<-SQL
-      CREATE TABLE IF NOT EXISTS rooms (
-        id INTEGER PRIMARY KEY,
-        title TEXT,
-        date_created TEXT,
-        price TEXT,
-        url TEXT
-      )
-    SQL
-    DB[:conn].execute(sql)
+  def self.all
+    rows = DB[:conn].execute("SELECT * FROM rooms")
+    rows.collect do |row|
+      self.new_from_db(row)
+    end
   end
 
 end
