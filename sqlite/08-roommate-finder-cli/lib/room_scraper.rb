@@ -7,10 +7,14 @@ class RoomScraper
   end
 
   def call
-    rows.map {|row| scrape_row(row)}
+    # rows.map {|row| scrape_row(row)}
+    self.rows.each do |row|
+      # instantiate a Room instance and save to the database
+      Room.create_from_hash(self.scrape_row(row))
+    end
   end
 
-  private
+  #private
     def rows
       @rows ||= self.doc.search('div.content ul.rows p.result-info')
     end
