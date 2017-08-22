@@ -1,0 +1,11 @@
+require_relative './config/environment'
+
+#reload the environment
+def reload!
+  load_all './lib'
+end
+
+# create a console
+task :console do
+  Pry.start
+end
