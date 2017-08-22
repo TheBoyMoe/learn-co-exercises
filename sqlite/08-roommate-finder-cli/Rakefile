@@ -9,3 +9,14 @@ end
 task :console do
   Pry.start
 end
+
+task :scrape_rooms do
+  # instantiate a scraper and have it find new rooms
+  nyc_scraper = RoomScraper.new('https://newyork.craigslist.org/search/roo')
+  # nyc_scraper.call
+  # chicago_scraper = RoomScraper.new('https://chicago.craigslist.org/search/roo')
+  # chicago_scraper.call
+
+  # following call, should be able to call Room.all and list all available rooms
+
+end
