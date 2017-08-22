@@ -26,6 +26,25 @@ class Room
     end
   end
 
+  # return an array of instances from an array of records
+  def self.new_from_rows(rows)
+    rows.collect do |row|
+      self.new_from_db(row)
+    end
+  end
+
+  def self.sort_by_price(order = 'ASC')
+    # sorting by price using ruby
+    # case order
+    # when 'ASC'
+    #   self.all.sort_by {|instance| instance.price}
+    # when 'DESC'
+    #   self.all.sort_by {|instance| instance.price}.reverse
+    # end
+    rows = DB[:conn].execute("SELECT * FROM rooms ORDER BY price #{order}")
+    new_from_rows(rows)
+  end
+
   def self.create_table
     sql = <<-SQL
       CREATE TABLE IF NOT EXISTS rooms (
@@ -52,11 +71,11 @@ class Room
     DB[:conn].execute(sql, self.title, self.date_created, self.price, self.url)
   end
 
+  # return an array of instances
   def self.all
     rows = DB[:conn].execute("SELECT * FROM rooms")
-    rows.collect do |row|
-      self.new_from_db(row)
-    end
+    self.new_from_rows(rows)
   end
+
 
 end
