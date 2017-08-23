@@ -40,15 +40,23 @@ To make use of ActiveRecord's built in ORM methods, ensure that your ruby class 
 
   # create a new student record in the database
   # "INSERT INTO students (name) VALUES (John)";
-  Student.create(name: 'John')
+  student1 = Student.create(name: 'John') #=> returns instance of class
+
+  # to create a record if it does not already exist
+  student2 =  Student.find_or_create_by({name: 'John'}) #=> returns instance of class
+  student1.id == student2.id
 
   # retrieve a record by id
   # "SELECT * FROM students WHERE id = 1";
-  Student.find(1)
+  Student.find(1) #=> returns instance of class
 
   # retrieve a record by any of it's attributes, e.g. name
   # "SELECT * FROM students WHERE name = 'John' LIMIT 1";
-  Student.find_by(name: 'John')
+  Student.find_by(name: 'John') #=> returns instance of class
+
+  # there's also, .find_by_[attr_name], e.g
+  Student.find_by_name('John') #=> returns instance of class
+  Student.find_by_id(1) #=> returns instance of class
 
   # getters/setters of an instance
   # there's no need to define attr_accessors
@@ -58,6 +66,10 @@ To make use of ActiveRecord's built in ORM methods, ensure that your ruby class 
 
   # save changes to the database
   student.save
+
+  # to update and save a record in one step
+  student.update({name: 'Simon'})
+  student.name #=> 'Simon'
 ```
 
 
@@ -65,3 +77,4 @@ To make use of ActiveRecord's built in ORM methods, ensure that your ruby class 
 
 ### References
 1. [Active Record Basics](http://guides.rubyonrails.org/active_record_basics.html)
+2. [Querying Active Record](http://guides.rubyonrails.org/active_record_querying.html)
