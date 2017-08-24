@@ -1,6 +1,6 @@
 ## Active Record
 
-Active Record represents the Model layer in the MVC pattern - responsible for implementing business data and logic. Active Record is the implementation of a design pattern which facilitates the creation, use and storage of business objects. It is itself an ORM system, enabling those object classes and attributes to be mapped to database tables and columns respectively. By following the adopted conventions, there is very little SQL code that need be written.
+Active Record represents the Model layer in the MVC pattern - responsible for implementing business data and logic. Active Record is the implementation of a design pattern which facilitates the creation, use and storage of business objects. It is itself an ORM system, enabling those object classes and attributes to be mapped to database tables and columns respectively. By following the adopted conventions, there is very little SQL code that need be written. Most Active Record functionality is database independent. Since you're doing everything in Ruby instead of SQl, you don't have to worry about particular SQL syntax - so you can use SQLite3 in development and MySQL or PostgreSql in production.
 
 ### Implementing Active Record
 
@@ -190,6 +190,13 @@ Another common Rake task is to provide a pry console in order to debug the app, 
 Provided the db:seed and db:migrate commands are run first, when you execute 'rake console' you'll be dropped in to pry and have access to the database table.
 
 
+### Migrations
+
+Database migrations is a simple, convenient way to configure/alter your database in a structured and organised manner using Ruby. You can alter the configuration of you database at a later date without losing data. Active Record keeps track of these changes, so you can revert those changes.
+
+Check 'migrations-basics/README.md' and follow the exercise
+
 ### References
 1. [Active Record Basics](http://guides.rubyonrails.org/active_record_basics.html)
 2. [Querying Active Record](http://guides.rubyonrails.org/active_record_querying.html)
+3. [Active Record Migrations](http://edgeguides.rubyonrails.org/active_record_migrations.html#writing-a-migration)
