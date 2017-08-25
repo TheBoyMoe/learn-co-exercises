@@ -88,6 +88,9 @@ Active Record objects can be created from a hash, a block or have their attribut
   # "SELECT * FROM students WHERE name = 'John' LIMIT 1";
   Student.find_by(name: 'John') #=> returns instance of class
 
+  # retrieve a record based on multiple attributes
+  Movie.find_by(title: 'The Sting', release_date: 1973, director: 'George Roy Hill')
+
   # there's also, .find_by_[attr_name], e.g
   Student.find_by_name('John') #=> returns instance of class
   Student.find_by_id(1) #=> returns instance of class
@@ -115,7 +118,7 @@ Active Record objects can be created from a hash, a block or have their attribut
 
   # There's also the .update_all class method, for bulk updates
   User.update_all "max_login_attempts = 3, must_change_password = 'true'"
-
+  Movie.update_all(title: 'A Movie')
 ```
 
 #### Delete
@@ -125,6 +128,12 @@ To delete a record from the database, first retrieve it, before 'destroying' it
 ```ruby
   user = User.find_by(name: 'John')
   user.destroy
+```
+
+Destroy all records at once
+
+```ruby
+  Movie.destroy_all
 ```
 
 ### Rake and Rake tasks
