@@ -254,11 +254,40 @@ Another common Rake task is to provide a pry console in order to debug the app, 
 Provided the db:seed and db:migrate commands are run first, when you execute 'rake console' you'll be dropped in to pry and have access to the database table.
 
 
-### Migrations
+### Migrations and Active Record
+
+ActiveRecord allows you to create a database that your classes can interact with, with only a few lines of code. Your models inherit from ActiveRecord::Base and are placed in app/models folder. Migrations inherit from ActiveRecord::Migration and are placed in db/migrate.
+
+Note: as of ActiveRecord5.x, you need to include the version number when inheriting from ActiveRecord::Migration, e.g. ActiveRecord::Migration[4.2]
+
+Note: the t.timestamps create two columns, created_at and updated_at
+
+```ruby
+
+  # migration
+  class CreateDogs < ActiveRecord::Migration[4.2]
+    def change
+      create_table :dogs do |t|
+        t.string :name
+        t.string :breed
+        t.timestamps
+      end
+    end
+  end
+
+  # model
+  class Dog < ActiveRecord::Base; end
+
+  # to create the database & make ActiveRecords CRUD/ORM methods available
+  rake db:migrate
+```
+
+Note: after db:migrate has been applied, do not add columns to the change method above directly. Instead, create a new migration file with a change method and use the 'add_column' statement and run db:migrate once more. Number the files 01_, 02_, etc so that they're applied in sequence, in the correct order, e.g. create_table first, amendment second.
+
+Migrate files use a naming convention, where the name of the class (in camel case) matches that of the file (in snake case), ignoring any numbers at the beginning of the file. Rails uses a timestamp in the format YYYYMMDDHHMMSS, in order to determine the order in which the files should be executed.
 
 Database migrations is a simple, convenient way to configure/alter your database in a structured and organised manner using Ruby. You can alter the configuration of you database at a later date without losing data. Active Record keeps track of these changes, so you can revert those changes.
 
-Check 'migrations-basics/README.md' and follow the exercise
 
 ### References
 1. [Active Record Basics](http://guides.rubyonrails.org/active_record_basics.html)
