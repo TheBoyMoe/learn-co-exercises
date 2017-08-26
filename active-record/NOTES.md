@@ -288,6 +288,19 @@ Migrate files use a naming convention, where the name of the class (in camel cas
 
 Database migrations is a simple, convenient way to configure/alter your database in a structured and organised manner using Ruby. You can alter the configuration of you database at a later date without losing data. Active Record keeps track of these changes, so you can revert those changes.
 
+#### Active Record Datatypes
+
+|Data Type                      |Examples                                                      |
+|-------------------------------|--------------------------------------------------------------|
+|boolean                        | true, false (sqlite3 uses 0 - false, 1 - true)               |
+|integer                        | 2, -13, 485                                                  |
+|string                         | "Halloween", "Boo!", strings between 1-255 characters        |
+|datetime                       | DateTime.now, DateTime.new(2014,10,31) (sqlite3 uses strings)|
+|float                          | 2.234, 32.2124, -6.342 (sqlite3 uses REAL)                   |
+|text                           | strings between 1 and 2 ^ 32 - 1 characters                  |
+
+
+
 
 ### References
 1. [Active Record Basics](http://guides.rubyonrails.org/active_record_basics.html)
