@@ -119,6 +119,12 @@ To associate a song to an artist we could set 'hello.artist_id = adele.id', but 
   hello.artist = adele
   hello.artist #=> <Artist:0x007fc75b8d9490 id: nil, name: "Adele">
   hello.artist.name #=> 'Adele'
+  hello
+  #=> <Song:0x007fc75a8de3d8 id: nil, name: "Hello", artist_id: nil, genre_id: nil>
+  # the song.artist_id is unchanged in this case because the artist has not been saved and so has no id. When the song/artist is saved, e.g 'song.save' => song.artist_id is updated with the artist's id.
+  song.save
+  song
+  #=> <Song:0x007fc75a8de3d8 id: nil, name: "Hello", artist_id: nil, genre_id: 1>
 ```
 
 However, when we interrogate the artist object for their songs, the collection is empty

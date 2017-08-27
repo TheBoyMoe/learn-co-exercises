@@ -141,3 +141,4 @@ Destroy all records at once
 1. [Active Record Basics](http://guides.rubyonrails.org/active_record_basics.html)
 2. [Querying Active Record](http://guides.rubyonrails.org/active_record_querying.html)
 3. [Active Record Migrations](http://edgeguides.rubyonrails.org/active_record_migrations.html#writing-a-migration)
+4. [Active Record Associations](http://guides.rubyonrails.org/association_basics.html)
