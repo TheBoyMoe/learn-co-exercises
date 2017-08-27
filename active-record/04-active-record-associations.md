@@ -94,3 +94,50 @@ An artist has many songs, add the has_many macro to the Artist model to create t
     has_many :artists, through: :songs
   end
 ```
+
+### Testing the Associations
+
+Launch a Pry console by running 'rake console', and create a few songs & artists:
+
+```ruby
+hello = Song.new(name: "Hello")
+#=> <Song:0x007fc75a8de3d8 id: nil, name: "Hello", artist_id: nil, genre_id: nil>
+hotline_bling = Song.new(name: "Hotline Bling")
+#=> <Song:0x007fc75b9f3a38 id: nil, name: "Hotline Bling", artist_id: nil, genre_id: nil>
+someone_like_you = Song.new(name: "Someone Like You")
+#=> <Song:0x007fc75b5cabc8 id: nil, name: "Someone Like You", artist_id: nil, genre_id: nil>
+
+adele = Artist.new(name: "Adele")
+#=> <Artist:0x007fc75b8d9490 id: nil, name: "Adele">
+drake = Artist.new(name: "Drake")
+#=> <Artist:0x007fc75b163c60 id: nil, name: "Drake">
+```
+
+To associate a song to an artist we could set 'hello.artist_id = adele.id', but ActiveRecord macros allow us to associate an artist object directly to a song, e.g.
+
+```ruby
+  hello.artist = adele
+  hello.artist #=> <Artist:0x007fc75b8d9490 id: nil, name: "Adele">
+  hello.artist.name #=> 'Adele'
+```
+
+However, when we interrogate the artist object for their songs, the collection is empty
+
+```ruby
+  adele.songs #=> []
+```
+
+The model that has the 'has_many' relationship is considered the parent, the model with the 'belongs_to', the child. If you tell the child that it belongs to the parent, the parent won't know about that relationship, e.g. 'hello.artist = adele'. If you tell the parent that a certain child object has been added to its collection, both the parent and the child will know about the association. Thus:
+
+```ruby
+  # creates 'has_many' and reciprocal 'belongs_to' relationships
+  # 'has_many' stores those objects in an array
+  adele.songs << someone_like_you
+
+  adele.songs
+  #=> [#<Song:0x007fc75b5cabc8 id: nil, name: "Someone Like You", artist_id: nil, genre_id: nil>]
+  someone_like_you.artist
+  #=> <Artist:0x007fc75b8d9490 id: nil, name: "Adele">
+  someone_like_you.artist.name
+  #=> 'Adele'
+```
