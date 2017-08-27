@@ -66,3 +66,31 @@ A genre will have many songs and it will have many artists through songs. These 
     end
   end
 ```
+
+Don't forget the run 'rake db:migrate' to create the database tables.
+
+
+### Building Associations
+
+The has_many, has_many :through, and belongs_to relationships are created using ActiveRecord macros - these are simply methods that can be used to implement these associations. These macros are added to our models, which need to inherit from ActiveRecord::Base. In order to create the 'song belongs to artist' relationship, add the belongs_to macro to the Song model(repeat for genre)
+
+```ruby
+  class Song < ActiveRecord::Base
+    belongs_to :artist
+    belongs_to :genre
+  end
+```
+
+An artist has many songs, add the has_many macro to the Artist model to create the association. Because each song has an artist_id and the has_many macro, we can re-create the has_many relationship. An artist also has many genres, use the has_many through macro. Repeat the process for the Genre model.
+
+```ruby
+  class Artist < ActiveRecord::Base
+    has_many :songs
+    has_many :genres, through: :songs
+  end
+
+  class Genre < ActiveRecord::Base
+    has_many :songs
+    has_many :artists, through: :songs
+  end
+```
