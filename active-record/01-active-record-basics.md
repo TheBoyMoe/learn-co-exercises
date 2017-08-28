@@ -142,3 +142,4 @@ Destroy all records at once
 2. [Querying Active Record](http://guides.rubyonrails.org/active_record_querying.html)
 3. [Active Record Migrations](http://edgeguides.rubyonrails.org/active_record_migrations.html#writing-a-migration)
 4. [Active Record Associations](http://guides.rubyonrails.org/association_basics.html)
+5. [Rails Api Docs](http://api.rubyonrails.org/)

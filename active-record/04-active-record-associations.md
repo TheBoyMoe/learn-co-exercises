@@ -133,12 +133,16 @@ However, when we interrogate the artist object for their songs, the collection i
   adele.songs #=> []
 ```
 
+
+### Has_many & belongs_to methods
+
 The model that has the 'has_many' relationship is considered the parent, the model with the 'belongs_to', the child. If you tell the child that it belongs to the parent, the parent won't know about that relationship, e.g. 'hello.artist = adele'. If you tell the parent that a certain child object has been added to its collection, both the parent and the child will know about the association. Thus:
 
 ```ruby
   # creates 'has_many' and reciprocal 'belongs_to' relationships
   # 'has_many' stores those objects in an array
   adele.songs << someone_like_you
+  adele.songs << Song.new(name: 'Some One Like You') # creates song and adds it to the songs  collection
 
   adele.songs
   #=> [#<Song:0x007fc75b5cabc8 id: nil, name: "Someone Like You", artist_id: nil, genre_id: nil>]
@@ -147,3 +151,35 @@ The model that has the 'has_many' relationship is considered the parent, the mod
   someone_like_you.artist.name
   #=> 'Adele'
 ```
+
+The 'adele.songs << song' method is an inefficient way of adding songs to the artist's songs collection, the method returns the entire collection. A better technique is to use the '#build' or '#create' methods to create a song event though they're called on the artist instance.
+
+```ruby
+  adele.songs.build(name: 'Some One Like You')
+  #=> #<Song id:nil, name: 'Some One Like You', artist_id: 1, genre_id: nil>
+  adele.save #  inserts the song into the songs table
+```
+
+The method will create the song, add it to the 'songs' collection and automatically associates it with the artist_id(if the artist has been previously saved), but does not have it's own id because it is yet to be saved. To save the song to the 'songs' table, 'adele.save' - until that point it exists in memory. To create and save the song, use 'create'.
+
+```ruby
+  adele.songs.create(name: 'Some One Like You')
+  #<Song id:4, name: 'Some One Like You', artist_id: 1, genre_id: nil>
+```
+
+Note: 'adele.songs.build' and 'adele.songs.create' are 'has_many' methods - an artist has many songs. There are also 'belongs_to' methods, the song belongs to the artist, e.g.
+
+```ruby
+  song = Song.new(name: 'Song Remains the Same') # creates song => can't be saved until associated with an artist
+  song.build_artist(name: 'Led Zeppelin') # creates artist
+  song.save # saves both artist and song to their respective tables (two inserts are executed) - and adds song to artist.songs collection
+
+  song.create_artist(name: 'Led Zeppelin') # creates and saves artist, but not song, requires artist_id
+  song.save # inserts into songs table
+```
+
+Note: Methods to be aware of:
+
+belongs_to => artist, artist=, build_artist, create_artist, create_artist!
+has_many => songs, songs<<, create, build (generally use build and not create in a request cycle)
+ #persisted? => check if the instance has been saved to the database
