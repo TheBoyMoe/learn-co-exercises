@@ -122,7 +122,7 @@ To associate a song to an artist we could set 'hello.artist_id = adele.id', but 
   hello
   #=> <Song:0x007fc75a8de3d8 id: nil, name: "Hello", artist_id: nil, genre_id: nil>
   # the song.artist_id is unchanged in this case because the artist has not been saved and so has no id. When the song/artist is saved, e.g 'song.save' => song.artist_id is updated with the artist's id.
-  song.save
+  song.save #=> returns true if the object was saved, the object was valid
   song
   #=> <Song:0x007fc75a8de3d8 id: nil, name: "Hello", artist_id: nil, genre_id: 1>
 ```
@@ -180,6 +180,55 @@ Note: 'adele.songs.build' and 'adele.songs.create' are 'has_many' methods - an a
 
 Note: Methods to be aware of:
 
-belongs_to => artist, artist=, build_artist, create_artist, create_artist!
-has_many => songs, songs<<, create, build (generally use build and not create in a request cycle)
- #persisted? => check if the instance has been saved to the database
+ * belongs_to => artist, artist=, build_artist, create_artist, create_artist!
+ * has_many => songs, songs<<, create, build (generally use build and not create in a request cycle)
+ * song.persisted? => check if the instance has been saved to the database
+
+
+
+#### Validate objects
+
+ Validations only run when you try to save the object or validate it, e.g. song.valid?.
+
+ * song.valid? => check if the object is valid, only valid objects can be saved. The 'save' method will return true/false depending on whether the object was saved.
+ * song.errors => returns an error object which will include any errors(messages attribute) the object has, e.g. not valid.
+ * song.errors.full_messages => returns an array of all the error messages
+ * song.errors.any? => returns a boolean
+
+
+
+### Active Record Life Cycle Events
+
+Don't override, #initialize method in your model classes. ActiveRecord provides life-cycle methods (callbacks) that you can hook into to control the objects' life-cycle. There a re a number of life-cycle events you can hook into, e.g.
+ * before_save
+ * after_save
+ * before_create
+ * after_create
+ * before_update
+ * after_update
+ * before_destroy
+ * after_destroy
+
+To 'hook' into a particular event, have it call a method, e.g.
+
+```ruby
+class Artist < ApplicationRecord
+  has_many :songs
+
+  validates :name, :presence => true
+  validates :name, :length => {:minimum => 5}
+
+  after_create :email_people # execute after every artist instantiation
+  after_save :notify_admin
+
+  def email_people
+    # Do some thing
+  end
+
+  def notify_admin
+    # do some thing
+  end
+
+end
+
+```
