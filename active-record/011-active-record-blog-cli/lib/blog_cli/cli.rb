@@ -39,7 +39,15 @@ class BlogCLI::CLI
     puts 'Please enter the content:'
     params[:content] = self.user_input
     post = BlogCLI::Post.new(params)
-    post.save
+
+    # 1. manually assign the current_user
+    # post.author = self.current_user
+
+    # 2. instantiate the post already asociated with the current_user
+    post = current_user.posts.build(params)
+    post.save # insert post
+    puts "Saved post, id: #{post.id}"
+    menu
   end
 
   def user_input
