@@ -16,6 +16,8 @@ class BlogCLI::CLI
   def menu
     puts 'What would you like to do?'
     puts '1. Write a post'
+    puts "2. List your posts"
+    puts "3. List all posts"
     self.main_menu_loop
   end
 
@@ -24,11 +26,50 @@ class BlogCLI::CLI
       case self.last_input.to_i
       when 1
         self.post_new
+        break
+      when 2
+        self.post_index
+        break
       else
         menu
         break
       end
     end
+  end
+
+  # print all the posts of the current_user
+  def post_index
+    puts "--- Posts by you, #{current_user.name} ---"
+    # How to print out each post by this user with an ID and a Title
+    current_user.posts.each do |post|
+      puts "#{post.id}. #{post.title}"
+    end
+
+    puts "Enter the Post ID you'd like to see or edit or go back to the main menu:"
+    if user_input.to_i > 0
+      post_show
+    else
+      menu
+    end
+  end
+
+  def post_show
+    puts "Loading Post #{last_input}..."
+    # When we load this post, it 100% belongs to the current_user
+    # begin
+    #   post = current_user.posts.find(last_input)
+    # SELECT * FROM posts WHERE id = ? AND author_id = ?
+    # find_by returns nil if no match, find throws an exception
+    if post = current_user.posts.find_by(:id => last_input)
+      puts "--- #{post.id} --- #{post.title}"
+      puts
+      puts post.content
+    else
+      # trying to retrieve the post of another user (current_user.id != author_id of post)
+      # rescue ActiveRecord::RecordNotFound
+      puts "Can't find a post with ID #{last_input} for you..."
+    end
+    menu
   end
 
   # instantiate a post
