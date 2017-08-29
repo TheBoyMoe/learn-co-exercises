@@ -44,7 +44,7 @@ class BlogCLI::CLI
     # post.author = self.current_user
 
     # 2. instantiate the post already asociated with the current_user
-    post = current_user.posts.build(params)
+    post = self.current_user.posts.build(params)
     post.save # insert post
     puts "Saved post, id: #{post.id}"
     menu
