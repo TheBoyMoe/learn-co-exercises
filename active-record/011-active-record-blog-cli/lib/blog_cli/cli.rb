@@ -1,0 +1,3 @@
+class BlogCLI::CLI
+
+end
