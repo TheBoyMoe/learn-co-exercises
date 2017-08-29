@@ -15,13 +15,20 @@ class BlogCLI::CLI
     while user_input != 'exit'
       case @last_input.to_i
       when 1
-        self.write_post
+        self.post_new
+      else
+        menu
+        break
       end
     end
   end
 
-  def write_post
+  # instantiate a post
+  def post_new
     puts 'Please enter the title of your new post:'
+    post = BlogCLI::Post.new
+    post.title = self.user_input
+    post.save
   end
 
   def user_input
