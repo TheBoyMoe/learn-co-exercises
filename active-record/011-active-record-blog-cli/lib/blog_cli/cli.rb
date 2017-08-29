@@ -25,9 +25,12 @@ class BlogCLI::CLI
 
   # instantiate a post
   def post_new
+    params = {}
     puts 'Please enter the title of your new post:'
-    post = BlogCLI::Post.new
-    post.title = self.user_input
+    params[:title] = self.user_input
+    puts 'Please enter the content:'
+    params[:content] = self.user_input
+    post = BlogCLI::Post.new(params)
     post.save
   end
 

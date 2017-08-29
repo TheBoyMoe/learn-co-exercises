@@ -1,5 +1,6 @@
 require_relative '../config/environment'
 
+# prevent the program from running if there is a pending migration
 ActiveRecord::Migration.check_pending!
 
 module BlogCLI
