@@ -1,8 +1,16 @@
 class BlogCLI::CLI
+  attr_reader :last_input, :current_user
 
   def call
     puts 'Welcom to the Blog CLI!'
+    self.login
     self.menu
+  end
+
+  def login
+    puts 'Please enter your user name to login'
+    @current_user = BlogCLI::Author.find_or_create_by(:name => self.user_input)
+    puts "You are logged in as: #{self.current_user.name}" # current_user is an author instance
   end
 
   def menu
@@ -12,8 +20,8 @@ class BlogCLI::CLI
   end
 
   def main_menu_loop
-    while user_input != 'exit'
-      case @last_input.to_i
+    while self.user_input != 'exit'
+      case self.last_input.to_i
       when 1
         self.post_new
       else
