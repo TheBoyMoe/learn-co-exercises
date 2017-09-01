@@ -113,8 +113,9 @@ body - data sent back to the requester. Has to respond to 'each' and yield strin
 
 ### Resources
 
-1. [Overview of Rack](https://blog.engineyard.com/2015/understanding-rack-apps-and-middleware)
-2. [Build a Rack Application from Scratch part 1](http://tommaso.pavese.me/2016/06/05/a-rack-application-from-scratch-part-1-introducting-rack/#a-naive-and-incomplete-framework)
-3. [Build a Rack Application from Scratch part 2](http://tommaso.pavese.me/2016/07/26/a-rack-application-from-scratch-part-2-routes-and-controllers/)
-4. [Build a Rack Application from Scratch part 3](http://tommaso.pavese.me/2016/08/01/a-rack-application-from-scratch-part-3-view-templates/)
-5. [Build a Rack Application from Scratch part 4](http://tommaso.pavese.me/2016/10/09/a-rack-application-from-scratch-part-4-models-and-persistence/)
+1. [Rack docs](https://rack.github.io/)
+2. [Overview of Rack](https://blog.engineyard.com/2015/understanding-rack-apps-and-middleware)
+3. [Build a Rack Application from Scratch part 1](http://tommaso.pavese.me/2016/06/05/a-rack-application-from-scratch-part-1-introducting-rack/#a-naive-and-incomplete-framework)
+4. [Build a Rack Application from Scratch part 2](http://tommaso.pavese.me/2016/07/26/a-rack-application-from-scratch-part-2-routes-and-controllers/)
+5. [Build a Rack Application from Scratch part 3](http://tommaso.pavese.me/2016/08/01/a-rack-application-from-scratch-part-3-view-templates/)
+6. [Build a Rack Application from Scratch part 4](http://tommaso.pavese.me/2016/10/09/a-rack-application-from-scratch-part-4-models-and-persistence/)
