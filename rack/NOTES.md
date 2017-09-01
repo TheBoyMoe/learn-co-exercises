@@ -67,6 +67,16 @@ Somme Rack methods include:
 
 Every response must contain 3 parts, status, headers and body. You can use the Rack::Response class and it's convenience methods, e.g. write, set_cookie, finish etc. to create a response, or simply return an array containing the three components.
 
+```ruby
+class Application
+
+  def call(env)
+    [200, {'Content-Type' => 'text/html'}, ['Hello World']]
+  end
+
+end
+```
+
 status - http status code, e.g 200,404, etc
 header - must respond to 'each' and yield key/value pairs, the keys have to be strings
 body - data sent back to the requester. Has to respond to 'each' and yield string values.
@@ -224,6 +234,22 @@ In rack you can set the status code through the status_code attribute, by defaul
     end
   end
 ```
+
+### HTTP Verbs
+
+Http verbs describe the required action. With the same resource we may want to update, delete or retrieve it.
+
+VERB  | Description |
+| ------------- | ------------- |
+| HEAD  | Asks for a response like a GET but without the body  |
+| GET  | Retrieves a representation of a resource  |
+| POST | Submits data to be processed in the body of the request, e.g submitting a form|
+| PUT | Uploads a representation of a resource in the body of the request |
+| DELETE | Deletes a specific resource|
+| TRACE | Echoes back the received request |
+| OPTIONS | Returns the HTTP methods the server supports |
+| CONNECT | Converts the request to a TCP/IP tunnel (generally for SSL)|
+| PATCH | Apply a partial modification of a resource |
 
 
 ### Resources
