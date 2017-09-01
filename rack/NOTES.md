@@ -110,6 +110,88 @@ body - data sent back to the requester. Has to respond to 'each' and yield strin
   end
 ```
 
+### Dynamic Routes
+
+Currently, for every new route (url path) we want to add to our server, we have to write an 'if' statement with a 'do' block our #call method. If our app handles user sign ups, allowing them to login and view account details, we couldn't be manually adding routes for each of these. In order to handle these situations we use dynamic routes.
+
+Consider the following class and rack app:
+
+```ruby
+  #song.rb
+  class Song
+    attr_accessor :title, :artist
+  end
+
+  # application.rb ver. 1
+  class Application
+
+    @@songs = [Song.new("Sorry", "Justin Bieber"),
+              Song.new("Hello","Adele")]
+
+    def call(env)
+      resp = Rack::Response.new
+      req = Rack::Request.new(env)
+
+      @@songs.each do |song|
+        resp.write "#{song.title}\n"
+      end
+
+      resp.finish
+    end
+  end
+```
+
+In ver.1, all the song titles are returned no matter the path. If you want to query individual songs by path, e.g http://localhost:9292/songs/Sorry we could use ver.2, but would have to hard code each song individually, but this would be inflexible, requiring manual editing each time a song was added.
+
+```ruby
+  # application.rb ver.2
+  class Application
+
+    @@songs = [Song.new("Sorry", "Justin Bieber"),
+              Song.new("Hello","Adele")]
+
+    def call(env)
+      resp = Rack::Response.new
+      req = Rack::Request.new(env)
+
+      if req.path == "/songs/Sorry"
+        resp.write @@songs[0].artist
+      elsif req.path == "/songs/Hello"
+        resp.write @@songs[1].artist
+      end
+
+      resp.finish
+    end
+  end
+```
+
+Since paths are strings, we can look for the text after '/songs/' to determine the actual song and then look for a match, e.g. ver.3. Now we can add as many songs as req'd, and not have to edit our code.
+
+```ruby
+# application.rb ver.3
+class Application
+
+  @@songs = [Song.new("Sorry", "Justin Bieber"),
+            Song.new("Hello","Adele")]
+
+  def call(env)
+    resp = Rack::Response.new
+    req = Rack::Request.new(env)
+
+    if req.path.match(/songs/)
+
+      song_title = req.path.split("/songs/").last
+      song = @@songs.find{|s| s.title == song_title}
+
+      resp.write song.artist
+    end
+
+    resp.finish
+  end
+end
+```
+
+
 
 ### Resources
 
