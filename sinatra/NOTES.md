@@ -1,0 +1,15 @@
+## Sinatra
+
+Sinatra is a Domain Specific Language implemented in Ruby that's used for writing web applications. Created by Blake Mizerany, Sinatra is Rack-based, which means it can fit into any Rack-based application stack, including Rails.
+
+Unlike Ruby on Rails, which is a Full Stack Web Development Framework that provides everything needed from front to back, Sinatra is designed to be lightweight and flexible. Sinatra is designed to provide you with the bare minimum requirements and abstractions for building simple and dynamic Ruby web applications.
+
+Sinatra is considered a light weight framework where the responsibility of app structure and communication falls solely on the developer. Sinatra doesn't give you a lot to get started with. There is no way to auto-generate files, directories or routes. Sinatra requires that you create the app structure, routes, controllers and connect them manually.
+
+To get started install the sinatra gem, 'gem install sinatra'.
+
+Starting with an empty dir, create app, config folders. In app/, add models, views and controllers folders - adding application.rb to the controllers dir. Add environment.rb to config/. From the cli, enter 'bundle init', to create your Gemfile and add the 'sinatra' and 'rspec' gems. The 'bundle install' command will download these, plus create you 'Gemfile.lock' file. Run 'rspec --init', creates your 'spec' folder, 'spec_helper.rb' and '.rspec' files. Add 'config.ru' file to the root of the project - entry point for the app.
+
+The application controller (app/controllers/application.rb) is the heart of the app. This class inherits from Sinatra::Base - giving it Sinatra's functionality. To start the app enter 'rackup config.ru'  or simply 'rackup'. Load the 'shotgun' gem (install the gem 'gem install shotgun' so the command is available from the cli, and add it to the gem file and download with 'bundle install') and start the app with 'shotgun config.ru' (or 'shotgun'), instead of rackup and any changes to the app are automatically applied without a re-start. Shotgun uses port 9393, as opposed to 9292. When starting an app with rackup, the application code is read once - every start thus requires a re-start
+
+'config.ru' requires a Sinatra Controller to run - a ruby class that inherits from Sinatra::Base. This gives the app a Rack-compatible interface via the Sinatra framework. Within controllers we define our 'routes' or methods such as 'get', and 'post'. These methods are attached to and scoped to the particular controller they're defined in. The final step in creating a route is to 'mount' it in the config.ru file. The 'application' controller is mounted using the 'run' keyword. All other controllers are mounted using the 'use' keyword.
