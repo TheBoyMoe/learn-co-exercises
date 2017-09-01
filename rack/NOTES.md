@@ -191,6 +191,39 @@ class Application
 end
 ```
 
+### Setting HTTP Status codes
+
+
+Status Number | Code/Description
+--------------|--------------------------
+1             | 1xx: Informational (request received and continuing process)
+2             | 2xx: Success (request successfully received, understood, and accepted)
+3             | 3xx: Redirection (further action must be taken to complete request)
+4             | 4xx: Client Error (request contains bad syntax and can't be completed)
+5             | 5xx: Server Error (server couldn't complete request)
+
+
+In rack you can set the status code through the status_code attribute, by default it is set to 200.
+
+
+```ruby
+  class Application
+
+    def call(env)
+      resp = Rack::Response.new
+      req = Rack::Request.new(env)
+
+      if req.path=="/songs"
+        resp.write "You requested the songs"
+      else
+        resp.write "Route not found"
+        resp.status = 404
+      end
+
+      resp.finish
+    end
+  end
+```
 
 
 ### Resources
