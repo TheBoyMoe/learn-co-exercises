@@ -1,3 +1,4 @@
+# load the gems
 require 'bundler'
 Bundler.require
 

@@ -13,3 +13,23 @@ Starting with an empty dir, create app, config folders. In app/, add models, vie
 The application controller (app/controllers/application.rb) is the heart of the app. This class inherits from Sinatra::Base - giving it Sinatra's functionality. To start the app enter 'rackup config.ru'  or simply 'rackup'. Load the 'shotgun' gem (install the gem 'gem install shotgun' so the command is available from the cli, and add it to the gem file and download with 'bundle install') and start the app with 'shotgun config.ru' (or 'shotgun'), instead of rackup and any changes to the app are automatically applied without a re-start. Shotgun uses port 9393, as opposed to 9292. When starting an app with rackup, the application code is read once - every start thus requires a re-start
 
 'config.ru' requires a Sinatra Controller to run - a ruby class that inherits from Sinatra::Base. This gives the app a Rack-compatible interface via the Sinatra framework. Within controllers we define our 'routes' or methods such as 'get', and 'post'. These methods are attached to and scoped to the particular controller they're defined in. The final step in creating a route is to 'mount' it in the config.ru file. The 'application' controller is mounted using the 'run' keyword. All other controllers are mounted using the 'use' keyword.
+
+
+### Routes
+
+A route connects a http request to a specific resource on your server via a specific method in your controllers - the actual code within the method is the 'Controller Action'. The resource part of the url, e.g. '/cart', '/songs' is mapped to a particular method that is executed in response, e.g display the customers shopping cart. Each route will respond to a particular http verb, e.g. 'get', or 'post' and a string that matches the resource path, e.g. 'http://localhost:9393/medicines' will be interpreted as a 'GET' request for '/medicines'.
+
+```ruby
+  # route / controller action
+  get '/medicines' do
+    # do something
+  end
+
+  # or
+  get('/medicines') { # do something }
+```
+
+
+### Resources
+
+1. [Getting started with Sinatra](http://www.sinatrarb.com/intro.html)
