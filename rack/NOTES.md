@@ -2,12 +2,13 @@
 
 Rack is a Ruby gem that allows you to create a simple web server.
 
-Setup
+### Setup
 
 Create a class that has one method called #call. This method takes one argument - this is the request object(env) which holds all the request information, and returns a response object(Rack::Response object). The response consists of the status code, headers and body.
 
 ```ruby
   # application.rb
+  require 'rack'
 
   class Application
 
@@ -31,3 +32,89 @@ To run the server, we need a config.ru file and then use the 'rackup' command to
   # from the command prompt
   rackup config.ru
 ```
+
+
+### The Request
+
+Every http request has two parts, the header and the path to the path to the requested resource. All this information is found in the 'env' argument(a hash) passed to the #call method. Once we've converted this into a Rack Request obj, Rack has a number of methods that allows us to access this information.
+
+```ruby
+  class Application
+
+    def call(env)
+      resp = Rack::Response.new
+      req = Rack::Request.new(env)
+      resp.finish
+    end
+
+  end
+```
+
+Somme Rack methods include:
+  #path - returns the path requested
+  #body - returns the body of the request
+  #content_length/charset/type
+  #cookies
+  #port
+  #query_string
+  #url
+  #request_method - the http verb
+
+
+
+
+### The Response  
+
+Every response must contain 3 parts, status, headers and body. You can use the Rack::Response class and it's convenience methods, e.g. write, set_cookie, finish etc. to create a response, or simply return an array containing the three components.
+
+status - http status code, e.g 200,404, etc
+header - must respond to 'each' and yield key/value pairs, the keys have to be strings
+body - data sent back to the requester. Has to respond to 'each' and yield string values.
+
+### Simple Example
+
+```ruby
+  class Application
+
+    # data to be shared
+    @@items = ["Apples","Carrots","Pears"]
+
+    def call(env)
+      resp = Rack::Response.new
+      req = Rack::Request.new(env)
+
+      # the path that needs to be matched, http://localhost:9292/items
+      if req.path.match(/items/)
+        @@items.each do |item|
+          resp.write "#{item}\n"
+        end
+      # match a search, e.g https://github.com/search?q=apples
+      # the section after ? are the GET parameters, which come in a key/value pair  
+      elsif req.path.match(/search/)
+
+        # rack stores the key/value params as a hash
+        search_term = req.params["q"]
+
+        if @@items.include?(search_term)
+          resp.write "#{search_term} is one of our items"
+        else
+          resp.write "Couldn't find #{search_term}"
+        end
+
+      else
+        resp.write "Path Not Found"
+      end
+
+      resp.finish
+    end
+  end
+```
+
+
+### Resources
+
+1. [Overview of Rack](https://blog.engineyard.com/2015/understanding-rack-apps-and-middleware)
+2. [Build a Rack Application from Scratch part 1](http://tommaso.pavese.me/2016/06/05/a-rack-application-from-scratch-part-1-introducting-rack/#a-naive-and-incomplete-framework)
+3. [Build a Rack Application from Scratch part 2](http://tommaso.pavese.me/2016/07/26/a-rack-application-from-scratch-part-2-routes-and-controllers/)
+4. [Build a Rack Application from Scratch part 3](http://tommaso.pavese.me/2016/08/01/a-rack-application-from-scratch-part-3-view-templates/)
+5. [Build a Rack Application from Scratch part 4](http://tommaso.pavese.me/2016/10/09/a-rack-application-from-scratch-part-4-models-and-persistence/)
