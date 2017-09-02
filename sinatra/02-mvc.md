@@ -69,3 +69,38 @@ config directory - contains 'environment.rb' file - responsible loading bundler(
 public directory - holds all he front end assets, e.g css, js and image files.
 
 spec directory - contains any tests, subdivided into models, features and controllers.
+
+
+### Sinatra Views
+
+The simplest way to render html is to include a string containing html tag in the '/' route of 'app.rb'.
+
+```ruby
+  # app.rb
+  class App < Sinatra::Base
+
+  	get '/' do
+  		'<h1>Hello fro Sinatra</h1>'
+  	end
+  end
+```
+
+By default, Sinatra uses a templating engine called ERB (Embedded Ruby) to render '.erb' files - html files with embedded ruby - used to create the dynamic components of the page. ERB will render any html page with a '.erb' extension. To render index.erb, in our controller we update the controller action with  the 'erb' keyword and the file name, e.g.
+
+```ruby
+  # app.rb
+  class App < Sinatra::Base
+
+    get '/' do
+      # render index.erb
+      erb :index
+    end
+
+    get "/info" do
+      # render info.erb
+      erb :info
+    end
+  end
+```
+
+By convention, we keep the names of our routes and erb files the same.
