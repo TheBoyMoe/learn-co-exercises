@@ -7,3 +7,4 @@ gem "sinatra"
 gem 'rspec'
 gem 'pry'
 gem 'shotgun'
+gem 'require_all'
