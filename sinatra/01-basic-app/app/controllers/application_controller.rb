@@ -1,14 +1,18 @@
 class ApplicationController < Sinatra::Base
 
+  # generally you don't define routes in the application controller, define tham in other controllers.
+
+  # define functionality in here that you want the other controllers to inherit
+
+  # tell your controllers where to find your erb templates & you're public directory
+  # by default sinatra will look in controller/views for erb templates
+  configure do
+  	set :views, "app/views"
+  	set :public_dir, "public"
+  end
+
   get '/' do
-    'Hello from Sinatra'
+    erb :index
   end
 
-  get '/contact' do
-    "Feel free to drop us a line!"
-  end
-
-  get '/support' do
-    "You've reached the support page!"
-  end
 end

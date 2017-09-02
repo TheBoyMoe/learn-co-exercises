@@ -1,6 +1,6 @@
-class AboutController < Sinatra::Base
+class AboutController < ApplicationController
 
   get '/about' do
-    "You've reached the about page"
+    erb :about
   end
 end

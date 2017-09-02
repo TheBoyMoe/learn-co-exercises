@@ -4,6 +4,6 @@
 class PostsController < ApplicationController
 
   get '/posts' do
-    "You've reached the posts page"
+    erb :'posts/index'
   end
 end
