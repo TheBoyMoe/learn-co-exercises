@@ -11,8 +11,15 @@ class ApplicationController < Sinatra::Base
   	set :public_dir, "public"
   end
 
-  get '/' do 
+  get '/' do
     erb :index
+  end
+
+
+  # dummy routes
+  get '/dummy/:id1/:id2/:id3' do
+    # binding.pry
+    raise params.inspect
   end
 
 end
