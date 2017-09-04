@@ -78,3 +78,5 @@ Using instance variables in controllers is also the way in which we can pass an 
 
 1. [Getting started with Sinatra](http://www.sinatrarb.com/intro.html)
 2. [URL Encoded Characters](http://www.degraeve.com/reference/urlencoding.php)
+3. [Form exercise - Citi Bike](https://github.com/ashleygwilliams/citibike-sinatra)
+4. [Form exercise](https://github.com/ashleygwilliams/sinatra-form-party)
