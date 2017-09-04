@@ -35,9 +35,46 @@ The url parameters entered by the user will be accessible within the controller 
 
 You can receive multiple pieces of data through a dynamic route by separating the content with a forward slash. For example, get '/numbers/:number1/:number2' would give you a params hash with two key-value pairs (number1 and number2).
 
+**unsafe characters in urls** certain characters are not allowed in urls, e.g. spaces are replaced by '%20'. Unsafe characters will be encoded with appropriate ASCII characters.  
 
 
+### Passing variables between Views and Controllers
+
+Instance variables defined in a class are visible throughout the instance, and accessible by any instance method. Creating an instance variable in a controller method/route makes that variable visible in the erb template that controller renders. It is, however not visible in other controllers. Using instance variables in this way allows us to create dynamic pages - we can insert data from database requests, an api, a calculation, etc.
+
+```erb
+# controller route
+  post '/reverse' do
+    original_string = params["string"]
+    @reversed_string = original_string.reverse
+
+    erb :reversed
+  end
+
+  # reversed.erb template
+
+  # we can access the instance variable in the template
+  <p><%= @reversed_string %></p>
+```
+
+Using instance variables in controllers is also the way in which we can pass an array to a template,  which we can iterate through and render.
+
+```erb
+  get '/friends' do
+    @friends = ['Emily Wilding Davison', 'Harriet Tubman', 'Joan of Arc', 'Malala Yousafzai', 'Sojourner Truth']
+
+    erb :friends
+  end
+
+  # friends.erb
+  <ul>
+    <% @friends.each do |friend| %>
+    <li><%= friend %></li>
+    <% end %>
+  </ul>
+```
 
 ### Resources
 
 1. [Getting started with Sinatra](http://www.sinatrarb.com/intro.html)
+2. [URL Encoded Characters](http://www.degraeve.com/reference/urlencoding.php)
