@@ -22,7 +22,7 @@ There are 3 levels of tests that correspond to the different levels in our app's
 Capybara is a ruby gem used for integration testing in Sinatra and Rails apps. First step is to configure RSpec to use the Capybara methods.
 
 ```ruby
-  # .rspec file
+  # spec/spec_helper.rb file
   # Load RSpec and Capybara
   require 'rspec'
   require 'capybara/rspec'
@@ -44,3 +44,48 @@ Capybara is a ruby gem used for integration testing in Sinatra and Rails apps. F
   # Configure Capybara to test against the application above.
   Capybara.app = app
 ```
+
+Capybara provides a number of new methods, including:
+
+visit and page - which allow us to examine the current state of the page,
+click_button, click_link and fill_in -allow us to mimic user actions,
+
+and matchers, such as:
+'have_text', 'have_selector', 'have_field' - allow us to check that the page contains certain html elements or text.
+
+**visit:** navigates the test's browser to a specific URL. It is equivalent to a user typing a URL into their browser's address bar. The method accepts a string argument, the url that you want to test, e.g. visit '/', and capybara will load that page, the root, within the test.
+
+**page:** gives you a Capybara::Session object that represents the browser page the user would actually be looking at or whichever route was last passed to visit. The object responds to methods that represent actions that a user could take on a page, e.g. 'click_link', 'click_button', 'fill_in' and 'body'. The 'page.body' method will return the current page's html as a string.
+
+```ruby
+  it 'welcomes the user' do
+    visit '/'
+    expect(page.body).to include("Welcome!")
+  end
+
+  it 'has a greeting form with a user_name field' do
+    visit '/'
+
+    expect(page).to have_selector("form")
+    expect(page).to have_field(:user_name)
+  end
+
+  it 'greets the user personally based on their user_name in the form' do
+    visit '/'
+
+    fill_in(:user_name, :with => "Tom")
+    click_button "Submit"
+
+    expect(page).to have_text("Hi Tom, nice to meet you!")
+  end
+```
+
+In the preceding tests, we tell Capybara to visit the page at '/'. Once that is done, we set some expectations against the page object that represent the user looking at the page in their browser. We can simply assert that the page includes the 'Welcome!' text, has an HTML form tag, and a form field with either an 'id' or 'name' attribute with a value of 'user_name' The third test tries to mimic what a user should see when they visit the page, and fill in the input field with their name, 'Tom', and click the 'Submit' button.
+
+When Capybara submits a form, the page object is appropriately updated. page no longer contains the original greeting form, but, rather, after click_button is called, page now contains the response to the greeting form. We can expect the page to have the text 'Hi Tom, nice to meet you!'.
+
+
+
+### Resources
+
+1. [Capybara Methods](https://github.com/teamcapybara/capybara#the-dsl)
