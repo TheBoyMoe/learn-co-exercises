@@ -12,7 +12,7 @@ Starting with an empty dir, create app, config folders. In app/, add models, vie
 
 The application controller (app/controllers/application.rb) is the heart of the app. This class inherits from Sinatra::Base - giving it Sinatra's functionality, i.e. you're turning an ordinary ruby class in to a class that knows how to handle web requests. To start the app enter 'rackup config.ru'  or simply 'rackup'. Load the 'shotgun' gem (install the gem 'gem install shotgun' so the command is available from the cli, and add it to the gem file and download with 'bundle install') and start the app with 'shotgun config.ru' (or 'shotgun'), instead of rackup and any changes to the app are automatically applied without a re-start. Shotgun uses port 9393, as opposed to 9292. When starting an app with rackup, the application code is read once - every start thus requires a re-start
 
-'config.ru' requires a Sinatra Controller to run - a ruby class that inherits from Sinatra::Base. This gives the app a Rack-compatible interface via the Sinatra framework. Within controllers we define our 'routes' or methods such as 'get', and 'post'. These methods are attached to and scoped to the particular controller they're defined in. The final step in creating a route is to 'mount' it in the config.ru file. The 'application' controller is mounted using the 'run' keyword. All other controllers are mounted using the 'use' keyword.
+'config.ru' requires a Sinatra Controller to run- a ruby class that inherits from Sinatra::Base. This gives the app a Rack-compatible interface via the Sinatra framework. Within controllers we define our 'routes' or methods such as 'get', and 'post'. These methods are attached to and scoped to the particular controller they're defined in. The final step in creating a route is to 'mount' it in the config.ru file. The 'application' controller is mounted using the 'run' keyword. All other controllers are mounted using the 'use' keyword.
 
 
 ### Routes
@@ -28,6 +28,14 @@ A route connects a http request to a specific resource on your server via a spec
   # or
   get('/medicines') { # do something }
 ```
+
+**dynamic routes:** routes that are created based on attributes within the url of the request. A route such as 'get /posts/:id' or 'get /users/:name' which has a ':' in front of a variable is a dynamic route. Such routes allow us to take input directly from a url, e.g. the :name or :id, and generate countless routes to resources on the fly dynamically without having to hard code them. A route is simply a html verb, e.g. 'get', that is paired with a matching url pattern.
+
+The url parameters entered by the user will be accessible within the controller action through the automatically generated params hash. The hash will contain a key-value pair for each parameter specified in the url. Thus, '/posts/:id', will generate a hash with a key of ':id', the value being that entered by the user.  
+
+You can receive multiple pieces of data through a dynamic route by separating the content with a forward slash. For example, get '/numbers/:number1/:number2' would give you a params hash with two key-value pairs (number1 and number2).
+
+
 
 
 ### Resources
