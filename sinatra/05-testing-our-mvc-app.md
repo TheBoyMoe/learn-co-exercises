@@ -19,4 +19,28 @@ There are 3 levels of tests that correspond to the different levels in our app's
 
 ### Using Capybara
 
-Capybara is a ruby gem used for integration testing in Sinatra and Rails apps.
+Capybara is a ruby gem used for integration testing in Sinatra and Rails apps. First step is to configure RSpec to use the Capybara methods.
+
+```ruby
+  # .rspec file
+  # Load RSpec and Capybara
+  require 'rspec'
+  require 'capybara/rspec'
+  require 'capybara/dsl'
+
+  # Configure RSpec
+  RSpec.configure do |config|
+    # Mixin the Capybara functionality into Rspec
+    config.include Capybara::DSL
+    config.order = 'default'
+  end
+
+  # Define the application we're testing
+  def app
+    # Load the application defined in config.ru
+    Rack::Builder.parse_file('config.ru').first
+  end
+
+  # Configure Capybara to test against the application above.
+  Capybara.app = app
+```
