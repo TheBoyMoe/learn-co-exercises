@@ -29,11 +29,17 @@ module FormsLab
 
     # /pirates#create action - save the new pirate(and ships) to the database
     post '/pirates' do
-      binding.pry
+      # binding.pry # DEBUG
+
+      # simply passing in the params hash will not work since the 'ships' array is of hashes,
+      # Active Record is expecting an array of ship instances
       @pirate = Pirate.create(name: params[:pirate][:name], weight: params[:pirate][:weight], height: params[:pirate][:height])
 
       params[:pirate][:ships].each do |ship_hash|
-        ship = Ship.create(name: ship_hash[:name], category: ship_hash[:category], booty: ship_hash[:booty])
+        # ship = Ship.create(name: ship_hash[:name], category: ship_hash[:category], booty: ship_hash[:booty])
+
+        # you can't pass in a hash containing attributes not defined in the model's class
+        ship = Ship.new(ship_hash)
         ship.pirate = @pirate
         ship.save
       end

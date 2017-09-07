@@ -5,10 +5,12 @@
   <input type="text" name="pirate[height]" placeholder="pirate height"/><br><br>
 
   <!-- use the 'id' attribute to find the elements when testing with capybara -->
+  <!-- sinatra will start a new hash when ever it sees an attribute repeated -->
   <input type="text" id="ship_name_1" name="pirate[ships][][name]" placeholder="ship name"/><br>
   <input type="text" id="ship_type_1" name="pirate[ships][][category]"  placeholder="ship type"/><br>
   <input type="text" id="ship_booty_1" name="pirate[ships][][booty]"  placeholder="ship booty"/><br><br>
 
+  <!--  seeing the ship[:name] attribute repeated tells sinatra to start a new hash -->
   <input type="text" id="ship_name_2" name="pirate[ships][][name]"  placeholder="ship name"/><br>
   <input type="text" id="ship_type_2" name="pirate[ships][][category]"  placeholder="ship type"/><br>
   <input type="text" id="ship_booty_2" name="pirate[ships][][booty]"  placeholder="ship booty"/><br><br>
