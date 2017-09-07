@@ -1,0 +1,15 @@
+<!-- display all the pirates -->
+
+<h1>Pirates</h1>
+<ul>
+  <% @pirates.each do |pirate| %>
+    <li>
+      <a href="/pirates/<%= pirate.id %>">
+        <p>Name: <%= pirate.name %></p>
+        <p>Weight <%= pirate.weight.to_i %>, Height: <%= pirate.height.to_i %></p>
+      </a>
+    </li>
+  <% end %>
+</ul>
+
+<a href="/pirates/new">Create a pirate</a>

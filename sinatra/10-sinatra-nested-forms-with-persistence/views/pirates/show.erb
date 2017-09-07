@@ -1,23 +1,17 @@
-<h1>Pirates</h1>
-<p>Pirate name: <%= @pirate.name %></p>
-<p>Pirate weight: <%= @pirate.weight %></p>
-<p>Pirate height: <%= @pirate.height %></p>
+<h1>Pirate</h1>
+<div>
+  <p>Pirate name: <%= @pirate.name %></p>
+  <p>Pirate weight: <%= @pirate.weight %></p>
+  <p>Pirate height: <%= @pirate.height %></p>
+</div><br />
 
-<!-- <ul>
-  <% @ships.each do |ship| %>
-    <li>
-      <p><%= ship.name %></p>
-      <p><%= ship.type %></p>
-      <p><%= ship.booty %></p>
-    </li>
+<% if !@pirate.ships.empty? %>
+  <h2>Ships</h2>
+  <% @pirate.ships.each do |ship| %>
+    <div class="ship">
+      <p>Name: <%= ship.name %></p>
+      <p>Type: <%= ship.category %></p>
+      <p>Booty: <%= ship.booty %></p>
+    </div><br />
   <% end %>
-</ul> -->
-
-<h1>Ships</h1>
-<% @ships.each do |ship| %>
-  <div class="ship">
-    <p>Name: <%= ship.name %></p><br>
-    <p>Type: <%= ship.type %></p><br>
-    <p>Booty: <%= ship.booty %></p>
-  </div><br>
 <% end %>
