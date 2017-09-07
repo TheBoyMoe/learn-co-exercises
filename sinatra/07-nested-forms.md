@@ -196,3 +196,8 @@ With ERB you don't need to manually index each hash entry in the array, ERB can 
 ```
 
 In the first part of the controller action, we create a new Student using the info stored in params[:student], which contains the student's name, grade, and courses. We iterate over `params[:student][:courses]`, an array of hashes, creating an instance of a Course object for each hash. We can access the student and courses array via the `@student` and `@courses` instance variables respectively.
+
+
+### Resources
+
+1. [Sinatra form example](https://github.com/ashleygwilliams/sinatra-form-party/blob/master/views/survey.erb)

@@ -1,0 +1,18 @@
+<h1>Make your form here</h1>
+<form action="/pirates" method="post">
+  <input type="text" name="pirate[name]" placeholder="pirate name"/><br>
+  <input type="text" name="pirate[weight]" placeholder="pirate weight"/><br>
+  <input type="text" name="pirate[height]" placeholder="pirate height"/><br><br>
+
+  <!-- use the 'id' attribute to find the elements when testing with capybara -->
+  <input type="text" id="ship_name_1" name="pirate[ships][][name]"/><br>
+  <input type="text" id="ship_type_1" name="pirate[ships][][type]"/><br>
+  <input type="text" id="ship_booty_1" name="pirate[ships][][booty]"/><br><br>
+
+  <input type="text" id="ship_name_2" name="pirate[ships][][name]"/><br>
+  <input type="text" id="ship_type_2" name="pirate[ships][][type]"/><br>
+  <input type="text" id="ship_booty_2" name="pirate[ships][][booty]"/><br><br>
+
+  <input type="submit" value="Submit" />
+
+</form>
