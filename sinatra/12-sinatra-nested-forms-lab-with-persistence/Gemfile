@@ -1,0 +1,24 @@
+# A sample Gemfile
+source "https://rubygems.org"
+
+# gem "rails"
+
+gem 'sinatra', require: 'sinatra/base'
+gem 'sinatra-reloader', require: false
+gem 'sqlite3'
+gem 'activerecord', :require => 'active_record'
+gem 'sinatra-activerecord', :require => 'sinatra/activerecord'
+gem 'tux'
+gem 'rake'
+gem 'thin'
+gem 'shotgun'
+gem 'pry'
+gem 'require_all'
+gem 'rack'
+
+
+group :test do
+  gem 'rspec'
+  gem 'rack-test'
+  gem 'capybara'
+end
