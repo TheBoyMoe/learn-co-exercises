@@ -1,0 +1,15 @@
+<!-- list all the current teams -->
+<!-- provide a link to see the teams in detail -->
+
+<h1>Our current roster of Super Hero teams</h1>
+
+<ul>
+  <% @teams.each do |team| %>
+    <li>
+      <p><a href="/teams/<%= team.id %>"><%= team.name %></a></p>
+      <p><%= team.motto %></p>
+    </li>
+  <% end %>
+</ul>
+
+<h3><a href="/teams/new">Create a new Team of Super Heros</a></h3>

@@ -3,7 +3,7 @@
 <h2>Team Motto: <%= @team.motto %></h2>
 
 <ul>
-  <% @members.each do |member| %>
+  <% @team.heros.all.each do |member| %>
     <li>
       <h2>Hero Name: <%= member.name %></h2>
       <p>Hero Power: <%= member.power %></p>
@@ -11,3 +11,5 @@
     </li>
   <% end %>
 </ul>
+
+<h3><a href="/teams">View all teams</a></h3>

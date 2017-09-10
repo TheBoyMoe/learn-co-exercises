@@ -33,18 +33,49 @@ class App < Sinatra::Base
 
   set :views, Proc.new { File.join(root, "../views/") }
 
+  # root -> forward to /teams
   get '/' do
-    erb :super_hero
+    redirect :'/teams'
   end
 
-  post '/teams' do
-    @team = Team.new(params[:team])
+  # teams#index action -> show all items
+  get '/teams' do
+    @teams = Team.all
+    erb :index
+  end
 
-    @members = params[:team][:members].collect do |member|
-      Hero.new(member)
+  # teams#new action -> allow user to create a new item
+  get '/teams/new' do
+    erb :new
+  end
+
+  # teams#show action -> show item
+  get '/teams/:id' do
+    @team = Team.find(params[:id])
+
+    erb :show
+  end
+
+  # POST teams#create action -> add a new team with members
+  post '/teams' do
+    team = Team.create(name: params[:team][:name], motto: params[:team][:motto])
+
+    params[:team][:members].collect do |member|
+      hero = Hero.new(member)
+      hero.team = team
+      hero.save
     end
 
-    erb :team
+    redirect :"/teams/#{team.id}"
   end
+
+  # teams#edit action -> allow user to edit item
+
+
+  # teams#update Action -> commit changes
+
+
+  # teams#destroy action -> delete item
+
 
 end
