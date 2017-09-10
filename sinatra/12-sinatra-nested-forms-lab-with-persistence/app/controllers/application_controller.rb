@@ -69,13 +69,13 @@ class App < Sinatra::Base
     redirect :"/teams/#{team.id}"
   end
 
-  # teams#edit action -> allow user to edit item
+  # TODO teams#edit action -> allow user to edit item
 
 
-  # teams#update Action -> commit changes
+  # TODO teams#update Action -> commit changes
 
 
-  # teams#destroy action -> delete item
+  # TODO teams#destroy action -> delete item
 
 
 end
