@@ -27,7 +27,9 @@ A persistent cookie is stored on your computer, while a session cookie is tempor
 
 ### Sessions
 
-A session is just a hash that stores data on the server, passing that data to the user as a cookie. You can access the data just like any other hash.
+A session is just a hash that stores data on the server, passing that data to the user as a cookie. You can access the data just like any other hash. The session hash can be accessed in any controller file of your application. Whatever data is stored in the session hash can thus be accessed, added to, changed or deleted in any controller file or route at any time and that change persists for the duration of the session - the period of time in which you, the client, are interacting with the web application. This is usually the time in between logging in and logging out. The act of logging in/out is simply the act of having your `user_id` added to or removed from the session hash. The session hash can be used to store anything, including the user's profile page, shopping cart, etc. The session hash can be accessed and manipulated across http requests from any controller - changes made in one controller route will persist across http requests to be available in other controller routes.
+
+The session is simply a way to store user data on a temporary basis. In any web application, a user ID is typically used as a session ID - the ID attribute of a user is a unique identifier that will always be distinguishable from other user ID attributes.
 
 1. Setup
 
@@ -42,7 +44,7 @@ In Sinatra you enable sessions within the controller, e.g. 'app.rb', in the 'con
   end
 ```
 
-You can set the `session_secret` to anything you wast. It's a basic security feature designed to make it harder for someone to hack into your site without either signing up or signing in. A `session_id` is a alphanumeric string that is unique to a given user's session and is stored in the browser cookie.
+You can set the `session_secret` to anything you want. It's a basic security feature designed to make it harder for someone to hack into your site without either signing up or signing in. A `session_id` is a alphanumeric string that is unique to a given user's session, is used to encrypt the session hash and is stored in the browser cookie.
 
 2. Using
 
@@ -76,6 +78,9 @@ You can view the contents of the session hash as a cookie in your browser using 
 There are a number of ways:
 
   - all sessions cookies are automatically cleared when you log out of the site.
+
   - you can clear session cookies using the Developer Tools - right-click on the url in the `Cookies` dropdown and select clear. If you now refresh the page you'll find that you've been logged out.
+
+  - in Your `/logout` route you clear out the session by setting it's value to an empty hash, e.g session = {}. Any key-value pairs you add during the session will persist until the session is cleared.
 
 Incognito mode in Chrome does not persist any cookies, session or persistent. Cookies are created for that particular session and then cleared when the session is over. Incognito mode can thus be useful to debug session and cookie problems.
