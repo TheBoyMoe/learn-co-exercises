@@ -56,12 +56,12 @@ Example `environment.rb` file:
   require 'bundler/setup'
   Bundler.require(:default, ENV['SINATRA_ENV'])
 
-  # database connector
-  configure :development do
-    set :database, 'sqlite3:db/development.sqlite'
-  end
+  ActiveRecord::Base.establish_connection(
+    :adapter => "sqlite3",
+    :database => "db/#{ENV['SINATRA_ENV']}.sqlite"
+  )
 
-  require './app'
+require_all 'app'
 ```
 
 3. Run your rake tasks

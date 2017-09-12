@@ -5,13 +5,13 @@
 
 # Each controller should handle ONE resource and should
 # implement these 7 actions (follows the design pattern described by Roy Fielding)
-# 1. posts#index action #=> show all items
-# 2. posts#show action #=> show item
-# 3. posts#new action #=> allow user to create new item
-# 4. posts#create action => add new item
-# 5. posts#edit action => allow user to edit item
-# 6. posts#update action #=> update item
-# 7. posts#destroy action #=> delete item
+# 1. GET posts#index action #=> show all items
+# 2. GET posts#show action #=> show item
+# 3. GET posts#new action #=> allow user to create new item
+# 4. POST posts#create action => add new item
+# 5. GET posts#edit action => allow user to edit item
+# 6. PATCH posts#update action #=> update item
+# 7. DELETE posts#destroy action #=> delete item
 
 # Order of your actions matter, have more specific actions appear before more generic ones, e.g 'post#new' before 'posts#id'
 

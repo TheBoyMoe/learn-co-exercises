@@ -35,6 +35,9 @@ Requires 2 controller actions/ routes - one which return all instances of a clas
 
   * The `show.erb` view page will use erb to render the `@post` object.
 
+NOTE: the order in which we define certain routes matters. Thus if we define `get /posts/:id` before `get /posts/new`, every request for `get /posts/new` will be routed to `get /posts/:id` causing an error to be thrown because Sinatra can not find an instance with the 'id' of 'new'. Ensure that '/posts/new' appears before '/posts/:id'.
+
+
 **Update**
 
 Requires two controller actions/routes - one to render an update form allowing the user to enter the necessary information, and a second to capture and process the post request.
@@ -60,11 +63,12 @@ NOTE: browsers don't support the `patch` method type, use the following work aro
 
   ```html
     <!-- edit.erb -->
-    <form action="/models/<%= @model.id %>" method="post">
-        <input id="hidden" type="hidden" name="_method" value="patch">
-        <input type="text" ...>
-        ...
-        ...
+    <form action="/posts/<%= @post.id %>" method="post">
+      <!-- changes the request from post to update -->
+      <input id="hidden" type="hidden" name="_method" value="patch">
+      <input type="text" ...>
+      ...
+      ...
     </form>  
   ```
 
@@ -75,12 +79,21 @@ NOTE: browsers don't support the `patch` method type, use the following work aro
 
 I implemented with one route/controller action. It does not need a view page, being implemented with a single 'delete' button on the 'show' page of the instance to be deleted. The 'delete' button is actually a form that should send the 'DELETE' request to `delete /posts/:id/delete` via an 'input' field with the type of 'submit' and value of 'delete'. The form must include an 'input' field with `name=_method` and `value="delete"` for the 'delete' request to work.
 
+NOTE:
+
+  * add 'MethodOverride' setting to 'config.ru' file.
+
+  * In order to make a form that looks like a button, all we need to do is make a form that has no input fields, only a "submit" button with a value of "delete".
+
 ```html
-  <form method="post" action="/models/<%= @model.id %>/delete">
-    <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <form method="post" action="/posts/<%= @post.id %>/delete">
+    <!-- changes the request from post to delete -->
+    <input id="hidden" type="hidden" name="_method" value="delete">
     <input type="submit" value="delete">
   </form>
 ```
+
+
 
 ### Summary
                                  retrieves            sends request
@@ -89,6 +102,6 @@ Create: `get /post/new`         ----------> new.erb   -------------> `post '/pos
 Read:   `get 'posts'`           ----------> index.erb
         `get '/posts/:id'`      ----------> show.erb
 
-Update: `get 'post/:id/:edit'`  ----------> edit.erb  ------------> `post '/post/:id'`
+Update: `get 'post/:id/:edit'`  ----------> edit.erb  ------------> `patch '/post/:id'`
 
 Delete: `get /posts/:id`        ----------> show.erb  ------------> `post '/posts/:id/delete'`

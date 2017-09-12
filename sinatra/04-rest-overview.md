@@ -9,6 +9,6 @@ Any app which intends to make available a resource via REST should include the f
 4. POST /photos #=> create, adds the new item to the application
 
 5. GET /photos/1/edit #=> edit, present a form allowing the user to edit the item(calls PUT /photos/1 on submission)
-6. PUT /photos/1 #=> update, updates the item in the app
+6. PATCH /photos/1 #=> update, updates the item in the app
 
 7. DELETE /photos/1 #=> destroy, delete the item from the app
