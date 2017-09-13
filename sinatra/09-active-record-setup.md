@@ -48,7 +48,7 @@ Add the following code block to your `environment.rb` file
   end
 ```
 
-Example `environment.rb` file:
+Example `environment.rb` file(updated):
 
 ```ruby
   ENV['SINATRA_ENV'] ||= "development"
@@ -56,6 +56,7 @@ Example `environment.rb` file:
   require 'bundler/setup'
   Bundler.require(:default, ENV['SINATRA_ENV'])
 
+  # database adapter - replaces the block above
   ActiveRecord::Base.establish_connection(
     :adapter => "sqlite3",
     :database => "db/#{ENV['SINATRA_ENV']}.sqlite"
