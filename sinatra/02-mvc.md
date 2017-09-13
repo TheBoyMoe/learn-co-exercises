@@ -130,4 +130,4 @@ Some of that logic resides in our controllers, e.g. views should never directly 
 
 Some of the logic pertains to the view itself, e.g. the information displayed by certain pages is dependent upon a user being logged in. Instead of writing that type of logic directly into the view, we use 'helper methods'. These are methods that are written in separate class, `Helper` class and are accessible in the views.
 
-Add the helper.erb file to `app/helpers` directory, and define the `Helper` class specifically to control logic in our views. This class will often have methods related to determining the current user, and whether they're logged in or not, e.g. `current_user` and `is_logged_in?`. These methods are only ever called from the views.
+Add the helper.erb file to `app/helpers` directory, and define the `Helper` class specifically to control logic in our views. This class will often have methods related to determining the current user, and whether they're logged in or not, e.g. `current_user` and `is_logged_in?`. These methods are class methods and will only ever be called from the views.

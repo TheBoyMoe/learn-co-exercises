@@ -14,7 +14,7 @@ Logging in is the action of storing a user's ID in the `session` hash. A typical
   session[:id] = user.id
 ```
 
-3. The `session` hash is available in every other controller route. That means that, for the duration of the session (i.e., until the user logs out), the app will know who the current user is on every page by matching up a user ID with the `session[:id]` value.
+3. The `session` hash is available in every other controller route (and views??). That means that, for the duration of the session (i.e., until the user logs out), the app will know who the current user is on every page by matching up a user ID with the `session[:id]` value.
 
 Note: in this particular example encryption of users passwords will be ignored, and they will be stored in plain text in the database.
 
