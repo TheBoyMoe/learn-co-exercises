@@ -37,7 +37,9 @@ A simple file/directory structure would look like:
 │   ├── models
 │   │   └── model.rb
 │   └── views
-│       └── index.erb
+│   |   └── index.erb  
+│   └── helpers
+│       └── helper.erb
 ├── config
 │   └── environment.rb
 ├── config.ru
@@ -57,6 +59,8 @@ app directory - contains folders for our models, views and controllers.
 models directory - represents the data or object logic behind the app. Typically, these files represent a component of the app, e.g. Post, User, etc, or a unit of work. Each file being a different class.
 
 views directory - contains the .erb files responsible for creating the view displayed by the browser. By convention each file is named after the action that renders them.
+
+helpers directory - contains the `Helper` class - helper methods which handle view logic
 
 controllers directory - represents the app logic, the 'flow' of the app. Are where the apps configurations (tells the controller where to find views and the public directory), controllers and routes are found. There is typically the 'ApplicationController' that represents the application when the server is running and inherits from 'Sinatra::Base'. This can be the 'app.rb' or 'application_controller.rb' file.
 
@@ -104,3 +108,26 @@ By default, Sinatra uses a templating engine called ERB (Embedded Ruby) to rende
 ```
 
 By convention, we keep the names of our routes and erb files the same.
+
+
+## Helper Methods
+
+MVC architecture relies heavily on the principle of separation of concerns, e.g.
+
+  * we create model for every class
+
+  * we only have one erb file per view
+
+  * models handle our Ruby logic
+
+  * controllers handle the HTTP requests and connect to our models and views
+
+  * views either take in or display data to our users - never communicate with our models.
+
+We want to minimize the amount of logic our views contain:
+
+Some of that logic resides in our controllers, e.g. views should never directly pull data from the database, instead this is handled in a controller action and the data passed to the view - the controller acting as a go-between.
+
+Some of the logic pertains to the view itself, e.g. the information displayed by certain pages is dependent upon a user being logged in. Instead of writing that type of logic directly into the view, we use 'helper methods'. These are methods that are written in separate class, `Helper` class and are accessible in the views.
+
+Add the helper.erb file to `app/helpers` directory, and define the `Helper` class specifically to control logic in our views. This class will often have methods related to determining the current user, and whether they're logged in or not, e.g. `current_user` and `is_logged_in?`. These methods are only ever called from the views.
