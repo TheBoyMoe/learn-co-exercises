@@ -1,0 +1,16 @@
+body {
+  padding: 40px 20px;
+}
+
+h1 {
+  padding-bottom: 40px;
+}
+
+form label {
+  display: inline-block;
+  width: 100px;
+}
+
+input[type="submit"] {
+  margin-left: 235px;
+}
