@@ -19,15 +19,15 @@ A RESTful route maps a HTTP verbs (get, post, put, delete, patch) to CRUD action
 
 ## Routes and Actions
 
-| HTTP VERB       | ROUTE             | Action        | Used For |
+| HTTP VERB       | ROUTE               | Action        | Used For |
 
-| GET             | '/posts'          | index action  | display all posts |
-| GET             | '/posts/:id'      | show action   | displays a single post based on ID |
-| GET             | '/posts/new'      | new action    | display a form allowing user to enter data |
-| POST            | '/posts'          | create action | create a post |
-| GET             | '/posts/:id/edit' | edit action   | display a form allowing user to edit post |
-| PATCH(use POST) | '/posts/:id'      | update action | edits blog post based on ID |
-| DELETE(use POST)| '/posts/:id'      | delete action | deletes blog post based on ID |  
+| GET             | '/posts'            | index action  | display all posts |
+| GET             | '/posts/:id'        | show action   | displays a single post based on ID |
+| GET             | '/posts/new'        | new action    | display a form allowing user to enter data |
+| POST            | '/posts'            | create action | create a post |
+| GET             | '/posts/:id/edit'   | edit action   | display a form allowing user to edit post |
+| PATCH(use POST) | '/posts/:id'        | update action | edits blog post based on ID |
+| DELETE(use POST)| '/posts/:id/delete' | delete action | deletes blog post based on ID |  
 
 
 ### Index Action
@@ -125,7 +125,7 @@ NOTE: browsers don't support the 'PATCH', 'DELETE' or 'PUT' verbs
 ### Delete Action
 
 ```ruby
-  delete '/posts/:id' do
+  delete '/posts/:id/delete' do
     post = Post.find_by_id(params[:id])
     post.delete
 
@@ -136,7 +136,7 @@ NOTE: browsers don't support the 'PATCH', 'DELETE' or 'PUT' verbs
 Delete is implemented as 'button' - input field with `type="submit"`. As with 'UPDATE' action, add a hidden 'input' field with `value="delete"`.
 
 ```ruby
-  <form action="/posts/<%= @post.id %>" method="post">
+  <form action="/posts/<%= @post.id/delete %>" method="post">
     <input id="hidden" type="hidden" name="_method" value="delete">
     <input type="text" name="title">
     <input type="text" name="content">
