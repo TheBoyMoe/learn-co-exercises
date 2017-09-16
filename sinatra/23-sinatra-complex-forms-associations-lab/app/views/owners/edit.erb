@@ -1,0 +1,28 @@
+<h1>Update Owner</h1>
+
+<form action="/owners/<%= @owner.id %>" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <label for="owner_name">Name:</label>
+  <input id="owner_name" type="text" name="owner[name]" value="<%= @owner.name %>"/>
+  <br></br>
+
+  <!-- display existing pets for users to select from -->
+  <fieldset>
+    <legend>Select from an existing pet</legend>
+      <% Pet.all.each do |pet| %>
+        <input id="<%= pet.id %>" type="checkbox" name="owner[pet_ids][]" value="<%= pet.id %>" <%= 'checked' if @owner.pets.include?(pet) %>/>
+        <label for="<%= pet.id %>"><%= pet.name %></label>
+      <% end %>
+  </fieldset>
+  <br><br>
+
+  <!-- create a new pet -->
+  <fieldset>
+    <legend>Create a new pet</legend>
+    <label for="pet_name">Name:</label>
+    <input id="pet_name" type="text" name="pet[name]" />
+  </fieldset>
+  <br><br>
+
+  <input type="submit" value="Update Owner" />
+</form>

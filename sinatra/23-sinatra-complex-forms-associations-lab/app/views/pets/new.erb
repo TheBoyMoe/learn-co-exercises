@@ -1,0 +1,28 @@
+<h1>Create a new Pet</h1>
+
+<!-- create a new pet -->
+<form action="/pets" method="post">
+  <label for="pet_name">Pet name:</label>
+  <input id="pet_name" type="text" name="pet[name]" />
+  <br><br>
+
+  <!-- select from a list of available owners -->
+  <fieldset>
+    <legend>Select from the available owners</legend>
+    <% @owners.each do |owner| %>
+      <input id="<%= owner.id %>" type="radio" name="pet[owner_id]" value="<%= owner.id %>" />
+      <label for="<%= owner.id %>"><%= owner.name %></label>
+    <% end %>
+  </fieldset>
+  <br><br>
+
+  <!-- create a new owner for the pet, overwrite the old one -->
+  <fieldset>
+    <legend>Create a new owner</legend>
+    <label for="owner_name">Owner name:</label>
+    <input id="owner_name" type="text" name="owner[name]" />
+  </fieldset>
+  <br><br>
+
+  <input type="submit" name="create_pet" value="Create Pet">
+</form>
