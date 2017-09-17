@@ -1,0 +1,21 @@
+<h1>Artist</h1>
+<div>
+  <p>Artist: <%= @artist.name %></p>
+  <!-- <% song_str = @artist.songs.collect {|song| song.name}.join(', ') %>
+  <p>Songs: <%= song_str %></p>
+  <% genre_str = @artist.genres.collect {|genre| genre.name}.join(', ')%>
+  <p>Genres: <%= genre_str %></p> -->
+
+  <p>Songs:
+    <% @artist.songs.each do |song| %>
+      <a href="/songs/<%= song.slug %>"><%= song.name %></a>&nbsp;
+    <% end %>
+  </p>
+
+  <p>Genres:
+    <% @artist.genres.uniq.each do |genre| %>
+      <a href="/genres/<%= genre.slug%>"><%= genre.name %></a>
+    <% end %>
+  </p>
+  
+</div>

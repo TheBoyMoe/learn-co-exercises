@@ -1,0 +1,21 @@
+/* custom styles */
+
+body {
+  padding: 40px 20px;
+}
+
+
+ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+li a {
+  text-decoration: none;
+}
+
+h1,
+fieldset {
+  margin-bottom: 20px !important;
+}
