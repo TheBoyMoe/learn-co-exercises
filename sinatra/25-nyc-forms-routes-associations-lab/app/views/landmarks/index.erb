@@ -1,0 +1,9 @@
+<h1>Historical Landmarks</h1>
+
+<ul>
+  <% @landmarks.each.with_index(1) do |landmark, i| %>
+    <li><a href="/landmarks/<%= landmark.id %>"><%= i %>. <%= landmark.name %> <%= landmark.year_completed %></a></li>
+  <% end %>
+</ul>
+
+<p><a href="/landmarks/new">Add a new Landmark</a></p>
