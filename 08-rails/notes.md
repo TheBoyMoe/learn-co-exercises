@@ -13,4 +13,4 @@ In rails:
 
   * comes with a lot of 'instrumentation' - in Sinatra you need to create all your files, mount your controllers all manually. Rails comes with a series of helpers, `ActionView` which will generate html for you - Sinatra you write it yourself.  
 
-  * provides the 'Asset Pipeline' - used to bundle/process css, js and and images for your finished app. 
+  * provides the 'Asset Pipeline' - used to bundle/process css, js and and images for your finished app.

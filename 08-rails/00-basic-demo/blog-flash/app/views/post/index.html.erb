@@ -1,0 +1,8 @@
+<h1>Rendering list of posts from index.erb</h1>
+
+<ol>
+  <% @posts.each do |post| %>
+    <!-- <li><a href="/post/<%= post.id %>"><%= post.title %></a></li> -->
+    <li><%= link_to(post.title, post_path(post)) %></li>
+  <% end %>
+</ol>
