@@ -10,8 +10,25 @@ $ rails generate controller [controller_name] [action_name] ...
 
 rails routes
 
+*setting up a new Rails project with Rspec*
 
+Create the rails app with the `new` keyword, adding the `-T` option to tell the generator not to include the default test framework `TestUnit`
 
+$ rails new [app_name] -T
+
+in the gem file add:
+gem 'rspec-rails'
+
+after running `bundle install`, create the initial RSpec config:
+$ rails g rspec:install
+
+*generate migration in rails*
+
+$ rails generate migration [file_name]
+
+*run the migration*
+
+$ rails db:migrate
 
 
 ### Erb
