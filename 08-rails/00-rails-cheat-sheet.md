@@ -6,6 +6,10 @@
 
 $ rails generate controller [controller_name] [action_name] ...
 
+*undo/delete a controller*
+
+$ rails destroy controller [controller_name]
+
 *display routing table*
 
 rails routes
