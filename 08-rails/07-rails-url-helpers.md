@@ -26,6 +26,10 @@ To begin, we're going to start with an application that has the MVC set up for `
 ```ruby
   # config/routes.rb
   resources :posts, only: [:index, :show]
+
+  # equivalent to:
+  get 'posts', to: 'posts#index'
+  get 'posts/:id', to: 'posts#show', as: 'student'# alias
 ```
 
 We briefly discussed this `resources` method in the dynamic routing lesson. This will create routing methods for posts that we can utilize in our views and controllers. Running `rake routes` in the terminal will give the following output:
@@ -37,7 +41,7 @@ We briefly discussed this `resources` method in the dynamic routing lesson. This
 
 These four columns tell us everything that we'll need in order to use the route helper methods. The breakdown is below:
 
-* **Column 1** - This column gives the prefix for the route helper methods. In the current application, `posts` and `post` are the prefixes for the methods that you can use throughout your applications. The two most popular method types are `_path` and `_url`. So if we want to render a relative link path to our posts' index page, the method would be `posts_path` or `posts_url`. The difference between `_path` and `_url` is that `_path` gives the relative path and `_url` renders the full URL. If you open up the rails console in the [sample app](https://github.com/jordanhudgens/blog-flash) you can test these route helpers out. Run `app.posts_path` and see what the output is. You can also run `app.posts_url` and see how it prints out the full path instead of the relative path. **In general, it's best to use the `_path` version so that nothing breaks if your server domain changes**.
+* **Column 1** - This column gives the prefix for the route helper methods. In the current application, `posts` and `post` are the prefixes for the methods that you can use throughout your applications. The two most popular method types are `_path` and `_url`. So if we want to render a relative link path to our posts' index page, the method would be `posts_path` or `posts_url`. The difference between `_path` and `_url` is that `_path` gives the relative path and `_url` renders the full URL. If you open up the rails console in the [sample app](https://github.com/jordanhudgens/blog-flash) you can test these route helpers out. Run `app.posts_path` and see what the output is. You can also run `app.posts_url` and see how it prints out the full path instead of the relative path(als available is `app.post_path` and `app.post_url`). **In general, it's best to use the `_path` version so that nothing breaks if your server domain changes**.
 
 * **Column 2** - This is the HTTP verb.
 
@@ -129,5 +133,3 @@ Now the application lets users navigate to `/register` to sign up, and you, the 
 ## Summary
 
 Hopefully this lesson shed some light on the beauty of using route helper methods. If you run the tests again after making the above changes, you'll notice something interesting: all of the tests are still passing! If we had hardcoded the URLs in the links in our views, we would have had a major issue: all of our links to the show pages would have broken, along with our Capybara tests. However, by using the built-in helper methods, the links all updated automatically.
-
-<p data-visibility='hidden'>View <a href='https://learn.co/lessons/rails-url-helpers-readme'>Rails URL Helpers</a> on Learn.co and start learning to code for free.</p>
