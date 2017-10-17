@@ -47,6 +47,36 @@ use route helpers so as not to hard code route string(append `_path`)
 <%= link_to("About page", about_path) %>  => <a href="/about">About page</a>
 
 
+### Form Tags
+
+1. form_tag
+
+```bash
+  <%= form_tag [action_path] do %>
+
+  <% end %>
+```
+
+2. input field - adds id="post_title"
+
+```bash
+    <%= text_field_tag :'post[title]' %>
+```
+
+3. textarea field - adds id="post_description"
+
+```bash
+  <%= text_area_tag :'post[description]' %>
+```
+
+4. submit button/input - adds label "Submit Post"
+
+```bash
+    <%= submit_tag "Submit Post" %>
+```
+
+
+
 ### Rake commands
 
 display available rake commands
