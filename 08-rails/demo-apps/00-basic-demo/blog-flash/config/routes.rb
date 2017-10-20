@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   get 'home', to: 'post#home'
   get 'posts', to: 'post#index'
   get 'posts/:id', to: 'post#show', as: 'post'
+
+  root 'static#home'
 end

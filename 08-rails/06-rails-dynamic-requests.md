@@ -146,4 +146,27 @@ resources :posts, only: :show
 
 We will go into detail on what the `resources` method does in a future lesson. For right now, just know that it deals with the seven key RESTful routes. In this case, we limited it to only make the `show` action available.
 
-Run the tests for a final time, and they should still be passing! Nice work!
+### example
+
+```ruby
+  Rails.application.routes.draw do
+
+    # get 'students', to: 'students#index' # students_path
+    # get '/student/:id', to: 'students#show', as: 'student' # student_path(:id)
+    # get '/students/new', to: 'students#new', as: 'new_student' # new_student_path
+    # post '/students', to: 'students#create'
+
+    # alternative
+    resources :students, only: [:index, :show, :new, :create]
+
+  # $ rails routes
+  #
+  #       Prefix Verb URI Pattern             Controller#Action
+  #     students GET  /students(.:format)     students#index
+  #              POST /students(.:format)     students#create
+  #  new_student GET  /students/new(.:format) students#new
+  #      student GET  /students/:id(.:format) students#show
+  #
+
+end
+```

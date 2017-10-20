@@ -1,9 +1,5 @@
 class PostController < ApplicationController
 
-  def home
-    # render :plain => "Hello world"
-  end
-
   def index
     # renders default /post/index.html.erb (implicit rendering)
 
