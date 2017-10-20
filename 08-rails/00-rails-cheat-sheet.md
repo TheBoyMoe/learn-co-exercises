@@ -16,9 +16,9 @@ rails routes
 
 *setting up a new Rails project with Rspec*
 
-Create the rails app with the `new` keyword, adding the `-T` option to tell the generator not to include the default test framework `TestUnit`
+Create the rails app with the `new` keyword, adding the `-T` option to tell the generator not to include the default test framework `TestUnit`, add `--without production` to stop the installation of production gems,
 
-$ rails new [app_name] -T
+$ rails new [app_name] -T --without production
 
 in the gem file add:
 gem 'rspec-rails'
@@ -33,6 +33,30 @@ $ rails generate migration [file_name]
 *run the migration*
 
 $ rails db:migrate
+
+
+*generate a resource*
+
+$ rails g scaffold [Model-singular] [attribute]:[data_type] [attribute]:[data_type]
+
+e.g User (Post, etc.)
+$ rails g scaffold User name:string email:string
+
+
+*add postgreSQL for production apps*
+
+add the following to the Gemfile
+
+```ruby
+  group :production do
+    gem 'pg', '0.20.0'
+  end
+```
+
+When creating a new app, you can suppress the installation  of production gems with the `--without production` option
+
+$ bundle install --without production
+
 
 
 ### Erb
