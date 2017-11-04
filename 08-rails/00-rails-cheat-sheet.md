@@ -2,6 +2,18 @@
 
 ### Rails
 
+*rails console*
+
+loads full rails environment and development database - changes to the database are saved
+$ rails c
+
+loads the rails environment giving access to the test database - changes to the database are saved
+$ rails c test
+
+loads the rails environment and the development database - changes to the database are rolled back on exit
+$ rails c --sandbox
+
+
 *generate a controller*
 
 $ rails generate controller [controller_name] [action_name] ...
@@ -9,6 +21,51 @@ $ rails generate controller [controller_name] [action_name] ...
 *undo/delete a controller*
 
 $ rails destroy controller [controller_name]
+
+
+*generate a model*
+
+$ rails g model [model - singular] [attribute:data_type] [attribute:data_type] ...
+
+*undo/delete model*
+
+$ rails destroy model [model]
+
+
+*updating model objects/instances*
+
+$ user.update_attributes(name: 'tom', email: 'tom@example.com')
+
+accepts a hash of attributes
+updates the database record
+if the model uses validations, if any fail, the update will fail
+
+$ user.update_attribute(:name, 'tom jones')
+
+update a single attribute
+updates the database record
+skips any validations
+
+
+*reload the model instance from the database*
+
+$ user.reload
+$ user.reload.name
+
+ensures the instance in memory reflects the record in the database
+
+*delete a database record*
+
+$ user.destroy
+
+*error creating a user - in console*
+
+$ user.errors
+$ user.errors.full_messages
+
+*display user attributes - in console*
+
+puts user.attributes.to_yaml
 
 *display routing table*
 
@@ -18,7 +75,7 @@ rails routes
 
 Create the rails app with the `new` keyword, adding the `-T` option to tell the generator not to include the default test framework `TestUnit`, add `--without production` to stop the installation of production gems,
 
-$ rails new [app_name] -T --without production
+$ rails new [app_name] -T
 
 in the gem file add:
 gem 'rspec-rails'
@@ -33,6 +90,19 @@ $ rails generate migration [file_name]
 *run the migration*
 
 $ rails db:migrate
+
+*undo migration*
+
+$ rails db:rollback
+
+to go back to the beginning(or a particular version)
+$ rails db:rollback VERSION=0
+
+
+*reset the database*
+
+drops the database and re-creates it
+$ rails db:migrate:reset
 
 
 *generate a resource*
@@ -57,6 +127,90 @@ When creating a new app, you can suppress the installation  of production gems w
 
 $ bundle install --without production
 
+*enable ssl in production*
+
+In `config/environments/production.rb`, uncomment
+
+config.force_ssl = true
+
+If the site's running on heroku, that's all that's required. If you have a custom domain, refer to their documentation [setup SSL on Heroku](https://devcenter.heroku.com/articles/ssl)
+
+
+*seed the database with dummy data*
+
+1. Add the gem `faker` to the `development` group of your Gemfile and run `bundle install`
+
+2. add the following to the 'db/seed.rb' file:
+
+```ruby
+  User.create!(name:  "Example User",
+               email: "example@railstutorial.org",
+               password:              "foobar",
+               password_confirmation: "foobar")
+
+  99.times do |n|
+    name  = Faker::Name.name
+    email = "example-#{n+1}@railstutorial.org"
+    password = "password"
+    User.create!(name:  name,
+                 email: email,
+                 password:              password,
+                 password_confirmation: password)
+  end
+
+```
+
+3. reset, and then seed the database:
+
+
+```bash
+  rails db:migrate:reset
+  rails db:seed
+```
+
+
+*use dummy data in your RSpec tests*
+
+1. create a `fixtures` folder in '/spec'
+
+2. create a yaml file in 'spec/fixtures' named after the database table you with to populate, e.g. `users.yml`
+
+3. define you users in `users.yml`
+
+```bash
+michael:
+  name: Michael Example
+  email: michael@example.com
+  password_digest: <%= User.digest('password') %>
+
+archer:
+  name: Sterling Archer
+  email: duchess@example.gov
+  password_digest: <%= User.digest('password') %>
+
+lana:
+  name: Lana Kane
+  email: hands@example.gov
+  password_digest: <%= User.digest('password') %>
+
+malory:
+  name: Malory Archer
+  email: boss@example.gov
+  password_digest: <%= User.digest('password') %>
+
+<% 30.times do |n| %>
+user_<%= n %>:
+  name:  <%= "User #{n}" %>
+  email: <%= "user-#{n}@example.com" %>
+  password_digest: <%= User.digest('password') %>
+<% end %>
+```
+
+4. in your spec file, add `fixtures :all`, you can access your users via the `users` method, addressing individual users via their 'label'  e.g.
+
+```ruby
+  @user = users(:michael)
+```
 
 
 ### Erb

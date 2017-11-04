@@ -1,16 +1,16 @@
 =begin
     References
     [1] http://ruby-doc.org/core-2.1.2/Hash.html
-        
+
 =end
 
-rescue => exception
-    
-else
-    
-ensure
-    
-end
+# rescue => exception
+#
+# else
+#
+# ensure
+#
+# end
 
 # create a hash by instantiating a new instance of the Hash class:
 item = Hash.new
@@ -41,12 +41,12 @@ item[1] = "Grocery Store" #=> { :item => "Bread", :quantity => 1, 1 => "Grocery 
 # the name of the hash, brackets containing the new key, an equals sign, and the new value for said key:
 item["brand"] = "Treehouse Bread Company"
 
-# If you're using symbols as keys, there's a shorthand notation you can use. 
+# If you're using symbols as keys, there's a shorthand notation you can use.
 # So if you're defining a hash like this...
 
 item = { :item => "Bread", :quantity => 1 }
 
-# ...you can move the colons after the symbols, and omit the arrows. 
+# ...you can move the colons after the symbols, and omit the arrows.
 # This hash will be identical to the one above:
 
 item = { item: "Bread", quantity: 1 }
@@ -89,7 +89,7 @@ hash.values #=> ["Bread", 1, "Treehouse Bread Company"]
 hash.values_at("quantity", "brand") #=> [1, "Treehouse Bread Company"]
 
 # The has_value? (alias value?) method takes one argument and returns true or false if the value is contained within the hash:
-hash.has_value?("brand") #=> false 
+hash.has_value?("brand") #=> false
 hash.has_value?("Bread") #=> true
 hash.value?('Bread') #=> true
 
@@ -112,7 +112,7 @@ hash.size #=> 4
 # The invert method returns a new hash with the keys and values transposed, original unchanged
 hash.invert #=> {"Bread" => "item", 1 => "quantity", "Treehouse Bread Company" => "brand"}
 
-# The shift method works similar to hashes as it does with arrays. 
+# The shift method works similar to hashes as it does with arrays.
 # It will REMOVE a key and value pair from the hash and return it as an array:
 hash.shift #=> ["item", "Bread"]
 
@@ -125,3 +125,22 @@ hash.merge({"calories" => 100}) #=> {"quantity" => 1, "brand" => "Treehouse Brea
 
 # If any key value pairs exist in the original hash, the values in the merge obj are used:
 hash.merge({"quantity" => 100}) #=> {"quantity" => 100, "brand" => "Treehouse Bread Company", "calories" => 100}
+
+
+#  count word frquency in a sentence using a hash
+puts "Enter a sentence"
+text = gets.chomp
+words = text.split(' ')
+# create a hash with a default value
+# to access the default value, try accessing the value of a non-existant key
+frequencies = Hash.new(0)
+# The first time we find the word, it will have a default value of`0
+words.each do |word|
+  frequencies[word] += 1
+end
+
+# sort the hash based on word count, smallest to highest
+frequencies = frequencies.sort_by {|word, count| count}
+
+frequencies.reverse!
+frequencies.each {|k,v| puts "#{k} #{v}"}
