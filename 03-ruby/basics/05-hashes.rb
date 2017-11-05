@@ -144,3 +144,26 @@ frequencies = frequencies.sort_by {|word, count| count}
 
 frequencies.reverse!
 frequencies.each {|k,v| puts "#{k} #{v}"}
+
+# we can iterate over only keys or only values
+my_hash = { one: 1, two: 2, three: 3 }
+
+my_hash.each_key { |k| print k, " " }
+# ==> one two three
+
+my_hash.each_value { |v| print v, " " }
+# ==> 1 2 3
+
+
+# we can also filter a hash looking for a specific value or values that meet certain criteria
+grades = { alice: 100,
+  bob: 92,
+  chris: 95,
+  dave: 97
+}
+
+grades.select { |name, grade| grade <  97 }
+# ==> { :bob => 92, :chris => 95 }
+
+grades.select { |k, v| k == :alice }
+# ==> { :alice => 100 }
