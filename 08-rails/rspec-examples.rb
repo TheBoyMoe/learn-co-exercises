@@ -25,3 +25,13 @@ describe 'linking from the index page to the show page' do
     expect(page).to have_link(@student.to_s, href: student_path(@student))
   end
 end
+
+# example of using have_content
+describe 'Multiple coupons are shown' do
+  it 'on the index page' do
+    Coupon.create(coupon_code: "ASD123", store: "Chipotle")
+    Coupon.create(coupon_code: "XYZ098", store: "Jamba")
+    visit coupons_path
+    expect(page).to have_content(/Chipotle|Jamba/)
+  end
+end
