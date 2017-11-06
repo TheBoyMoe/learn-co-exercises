@@ -8,7 +8,7 @@
 
 ## Calling a method with a block
 
-A block is a bit of code enclosed in `do`/`end` keywords or curly brackets (`{}`). We've seen methods like `#each` and `#collect` being called with blocks.
+A block is a bit of code enclosed in `do`/`end` keywords or curly brackets (`{}`). We've seen methods like `#each` and `#collect` being called with blocks. Methods that accept blocks have a way of transferring control from the calling method to the block and back again. We can build this into the methods we define by using the yield keyword.
 
 Let's take a look at the following example:
 
@@ -116,6 +116,18 @@ now we are back in the method
 ```
 
 The syntax inside the block might look familiar — it is how we pass items from a collection into a block, one by one, when we use an iterator like `#each`.
+
+```ruby
+def yield_name(name)
+  puts "In the method! Let's yield."
+  yield("Kim")
+  puts "In between the yields!"
+  yield(name)
+  puts "Block complete! Back in the method."
+end
+
+yield_name("Eric") { |n| puts "My name is #{n}." }
+```
 
 ## Code-Along: Building our own method with `yield`
 

@@ -146,6 +146,29 @@ end
 #  └── "Snuggling."
 ```
 
-That's all for now—we'll discuss `case` statements and looping in upcoming lessons.
 
-<p data-visibility='hidden'>View <a href='https://learn.co/lessons/conditional-readme' title='Control Flow'>Control Flow</a> on Learn.co and start learning to code for free.</p>
+## Case Statement
+
+```ruby
+case language
+  when "JS"
+    puts "Websites!"
+  when "Python"
+    puts "Science!"
+  when "Ruby"
+    puts "Web apps!"
+  else
+    puts "I don't know!"
+end
+```
+
+Can also be written as when/then
+
+```ruby
+case language
+  when "JS" then puts "Websites!"
+  when "Python" then puts "Science!"
+  when "Ruby" then puts "Web apps!"
+  else puts "I don't know!"
+end
+```
