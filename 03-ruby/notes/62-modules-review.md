@@ -48,6 +48,8 @@ While some modules, like Math, are already present in the interpreter. Others ne
   date = Date.now
 ```  
 
+### Include keyword
+
 We can also `include` a module. A class that includes a module can use that modules methods. This means that we do not have to prepend a modules constants and methods with the module name.
 
 ```ruby
@@ -68,4 +70,60 @@ We can also `include` a module. A class that includes a module can use that modu
 
   acute = Angle.new(1)
   acute.cosine
+```
+
+When a module is used to mix additional behavior and information into a class, it's called a `mixin`. Mixins allow us to customize a class without having to rewrite code!
+
+
+```ruby
+  module Action
+    def jump
+      @distance = rand(4) + 2
+      puts "I jumped forward #{@distance} feet!"
+    end
+  end
+
+  class Rabbit
+    # all the constants and methods are accessible on Rabbit instances just as if they were defined on the Rabbit class itself.
+    include Action
+    attr_reader :name
+    def initialize(name)
+      @name = name
+    end
+  end
+
+  class Cricket
+    include Action
+    attr_reader :name
+    def initialize(name)
+      @name = name
+    end
+  end
+
+  peter = Rabbit.new("Peter")
+  jiminy = Cricket.new("Jiminy")
+
+  peter.jump
+  jiminy.jump
+```
+
+Mixins give us the ability to mimic inheriting from more than one class: by mixing in behaviours from various modules as needed, we can add any combination of behaviours to our classes we like!
+
+
+### Extend keyword
+
+Whereas include mixes a module's methods in at the instance level (allowing instances of a particular class to use the methods), the extend keyword mixes a module's methods at the class level. This means that class itself can use the methods, as opposed to instances of the class.
+
+```ruby
+  module ThePresent
+    def now
+      puts "It's #{Time.new.hour > 12 ? Time.new.hour - 12 : Time.new.hour}:#{Time.new.min} #{Time.new.hour > 12 ? 'PM' : 'AM'} (GMT)."
+    end
+  end
+
+  class TheHereAnd
+    extend ThePresent
+  end
+
+  TheHereAnd.now
 ```
