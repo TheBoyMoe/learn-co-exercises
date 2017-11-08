@@ -14,22 +14,73 @@ loads the rails environment and the development database - changes to the databa
 $ rails c --sandbox
 
 
+*rails generator*
+
+General syntax for the rails generator command. '--no-test-framework' flag tells the generator not to create any tests
+
+```bash
+  $ rails generate [name of generator] [options] --no-test-framework
+```
+
+*generate a migration*
+
+Example of adding, removing & changing a column
+
+```bash
+  rails g migration add_published_status_to_posts published_status:string --no-test-framework
+  # remove the same column
+  rails g migration remove_published_status_from_posts published_status:string --no-test-framework
+
+  rails g migration add_post_status_to_posts post_status:boolean --no-test-framework
+  # change the columns data_type
+  rails g migration change_post_status_data_type_to_posts post_status:string --no-test-framework
+
+  # creates the change migration, but you need to fill it in, e.g, add
+  change_column :posts, :post_status, :string
+```
+
+
 *generate a controller*
 
-$ rails generate controller [controller_name] [action_name] ...
+Use them when creating static views or non-CRUD features(creates unnecessary views and the wrong routes for a CRUD feature)
+
+```bash
+  # creates the controller and updates the routes table, creates a view template for each action, helper file and a series of assets
+  $ rails g controller [controller_name] [action_name] ... --no-test-framework
+
+  $ rails g controller admin dashboard stats financials settings --no-test-framework
+```
 
 *undo/delete a controller*
 
-$ rails destroy controller [controller_name]
-
+```bash
+  $ rails destroy controller [controller_name]
+```
 
 *generate a model*
 
-$ rails g model [model - singular] [attribute:data_type] [attribute:data_type] ...
+```bash
+  # create the migration and model in one go
+  $ rails g model [model - singular] [attribute:data_type] [attribute:data_type] ... --no-test-framework
+
+  $ rails g model Author name:string genre:string bio:text --no-test-framework
+```
 
 *undo/delete model*
 
-$ rails destroy model [model]
+```bash
+  $ rails destroy model [model]
+```
+
+*generate a resource*
+
+If your building an api, or want to manually create your views - use a resource generator.
+
+```bash
+  # creates the controller, folder for the views, model (account), migration, and updated routes.rb with a full resources call(creates routes for all CRUD operations)
+  rails g resource Account name:string payment_status:string --no-test-framework
+```
+
 
 
 *updating model objects/instances*
