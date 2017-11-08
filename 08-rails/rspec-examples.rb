@@ -35,3 +35,27 @@ describe 'Multiple coupons are shown' do
     expect(page).to have_content(/Chipotle|Jamba/)
   end
 end
+
+
+### Form_for tag & testing
+
+=begin
+<%= form_for(@school_class) do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.label :room_number %>
+  <%= f.text_field :room_number %>
+  <%= f.submit %>
+<% end %>
+=end
+
+it 'new form submits content and renders form content' do
+  visit new_school_class_path
+
+  fill_in 'school_class_title', with: "Software Engineering"
+  fill_in 'school_class_room_number', with: 10
+
+  click_on "Create School class"
+
+  expect(page).to have_content("Software Engineering")
+end
