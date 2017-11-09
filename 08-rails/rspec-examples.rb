@@ -59,3 +59,19 @@ it 'new form submits content and renders form content' do
 
   expect(page).to have_content("Software Engineering")
 end
+
+## create a database record with 'POST' - ensure route exists
+# => post "/authors", to: "authors#create"
+describe "creating a valid author" do
+    let(:bro_found) { Author.find_by(name: "S. Bro") }
+
+    before { post :create, name: "S. Bro", email: "bro@sbahj.info" }
+
+    it "creates successfully" do
+      expect(bro_found).to be_a(Author)
+    end
+
+    it "redirects to show page" do
+      expect(response).to redirect_to(author_path(bro_found))
+    end
+  end
