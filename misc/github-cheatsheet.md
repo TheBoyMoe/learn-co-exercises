@@ -141,6 +141,7 @@ Add the following aliases to ~/.bash_profile (linux) which are loaded into your 
   alias gl="git log"
   alias gh="git hist"
   alias go="git checkout"
+  alias gt="git tag"
   alias gd="git diff | mate"
   alias ga="git add"
   alias gaa="git add ."
@@ -200,3 +201,70 @@ Undo the last committed change by generating a commit that removes the changes t
 ```
 
 Here we are undoing the very last commit made, so pass HEAD as the argument to revert. We can revert any arbitrary commit earlier in history by simply specifying its hash value instead.
+
+
+*tagging commits*
+
+tag the current commit with a 'name/label' of your choice.
+
+```bash
+  $ git tag [name]
+```
+
+tag a particular commit
+
+```bash
+  $ git tag [name] [hash]
+```
+
+You can now refer to that particular commit by 'name'. We can now checkout the previous commit and give it a 'name' like so:
+
+```bash
+  $ git checkout [name]^
+  $ git tag [tag_name]
+```
+
+You can checkout any tagged commit in the same way you checkout a branch:
+
+```bash
+  $ git checkout v1
+  $ git checkout v1-previous
+```
+
+You can see all tags:
+
+```bash
+  $ git tag
+```
+
+And see all tags in the log:
+
+```bash
+  $ git tag master --all
+```
+
+*remove a commit from a branch*
+
+First tag the current commit so it can be easily found
+
+```bash
+  $ git tag latest
+```
+
+To reset to a particular point in the history, use the hash or tag value
+
+```bash
+ $ git reset --hard [tag/hash]
+```
+
+Any commits that were removed still exist in the repo, you can see them using the --all option. You can reference them using their a tag value (or hash).
+
+```bash
+  $ git hist --all
+```  
+
+Commits that are unreferenced remain until garbage collection. You can remove the 'tag' and thus allow the commit to be removed by garbage collection thus:
+
+```bash
+  $ git tag -d [tag_name]
+```
