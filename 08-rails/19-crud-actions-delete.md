@@ -102,6 +102,23 @@ As shown, you have to go to a user's `show` page to delete them. What if we want
   <%= link_to "Delete", person, method: :delete, data: { confirm: "Really?" } %>
 </div>
 <% end %>
+
+```
+
+Note:
+~~In Rails 4.1 and above try `button_to` instead of `link_to`, `link_to` works in rails 5??~~
+
+Ensure that jQuery ruby gem is installed for `link_to` to work, `button_to` works with out it.
+
+```ruby
+  gem 'jquery-rails'
+```
+
+Create `assets/javascripts/application.js`, add require both 'jquery' and 'jquery_ujs'
+
+```javascript
+//= require jquery
+//= require jquery_ujs
 ```
 
 [`link_to`](http://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html#method-i-link_to) is a method of `UrlHelper` that has a number of convenient features.
