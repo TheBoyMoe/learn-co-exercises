@@ -1,0 +1,15 @@
+<table>
+  <tbody>
+    <tr>
+      <td><%= @song.title %></td>
+      <td><%= @song.release_year%></td>
+      <td><%= @song.artist_name %></td>
+      <td><%= @song.genre %></td>
+      <td><%= link_to 'Edit', edit_song_path(@song) %></td>
+      <td>
+        <%= button_to "Delete", @song, method: :delete, data: { confirm: "Really?" } %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p><%= link_to 'View all', songs_path %></p>
