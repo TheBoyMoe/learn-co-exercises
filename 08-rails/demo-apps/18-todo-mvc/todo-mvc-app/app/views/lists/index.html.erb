@@ -1,0 +1,17 @@
+<section class="todoapp">
+  <%= render 'header'%>
+	<section class="main" style="display: block;">
+		<%# render 'toggle' %>
+		<ul class="todo-list">
+      <% @lists.each do |list| %>
+        <li>
+          <div class="view">
+            <label><%= link_to list.name, list_path(list) %></label>
+          </div>
+        </li>
+      <% end %>
+      <%# render 'list_item' %>
+    </ul>
+	</section>
+  <%= render 'footer_blank'%>
+</section>
