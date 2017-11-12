@@ -1,1 +1,31 @@
-<h1><%=  @list.name %></h1>
+<section class="todoapp">
+  <%= render 'header_list'%>
+	<section class="main" style="display: block;">
+		<%= render 'toggle' %>
+		<ul class="todo-list">
+      <li>
+        <div class="view">
+          <input class="toggle" type="checkbox">
+          <label>buy milk</label>
+          <button class="destroy"></button>
+        </div>
+      </li>
+      <li>
+        <div class="view">
+          <input class="toggle" type="checkbox">
+          <label>buy bread</label>
+          <button class="destroy"></button>
+        </div>
+      </li>
+      <li>
+        <div class="view">
+          <input class="toggle" type="checkbox">
+          <label>buy cheese</label>
+          <button class="destroy"></button>
+        </div>
+      </li>
+      <%# render 'list_item' %>
+    </ul>
+	</section>
+  <%= render 'footer'%>
+</section>
