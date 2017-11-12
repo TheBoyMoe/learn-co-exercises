@@ -2,6 +2,19 @@
 
 ### Rails
 
+*setting up a new Rails project with Rspec*
+
+Create the rails app with the `new` keyword, adding the `-T` option to tell the generator not to include the default test framework `TestUnit`, add `--without production` to stop the installation of production gems,
+
+$ rails new [app_name] -T
+
+in the gem file add:
+gem 'rspec-rails'
+
+after running `bundle install`, create the initial RSpec config:
+$ rails g rspec:install
+
+
 *rails console*
 
 loads full rails environment and development database - changes to the database are saved
@@ -122,17 +135,6 @@ puts user.attributes.to_yaml
 
 rails routes
 
-*setting up a new Rails project with Rspec*
-
-Create the rails app with the `new` keyword, adding the `-T` option to tell the generator not to include the default test framework `TestUnit`, add `--without production` to stop the installation of production gems,
-
-$ rails new [app_name] -T
-
-in the gem file add:
-gem 'rspec-rails'
-
-after running `bundle install`, create the initial RSpec config:
-$ rails g rspec:install
 
 *generate migration in rails*
 
