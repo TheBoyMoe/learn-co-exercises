@@ -1,26 +1,25 @@
 <section class="todoapp">
-	<header class="header">
-		<h1>todos</h1>
-		<input class="new-todo" placeholder="What needs to be done?" autofocus="">
-	</header>
+  <%= render 'header'%>
 	<section class="main" style="display: block;">
-		<input class="toggle-all" type="checkbox">
-		<label for="toggle-all">Mark all as complete</label>
-		<ul class="todo-list"><li data-id="1510484709811" class=""><div class="view"><input class="toggle" type="checkbox"><label>need to buy milk</label><button class="destroy"></button></div></li></ul>
+		<%# render 'toggle' %>
+		<ul class="todo-list">
+      <li>
+        <div class="view">
+          <label><a href="#">Shopping List</a></label>
+        </div>
+      </li>
+      <li>
+        <div class="view">
+          <label><a href="#">Reading List</a></label>
+        </div>
+      </li>
+      <li>
+        <div class="view">
+          <label><a href="#">Gift List</a></label>
+        </div>
+      </li>
+      <%# render 'list_item' %>
+    </ul>
 	</section>
-	<footer class="footer" style="display: block;">
-		<span class="todo-count"><strong>1</strong> item left</span>
-		<ul class="filters">
-			<li>
-				<a href="#/" class="selected">All</a>
-			</li>
-			<li>
-				<a href="#/active">Active</a>
-			</li>
-			<li>
-				<a href="#/completed">Completed</a>
-			</li>
-		</ul>
-		<button class="clear-completed" style="display: none;"></button>
-	</footer>
+  <%= render 'footer_blank'%>
 </section>
