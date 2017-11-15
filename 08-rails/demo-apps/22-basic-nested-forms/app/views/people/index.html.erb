@@ -1,0 +1,15 @@
+<h1>Address Book</h1>
+
+<% @people.each do |person| %>
+  <h4><%= person.name %></h4>
+  <ul>
+    <% person.addresses.each do |address| %>
+    <ul>
+      <li><%= address.address_type%></li>
+      <li><%= address.street_address_1 %></li>
+      <li><%= address.city %></li>
+      <li><%= address.state %></li>
+    </ul><br>
+    <% end %>
+  </ul>
+<% end %>
