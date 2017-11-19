@@ -1,0 +1,57 @@
+<h1>Add a new post</h1>
+<%= form_for @post do |f| %>
+
+  <%= f.label 'Title' %><br>
+  <%= f.text_field :title %><br><br>
+
+  <%= f.label 'Content' %><br>
+  <%= f.text_area :content %><br><br>
+
+  <%= f.label 'Categories' %><br>
+
+  <!-- generate a checkbox for each category, use the :id as the value and the :name as the label
+      pass in an array, the value and the label - in that order
+ -->
+  <!-- render check-boxes on the same line -->
+  <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %><br>
+
+  <!-- render the checkboxes on different lines -->
+  <%# f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |item| %>
+    <!-- <p><%# item.check_box %><%# item.label %></p> -->
+  <%# end %>
+
+
+  <!-- does the same as above without using the form-builder-->
+  <%# Category.all.each do |category| %>
+    <!-- <label for="category_id_<%# category.id %>"><%# category.name %></label> -->
+    <!-- <input type="checkbox" name="post[category_ids][]" value="<%# category.id %>" id="category_id_<%# category.id %>"><br> -->
+  <%# end %>
+
+  <!--
+  1. f is attached to the post.
+  2. the fields_for method looks to see if the object (post) attached to f responds to
+    a method called categories_attributes=
+    3a. If the underlying object (post) does respond to that method, fields_for knows your
+        building a nested form.
+    3b. If the underlying object does not respond to that method, fields_for assumes you're doing
+        something custom.
+  -->
+  <br>
+  <label>Add a new category</label><br>
+  <!-- create a single field, duplicate the fields_for block to create more fields -->
+  <%# f.fields_for :categories, Category.new do |category_field| %>
+    <%# category_field.text_field :name %><br>
+  <%# end %>
+
+  <!-- create new category in posts#new -->
+  <%= f.fields_for :categories do |category_field| %>
+    <%= category_field.text_field :name %><br>
+  <% end %>
+
+  <!-- <input type="text" id="post_categories_attributes_0_name" name="post[categories_attributes][0][name]"><br><br>
+  <input type="text" id="post_categories_attributes_1_name" name="post[categories_attributes][1][name]"><br><br>
+  <input type="text" id="post_categories_attributes_2_name" name="post[categories_attributes][2][name]"><br><br> -->
+
+  <br>
+  <%= f.submit %>
+<% end %>
