@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.team = Team.find_or_create_by(name: 'The Avengers')
-    binding.pry
+    # binding.pry
     if @user.save
       redirect_to user_path(@user) # => /users/:id
     else
@@ -29,6 +29,8 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:email)
+      params.require(:user).permit(:email, :addresses_attributes => [
+          :street_1, :street_2, :address_type
+        ])
     end
 end

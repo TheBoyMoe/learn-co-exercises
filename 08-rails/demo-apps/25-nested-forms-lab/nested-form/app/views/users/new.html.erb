@@ -5,10 +5,38 @@
   <%= f.label :email %><br>
   <%= f.text_field :email %>
 
+  <!-- VERSION 2 -->
+  <br><br>
+  <fieldset>
+    <legend>Home Address</legend>
+
+    <label for="">Street 1</label><br>
+    <input type="text" name="user[addresses_attributes][][street_1]"><br><br>
+
+    <label for="">Street 2</label><br>
+    <input type="text" name="user[addresses_attributes][][street_2]"><br><br>
+
+    <input type="hidden" name="user[addresses_attributes][][address_type]" value="Home">
+  </fieldset>
+
+  <br><br>
+  <fieldset>
+    <legend>Business Address</legend>
+
+    <label for="">Street 1</label><br>
+    <input type="text" name="user[addresses_attributes][][street_1]"><br><br>
+
+    <label for="">Street 2</label><br>
+    <input type="text" name="user[addresses_attributes][][street_2]"><br><br>
+
+    <input type="hidden" name="user[addresses_attributes][][address_type]" value="Business">
+  </fieldset>
+
   <br><br>
   <%= f.submit %>
 <% end %>
 
+<!-- VERSION 1  -->
 <!-- <form>
   <label for="">Email</label><br>
   <input type="text" name=""><br><br>
