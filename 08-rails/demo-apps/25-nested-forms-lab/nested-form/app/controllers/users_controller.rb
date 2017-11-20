@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     @user.team = Team.find_or_create_by(name: 'The Avengers')
     binding.pry
     if @user.save
-      redirect_to @user # => /users/:id
+      redirect_to user_path(@user) # => /users/:id
     else
       render :new
     end
