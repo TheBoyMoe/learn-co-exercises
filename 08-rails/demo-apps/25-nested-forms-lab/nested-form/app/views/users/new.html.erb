@@ -5,8 +5,23 @@
   <%= f.label :email %><br>
   <%= f.text_field :email %>
 
-  <!-- VERSION 2 -->
+  <!-- VERSION 3 -->
   <br><br>
+  <%= f.fields_for :addresses do |address_builder| %>
+    <fieldset>
+      <legend><%= address_builder.object.address_type %> Address</legend>
+
+      <%= address_builder.label :street_1 %><br>
+      <%= address_builder.text_field :street_1 %><br><br>
+
+      <%= address_builder.label :street_2 %><br>
+      <%= address_builder.text_field :street_2 %><br><br>
+    </fieldset>
+    <br><br>
+  <% end %>
+
+  <!-- VERSION 2 -->
+  <!-- <br><br>
   <fieldset>
     <legend>Home Address</legend>
 
@@ -30,9 +45,8 @@
     <input type="text" name="user[addresses_attributes][][street_2]"><br><br>
 
     <input type="hidden" name="user[addresses_attributes][][address_type]" value="Business">
-  </fieldset>
+  </fieldset> -->
 
-  <br><br>
   <%= f.submit %>
 <% end %>
 

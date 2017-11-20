@@ -10,6 +10,9 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    # for each address object, you get an address hash/form fields
+    @user.addresses.build(address_type: 'Home')
+    @user.addresses.build(address_type: 'Business')
   end
 
   def create

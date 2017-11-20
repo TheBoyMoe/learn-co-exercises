@@ -12,7 +12,17 @@ class User < ApplicationRecord
     #   {:street_1 => 'The second street', :address_type => 'Business'}
     # ]
 
-    addresses_attributes.each do |address_attributes|
+    # addresses_attributes.each do |address_attributes|
+    #   self.addresses.build(address_attributes)
+    # end
+
+    # WHEN USING #fields_for helper method - you get a hash of hashes
+    # address_attributes = {
+    #   0 => {:street_1 => 'The street', :address_type => 'Home'},
+    #   1 => {:street_1 => 'The second street', :address_type => 'Business'}
+    # }
+
+    addresses_attributes.values.each do |address_attributes|
       self.addresses.build(address_attributes)
     end
   end
