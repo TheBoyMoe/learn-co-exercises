@@ -1,5 +1,15 @@
 <h1>User registration form</h1>
-<form>
+
+<%= form_for @user do |f| %>
+  <%# binding.pry %>
+  <%= f.label :email %><br>
+  <%= f.text_field :email %>
+
+  <br><br>
+  <%= f.submit %>
+<% end %>
+
+<!-- <form>
   <label for="">Email</label><br>
   <input type="text" name=""><br><br>
 
@@ -43,4 +53,4 @@
 
   <input type="submit" name="Submit">
 
-</form>
+</form> -->
