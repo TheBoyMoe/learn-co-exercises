@@ -26,4 +26,21 @@ class User < ApplicationRecord
       self.addresses.build(address_attributes)
     end
   end
+
+  # def team_name=(name)
+  #   #find team by name
+  #   self.team = Team.find_by(name: name)
+  # end
+
+  def team_attributes=(team_attributes)
+    # create a team by name and set attributes
+    # team_attributes = {
+    #   :name => 'New Team Name',
+    #   :hometown => 'NYC'
+    # }
+    self.team = Team.where(:name => team_attributes[:name]).first_or_create do |t|
+      t.hometown = team_attributes[:hometown]
+    end
+  end
+
 end

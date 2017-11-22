@@ -11,8 +11,9 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     # for each address object, you get an address hash/form fields
-    @user.addresses.build(address_type: 'Home')
-    @user.addresses.build(address_type: 'Business')
+    @user.addresses.build(address_type: 'Home') # has_many association
+    @user.addresses.build(address_type: 'Business') # has_many
+    @user.build_team # belongs_to association
   end
 
   def create
@@ -32,8 +33,14 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:email, :addresses_attributes => [
-          :street_1, :street_2, :address_type
-        ])
+      params.require(:user).permit(
+          :email,
+          :addresses_attributes => [
+            :street_1, :street_2, :address_type
+          ],
+          :team_attributes => [
+            :name, :hometown
+          ]
+        )
     end
 end

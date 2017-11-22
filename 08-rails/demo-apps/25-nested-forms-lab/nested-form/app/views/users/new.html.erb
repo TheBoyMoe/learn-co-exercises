@@ -10,12 +10,23 @@
   <%= f.fields_for :addresses do |address_builder| %>
     <fieldset>
       <legend><%= address_builder.object.address_type %> Address</legend>
-
       <%= address_builder.label :street_1 %><br>
       <%= address_builder.text_field :street_1 %><br><br>
 
       <%= address_builder.label :street_2 %><br>
       <%= address_builder.text_field :street_2 %><br><br>
+    </fieldset>
+    <br><br>
+  <% end %>
+
+  <%= f.fields_for :team do |team_builder| %>
+    <fieldset>
+      <legend>Team (Name required, Hometown only required for new Teams)</legend>
+      <%= teams_builder.label :name %><br>
+      <%= teams_builder.text_field :name %><br><br>
+
+      <%= teams_builder.label :hometown %><br>
+      <%= teams_builder.text_field :hometown %><br><br>
     </fieldset>
     <br><br>
   <% end %>
