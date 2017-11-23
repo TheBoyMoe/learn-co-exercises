@@ -1,0 +1,14 @@
+<%# @posts.each do |post| %>
+  <%# render :partial => "post", locals: {:post => post} %>
+<%# end %>
+
+<!-- replace the above with the rails collection option -->
+<%# if @posts.count > 0 %>
+  <!-- pass each variable as post -->
+  <%# render partial: 'post', collection: @posts, as: :post %>
+<%# else %>
+  <!-- <p>There are no posts!</p> -->
+<%# end %>
+
+<!-- replace the above with this -->
+<%= render(@posts) || 'There are no posts' %>
