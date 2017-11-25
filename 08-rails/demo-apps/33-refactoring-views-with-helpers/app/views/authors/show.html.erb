@@ -1,0 +1,7 @@
+<% title @author.name %>
+
+<%= render partial: 'author', locals: {author: @author} %>
+<p>Posts:</p>
+<% @author.posts.each do |post| %>
+  <div><%= post.title %> - <%= last_updated(post) %></div>
+<% end %>
