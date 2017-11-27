@@ -1,0 +1,42 @@
+<!--
+  PROBLEMS WITH THIS IMPLEMENTATION
+  1. view is querying the database for posts and authors
+  2. view reads the params hash, made available by adding the `helper_method :params` to the PostsController
+  3. view overrides @posts, which PostsController already creates, yet more database calls!
+-->
+<!-- 'wire up' author & date filters -->
+<!-- FILTERS FOR EITHER property NOT BOTH -->
+<% if !params[:author].blank? %>
+  <% @posts = Post.where(author: params[:author]) %>
+<% elsif !params[:date].blank? %>
+  <% if params[:date] == "Today" %>
+    <% @posts = Post.where("created_at >=?", Time.zone.today.beginning_of_day) %>
+  <% else %>
+    <% @posts = Post.where("created_at <?", Time.zone.today.beginning_of_day) %>
+  <% end %>
+<% end %>
+
+<h1>Believe It Or Not I'm Blogging On Air</h1>
+
+<!-- Filter posts by author -->
+<div>
+  <h3>Filter posts:</h3>
+  <!-- render a drop down  -->
+  <%= form_tag("/posts", method: "get") do %>
+    <!-- allowing the user to select the author, requires a database call to get all the authors -->
+    <%= select_tag "author", options_from_collection_for_select(Author.all, "id", "name"), include_blank: true %>
+    <!-- OR by date -->
+    <%= select_tag "date", options_for_select(["Today", "Old News"]), include_blank: true %>
+
+    <%= submit_tag "Filter" %>
+  <% end %>
+</div>
+<!-- end -->
+
+<% @posts.each do |post| %>
+  <div>
+    <h2><%= post.title %></h2>
+    <h3>by: <%= link_to post.author.name, author_path(post.author) %></h3>
+    <p><%= post.description %></p>
+  </div>
+<% end %>

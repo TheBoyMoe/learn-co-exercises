@@ -1,0 +1,24 @@
+<h1>Believe It Or Not I'm Blogging On Air</h1>
+
+<!-- Filter posts by author -->
+<div>
+  <h3>Filter posts:</h3>
+  <!-- render a drop down  -->
+  <%= form_tag("/posts", method: "get") do %>
+    <!-- allowing the user to select the author -->
+    <%= select_tag "author", options_from_collection_for_select(@authors, "id", "name"), include_blank: true %>
+    <!-- OR by date -->
+    <%= select_tag "date", options_for_select(["Today", "Old News"]), include_blank: true %>
+
+    <%= submit_tag "Filter" %>
+  <% end %>
+</div>
+<!-- end -->
+
+<% @posts.each do |post| %>
+  <div>
+    <h2><%= post.title %></h2>
+    <h3>by: <%= link_to post.author.name, author_path(post.author) %></h3>
+    <p><%= post.description %></p>
+  </div>
+<% end %>
