@@ -1,0 +1,19 @@
+<%= form_for(post) do |f| %>
+
+  <label>Post title:</label><br>
+  <%= f.text_field :title %><br><br>
+
+  <!-- moved to a posts helper method -->
+  <%# if post.author.nil? %>
+    <%# f.select :author_id, options_from_collection_for_select(Author.all, :id, :name) %>
+  <%# end %>
+  <%# f.hidden_field :author_id %>
+
+  <%= author_id_field(@post) %>
+
+  <label>Post Description</label><br>
+  <%= f.text_area :description %><br>
+
+  <br>
+  <%= f.submit %>
+<% end %>
