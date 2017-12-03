@@ -9,6 +9,10 @@ class ListsController < ApplicationController
   def show
   end
 
+  def new
+    @list = List.new
+  end
+
   def create
     # raise params.inspect # DEBUG
     @list = List.new(list_params)

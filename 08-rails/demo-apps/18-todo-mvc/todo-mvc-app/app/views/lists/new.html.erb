@@ -1,10 +1,8 @@
-<h1>Add artist</h1>
-<%= form_for(@artist) do |f| %>
-  <label>Artist name:</label><br>
-  <%= f.text_field :name %><br>
+<h1>Add List</h1>
+<%= form_for(@list) do |f| %>
 
-  <label>Artist bio</label><br>
-  <%= f.text_field :bio %><br>
+  <label>List name:</label><br>
+  <%= f.text_field :name %><br>
 
   <%= f.submit %>
 <% end %>

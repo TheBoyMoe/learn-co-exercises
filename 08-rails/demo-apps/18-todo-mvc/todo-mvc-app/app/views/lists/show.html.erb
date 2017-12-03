@@ -3,28 +3,13 @@
 	<section class="main" style="display: block;">
 		<%= render 'toggle' %>
 		<ul class="todo-list">
-      <li>
-        <div class="view">
-          <input class="toggle" type="checkbox">
-          <label>buy milk</label>
-          <button class="destroy"></button>
-        </div>
-      </li>
-      <li>
-        <div class="view">
-          <input class="toggle" type="checkbox">
-          <label>buy bread</label>
-          <button class="destroy"></button>
-        </div>
-      </li>
-      <li>
-        <div class="view">
-          <input class="toggle" type="checkbox">
-          <label>buy cheese</label>
-          <button class="destroy"></button>
-        </div>
-      </li>
-      <%# render 'list_item' %>
+      <% if @list.items.count > 0 %>
+        <% @list.items.each do |item| %>
+          <%= render partial: 'list_item', locals: {item: item} %>
+        <% end %>
+      <% else %>
+        <%= render 'list_item_blank'  %>
+      <% end %>
     </ul>
 	</section>
   <%= render 'footer'%>
