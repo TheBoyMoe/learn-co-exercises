@@ -1,0 +1,30 @@
+<div class="card">
+  <h1><%= @tadpole.name %> the Tadpole</h1>
+
+  <!-- make form to make "Become a frog" button here -->
+  <!-- the form should post to /tadpoles/:id/metamorphosize -->
+
+  <p>Color: <%= @tadpole.color %></p>
+  <p>Parent: <a href="/frogs/<%= @tadpole.frog.id %>"><%= @tadpole.frog.name %></a></p>
+  <p>Lives: <a href="/ponds/<%= @tadpole.pond.id %>"><%= @tadpole.pond.name %></a></p>
+
+  <a href="/tadpoles">Back</a> |
+  <a href="/tadpoles/<%= @tadpole.id %>/edit">Edit</a> |
+  <a href="/tadpoles/<%= @tadpole.id %>/destroy">Delete</a> |
+  <form action="/tadpoles/<%= @tadpole.id %>/metamorphose" method="post">
+    <input type="submit" name="" value="Become a frog">
+  </form>
+
+  <!-- # another version using form_tag -->
+  <%# form_tag(metamorphose_path(@tadpole)) do %>
+    <%# submit_tag "Become a frog", :class => 'btn btn-primary' %>
+  <%# end %>
+
+  <!-- add the following route to config/routes.rb -->
+  <!-- post '/tadpoles/:id/metamorphose', to: 'tadpoles#metamorphose', as: 'metamorphose' -->
+
+</div>
+
+<div class="card">
+  <img src="http://<%= @tadpole.color %>-tadpole.jpg.to/" alt="Tadpole Picture" width="300">
+</div>
