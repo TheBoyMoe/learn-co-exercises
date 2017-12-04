@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: [:show, :edit, :update]
+  before_action :set_list, only: [:show]
 
   def index
     @list = List.new
@@ -7,6 +7,7 @@ class ListsController < ApplicationController
   end
 
   def show
+    @item = @list.items.build
   end
 
   def new

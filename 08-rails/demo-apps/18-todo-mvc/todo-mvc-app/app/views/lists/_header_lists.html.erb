@@ -1,7 +1,8 @@
 <header class="header">
+  <!-- form for adding new lists -->
   <h1>todo lists</h1>
   <!-- <input class="new-todo" placeholder="Add a new List" autofocus=""> -->
-  <%= form_for(@list) do |f| %>
+  <%= form_for(list) do |f| %>
     <%= f.text_field :name, {class: 'new-todo', placeholder: "Add a new List"} %>
   <% end %>
 </header>

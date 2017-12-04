@@ -1,4 +1,9 @@
 <header class="header">
-  <h1>todos</h1>
-  <input class="new-todo" placeholder="Add a new List" autofocus="">
+  <!-- form for adding new items to a list -->
+  <h1><%= list.name %></h1>
+  <!-- specify the action/url otherwise rails will use the default items_path - we're nesting the resource within -->
+  <%= form_for(item, url: list_items_path(list)) do |f| %>
+    <%= f.text_field :description, {class: 'new-todo', placeholder: "Add a new Item"} %>
+    <%= f.submit style: 'display: none'%>
+  <% end %>
 </header>

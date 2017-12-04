@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'items/create'
+
   # items are always created in the context of a list, so create them as a nested resource
   resources :lists do
     resources :items, only: [:create]
