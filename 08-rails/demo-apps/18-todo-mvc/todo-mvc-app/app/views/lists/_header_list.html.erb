@@ -1,9 +1,9 @@
 <header class="header">
   <!-- form for adding new items to a list -->
   <h1><%= list.name %></h1>
-  <!-- specify the action/url otherwise rails will use the default items_path - we're nesting the resource within -->
+  <!-- specify the action/url otherwise rails will use the default items_path - we're nesting the resource within the  list-->
   <%= form_for(item, url: list_items_path(list)) do |f| %>
-    <%= f.text_field :description, {class: 'new-todo', placeholder: "Add a new Item"} %>
+    <%= f.text_field :description, {class: 'new-todo', placeholder: item.errors.full_messages_for(:description).first || "Add a new item"} %>
     <%= f.submit style: 'display: none'%>
   <% end %>
 </header>

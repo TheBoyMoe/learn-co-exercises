@@ -1,8 +1,17 @@
 <header class="header">
   <!-- form for adding new lists -->
   <h1>todo lists</h1>
-  <!-- <input class="new-todo" placeholder="Add a new List" autofocus=""> -->
+
   <%= form_for(list) do |f| %>
-    <%= f.text_field :name, {class: 'new-todo', placeholder: "Add a new List"} %>
+    <%# if list.errors[:name].present? %>
+      <%# f.text_field :name, {class: 'new-todo', placeholder: "Lists must have a name"} %>
+    <%# else %>
+      <%# f.text_field :name, {class: 'new-todo', placeholder: "Add a new List"} %>
+    <%# end %>
+
+    <!-- replace above with this one line -->
+    <%= f.text_field :name, {class: 'new-todo', placeholder: list.errors.full_messages_for(:name).first || "Add a new list"} %>
+    <% f.submit style: "display: none" %>
+    
   <% end %>
 </header>

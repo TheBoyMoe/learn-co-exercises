@@ -12,5 +12,6 @@
  *
  *= require 'base'
  *= require_self
+ *= require 'lists'
  *= require 'styles'
  */

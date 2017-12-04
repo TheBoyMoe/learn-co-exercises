@@ -17,11 +17,13 @@ class ListsController < ApplicationController
   def create
     # raise params.inspect # DEBUG
     @list = List.new(list_params)
-    if @list.valid?
-      @list.save
-      redirect_to lists_url # use full url for redirects
+    if @list.save
+      redirect_to list_url(@list) # use full url for redirects
     else
-      render :index
+      @lists = List.all
+      # when you render you're not creating a new request
+      # check the @list object for errors in the view
+      render :index 
     end
   end
 

@@ -1,16 +1,16 @@
 <section class="todoapp">
-  <%= render partial: 'header_list', locals: {item: @item, list: @list} %>
+  <%= render partial: 'lists/header_list', locals: {item: @item, list: @list} %>
 	<section class="main" style="display: block;">
-		<%= render 'toggle' %>
+		<%= render 'lists/toggle' %>
 		<ul class="todo-list">
       <% if @list.items.count > 0 %>
         <% @list.items.each do |item| %>
-          <%= render partial: 'list_item', locals: {item: item} %>
+          <%= render partial: 'lists/list_item', locals: {item: item} unless !item.id %>
         <% end %>
       <% else %>
-        <%= render 'list_item_blank'  %>
+        <%= render 'lists/list_item_blank'  %>
       <% end %>
     </ul>
 	</section>
-  <%= render 'footer'%>
+  <%= render 'lists/footer'%>
 </section>
