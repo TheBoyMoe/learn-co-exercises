@@ -13,6 +13,7 @@
 
 class ItemsController < ApplicationController
 
+  # POST '/lists/:list_id/item'
   def create
     # retireive the appropriate list, and associate the item with it's parent
     @list = List.find(params[:list_id])
@@ -22,6 +23,18 @@ class ItemsController < ApplicationController
     else
       # 'lists/show' requires @list and @item - check for errors in view
       render 'lists/show'
+    end
+  end
+
+  # PATCH '/lists/:list_id/item/:id'
+  def update
+    # logger.debug(params)
+    @list = List.find_by(id: params[:list_id])
+    @item = @list.items.find_by(id: params[:id])
+    if @item
+      @item.status = params[:item][:status]
+      @item.save
+      redirect_to list_path(@item.list)
     end
   end
 
