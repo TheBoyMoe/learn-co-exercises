@@ -1,4 +1,5 @@
-<li class="<%= 'completed' if item.complete? %>">
+<!-- <li class="<%# 'completed' if item.complete? %>"> -->
+<li class="<%= li_class_for_item(item) %>">
   <div class="view">
     <!-- <form class="" action="<%# lists_path %>" method="get">
       <input name="utf8" type="hidden" value="&#x2713;" />

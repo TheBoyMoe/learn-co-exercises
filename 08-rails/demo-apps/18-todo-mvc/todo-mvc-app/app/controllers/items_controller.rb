@@ -32,14 +32,15 @@ class ItemsController < ApplicationController
     @list = List.find_by(id: params[:list_id])
     @item = @list.items.find_by(id: params[:id])
     if @item
-      @item.status = params[:item][:status]
-      @item.save
+      # @item.status = params[:item][:status]
+      # @item.save
+      @item.update(item_params) # replaces above two lines
       redirect_to list_path(@item.list)
     end
   end
 
   private
     def item_params
-      params.require(:item).permit(:description)
+      params.require(:item).permit(:description, :status)
     end
 end

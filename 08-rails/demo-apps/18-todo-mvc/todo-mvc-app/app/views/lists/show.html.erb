@@ -5,6 +5,7 @@
 		<ul class="todo-list">
       <% if @list.items.count > 0 %>
         <% @list.items.each do |item| %>
+          <!-- local variables are not passed into partials, e.g. the item object -->
           <%# render partial: 'lists/list_item', locals: {item: item, list: @list} unless !item.id %>
           <%= render partial: 'lists/list_item', locals: {item: item, list: @list} %>
         <% end %>
