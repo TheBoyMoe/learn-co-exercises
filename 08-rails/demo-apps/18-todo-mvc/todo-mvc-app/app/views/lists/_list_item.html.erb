@@ -1,6 +1,14 @@
 <li class="<%= 'completed' if item.complete? %>">
   <div class="view">
-    <input class="toggle" type="checkbox" <%= "checked='checked'" if item.complete? %>>
+    <!-- <form class="" action="<%# lists_path %>" method="get">
+      <input name="utf8" type="hidden" value="&#x2713;" />
+      <input name="authenticity_token" type="hidden" value="J7CBxfHalt49OSHp27hblqK20c9PgwJ108nDHX/8Cts=" />
+      <input class="toggle" type="checkbox" <%= "checked='checked'" if item.complete? %>>
+    </form> -->
+
+    <%= form_for(item, url: list_item_path(list, item)) do |f| %>
+      <input class="toggle" type="checkbox" <%= "checked='checked'" if item.complete? %>>
+    <% end %>
     <label><%= item.description %></label>
     <button class="destroy"></button>
   </div>

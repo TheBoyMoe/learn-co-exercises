@@ -7,7 +7,10 @@ class ListsController < ApplicationController
   end
 
   def show
-    @item = @list.items.build
+    # there's no need to assoicate the @item with @list
+    # it's simply passed in for form_for to wrap around
+    # @item = @list.items.build
+    @item = Item.new
   end
 
   def new
@@ -23,7 +26,7 @@ class ListsController < ApplicationController
       @lists = List.all
       # when you render you're not creating a new request
       # check the @list object for errors in the view
-      render :index 
+      render :index
     end
   end
 

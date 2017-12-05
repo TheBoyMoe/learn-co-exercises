@@ -5,7 +5,8 @@
 		<ul class="todo-list">
       <% if @list.items.count > 0 %>
         <% @list.items.each do |item| %>
-          <%= render partial: 'lists/list_item', locals: {item: item} unless !item.id %>
+          <%# render partial: 'lists/list_item', locals: {item: item, list: @list} unless !item.id %>
+          <%= render partial: 'lists/list_item', locals: {item: item, list: @list} %>
         <% end %>
       <% else %>
         <%= render 'lists/list_item_blank'  %>

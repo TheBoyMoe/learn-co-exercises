@@ -4,10 +4,10 @@ Rails.application.routes.draw do
 
   # items are always created in the context of a list, so create them as a nested resource
   resources :lists do
-    resources :items, only: [:create]
+    resources :items
   end
 
-  
+
   # list_items  POST   /lists/:list_id/items(.:format) items#create
 
 
