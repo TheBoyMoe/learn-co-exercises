@@ -9,7 +9,7 @@
 
     <%= form_for(item, url: list_item_path(list, item)) do |f| %>
       <!-- <input class="toggle" type="checkbox" <%# "checked='checked'" if item.complete? %>> -->
-      <%= f.check_box :status, class: 'toggle', checked: (true if item.complete?) %>
+      <%= f.check_box :status, class: 'toggle', checked: item.complete? %>
     <% end %>
     <label><%= item.description %></label>
     <button class="destroy"></button>
