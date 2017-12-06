@@ -19,10 +19,12 @@
     <label><%= item.description %></label>
 
     <!-- delete item using form_tag -->
-    <%= form_tag(list_item_path(list, item), method: 'delete') do %>
-      <button class="destroy" type="submit"></button>
-    <% end %>
+    <%#= form_tag(list_item_path(list, item), method: 'delete') do %>
+      <!-- <button class="destroy" type="submit"></button> -->
+    <%# end %>
 
+    <!-- delete item using rails button_to  helper -->
+    <%= button_to 'x', list_item_path(list, item), method: 'delete', class: 'destroy' %>
 
     <!-- html form example -->
     <!-- <form action="<%= list_item_path(list, item) %>" method="post">
