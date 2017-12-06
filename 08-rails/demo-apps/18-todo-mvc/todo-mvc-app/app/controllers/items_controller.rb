@@ -39,6 +39,10 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    logger.debug("Item: #{params}")
+  end
+
   private
     def item_params
       params.require(:item).permit(:description, :status)

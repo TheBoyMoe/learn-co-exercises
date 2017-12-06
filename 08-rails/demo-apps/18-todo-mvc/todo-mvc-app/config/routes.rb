@@ -21,5 +21,16 @@ Rails.application.routes.draw do
   #             DELETE /lists/:id(.:format)            lists#destroy
 
 
+  # items_create   GET    /items/create(.:format)                  items#create
+  #   list_items   GET    /lists/:list_id/items(.:format)          items#index
+  #                POST   /lists/:list_id/items(.:format)          items#create
+  # new_list_item  GET    /lists/:list_id/items/new(.:format)      items#new
+  # edit_list_item GET    /lists/:list_id/items/:id/edit(.:format) items#edit
+  #      list_item GET    /lists/:list_id/items/:id(.:format)      items#show
+  #                PATCH  /lists/:list_id/items/:id(.:format)      items#update
+  #                PUT    /lists/:list_id/items/:id(.:format)      items#update
+  #                DELETE /lists/:list_id/items/:id(.:format)      items#destroy
+
+
   root 'lists#index'
 end
