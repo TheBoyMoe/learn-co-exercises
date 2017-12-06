@@ -40,7 +40,12 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    logger.debug("Item: #{params}")
+    @list = List.find_by(id: params[:list_id])
+    item = @list.items.find_by(id: params[:id])
+    if item
+      item.destroy
+      redirect_to list_path(@list)
+    end
   end
 
   private

@@ -18,10 +18,11 @@
     <!-- item description -->
     <label><%= item.description %></label>
 
-    <!-- delete item -->
+    <!-- delete item using form_tag -->
     <%= form_tag(list_item_path(list, item), method: 'delete') do %>
       <button class="destroy" type="submit"></button>
     <% end %>
+
 
     <!-- html form example -->
     <!-- <form action="<%= list_item_path(list, item) %>" method="post">
