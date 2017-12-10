@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AuthApp</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="header">
+      <div class="container">
+
+        <div class="nav">
+          <% if current_user %>
+            <ul>
+              <li><%= current_user.email %></li>
+              <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+            </ul>
+          <% else %>
+            <ul>
+              <li><%= link_to "Log in", login_path %></a></li>
+              <li><%= link_to "Sign up", signup_path %></a></li>
+            </ul>
+          <% end %>
+        </div>
+
+        <div class="logo">
+        </div>
+
+      </div>
+    </div>
+
+    <%= yield %>
+    
+  </body>
+</html>
