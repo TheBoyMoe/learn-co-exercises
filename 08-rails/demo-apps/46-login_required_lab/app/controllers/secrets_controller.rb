@@ -14,11 +14,11 @@ class SecretsController < ApplicationController
 
   end
 
-  private
-    # could be moved to application_controller
-    def require_login
-      # redirect to login unless logged in
-      redirect_to controller: 'sessions', action: 'new' unless current_user
-    end
+  # private
+  #   # could be moved to application_controller
+  #   def require_login
+  #     # redirect to login unless logged in
+  #     redirect_to controller: 'sessions', action: 'new' unless current_user
+  #   end
 
 end

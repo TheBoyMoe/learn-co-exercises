@@ -12,7 +12,8 @@
 =end
 
 class SessionsController < ApplicationController
-
+  before_action :require_login, only: [:show]
+  
   def new
     # render login form, uses the sessions object
   end
@@ -31,20 +32,20 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    # alternate
+    # session.delete :name
+    # redirect_to controller: 'session', action: 'new'
+
     session[:name] = nil
     redirect_to login_url
   end
 
   # alternate
   # def create
-  #   return redirect_to(controller: 'sessions',
-  #                      action: 'new') if !params[:name] || params[:name].empty?
+  #   return redirect_to(controller: 'sessions', action: 'new') if !params[:name] || params[:name].empty?
   #   session[:name] = params[:name]
   #   redirect_to controller: 'application', action: 'hello'
   # end
 
-  # def destroy
-  #   session.delete :name
-  #   redirect_to controller: 'application', action: 'hello'
-  # end
+
 end
