@@ -52,3 +52,23 @@ Next, add the following code **BEFORE ANYTHING ELSE ON LINE ONE** of spec/rails_
 require 'simplecov'
 SimpleCov.start 'rails'
 ```
+
+7. Setup Guard to automate your specs
+
+Add the following ruby gem in group :test block
+
+```ruby
+    gem 'guard-rspec'
+``` 
+
+In the root directory execute
+
+```ruby
+    bundle exec guard init rspec
+```
+
+to generate the Guardfile. To run guard run
+
+```ruby
+    bundle exec guard
+```
