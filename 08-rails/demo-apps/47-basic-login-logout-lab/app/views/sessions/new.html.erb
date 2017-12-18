@@ -1,0 +1,11 @@
+<h1>Login</h1>
+<%#= render partial: 'shared/form', locals: {user: @user} %>
+<%= form_for @user, url: '/login', method: 'post' do |f| %>
+  <%= f.label :name %><br>
+  <%= f.text_field :name %><br>
+  <%= f.label :password %><br>
+  <%= f.password_field :password %><br>
+  <%= f.label :password_confirmation %><br>
+  <%= f.password_field :password_confirmation %><br>
+  <%= f.submit "Submit" %>
+<% end %>
