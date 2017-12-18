@@ -1,8 +1,13 @@
 # noinspection RubyInterpreter
 Rails.application.routes.draw do
-  devise_for :users
-  get 'pages/home'
 
+
+	get 'pages/home'
 	root to: 'pages#home'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+	# devise_for :users
+
+	# replaces above line - allows the app to receive the callback from facebook
+	devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
 end
