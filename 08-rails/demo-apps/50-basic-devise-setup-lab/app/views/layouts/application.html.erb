@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<header>
+	<div>
+		<% unless current_user %>
+			<%= link_to("Log In", new_user_session_path) %> |
+			<%= link_to("Sign Up", new_user_registration_path) %>
+		<% else %>
+			<%= link_to("Log Out", destroy_user_session_path, :method => 'delete') %><br>
+		<% end %>
+	</div>
+</header>
+
+<div>
+	<%= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
+	<%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
+	<%= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
+</div>
+
+<%= yield %>
+
+</body>
+<head>
+  <title>DeviseLab</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+</html>
