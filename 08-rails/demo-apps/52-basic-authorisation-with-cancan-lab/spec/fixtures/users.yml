@@ -1,0 +1,14 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+alice:
+  id: 1
+  name: alice
+
+beth:
+  id: 2
+  name: beth
+
+eve:
+  id: 3
+  name: eve
+

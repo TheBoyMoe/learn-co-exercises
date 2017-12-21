@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+alice_private:
+  content: I am a secret just for Alice.
+  user_id: 1
+
+alice_to_beth:
+  content: This is a secret for Beth's eyes only!
+  user_id: 1
+
+beth_to_eve:
+  content: I'm sorry you and Alice are still fighting.
+  user_id: 2
+
+eve_private:
+  content: Subjects are beginning to exhibit signs of trust. Operation proceeds.
+  user_id: 3

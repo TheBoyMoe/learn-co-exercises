@@ -1,0 +1,9 @@
+<h1>Login Page</h1>
+
+<%= form_for :user, url: login_path, method: 'post' do |f| %>
+	<%= f.text_field :name, :placeholder => 'Name'%>
+	<%= f.submit "Login" %>
+<% end %>
+
+<br><br>
+<%=  link_to 'Signup', signup_path %>

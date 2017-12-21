@@ -1,0 +1,9 @@
+<h1>Notes List</h1>
+
+<% if @notes.count > 0 %>
+	<% @notes.each do |note| %>
+		<p><%= note.content %></p>
+	<% end %>
+<% else %>
+	<p>No notes found!</p>
+<% end %>

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+alice_private_join:
+  note_id: 1
+  user_id: 1
+
+alice_to_beth_join:
+  note_id: 2
+  user_id: 2
+
+beth_to_eve_join:
+  note_id: 3
+  user_id: 3
+
+eve_private_join:
+  note_id: 4
+  user_id: 3

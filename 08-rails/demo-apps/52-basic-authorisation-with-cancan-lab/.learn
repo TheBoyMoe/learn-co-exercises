@@ -1,0 +1,8 @@
+tags:
+  - cancan
+  - rails
+  - authorization
+languages:
+  - Ruby
+resources:
+  - https://github.com/ryanb/cancan

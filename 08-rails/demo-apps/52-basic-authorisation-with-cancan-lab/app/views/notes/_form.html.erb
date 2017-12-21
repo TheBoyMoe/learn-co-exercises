@@ -1,0 +1,12 @@
+<%= form_for note do |f|%>
+	<p>
+		<%= f.label :content %>
+		<%= f.text_field :content %>
+	</p>
+	<p>
+		<%= f.label :visible_to %>
+		<%= f.text_field :visible_to %>
+	</p>
+
+	<%= f.submit %>
+<% end %>
