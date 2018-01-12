@@ -1,8 +1,8 @@
 <h1>Post Form</h1>
 
 <!-- 1. Using a html form in rails, include hidden authenticity_token to stop CSRF -->
-<!-- <form class="new-post-form" action="<%= posts_path %>" method="post">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+<!-- <form class="new-post-form" action="<%#= posts_path %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%#= form_authenticity_token %>">
   <label for="post_title">Title</label>
   <input id="post_title" type="text" name="post[title]"><br>
   <label for="post_description">Descrition</label>
@@ -11,13 +11,13 @@
 </form> -->
 
 <!-- 2. Using rails form tag to replace form element and hidden 'authenticity_token' -->
-<!-- <%= form_tag posts_path do %>
-  <label for="post_title">Title</label>
-  <input id="post_title" type="text" name="post[title]"><br>
-  <label for="post_description">Descrition</label>
-  <input id="post_description" type="text" name="post[description]" /><br>
-  <input type="submit" name="submit" value="Submit Post">
-<% end %> -->
+<%#= form_tag posts_path do %>
+  <!--<label for="post_title">Title</label>-->
+  <!--<input id="post_title" type="text" name="post[title]"><br>-->
+  <!--<label for="post_description">Descrition</label>-->
+  <!--<input id="post_description" type="text" name="post[description]" /><br>-->
+  <!--<input type="submit" name="submit" value="Submit Post">-->
+<%# end %> -->
 
 <!-- 3. incorporate rails form helpers -->
 <%= form_tag posts_path do %>
