@@ -5,6 +5,64 @@
 
 In this lesson you're going to build a complete Ruby on Rails application that manages related data through complex forms and RESTful routes. The goal of the application is to build a Content Management System, whether the content being managed is Blog Posts, Recipes, a Library of Resources, or any domain model that lends itself to these requirements (the majority of ideas you could come up with would probably meet the requirements).
 
+
+## Initial setup
+
+1. Build the initial Rails app with the following command so Mini-test framework is not added.
+
+```ruby
+	rails new [app_name] -T
+```
+
+2. Add the following gems to the app's Gemfile:
+
+```ruby
+	group :development, :test do
+    gem 'sqlite3'
+    gem 'byebug'
+    gem 'database_cleaner', '1.4.1'
+    gem 'capybara', '2.4.4'
+    gem 'rspec-rails', '3.3.2'
+  end
+  
+  group :test do
+    gem 'cucumber-rails', :require => false
+    gem 'cucumber-rails-training-wheels'
+    gem 'simplecov', :require => false
+  end
+```
+
+3. Run the following commands to install Cucumber, Capybara, Rspec and Simplecov gems
+
+```ruby
+	rails generate cucumber:install capybara
+  rails generate cucumber_rails_training_wheels:install
+  rails generate rspec:install
+``` 
+
+4. Create a new file called rspec.rb in features/support with the following contents:
+
+```ruby
+	require 'rspec/core'
+  
+  RSpec.configure do |config|
+    config.mock_with :rspec do |c|
+      c.syntax = [:should, :expect]
+    end
+    config.expect_with :rspec do |c|
+      c.syntax = [:should, :expect]
+    end
+  end
+```
+
+5. add the following code BEFORE ANYTHING ELSE ON LINE ONE of spec/rails_helper.rb and features/support/env.rb:
+
+```ruby
+	require 'simplecov'
+  SimpleCov.start 'rails'
+```
+
+
 ## Requirements
 
 1. Use the Ruby on Rails framework.
