@@ -20,15 +20,16 @@ In this lesson you're going to build a complete Ruby on Rails application that m
 	group :development, :test do
     gem 'sqlite3'
     gem 'byebug'
-    gem 'database_cleaner', '1.4.1'
-    gem 'capybara', '2.4.4'
-    gem 'rspec-rails', '3.3.2'
   end
   
   group :test do
+    gem 'rspec-rails', '3.3.2'
     gem 'cucumber-rails', :require => false
     gem 'cucumber-rails-training-wheels'
     gem 'simplecov', :require => false
+    gem 'capybara', '2.4.4'
+    gem 'database_cleaner', '1.4.1'
+    gem 'launchy'
   end
 ```
 
@@ -62,6 +63,28 @@ In this lesson you're going to build a complete Ruby on Rails application that m
   SimpleCov.start 'rails'
 ```
 
+6. Automate RSpec tests with the Guard gem. Add the following to the 'group: test' section in the Gemfile
+
+
+```text
+	gem 'guard-rspec'
+```
+
+After running 'bundle install', generate the 'Guardfile', and start it.
+
+```ruby
+	bundle exec guard init rspec # generate guard file
+	bundle exec guard # start guard
+ ```
+
+7. Enable debugging, add "gem 'byebug'" to the development/test group in the Gemfile, and add "require 'byebug" to spec_helper.rb file to enable interactive debugging. 
+
+
+8. Prepare the test base, run the first time or when the schema changes
+
+```text
+	rails db:test:prepare 
+```
 
 ## Requirements
 
