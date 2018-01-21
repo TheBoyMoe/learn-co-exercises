@@ -1,0 +1,12 @@
+<h1>New Post Form</h1>
+
+<form action="<%= posts_path %>" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<label for="post_title">Title:</label><br>
+	<input type="text" id="post_title" name="post[title]"><br>
+
+	<label for="post_description">Description</label><br>
+	<textarea id="post_description" name="post[description]"></textarea><br>
+
+	<input type="submit" value="Submit Post">
+</form>
