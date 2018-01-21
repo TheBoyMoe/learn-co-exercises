@@ -6,3 +6,7 @@ demos/04-javascript-rock-dodger/node_modules
 08-rails/demo-apps/48-omniauth-facebook-auth/omniauth-demo/log/
 08-rails/demo-apps/48-omniauth-facebook-auth/omniauth-demo/db/*.sqlite3
 08-rails/demo-apps/48-omniauth-facebook-auth/omniauth-demo/.env
+
+08-rails/review/02-rails-form_tag-readme/log/
+08-rails/review/02-rails-form_tag-readme/tmp/
+08-rails/review/02-rails-form_tag-readme/.byebug_history
