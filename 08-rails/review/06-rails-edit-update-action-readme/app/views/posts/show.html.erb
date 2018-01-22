@@ -1,2 +1,5 @@
 <h1><%= @post.title %></h1>
 <p><%= @post.description %></p>
+
+<%= link_to 'Edit', "/posts/#{@post.id}/edit" %> |
+<%= link_to 'Back', posts_path %>

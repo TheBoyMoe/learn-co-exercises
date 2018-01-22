@@ -1,4 +1,4 @@
-## Form_tag
+## new template using the html form element
 
 
 ```html
@@ -30,6 +30,8 @@
 
 ---------------------------------------------------------------------------------------
 
+## new form template using the form_teg
+
 ```html
 <%= form_tag students_path, method: 'post' do %>
 
@@ -58,4 +60,34 @@
 		 @student = Student.create(first_name: params[:@student][:first_name], last_name: params[:student][:last_name])
 		 redirect_to student_path(@student)
 	end
+```
+
+
+---------------------------------------------------------------------------------------------------------------
+
+## edit template using the form_tag
+
+```html
+	<%= form_tag post_path(@post), method: 'put' do %>
+		<label>Post title:</label><br>
+		<%= text_field_tag :title, @post.title %><br><br>
+	
+		<label>Post Description</label><br>
+		<%= text_area_tag :description, @post.description %><br><br>
+	
+		<%= submit_tag "Submit Post" %>
+	<% end %>
+```
+
+```ruby
+# controller action
+	def update
+		@post = Post.find(params[:id])
+		if @post.update(title: params[:title], description: params[:description])
+			redirect_to post_path(@post)
+		else
+			render :edit
+		end
+	end 
+  
 ```
