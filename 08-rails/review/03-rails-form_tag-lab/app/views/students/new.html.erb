@@ -1,0 +1,25 @@
+<h1>Student Form</h1>
+
+<%= form_tag students_path, method: 'post' do %>
+
+	<label for="first_name">First Name:</label><br>
+
+	<!--1.	-->
+	<!--return a student hash with key/value pairs-->
+	<%#= text_field_tag 'student[first_name]' %>
+	<!--produces the following html-->
+	<!--<input type="text" name="student[first_name]" id="student_first_name" />-->
+
+	<!--2.-->
+	<!--return individual key/value pairs-->
+	<%= text_field_tag :first_name %><br><br>
+	<!--produces the following html-->
+	<!--<input type="text" name="first_name" id="first_name" />-->
+
+
+	<label for="last_name">Last Name:</label><br>
+	<%= text_field_tag :last_name %><br><br>
+
+	<%= submit_tag 'Submit Student' %>
+
+<% end %>
