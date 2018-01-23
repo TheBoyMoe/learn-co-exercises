@@ -32,6 +32,8 @@
 
 ## new form template using the form_teg
 
+Use the form_tag when creating a search field or contact form
+
 ```html
 <%= form_tag students_path, method: 'post' do %>
 
