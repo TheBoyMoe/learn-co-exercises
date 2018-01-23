@@ -32,6 +32,37 @@ Run rails/rake db:migrate to create database table
 	rails g model Author name:string avatar:string bio:text
 ```
 
+Adding foreign keys to your model - adds `belongs_to` relationship to song model for both artist and genre's.
+- you need to add the reciprical `'has_many` relationship to both artist and genre model's.
+- automatically adds the artist_id and genre_id columns in songs table
+
+```text
+	rails g model Song name:string artist:references genre:references 
+```
+
+```ruby
+	 create_table "artists", force: :cascade do |t|
+      t.string   "name"
+      t.text     "bio"
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
+    end
+  
+    create_table "genres", force: :cascade do |t|
+      t.string   "name"
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
+    end
+  
+    create_table "songs", force: :cascade do |t|
+      t.string   "name"
+      t.integer  "artist_id"
+      t.integer  "genre_id"
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
+    end
+```
+
 
 ### Controller generator
 
