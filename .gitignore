@@ -7,26 +7,6 @@ demos/04-javascript-rock-dodger/node_modules
 08-rails/demo-apps/48-omniauth-facebook-auth/omniauth-demo/db/*.sqlite3
 08-rails/demo-apps/48-omniauth-facebook-auth/omniauth-demo/.env
 
-08-rails/review/02-rails-form_tag-readme/log/
-08-rails/review/02-rails-form_tag-readme/tmp/
-08-rails/review/02-rails-form_tag-readme/.byebug_history
-
-08-rails/review/03-rails-form_tag-lab/log/
-08-rails/review/03-rails-form_tag-lab/tmp/
-08-rails/review/03-rails-form_tag-lab/db/*.sqlite
-
-08-rails/review/04-rails-create-action-lab/log/
-08-rails/review/04-rails-create-action-lab/tmp/
-08-rails/review/04-rails-create-action-lab/db/*.sqlite
-
-08-rails/review/05-rails-index-show-new-create-lab/log/
-08-rails/review/05-rails-index-show-new-create-lab/tmp/
-08-rails/review/05-rails-index-show-new-create-lab/db/*.sqlite
-
-08-rails/review/06-rails-edit-update-action-readme/log/
-08-rails/review/06-rails-edit-update-action-readme/tmp/
-08-rails/review/06-rails-edit-update-action-readme/db/*.sqlite
-
 08-rails/review/*/log/
 08-rails/review/*/tmp/
 08-rails/review/*/db/*.sqlite3
