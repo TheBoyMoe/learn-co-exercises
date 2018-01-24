@@ -91,9 +91,11 @@
 	<!--generates the following html-->
 	<form accept-charset="UTF-8" action="/cats" method="post">
     <label for="cat_name">Name</label>
-    <input id="cat_name" name="cat[name]" type="text" />
+    <input type="text" name="cat[name]" id="cat_name" />
+    
     <label for="cat_color">Color</label>
-    <input id="cat_color" name="cat[color]" type="text" />
+    <input type="text" name="cat[color]" id="cat_color" />
+    
     <input name="commit" type="submit" value="Create" />
   </form>
 ```
