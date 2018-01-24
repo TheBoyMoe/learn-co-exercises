@@ -120,3 +120,64 @@ Use the form_tag when creating a search field or contact form
     <input name="commit" type="submit" value="Create Cat">
   </form>
 ```
+
+------------------------------------------------------------------------------------------------------------
+
+## form_tag example including display of validation errors to the user
+
+```html
+	<!--display error validation errors to user at top-->
+  <% if @author.errors.any? %>
+    <div id="error_explanation">
+      <h2>There were some errors:</h2>
+      <ul>
+        <% @author.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <!--display form - highlighting any fields in error-->
+  <%= form_tag authors_path, method: "post" do %>
+    <div class="field<%= ' field_with_errors' if @author.errors[:name].any? %>">
+      <%= label_tag "name", "Name" %>
+      <%= text_field_tag "name", @author.name %>
+    </div>
+    <div class="field<%= ' field_with_errors' if @author.errors[:email].any? %>">
+      <%= label_tag "email", "Email" %>
+      <%= text_field_tag "email", @author.email %>
+    </div>
+    <%= submit_tag "Create Author" %>
+  <% end %>
+
+```
+
+Resulting html (with error)
+
+```html
+	<div id="error_explanation">
+		<h2>There were some errors:</h2>
+		<ul>
+				<li>Name does not allow numbers</li>
+		</ul>
+	</div>
+    
+	<form action="/authors" accept-charset="UTF-8" method="post">
+		
+		<!--name field-->
+    <div class="field field_with_errors">
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name" value="werw34" />
+    </div>
+    
+    <!--email field-->
+    <div class="field">
+      <label for="email">Email</label>
+      <input type="text" name="email" id="email" value="werwer" />
+    </div>
+    
+    <input type="submit" name="commit" value="Create Author" />
+  </form>
+
+```
