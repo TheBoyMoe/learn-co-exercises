@@ -3,6 +3,18 @@
 [Rails generators](http://guides.rubyonrails.org/active_record_migrations.html)
 [Rails Migration Api](http://api.rubyonrails.org/classes/ActiveRecord/Migration.html)
 
+### Abstract
+
+- migration - migration file
+- model(singular) - model and migration
+- controller(plural) - controller, actions, routes and view for each action *
+- resource(singular) - model, migration, controller(NO actions), routes, NO views *
+- scaffold(singular) - full working CRUD based RESTful resource
+										 - model, migration, controller(complete CRUD actions), routes, views(index, show, new, edit, _form) *
+
+* plus helper and asset(scss, coffee script) files
+
+
 ### Migration generator
 
 Creates the migration file required to create the database table
@@ -85,4 +97,13 @@ Useful when creating a API for a front-end MVC framework.
 
 ```text
 	rails g resource Account name:string payment_status:string
+```
+
+
+### Scaffold generator
+
+Full working CRUD based RESTful resource
+
+```text
+	rails g scaffold Apartment address:string price:integer
 ```
