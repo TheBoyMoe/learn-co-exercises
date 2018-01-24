@@ -1,0 +1,11 @@
+<h1>Add a genre</h1>
+
+<%= form_for(@genre) do |f| %>
+	<%= f.label :name %>
+	<%= f.text_field :name %>
+
+	<%= f.submit %>
+<% end %>
+
+<br>
+<%= link_to 'Back', songs_path %>
