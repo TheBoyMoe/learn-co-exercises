@@ -13,7 +13,7 @@ Validation occurs when a record is saved to the database, i.e. when '#create' or
 	- confirmation - used when you have two fields that should receive exactky the same text, e.g password and email
 	- exclusion/inclusion - checks that the attribute value is not/is included in a given set.
 	- format - check whether an attribute value matches a given regular expression.
-	- length - applied to string values, validates that the attributes value is within the given length
+	- length - applied to string values(and numbers- count number of digits, e.g. phone numbers), validates that the attributes value is within the given length
 	- numericality - ensures the attribute value is numeric(integer/float) - additional options allow you to be more precise
 	- uniqueness - validates that the value is unique prior to being saved, useful for emails.
 	
