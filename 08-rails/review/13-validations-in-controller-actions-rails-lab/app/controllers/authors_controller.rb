@@ -4,13 +4,23 @@ class AuthorsController < ApplicationController
   end
 
   def new
+    @author = Author.new
   end
 
   def create
-    begin
-      @author = Author.create!(author_params)
+    # DOES NOT work - even though specs pass
+    # begin
+    #   @author = Author.create!(author_params)
+    #   redirect_to author_path(@author)
+    # rescue
+    #   render :new
+    # end
+
+    @author = Author.new(author_params)
+    if @author.valid?
+      @author.save
       redirect_to author_path(@author)
-    rescue
+    else
       render :new
     end
   end
