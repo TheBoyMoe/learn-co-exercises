@@ -114,7 +114,7 @@ RSpec.describe SongsController, type: :controller do
     end
 
     it "redirects to the songs list" do
-      expect(response).to redirect_to(songs_url)
+      expect(response).to redirect_to(songs_path)
     end
   end
 
