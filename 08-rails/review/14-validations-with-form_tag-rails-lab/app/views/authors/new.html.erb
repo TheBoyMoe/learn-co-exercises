@@ -12,6 +12,7 @@
 <% end %>
 
 <%= form_tag authors_path, method: "post" do %>
+
   <div class="field<%= ' field_with_errors' if @author.errors[:name].any? %>">
     <%= label_tag "name", "Name" %>
     <%= text_field_tag "name", @author.name %>

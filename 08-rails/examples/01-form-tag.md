@@ -181,3 +181,149 @@ Resulting html (with error)
   </form>
 
 ```
+
+
+
+
+### form_tag used in new.html.erb for author object
+
+```html
+	<% if @author.errors.any? %>
+    <div id="error_explanation">
+      <h2>There were some errors:</h2>
+      <ul>
+        <% @author.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <%= form_tag authors_path, method: "post" do %>
+    
+    <div class="field<%= ' field_with_errors' if @author.errors[:name].any? %>">
+      <%= label_tag "name", "Name" %>
+      <%= text_field_tag "name", @author.name %>
+    </div>
+  
+    <div class="field<%= ' field_with_errors' if @author.errors[:email].any? %>">
+      <%= label_tag "email", "Email" %>
+      <%= text_field_tag "email", @author.email %>
+    </div>
+  
+    <div class="field<%= ' field_with_errors' if @author.errors[:phone_number].any? %>">
+      <%= label_tag "phone_number", "Phone Number" %>
+      <%= text_field_tag "phone_number", @author.phone_number %>
+    </div>
+  
+    <%= submit_tag "Create" %>
+  <% end %>
+```
+
+
+Resulting html (with errors)
+
+
+```html
+	<div id="error_explanation">
+      <h2>There were some errors:</h2>
+      <ul>
+          <li>Name can&#39;t be blank</li>
+          <li>Phone number is the wrong length (should be 10 characters)</li>
+      </ul>
+    </div>
+  
+  <form action="/authors" accept-charset="UTF-8" method="post">
+  
+    <div class="field field_with_errors">
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name" value="......" />
+    </div>
+  
+    <div class="field">
+      <label for="email">Email</label>
+      <input type="text" name="email" id="email" value="....." />
+    </div>
+  
+    <div class="field field_with_errors">
+      <label for="phone_number">Phone Number</label>
+      <input type="text" name="phone_number" id="phone_number" value="....." />
+    </div>
+  
+    <input type="submit" name="commit" value="Create" />
+  </form>
+
+```
+
+
+### form_tag used in edit.html.erb for post object
+
+
+```html
+	<% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2>There were some errors:</h2>
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <%= form_tag post_path(@post), method: "patch" do %>
+  
+    <div class="field<%= ' field_with_errors' if @post.errors[:title].any? %>">
+      <%= label_tag "title", "Title" %>
+      <%= text_field_tag "title", @post.title %>
+    </div>
+  
+    <div class="field<%= ' field_with_errors' if @post.errors[:category].any? %>">
+      <%= label_tag "category", "Category" %>
+      <p>Must be either "Fiction" or "Non-Fiction".</p>
+      <%= text_field_tag "category", @post.category %>
+      <p>
+        Please type carefully as our top scientists are working around the clock to
+        enable state-of-the-art dropdown technology for this form field.
+      </p>
+    </div>
+  
+    <div class="field<%= ' field_with_errors' if @post.errors[:content].any? %>">
+      <%= label_tag "content", "Content" %>
+      <br />
+      <%= text_area_tag "content", @post.content %>
+    </div>
+    <%= submit_tag "Update" %>
+  <% end %>
+  
+```
+
+
+Resulting html (values are empty strings on a blank form, instance values are nil)
+
+
+```html
+	<form action="/posts/1" accept-charset="UTF-8" method="post">
+  
+    <div class="field">
+      <label for="title">Title</label>
+      <input type="text" name="title" id="title" value="" />
+    </div>
+  
+    <div class="field">
+      <label for="category">Category</label>
+      <p>Must be either "Fiction" or "Non-Fiction".</p>
+      <input type="text" name="category" id="category" value="" />
+      <p>
+        Please type carefully as our top scientists are working around the clock to
+        enable state-of-the-art dropdown technology for this form field.
+      </p>
+    </div>
+  
+    <div class="field">
+      <label for="content">Content</label>
+      <br />
+      <textarea name="content" id="content">......</div>
+    <input type="submit" name="commit" value="Update" />
+  </form>
+```
