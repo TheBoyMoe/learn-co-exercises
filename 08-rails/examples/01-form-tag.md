@@ -1,5 +1,8 @@
 ## new template using the html form element
 
+References:
+1. [Rails form helpers](http://guides.rubyonrails.org/form_helpers.html)
+
 
 ```html
 <%= form_tag students_path, method: 'post' do %>

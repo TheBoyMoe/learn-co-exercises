@@ -1,0 +1,47 @@
+<h1>Amend song details</h1>
+
+<!--display any errors-->
+<% if @song.errors.any? %>
+	<div id="error_explanation">
+		<h3>There were some errors:</h3>
+		<ul>
+			<% @song.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
+<!--display form-->
+<%= form_tag song_path(@song), method: 'patch' do %>
+
+	<div class="field<%= ' field_with_errors' if @song.errors[:title].any? %>">
+		<%= label_tag 'song[title]', 'Title' %>
+		<%= text_field_tag 'song[title]', @song.title %>
+	</div><br>
+
+	<div class="field<%= ' field_with_errors' if @song.errors[:artist_name].any? %>">
+		<%= label_tag 'song[artist_name]', 'Artist' %>
+		<%= text_field_tag 'song[artist_name]', @song.artist_name %>
+	</div><br>
+
+	<div class="field<%= ' field_with_errors' if @song.errors[:release_year].any? %>">
+		<%= label_tag 'song[release_year]', 'Year released' %>
+		<%= text_field_tag 'song[release_year]', @song.release_year %>
+	</div><br>
+
+	<!--check box not working - not setting the value using @song.released-->
+	<div class="field<%= ' field_with_errors' if @song.errors[:released].any? %>">
+		<%= hidden_field_tag 'song[released]', false %>
+		<%= check_box_tag 'song[released]', @song.released %>
+		<%= label_tag 'song[released]', 'Released' %>
+	</div><br>
+
+	<%= label_tag 'song[genre]', 'Genre' %>
+	<%= text_field_tag 'song[genre]', @song.genre %><br><br>
+
+	<%= submit_tag "Update Song" %>
+<% end %>
+
+<br>
+<%= link_to 'Back', song_path(@song) %>

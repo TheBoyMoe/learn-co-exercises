@@ -1,0 +1,7 @@
+<h1>Song Details</h1>
+
+<%= render partial: 'form_errors', locals: {song: @song} %>
+<%= render partial: 'form', locals: {song: @song} %>
+
+<br>
+<%= link_to 'Back', songs_path %>

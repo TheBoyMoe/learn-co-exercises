@@ -3,7 +3,7 @@ class Song < ActiveRecord::Base
 	# 'title' can not be repeated by the same artist in the same year
 	validates :title, {presence: true, uniqueness: { scope: [:release_year, :artist_name],
 											message: "title cannot be repeated by the same artist in the same year" }}
-	validates :released, inclusion: {in: [true, false]}
+	validates :released, inclusion: {in: [true, false], message: 'must be either true or false'}
 	validates :artist_name, presence: true
 
 	# 'release_year' can not be blank if song has been released
