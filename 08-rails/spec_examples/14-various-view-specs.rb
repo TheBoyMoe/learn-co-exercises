@@ -1,3 +1,4 @@
+# review-21/specs
 RSpec.describe "posts/show", type: :feature do
 	before {
 		visit post_path(@post)
@@ -56,5 +57,40 @@ RSpec.describe "categories/edit", type: :feature do
 
 		expect(current_path).to eq(category_path(@category))
 		expect(page).to have_content("My Edited Category")
+	end
+end
+
+
+# review-22/features/artists_spec.rb
+describe "artists", type:  :feature do
+	before do
+		Artist.destroy_all
+		Song.destroy_all
+		@artist = Artist.create!(name: "Daft Punk")
+		@grid = @artist.songs.create!(title: "The Grid")
+		@voyager = @artist.songs.create!(title: "Voyager")
+	end
+
+	it "links to the artist's songs by title" do
+		visit artist_path(@artist)
+		expect(page).to have_link("The Grid", href: song_path(@grid))
+	end
+
+	it "lists all of the artist's songs" do
+		visit artist_path(@artist)
+		within("ul") do
+			expect(page).to have_content("The Grid")
+			expect(page).to have_content("Voyager")
+		end
+	end
+
+	it "lists the artists" do
+		visit artists_path
+		expect(page).to have_content("Daft Punk")
+	end
+
+	it "shows the song count for each artist" do
+		visit artists_path
+		expect(page).to have_content("2 songs")
 	end
 end
