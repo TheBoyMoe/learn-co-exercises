@@ -7,12 +7,12 @@ RSpec.describe PostsController, type: :controller do
 	# @post = @category.posts.create(title: 'My Post', description: 'My post desc')
 
 	describe "GET #show" do
-    before(:each){
+		before(:each){
 			get :show, id: @post
 		}
 
 		it "returns HTTP success" do
-      expect(response).to have_http_status(:success)
+			expect(response).to have_http_status(:success)
 		end
 
 		it 'renders the show template' do
@@ -26,12 +26,12 @@ RSpec.describe PostsController, type: :controller do
 	end
 
 
-  describe "GET #edit" do
+	describe "GET #edit" do
 		before(:each){
 			get :edit, id: @post
 		}
 		it "returns HTTP success" do
-      expect(response).to have_http_status(:success)
+			expect(response).to have_http_status(:success)
 		end
 
 		it 'renders the edit form' do
