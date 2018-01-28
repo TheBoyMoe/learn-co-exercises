@@ -1,4 +1,4 @@
-require 'rails_helper'
+ require 'rails_helper'
 
 RSpec.describe "posts/show", type: :feature do
   it "shows the post's title in an <h1> tag" do
