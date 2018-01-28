@@ -17,8 +17,15 @@
 	<%= f.label :content, 'Content' %>
 	<%= f.text_area :content %><br><br>
 
+	<!--add a datalist that allows users to select a category from a drop down, or define their own-->
 	<%= f.label :category_name, 'Category' %>
-	<%= f.text_field :category_name %><br><br>
+	<%= f.text_field :category_name, list: 'categories_autocomplete' %>
+	<datalist>
+		<% Category.all.each do |category| %>
+			<option value="<%= category.name %>"></option>
+		<% end %>
+	</datalist>
+	<br><br>
 
 	<%= f.submit %>
 <% end %>
