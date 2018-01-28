@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  resources :categories, :posts, only: [:index, :show, :new, :create, :edit, :update]
+  resources :categories, :posts, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 end

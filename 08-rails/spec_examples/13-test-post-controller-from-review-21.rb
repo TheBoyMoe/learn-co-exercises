@@ -44,6 +44,7 @@ RSpec.describe PostsController, type: :controller do
 
 	end
 
+
 	describe "GET #index" do
 		before(:each){
 			get :index
@@ -87,6 +88,21 @@ RSpec.describe PostsController, type: :controller do
 
 		it 'redirects to the show template displaying the post' do
 			expect(response).to redirect_to(post_path(Post.last))
+		end
+	end
+
+
+	describe "DELETE #destroy" do
+
+		it 'deletes the record from the database' do
+			expect{
+				delete :destroy, {id: @post.id}
+			}.to change(Post, :count).by(-1)
+		end
+
+		it 'redirects the user to the index page' do
+			delete :destroy, {id: @post.id}
+			expect(response).to redirect_to(posts_path)
 		end
 	end
 

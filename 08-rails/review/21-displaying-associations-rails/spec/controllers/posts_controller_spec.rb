@@ -90,4 +90,19 @@ RSpec.describe PostsController, type: :controller do
 		end
 	end
 
+
+	describe "DELETE #destroy" do
+
+		it 'deletes the record from the database' do
+			expect{
+				delete :destroy, {id: @post.id}
+			}.to change(Post, :count).by(-1)
+		end
+
+		it 'redirects the user to the index page' do
+			delete :destroy, {id: @post.id}
+			expect(response).to redirect_to(posts_path)
+		end
+	end
+
 end
