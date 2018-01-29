@@ -1,0 +1,11 @@
+<h2><%= @person.name %></h2>
+<% if @person.addresses.count > 0 %>
+	<% @person.addresses.each do |a| %>
+		<div>
+			<h4><%= a.address_type %></h4>
+			<p><%= a.street_address_1 %></p>
+			<p><%= a.street_address_2 %></p>
+			<p><%= a.city %>, <%= a.zipcode %>, <%= a.state %></p>
+		</div>
+	<% end %>
+<% end %>

@@ -1,0 +1,8 @@
+<h1>Address book</h1>
+
+<% @people.each do |person| %>
+	<p><%= link_to person.name, person_path(person) %></p>
+<% end %>
+
+<br>
+<%= link_to 'Add contact', new_person_path %>

@@ -1,0 +1,30 @@
+<h1>Add a new contect to your address book</h1>
+
+<%= form_for(@person) do |f| %>
+
+	<%= f.label :name %>
+	<%= f.text_field :name %><br><br>
+
+	<!--create the address hash-->
+	<%= f.fields_for :addresses do |a| %>
+		<%= a.label :street_address_1 %>
+		<%= a.text_field :street_address_1 %><br><br>
+
+		<%= a.label :street_address_2 %>
+		<%= a.text_field :street_address_2 %><br><br>
+
+		<%= a.label :city %>
+		<%= a.text_field :city %><br><br>
+
+		<%= a.label :state %>
+		<%= a.text_field :state %><br><br>
+
+		<%= a.label :zipcode %>
+		<%= a.text_field :zipcode %><br><br>
+
+		<%= a.label :address_type %>
+		<%= a.text_field :address_type %><br><br>
+	<% end %>
+
+	<%= f.submit %>
+<% end %>
