@@ -4,7 +4,7 @@ class Song < ActiveRecord::Base
   has_many :notes
 
   def genre_name
-    self.genre.name
+    self.genre.name if self.genre
   end
 
   def genre_name=(name)
@@ -13,7 +13,7 @@ class Song < ActiveRecord::Base
   end
 
   def artist_name
-    self.artist.name
+    self.artist.name if self.artist
   end
 
   def artist_name=(name)
@@ -23,7 +23,7 @@ class Song < ActiveRecord::Base
 
   # return the contents of each note as an array
   def note_contents
-    self.notes.map(&:content)
+    self.notes.map(&:content) if self.notes
   end
 
   # add each note to the song instance if it has not already
