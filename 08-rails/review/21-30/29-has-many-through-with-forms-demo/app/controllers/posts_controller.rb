@@ -13,6 +13,7 @@ class PostsController < ApplicationController
 	end
 
 	def create
+		byebug
 		@post = Post.new(post_params)
 		if @post.save
 			redirect_to post_path(@post)
@@ -37,6 +38,6 @@ class PostsController < ApplicationController
 		end
 
 		def post_params
-			params.require(:post).permit(:title, :content)
+			params.require(:post).permit(:title, :content, category_ids: [])
 		end
 end

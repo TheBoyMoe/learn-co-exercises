@@ -5,5 +5,8 @@
 	<%= f.label :content %>
 	<%= f.text_field :content %><br><br>
 
+	<!--create a checkbox field for each Category in our database-->
+	<%= f.collection_check_boxes :category_ids, Category.all, :id, :name %><br><br>
+
 	<%= f.submit %>
 <% end %>

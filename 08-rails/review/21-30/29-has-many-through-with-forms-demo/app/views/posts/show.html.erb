@@ -1,6 +1,11 @@
 <h2><%= @post.title %></h2>
 <p><%= @post.content %></p>
 
-<br>
+<h3>Categories:</h3>
+<% @post.categories.each do |category| %>
+	<span><%= category.name %></span>&nbsp;
+<% end %>
+
+<br><br>
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
