@@ -38,6 +38,11 @@ class PostsController < ApplicationController
 		end
 
 		def post_params
-			params.require(:post).permit(:title, :content, category_ids: [])
+			params.require(:post).permit(
+					:title,
+					:content,
+					category_ids: [], # select categories via check boxes
+					categories_attributes: [:name] # create new categories associated with the post
+			)
 		end
 end
