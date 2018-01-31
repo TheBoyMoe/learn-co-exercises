@@ -5,12 +5,13 @@
 	<%= f.label :content %>
 	<%= f.text_field :content %><br><br>
 
-	<h4>Add a category:</h4>
+	<h3>Add a category:</h3>
 
 	<!--create a checkbox for each category in the database-->
-	<%= f.collection_check_boxes :category_ids, Category.all, :id, :name %><br><br>
+	<%= f.collection_check_boxes :category_ids, Category.all, :id, :name %><br>
 
 	<!--create new categories-->
+	<h4>Definw a new category</h4>
 	<%= f.fields_for :categories, post.categories.build do |categories_field|  %>
 		<%= categories_field.text_field :name %>
 	<% end %><br><br>

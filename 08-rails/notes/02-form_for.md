@@ -158,3 +158,66 @@ Generated html
   	<input type="submit" name="commit" value="Create Song" />
   </form>
 ```
+
+
+### form_for example which displays a collection of check-boxes
+
+
+```erb
+	<%= form_for(post) do |f| %>
+  	<%= f.label :title %>
+  	<%= f.text_field :title %><br><br>
+  
+  	<%= f.label :content %>
+  	<%= f.text_field :content %><br><br>
+  
+  	<h3>Add a category:</h3>
+  
+  	<!--create a checkbox for each category in the database-->
+  	<%= f.collection_check_boxes :category_ids, Category.all, :id, :name %><br>
+  
+  	<!--create new categories-->
+  	<h4>Definw a new category</h4>
+  	<%= f.fields_for :categories, post.categories.build do |categories_field|  %>
+  		<%= categories_field.text_field :name %>
+  	<% end %><br><br>
+  
+  	<%= f.submit %>
+  <% end %>
+
+```
+
+Resulting html
+
+
+```html
+<form class="new_post" id="new_post" action="/posts" accept-charset="UTF-8" method="post">
+	<label for="post_title">Title</label>
+	<input type="text" name="post[title]" id="post_title" /><br><br>
+
+	<label for="post_content">Content</label>
+	<input type="text" name="post[content]" id="post_content" /><br><br>
+
+	<h3>Add a category:</h3>
+
+	<!--create a checkbox for each category in the database-->
+	<input type="checkbox" value="1" name="post[category_ids][]" id="post_category_ids_1" />
+	<label for="post_category_ids_1">Red</label>
+	
+	<input type="checkbox" value="2" name="post[category_ids][]" id="post_category_ids_2" />
+	<label for="post_category_ids_2">Green</label>
+	
+	<input type="checkbox" value="3" name="post[category_ids][]" id="post_category_ids_3" />
+	<label for="post_category_ids_3">Blue</label>
+	
+	<input type="checkbox" value="4" name="post[category_ids][]" id="post_category_ids_4" />
+	<label for="post_category_ids_4">Yellow</label>
+	
+	<!--create new categories-->
+	<h4>Definw a new category</h4>
+	<input type="text" name="post[categories_attributes][0][name]" id="post_categories_attributes_0_name" />
+	<br><br>
+
+	<input type="submit" name="commit" value="Create Post" />
+</form>
+```
