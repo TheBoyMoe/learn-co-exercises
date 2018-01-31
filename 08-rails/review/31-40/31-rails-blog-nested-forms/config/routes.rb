@@ -1,7 +1,8 @@
 RailsBlog::Application.routes.draw do
 
-  resources :users
-  resources :tags
+  resources :users, only: [:index, :show, :new, :create]
+  resources :tags, only: [:index, :show, :new, :create]
   resources :posts
 
+	root to: 'posts#index'
 end
