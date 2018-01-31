@@ -10,5 +10,19 @@
 	</div>
 <% end %>
 
+<!--display the posts comments-->
+<h3>Comments:</h3>
+<% if @post.comments.count > 0 %>
+	<% @post.comments.each do |comment| %>
+		<p><%= comment.content %></p>
+	<% end %>
+
+	<!--list of unique users who have commented on the post-->
+	<h4>Users who have commented on the post</h4>
+	<% @post.users.uniq.each do |user| %>
+		<p><%= link_to user.username, user_path(user) %></p>
+	<% end %>
+<% end %>
+
 <br>
 <%= link_to 'Back', posts_path %>
