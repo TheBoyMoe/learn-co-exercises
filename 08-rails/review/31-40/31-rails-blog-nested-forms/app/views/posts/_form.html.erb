@@ -16,11 +16,18 @@
     <%= f.text_field :name %><br>
     <%= f.label :content %><br>
     <%= f.text_area :content %><br>
-    Tags:
   </div>
 
+  <h3>Tags:</h3>
   <div class="field">
-    <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %><br>
+    <!--select a tag-->
+    <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %><br><br>
+
+    <!--create a new tag-->
+    <%= f.fields_for(:tags) do |tag_form| %>
+      <%= tag_form.label :name, 'Name' %>
+      <%= tag_form.text_field :name %>
+    <% end %>
   </div>
 
   <div class="actions">
