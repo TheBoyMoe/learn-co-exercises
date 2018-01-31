@@ -1,5 +1,14 @@
 <h2><%= @post.title %></h2>
 <p><%= @post.content %></p>
 
+<h3>Categories:</h3>
+<% if @post.categories.count > 0 %>
+	<div>
+		<% @post.categories.each do |category| %>
+			<span><%= category.name %></span>&nbsp;
+		<% end %>
+	</div>
+<% end %>
+
 <br>
 <%= link_to 'Back', posts_path %>
