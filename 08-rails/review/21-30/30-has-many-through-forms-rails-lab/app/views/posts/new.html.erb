@@ -1,1 +1,6 @@
-<%= render 'form', post: Post.new %>
+<h2>create a new Post</h2>
+
+<%= render partial: 'form', locals: {post: @post} %>
+
+<br>
+<%= link_to 'Back', posts_path %>
