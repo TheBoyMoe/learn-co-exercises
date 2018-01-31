@@ -5,16 +5,17 @@
 <% if @post.categories.count > 0 %>
 	<div>
 		<% @post.categories.each do |category| %>
-			<span><%= category.name %></span>&nbsp;
+			<span><%= link_to category.name, category_path(category) %></span>&nbsp;
 		<% end %>
 	</div>
 <% end %>
 
-<!--display the posts comments-->
+<!--display aal the posts comments-->
 <h3>Comments:</h3>
+
 <% if @post.comments.count > 0 %>
 	<% @post.comments.each do |comment| %>
-		<p><%= comment.content %></p>
+		<p><%= comment.user.username %> says: <%= comment.content %></p>
 	<% end %>
 
 	<!--list of unique users who have commented on the post-->
@@ -23,6 +24,30 @@
 		<p><%= link_to user.username, user_path(user) %></p>
 	<% end %>
 <% end %>
+
+
+<h3>Add a comment:</h3>
+
+<%= form_for(@post.comments.build) do |f| %>
+
+	<!--add a comment-->
+	<%= f.label :content %><br>
+	<%= f.text_area :content %><br><br>
+
+	<span>Select a user</span>&nbsp;
+	<!--associate the comment with a user-->
+	<%= f.collection_select :user_id, User.all, :id, :username, include_blank: 'Choose a user' %>
+	<%= f.hidden_field :post_id %><br><br> <!--required to pass user_id to params-->
+
+	<!--define a new user-->
+	<%= f.fields_for :user, @post.comments.last.build_user do |user_fields| %>
+		<%= user_fields.label :username, 'Add a username' %>
+		<%= user_fields.text_field :username %>
+	<% end %><br><br>
+
+	<%= f.submit %>
+<% end %>
+
 
 <br>
 <%= link_to 'Back', posts_path %>
