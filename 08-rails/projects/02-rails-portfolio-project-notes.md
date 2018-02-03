@@ -17,19 +17,27 @@ In this lesson you're going to build a complete Ruby on Rails application that m
 2. Add the following gems to the app's Gemfile:
 
 ```ruby
+	
+	ruby '2.4.1'
+	
 	group :development, :test do
     gem 'sqlite3'
     gem 'byebug'
   end
   
   group :test do
-    gem 'rspec-rails', '3.3.2'
-    gem 'cucumber-rails', :require => false
-    gem 'cucumber-rails-training-wheels'
-    gem 'simplecov', :require => false
-    gem 'capybara', '2.4.4'
-    gem 'database_cleaner', '1.4.1'
-    gem 'launchy'
+   gem 'rspec-rails', '~> 3.7', '>= 3.7.2'
+	 gem 'cucumber-rails', '~> 1.5'
+	 gem 'cucumber-rails-training-wheels'
+	 gem 'simplecov', '~> 0.15.1'
+	 gem 'capybara', '~> 2.12.0'
+	 gem 'capybara-webkit', '~> 1.14'
+	 gem 'capybara-screenshot', '~> 1.0', '>= 1.0.18'
+	 gem 'database_cleaner', '~> 1.6', '>= 1.6.2'
+	 gem 'launchy', '~> 2.4', '>= 2.4.3'
+	 gem 'factory_bot', '~> 4.8', '>= 4.8.2'
+	 gem 'factory_bot_rails', '~> 4.8', '>= 4.8.2'
+	 gem 'faker', '~> 1.8', '>= 1.8.7'
   end
 ```
 
