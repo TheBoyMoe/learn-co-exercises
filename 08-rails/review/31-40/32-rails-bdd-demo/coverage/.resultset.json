@@ -1,0 +1,30 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/home/theboymo/WORK/WEBDEV/COURSE-WORK/LEARN-CO/08-rails/review/31-40/32-rails-bdd-demo/app/models/contact.rb": [
+        0,
+        null,
+        0
+      ],
+      "/home/theboymo/WORK/WEBDEV/COURSE-WORK/LEARN-CO/08-rails/review/31-40/32-rails-bdd-demo/app/models/application_record.rb": [
+        0,
+        0,
+        0
+      ],
+      "/home/theboymo/WORK/WEBDEV/COURSE-WORK/LEARN-CO/08-rails/review/31-40/32-rails-bdd-demo/app/controllers/application_controller.rb": [
+        0,
+        0,
+        0
+      ],
+      "/home/theboymo/WORK/WEBDEV/COURSE-WORK/LEARN-CO/08-rails/review/31-40/32-rails-bdd-demo/app/helpers/application_helper.rb": [
+        0,
+        0
+      ],
+      "/home/theboymo/WORK/WEBDEV/COURSE-WORK/LEARN-CO/08-rails/review/31-40/32-rails-bdd-demo/app/jobs/application_job.rb": [
+        0,
+        0
+      ]
+    },
+    "timestamp": 1517952294
+  }
+}

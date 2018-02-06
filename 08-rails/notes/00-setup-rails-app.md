@@ -127,17 +127,30 @@ Use `js: true` tag to switch to a different `Capybara.javascript_driver` (:selen
 ```
 
 
-7. Add the following code BEFORE ANYTHING ELSE ON LINE ONE of spec/rails_helper.rb(for RSpec) and features/support/env.rb (for Cucumber):
+7. In order to use Factory Bot factories in our specs, add the following line to the `RSpec.config` bloc in `spec/rails_helper.rb`
+
+```ruby
+  config.include FactoryBot::Syntax::Methods
+```
+
+For Cucumber add the following line to `features/support/env.rb`
+
+```ruby
+	World(FactoryBot::Syntax::Methods)
+```
+
+
+8. Add the following code BEFORE ANYTHING ELSE ON LINE ONE of spec/rails_helper.rb(for RSpec) and features/support/env.rb (for Cucumber):
 
 ```ruby
 	require 'simplecov'
   SimpleCov.start 'rails'
 ```
 
-SimpleCov is a code coverage analysis tool. It provides overall coverage of all tests, including Cucumber features and RSpec tests, caching and merging results when generating reports. You can view coverage results by opening `coverage/index.html`. You may want to add that file to .gitignore so they're not tracked by Git.
+SimpleCov is a code coverage analysis tool. It provides overall coverage of all tests, including Cucumber features and RSpec tests, caching and merging results when generating reports. You can view coverage results by opening `coverage/index.html`. You may want to add the `coverage` folder to .gitignore.
 
 
-8. We'll use the DatabaseCleaner gem to ensure that our database is in a clean state in between tests. To configure DatabaseCleaner with regards to RSpec, add the following strategy to the `RSpec.config` block in `spec/rails_helper.rb`.
+9. We'll use the DatabaseCleaner gem to ensure that our database is in a clean state in between tests. To configure DatabaseCleaner with regards to RSpec, add the following strategy to the `RSpec.config` block in `spec/rails_helper.rb`.
 
 ```ruby
 	config.before(:suite) do
@@ -157,10 +170,10 @@ SimpleCov is a code coverage analysis tool. It provides overall coverage of all 
 Cucumber automatically configures the appropriate strategy to incorporate DatabaseCleaner and adds the appropriate code to `features/support/env.rb`.
 
 
-9. To enable interactive debugging, add `require 'byebug'` to `spec/rails_helper.rb`. 
+10. To enable interactive debugging, add `require 'byebug'` to `spec/rails_helper.rb`. 
 
 
-10. Prepare the test base, run the first time or when the schema changes
+11. Prepare the test base, run the first time or when the schema changes
 
 ```text
 	rails db:migrate
@@ -168,7 +181,7 @@ Cucumber automatically configures the appropriate strategy to incorporate Databa
 ```
 
 
-11. (Optional)We can automate railsur Cucumber and RSpec tests with the guard, guard-rspec and guard-cucumber gems. Guard watches your files and automatically runs your specs when ever they are modified.
+12. (Optional)We can automate railsur Cucumber and RSpec tests with the guard, guard-rspec and guard-cucumber gems. Guard watches your files and automatically runs your specs when ever they are modified.
 
 First, generate the guard file by running the following command at the command prompt:
 
@@ -181,4 +194,34 @@ To add the required Cucumber configuration to the Guardfile and run guard, execu
 ```ruby
 	bundle exec guard init cucumber
 	bundle exec guard # start guard
+```
+
+
+## Test RSpec configuration
+
+
+We'll test the RSpec configuration by creating a Contact model using a Rails generator and then run the migration. Since the `rspec-rails` and `factory_bot_rails` gems are installed a number of 'skeleton' files are created for us to configure `spec/models/contact_spec.rb` and `spec/factories/contacts.rb`. The last migration command will create the test database.
+
+ 
+```text
+	bundle exec rails generator model Contact name:string address:string phone:integer
+	
+	bundle exec rails db:migrate
+	bundle exec rails db:migrate RAILS_ENV=test
+```
+
+Define a contact factory using Factory Bot, and write the spec to test it's attributes.
+
+```ruby
+	# spec/factories/contacts.rb
+  FactoryBot.define do
+    factory :contact do
+      name "John Smith"
+      address "1 the street, the town, the country"
+      phone 1234567890
+    end
+  end
+  
+  # spec/models/contact_spec.rb
+   
 ```

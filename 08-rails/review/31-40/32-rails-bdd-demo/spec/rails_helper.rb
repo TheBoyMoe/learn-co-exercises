@@ -7,11 +7,7 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
-require 'rspec/rails'
 require 'shoulda/matchers'
-require 'capybara/rspec'
-require 'capybara-screenshot/rspec'
-require 'byebug'
 
 ActiveRecord::Migration.maintain_test_schema!
 
@@ -33,14 +29,11 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DatabaseCleaner.start
-    Settings.reload!
   end
 
   config.append_after(:each) do
     DatabaseCleaner.clean
   end
-
-  config.include Capybara::DSL
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
