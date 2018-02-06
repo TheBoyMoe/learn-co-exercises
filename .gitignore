@@ -13,3 +13,4 @@ demos/04-javascript-rock-dodger/node_modules
 08-rails/review/*/*/.byebug_history
 08-rails/review/*/*/failures.txt
 08-rails/review/*/*/examples.txt
+08-rails/review/*/*/vendor/bundle/
