@@ -234,14 +234,14 @@ To add the required Cucumber configuration to the Guardfile and run guard, execu
 ```
 
 
-## Test RSpec configuration
+## Check RSpec configuration
 
 
 We'll test the RSpec configuration by creating a Contact model using the Rails generator and then run the migration. The `rspec-rails` and `factory_bot_rails` gems will automatically create a number of 'skeleton' files `spec/models/contact_spec.rb` and `spec/factories/contacts.rb` respectively. The last migration command will create the test database.
 
  
 ```text
-	bundle exec rails generator model Contact name:string address:string phone:string
+	bundle exec rails generator model Contact name:string address:string phone_number:string
 	
 	bundle exec rails db:migrate
 	bundle exec rails db:migrate RAILS_ENV=test
@@ -255,7 +255,7 @@ Define a contact factory using Factory Bot, and write the spec to test it's attr
     factory :contact do
       name "John Smith"
       address "1 the street, the town, the country"
-      phone '1234567890'
+      phone_number '1234567890'
     end
   end
   
@@ -263,18 +263,21 @@ Define a contact factory using Factory Bot, and write the spec to test it's attr
   require 'rails_helper'
   
   RSpec.describe Contact, type: :model do
-  	before {@contact = create(:contact)}
   
   	context 'validate model attributes' do
       it {is_expected.to validate_presence_of(:name)}
       it {is_expected.to validate_presence_of(:address)}
-      it {is_expected.to validate_presence_of(:phone)}
-      it {is_expected.to validate_length_of(:phone).is_at_least(10)}
-  
-  		it "is a valid user" do
-  			expect(@contact).to be_valid
-  		end
+      it {is_expected.to validate_presence_of(:phone_number)}
+      it {is_expected.to validate_length_of(:phone_number).is_at_least(10)}
   	end
+  	
+  	context 'validate factory bot implementation' do
+	  	before {@contact = create(:contact)}
+  		
+  		it "is a valid user" do
+				expect(@contact).to be_valid
+			end
+		end
   
   end
 ```
@@ -284,9 +287,27 @@ Add the necessary validations to the Contact model to pass
 ```ruby
 	class Contact < ApplicationRecord
   	validates_presence_of :name, :address
-  	validates :phone, presence: true, length: {minimum: 10}
+  	validates :phone_number, presence: true, length: {minimum: 10}
   end
 ```
+
+
+## Check Cucumber configuration
+
+We'll simply check that the contact's address book page display's their contact details.
+
+```gherkin
+	# features/contact_page.feature
+  Feature: Contact page
+  
+  Scenario: Viewing the contact's details
+  Given there is a contact with name "John Smith" with address "Any street, any town" and phone number "1234567890"
+  When I am on the contact's contact page
+  Then I should see their "name"
+  And I should see their "address"
+  And I should see their "phone_number"
+```
+
 
 
 
