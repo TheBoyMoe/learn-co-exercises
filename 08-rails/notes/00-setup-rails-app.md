@@ -332,11 +332,37 @@ Cucumber will output a series of snippets which you can copy and paste in to you
   end
 ```
 
-Executing `bundle exec cucumber features/contact_page.feature` once more and the first feature passes.
+Executing `bundle exec cucumber features/contact_page.feature` once more and the first feature passes. Following the next few steps, we can get all the features to pass. In between each step execute the cucumber feature.
 
+1. implement the route
 
+```ruby
+	# config/routes.rb
+	Rails.application.routes.draw do
+  	resources :contacts, only: [:show]
+  end
+```
 
+2. implement the controller and action
 
+```ruby
+	# app/controllers/contacts_controller.rb
+	class ContactsController < ApplicationController
+  
+  	def show
+  		@contact = Contact.find(params[:id])
+  	end
+  end
+```
+
+3. implement view
+
+```erb
+	# app/views/contacts/show.html.erb
+	<p><%= @contact.name %></p>
+	<p><%= @contact.address %></p>
+	<p><%= @contact.phone_number %></p>
+```
 
 
 
