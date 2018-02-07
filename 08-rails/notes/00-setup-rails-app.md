@@ -153,18 +153,10 @@ And add the following line to the `RSpec.config` block within `spec/spec_helper.
 Now you can use matchers such as `validates_presence_of` to test your models.
 
 
-7. In order to use Factory Bot factories in our specs, add the following code block to `spec/support/factory_bot.rb`
+7. In order to use Factory Bot factories in our specs, add the following line to `spec/rails_helper.rb` in the `RSpec.config` code block
 
 ```ruby
-Rspec.config do |config|
   config.include FactoryBot::Syntax::Methods
-end
-```
-
-Add the following require statement to `spec/rails_helper.rb` so `factory_bot` is loaded
-
-```ruby
-	require 'support/factory_bot'
 ```
 
 For Cucumber add the following line to `features/support/env.rb`
@@ -245,7 +237,7 @@ To add the required Cucumber configuration to the Guardfile and run guard, execu
 ## Test RSpec configuration
 
 
-We'll test the RSpec configuration by creating a Contact model using a Rails generator and then run the migration. Since the `rspec-rails` and `factory_bot_rails` gems are installed a number of 'skeleton' files are created for us to configure `spec/models/contact_spec.rb` and `spec/factories/contacts.rb`. The last migration command will create the test database.
+We'll test the RSpec configuration by creating a Contact model using the Rails generator and then run the migration. The `rspec-rails` and `factory_bot_rails` gems will automatically create a number of 'skeleton' files `spec/models/contact_spec.rb` and `spec/factories/contacts.rb` respectively. The last migration command will create the test database.
 
  
 ```text
