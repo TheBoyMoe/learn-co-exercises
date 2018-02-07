@@ -301,12 +301,41 @@ We'll simply check that the contact's address book page display's their contact 
   Feature: Contact page
   
   Scenario: Viewing the contact's details
-  Given there is a contact with name "John Smith" with address "Any street, any town" and phone number "1234567890"
-  When I am on the contact's contact page
-  Then I should see their "name"
-  And I should see their "address"
-  And I should see their "phone_number"
+  Given there is a contact with name "John Smith" the address "Any street, any town" and phone number "1234567890"
+	 When I am on the "contact" page of "John Smith"
+	 Then I should see "John Smith"
+	 And I should see "Any street, any town"
+	 And I should see "1234567890"
 ```
+
+From the cli run the following command:
+
+```text
+	bundle exec cucumber features/contact_page.feature
+```
+
+Cucumber will output a series of snippets which you can copy and paste in to your steps file and implement.
+
+```ruby
+	# features/step_definitions/contact_page_steps.rb
+  Given(/^there is a contact with name "([^"]*)" the address "([^"]*)" and phone number "([^"]*)"$/) do |name, address, phone_number|
+  	@contact = FactoryBot.create(:contact, name: name, address: address, phone_number: phone_number)
+  end
+  
+  When(/^I am on the "([^"]*)" page of "([^"]*)"$/) do |page, name|
+  	@contact = Contact.find_by_name(name)
+  	visit "/contacts/#{@contact.id}"
+  end
+  
+  Then(/^I should see "([^"]*)"$/) do |string|
+  	expect(page).to have_text(string)
+  end
+```
+
+Executing `bundle exec cucumber features/contact_page.feature` once more and the first feature passes.
+
+
+
 
 
 
