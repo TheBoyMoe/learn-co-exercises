@@ -6,7 +6,7 @@
 This a guide to setting up a Ruby on Rails application with BDD in mind. We'll add both Cucumber and Rspec testing frameworks to accomplish this. 
 
 
-## Setup & Configuration
+## Setup and Configuration
 
 1. Build the initial Rails app with the following command, '-T' to skip adding the Mini-test framework and '-B' so `bundle install` will not run automatically post setup. We'll do this manually.
 
@@ -29,13 +29,12 @@ This a guide to setting up a Ruby on Rails application with BDD in mind. We'll a
 		gem 'simplecov', require: false
 		gem 'capybara', '~> 2.12.0'
 		gem 'capybara-webkit', '~> 1.14'
-		gem 'capybara-screenshot', '~> 1.0', '>= 1.0.18'
 		gem 'database_cleaner', '~> 1.6', '>= 1.6.2'
 		gem 'launchy', '~> 2.4', '>= 2.4.3'
 		gem 'faker', '~> 1.8', '>= 1.8.7'
 		gem 'shoulda-matchers', require: false
 		gem 'guard', '~> 2.14', '>= 2.14.2'
-		gem 'guard-rspec', '~> 4.7', '>= 4.7.3'
+		gem 'guard-rspec', require: false
 		gem 'guard-cucumber', '~> 2.1', '>= 2.1.2'
   end
 ```
@@ -50,37 +49,46 @@ This a guide to setting up a Ruby on Rails application with BDD in mind. We'll a
 Tells bundler to install the app's gems locally in the `vendor/bundle` directory rather than globally. Ensure that `.gitignore` has a reference to `vendor/bundle` so your not checking in the gems to your repository.
 
 
-4. To install Cucumber, Capybara and Rspec gems run the following commands:
+4. To install Cucumber and Rspec run the following commands:
 
 ```ruby
 	bundle exec rails generate cucumber:install capybara
-  bundle exec rails generate cucumber_rails_training_wheels:install
   bundle exec rails generate rspec:install
 ``` 
 
-The `cucumber:install` and `rspec:install` commands will generate the cucumber and rspec configuration files, while `cucumber_rails_training_wheels:install` will generate a basic `web_steps.rb` file to get you started with Cucumber testing. 
+The `cucumber:install` and `rspec:install` commands will generate the cucumber and rspec configuration files.
+(Optional) Run the following command:
 
-The `cucumber-rails` gem comes with Capybara support built in. To use Capybara with Rspec, load the gem via `spec/rails_helper.rb`, adding the following:
+```ruby
+  bundle exec rails generate cucumber_rails_training_wheels:install
+``` 
+to generate a basic `web_steps.rb` file to get you started with Cucumber testing(recommended not be used in production apps). 
+
+Since we're using a Rails app, load Capybara via `spec/rails_helper.rb` by adding the following line:
+
+```ruby
+	require 'capybara/rails'
+```
+
+The `cucumber-rails` gem comes with Capybara support built in, no need to integrate it with Cucumber. You can use it in your steps like so:
+
+```ruby
+	When /I sign in/ do
+    within("#session") do
+      fill_in 'Email', with: 'user@example.com'
+      fill_in 'Password', with: 'password'
+    end
+    click_button 'Sign in'
+  end
+```
+
+To integrate Capybara with RSpec, we'll also add the following line to `spec/rpec_helper.rb` file
 
 ```ruby
 	require 'capybara/rspec'
-	require 'capybara-screenshot/rspec'
-```
-
-And add the following line to the `RSpec.config` block within `spec/rails_helper.rb`
-
-```ruby
-	config.include Capybara::DSL
-```
-
-Add the following line to your `spec/rails_helper.rb` file before the `RSpec.config` block
-
-```ruby
-	Capybara.javascript_driver = :webkit
 ```
 
 Place your Capybara specs in `spec/features`, or alternately tag your spec example groups with `type: :feature`, e.g. 
-
 
 ```ruby
 	describe "the signin process", type: :feature do
@@ -89,14 +97,30 @@ Place your Capybara specs in `spec/features`, or alternately tag your spec examp
   end
 ```
 
-Use `js: true` tag to switch to a different `Capybara.javascript_driver` (:selenium by default). To use the `webkit-driver` follow the example below (requires the capybara-webkit gem):
+Use `js: true` tag to use the the javascript driver, selenium by default, e.g.
 
 ```ruby
 	describe 'some stuff which requires js', js: true do
-    it 'will use the default js driver'
-    it 'will switch to the webkit driver', driver: :webkit
+    it 'will use the js driver'
   end
 ```
+
+To use a different javascript driver, such as webkit (requires the capybara-webkit gem), add the following line to your `spec/spec_helper.rb` file before the `RSpec.config` block:
+ 
+```ruby
+	Capybara.javascript_driver = :webkit
+``` 
+
+To use javascript in you Cucumber scenarios, tag your scenarios with the `@javascript` tag.
+
+
+-- ?required ---------------------------------------------------------------------------------------- 
+And add the following line to the `RSpec.config` block within `spec/spec_helper.rb`
+
+```ruby
+	config.include Capybara::DSL
+```
+-----------------------------------------------------------------------------------------------------
 
 
 5. Create a new file called rspec.rb in features/support with the following contents:
@@ -126,11 +150,21 @@ Use `js: true` tag to switch to a different `Capybara.javascript_driver` (:selen
   end
 ```
 
+Now you can use matchers such as `validates_presence_of` to test your models.
 
-7. In order to use Factory Bot factories in our specs, add the following line to the `RSpec.config` bloc in `spec/rails_helper.rb`
+
+7. In order to use Factory Bot factories in our specs, add the following code block to `spec/support/factory_bot.rb`
 
 ```ruby
+Rspec.config do |config|
   config.include FactoryBot::Syntax::Methods
+end
+```
+
+Add the following require statement to `spec/rails_helper.rb` so `factory_bot` is loaded
+
+```ruby
+	require 'support/factory_bot'
 ```
 
 For Cucumber add the following line to `features/support/env.rb`
@@ -140,7 +174,7 @@ For Cucumber add the following line to `features/support/env.rb`
 ```
 
 
-8. Add the following code BEFORE ANYTHING ELSE ON LINE ONE of spec/rails_helper.rb(for RSpec) and features/support/env.rb (for Cucumber):
+8. Add the following code BEFORE ANYTHING ELSE ON LINE ONE of spec/spec_helper.rb(for RSpec) and features/support/env.rb (for Cucumber):
 
 ```ruby
 	require 'simplecov'
@@ -153,19 +187,30 @@ SimpleCov is a code coverage analysis tool. It provides overall coverage of all 
 9. We'll use the DatabaseCleaner gem to ensure that our database is in a clean state in between tests. To configure DatabaseCleaner with regards to RSpec, add the following strategy to the `RSpec.config` block in `spec/rails_helper.rb`.
 
 ```ruby
+	config.use_transactional_fixtures = false
+	
 	config.before(:suite) do
-		DatabaseCleaner.strategy = :transaction
 		DatabaseCleaner.clean_with(:truncation)
+	end
+
+	config.before(:each) do
+		DatabaseCleaner.strategy = :transaction
+	end
+
+	config.before(:each, :js => true) do
+		DatabaseCleaner.strategy = :truncation
 	end
 
 	config.before(:each) do
 		DatabaseCleaner.start
 	end
 
-	config.append_after(:each) do
+	config.after(:each) do
 		DatabaseCleaner.clean
 	end
 ```
+
+Set `config.use_transactional_fixtures` to `false`
 
 Cucumber automatically configures the appropriate strategy to incorporate DatabaseCleaner and adds the appropriate code to `features/support/env.rb`.
 
@@ -181,7 +226,7 @@ Cucumber automatically configures the appropriate strategy to incorporate Databa
 ```
 
 
-12. (Optional)We can automate railsur Cucumber and RSpec tests with the guard, guard-rspec and guard-cucumber gems. Guard watches your files and automatically runs your specs when ever they are modified.
+12. (Optional)We can automate Cucumber and RSpec tests with the guard, guard-rspec and guard-cucumber gems. Guard watches your files and automatically runs your specs when ever they are modified.
 
 First, generate the guard file by running the following command at the command prompt:
 
@@ -225,3 +270,18 @@ Define a contact factory using Factory Bot, and write the spec to test it's attr
   # spec/models/contact_spec.rb
    
 ```
+
+
+
+
+## References
+[Capybara](https://github.com/teamcapybara/capybara)
+[Capybara-Webkit](https://github.com/thoughtbot/capybara-webkit)  
+[Shoulda-Matchers](https://github.com/thoughtbot/shoulda-matchers)      
+[Factory Bot](https://github.com/thoughtbot/factory_bot/blob/master/GETTING_STARTED.md)  
+[SompleCov](https://github.com/colszowka/simplecov)  
+[DatabaseCleaner](https://github.com/DatabaseCleaner/database_cleaner)  
+[Rails helper example](https://gist.github.com/justin808/3dd1211c299f68042551)  
+[Guard](https://github.com/guard/guard)
+[Guard RSpec](https://github.com/guard/guard-rspec)
+[Guard Cucumber](https://github.com/guard/guard-cucumber)
