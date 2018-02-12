@@ -1,0 +1,24 @@
+<%= link_to '<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>'.html_safe, root_path %>
+
+<h3>
+  <%= @programmer.name %> | <%= formatted_date(@programmer.birth_date) %> - <%= formatted_date(@programmer.death_date) %>
+</h3>
+
+<div class="row jumbotron">
+
+  <div class="col-md-3">
+    <%= image_tag @programmer.image, height: '250px', class:"profile-image" %>
+  </div>
+
+  <div class="col-md-9 programmer-info">
+
+    <%= render partial: 'attribute', locals: {title: 'home_country', value: @programmer.home_country} %>
+    <%= render partial: 'attribute', locals: {title: 'quote', value: @programmer.quote} %>
+    <%= render partial: 'attribute', locals: {title: 'claim_to_fame', value: @programmer.claim_to_fame} %>
+    <p>
+    <%= link_to "Learn more about #{@programmer.name}", @programmer.wikipedia_page, target: '_blank' %>
+    </p>
+
+  </div>
+</div>
+
