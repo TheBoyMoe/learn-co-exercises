@@ -1,7 +1,7 @@
-<%= render partial: 'shared/authors', locals: {author: @author} %>
-
 <h1><%= @post.title %></h1>
 <p><%= @post.description %></p>
+
+<%= render partial: 'authors/authors', locals: {author: @post.author} %>
 
 <br>
 <%= link_to 'Back', posts_path %>
