@@ -1,9 +1,12 @@
 <h1>Classroom List</h1>
 
 <ul>
-	<% @classrooms.each do |classroom| %>
-		<li><%= link_to classroom.course_name, classroom_path(classroom) %></li>
-	<% end %>
+	<%# @classrooms.each do |classroom| %>
+		<%#= link_to classroom.course_name, classroom_path(classroom) %>
+	<%# end %>
+
+	<%= render(@classrooms) || 'No classrooms found' %>
+
 </ul>
 
 <br>

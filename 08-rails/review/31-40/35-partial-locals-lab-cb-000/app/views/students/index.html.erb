@@ -5,9 +5,12 @@
 	<%= submit_tag "Search", name: nil %>
 <% end %>
 
-<% @students.each do |student| %>
-	<%= render partial: 'student', locals: {student: student} %>
-<% end %>
+<%# @students.each do |student| %>
+	<%#= render partial: 'student', locals: {student: student} %>
+<%# end %>
+
+<!--render collection with a partial-->
+<%= render(@students) || 'No students were found' %>
 
 <br>
 <%= link_to 'Classrooms', classrooms_path %>
