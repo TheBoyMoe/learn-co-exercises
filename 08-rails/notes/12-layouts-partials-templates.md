@@ -56,3 +56,32 @@ You can specify a specific layout in the action(as well as the controller). Othe
   <br>
   <%= link_to 'Back', posts_path %>
 ```
+
+### Rendering collections
+
+So far we have rendered collections by iterating over them, e.g.
+
+```erb
+	<% @posts.each do |post| %>
+    <%= render :partial => "post", {:locals => {:post => post}} %>
+  <% end %>
+```
+
+Rails provides the `collection` keyword to simplify the implementation
+
+```erb
+	<%= render partial: 'post', collection: @posts %>
+```
+
+A more simplified version(depends on having a partial named after the model)
+
+```erb
+	<%= render @posts %>
+```
+
+This technique also allows you to handle empty collections - you must use `render()`
+
+```erb
+	<%= render(@posts) || "There are no blog posts"  %>
+```
+
