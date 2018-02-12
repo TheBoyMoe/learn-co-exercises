@@ -45,6 +45,7 @@ You can specify a specific layout in the action(as well as the controller). Othe
 	# we're no longer passing a string to 'render', e.g `render 'author'`.
 	# instead we're passing a hash with 2 key/value pairs, the second arg is itself a hash
 	# when using locals, make sure that the variables refered to in the partial have the same names as the keys in the locals hash.
+	# using locals also means your more explicit about the dependencies the partial depends on
 		
 	
 	<h1><%= @post.title %></h1>

@@ -1,0 +1,10 @@
+<h1>Classroom List</h1>
+
+<ul>
+	<% @classrooms.each do |classroom| %>
+		<li><%= link_to classroom.course_name, classroom_path(classroom) %></li>
+	<% end %>
+</ul>
+
+<br>
+<%= link_to 'Students', students_path %>
