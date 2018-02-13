@@ -30,3 +30,27 @@ def oldest_student
 	students.where("birthday is not null").order("birthday asc").first
 end
 ```
+
+
+Custom attribute accessor methods, add the attribute to the #strong_params
+
+```ruby
+	# app/model/song.rb - add 'virtual' attribute
+	def artist_name
+    artist.name unless artist == nil
+  end
+
+  # assign an artist to the song
+  def artist_name=(name)
+    unless !name || name.empty?
+      artist = Artist.find_or_create_by(name: name)
+      self.artist = artist
+      save
+    end
+  end
+  
+  #app/controllers/songs_controller.rb
+  def song_params
+		params.require(:song).permit(:title, :artist_name)
+	end 
+```
