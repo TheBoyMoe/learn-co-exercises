@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  # ensure the controller has access to the params hash
+  helper_method :params
 
   def index
     @posts = Post.all

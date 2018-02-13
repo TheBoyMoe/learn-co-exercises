@@ -1,10 +1,23 @@
 class Post < ActiveRecord::Base
-
-  validate :is_title_case 
-  before_validation :make_title_case 
   belongs_to :author
 
-  #put new code here
+  validate :is_title_case
+  before_validation :make_title_case
+
+  def self.by_author(id)
+    author = Author.find(id)
+    unless author == nil
+      author.posts
+    end
+  end
+
+  def self.from_today
+
+  end
+
+  def self.old_news
+
+  end
 
   private
 
