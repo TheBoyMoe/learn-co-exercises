@@ -1,8 +1,19 @@
-<%= form_for(@post) do |f| %>
-  <label>Post title:</label><br>
+<%= form_for(post) do |f| %>
+
+  <%= f.label :title %><br>
   <%= f.text_field :title %><br>
 
-  <label>Post Description</label><br>
+	<!--allow the user to select the author when none is present-->
+	<!--move to PostsHelper-->
+	<%# if post.author.nil? %>
+		<%#= f.select :author_id, options_from_collection_for_select(Author.all, :id, :name) %><br>
+	<%# else %>
+		<%#= f.hidden_field :author_id %>
+	<%# end %>
+
+	<%= author_id_field(post) %>
+
+  <%= f.label :description %><br>
   <%= f.text_area :description %><br>
 
   <%= f.submit %>
