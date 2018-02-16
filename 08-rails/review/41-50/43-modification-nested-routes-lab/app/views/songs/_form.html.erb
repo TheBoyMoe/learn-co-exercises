@@ -1,8 +1,9 @@
 <%= form_for song  do |f| %>
-	<%= f.hidden_field :artist_id %>
 
   <%= f.label :title %>
   <%= f.text_field :title %><br>
+
+	<%= artist_select(song, nested) %><br>
 
 	<%= f.label :artist_name %>
   <%= f.text_field :artist_name %>

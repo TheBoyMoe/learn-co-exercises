@@ -1,4 +1,6 @@
-describe "artists", type: :feature do
+require 'rails_helper'
+
+RSpec.describe "artists", type: :feature do
 
   before do
     Artist.destroy_all

@@ -1,5 +1,6 @@
 class SongsController < ApplicationController
 
+  # 'songs_path' and 'artist_songs_path'
   # '/songs' and '/artists/:artist_id/songs'
   def index
     # if params[:artist_id]
@@ -70,8 +71,8 @@ class SongsController < ApplicationController
     end
   end
 
-  # 'new_song_path' and 'new_artist_song_path'
-  # '/songs/:id/edit' and '/artists/:artist_id/songs/:id'
+  # 'edit_song_path' and 'edit_artist_song_path'
+  # '/songs/:id/edit' and '/artists/:artist_id/songs/:id/edit'
   def edit
     # handle the nested route
     if params[:artist_id] && !Artist.exists?(params[:artist_id])
@@ -81,10 +82,12 @@ class SongsController < ApplicationController
       if params[:id] && !Song.exists?(params[:id])
         redirect_to artist_songs_path(artist), alert: 'Song not found.'
       elsif params[:id]
+        @nested = true
         @song = artist.songs.find(params[:id])
       end
     # other route
     else
+      @nested = false
       @song = Song.find(params[:id])
     end
   end
