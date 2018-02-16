@@ -1,2 +1,2 @@
 <h1>Editing <%= @song.title %></h1>
-<%= render partial: "form" %>
+<%= render partial: "form", locals: {song: @song} %>

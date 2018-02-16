@@ -4,3 +4,7 @@
     <li><%= link_to artist.name, artist_songs_path(artist) %></li>
   <% end %>
 </ul>
+
+<br>
+<%= link_to 'Add New Artist', new_artist_path %> |
+<%= link_to 'Songs', songs_path %>
