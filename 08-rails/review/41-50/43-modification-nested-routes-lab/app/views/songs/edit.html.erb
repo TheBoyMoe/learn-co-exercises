@@ -1,2 +1,3 @@
 <h1>Editing <%= @song.title %></h1>
+<!--display artist drop down depending on whether the route is nested-->
 <%= render partial: "form", locals: {song: @song, nested: @nested} %>
