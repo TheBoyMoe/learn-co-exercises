@@ -1,0 +1,30 @@
+<h1>Application Preferences</h1>
+
+<%= form_for @preference, url: admin_preference_path(@preference) do |f| %>
+	<div class="form-group">
+		<%= f.label :song_sort_order %><br>
+		<%= f.radio_button :song_sort_order, 'DESC' %>&nbsp;DESC<br>
+		<%= f.radio_button :song_sort_order, 'ASC' %>&nbsp;ASC
+	</div><br>
+
+	<div class="form-group">
+		<%= f.label :artist_sort_order %><br>
+		<%= f.radio_button :artist_sort_order, 'DESC' %>&nbsp;DESC<br>
+		<%= f.radio_button :artist_sort_order, 'ASC' %>&nbsp;ASC
+	</div><br>
+
+	<div class="form-group">
+		<%= f.label :allow_create_artists %><br>
+		<%= f.radio_button :allow_create_artists, true %>&nbsp;True<br>
+		<%= f.radio_button :allow_create_artists, false %>&nbsp;False
+	</div><br>
+
+	<div class="form-group">
+		<%= f.label :allow_create_songs %><br>
+		<%= f.radio_button :allow_create_songs, true %>&nbsp;True<br>
+		<%= f.radio_button :allow_create_songs, false %>&nbsp;False
+	</div>
+
+	<br>
+	<%= f.submit %>
+<% end %>
