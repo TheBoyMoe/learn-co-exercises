@@ -15,3 +15,14 @@ In particular
   
 - review lab 31
 	- every tag associated with the post also populates a text_field in the 'edit form'
+	
+
+### Nested Routes and Namespaces
+
+- review lab 44
+	- demonstrates use of a scope, module and namespace
+		
+- review lab 45
+	- use of a namespace
+	- create a PreferencesController to save app settings		
+	
