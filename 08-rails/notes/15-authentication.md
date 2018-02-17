@@ -78,3 +78,55 @@ class LoginsController < ApplicationController
 	end
 end
 ```
+
+
+### Session Controller and Login in Rails
+
+Typical flow is:
+
+ * The user GETs `/login`
+ * The user enters their username(no password in this example).
+ * The user submits the form, POSTing to `/login`.
+ * In the create action of the `SessionsController` we set a cookie on the user's browser by writing their username into the session hash.
+ * Thereafter, the user is logged in. `session[:username]` will hold their username.
+ 
+```ruby
+# app/controllers/session_controller.rb
+class SessionsController < ApplicationController
+
+	# GET 'login'
+	def new
+		# render the login form
+	end
+
+	# POST 'login'
+	def create
+		if params[:username].nil? || params[:username].empty?
+			redirect_to new_session_path
+		else
+			session[:username] = params[:username]
+			redirect_to homepage_path
+		end
+	end
+	
+	# POST 'logout'
+	def destroy
+    session.delete :username
+    redirect_to new_session_path
+  end
+end 
+``` 
+
+
+```html
+<!--spp/views/sessions/new.html.erb-->
+<h1>Login</h1>
+
+<%= form_tag sessions_path, method: 'post' do %>
+
+	<label for="username">Username</label>
+	<%= text_field_tag :username %>
+
+	<%= submit_tag 'Login' %>
+<% end %>
+```
