@@ -16,15 +16,17 @@
 - use the `session` method to manipulate the session store
 - the session is only available in the controller and view(use a helper method)
 - there a three different mechanisms for implementing a session store:
-	* ActionDispatch::Session::CookieStore - Stores everything on the client.
-		- default and recommended, requires zero setup in order to use a session in a new app
-		- the ID and data is all stored in the cookie
+	* ActionDispatch::Session::CookieStore 
+		- default and recommended, it requires zero setup in order to use a session in a new app
+		- stores everything on the client, the ID and data is all stored in the cookie
 		- can store upto 4KB of data
-	* ActionDispatch::Session::CacheStore - Stores the data in the Rails cache.
+	* ActionDispatch::Session::CacheStore 
+		- stores data in the Rails cache.
 		- for info that is not critical, or does not need to be around for long, e.g. flash messages
-	* ActionDispatch::Session::ActiveRecordStore - Stores the data in a database using Active Record(require activerecord-session_store gem).
-- The Cache and ActiveRecord session stores use a cookie to store a unique ID for each session
-- You must use a cookie, Rails will not allow you to pass the session ID in the URL as this is less secure.
+	* ActionDispatch::Session::ActiveRecordStore 
+		- stores the data in a database using Active Record(requires activerecord-session_store gem).
+		- both Cache and ActiveRecord session store's use a cookie to store the ID of each session
+		- you must use a cookie, Rails will not allow you to pass the session ID in the URL as this is less secure.
 
 You can define the particular mechanism in `config/initializer/session_store.rb`
 
@@ -40,3 +42,39 @@ Rails.application.config.session_store :cookie_store, key: '_your_app_key'
 ```
 
 Rails defines the secret key to cryptographically sign session data for the CookieStore in `config/secrets.yml`
+
+To access the session use the Rails `session` method. The session is lazy loaded, so you don't need to disable it if you don't access it. To reset the entire session, use `reset_session`.
+
+```ruby
+class ApplicationController < ActionController::Base
+ 
+  private
+		# Finds the User with the ID stored in the session with the key
+		# :current_user_id This is a common way to handle user login in
+		# a Rails application; logging in sets the session value and
+		# logging out removes it.
+		def current_user
+			@current_user ||= session[:current_user_id] &&
+				User.find_by(id: session[:current_user_id])
+		end
+end
+
+
+class LoginsController < ApplicationController
+  # "Create" a login, aka "log the user in"
+  def create
+    if user = User.authenticate(params[:username], params[:password])
+      # Save the user ID in the session so it can be used in subsequent requests
+      session[:current_user_id] = user.id
+      redirect_to root_url
+    end
+  end
+  
+  # "Delete" a login, aka "log the user out"
+	def destroy
+		# Remove the user id from the session
+		@current_user = session[:current_user_id] = nil
+		redirect_to root_url
+	end
+end
+```
