@@ -130,3 +130,59 @@ end
 	<%= submit_tag 'Login' %>
 <% end %>
 ```
+
+### Securing Passwords in Rails
+
+Rails provides the `has_secure_password` method - requires the `bcrypt` gem.
+	* adds two fields to your user model, `password` and `password_confirmation`
+	* these two fields DO NOT correspond to columns in the database, instead you need to define a `password_digest` column in your migration
+	* it also adds some `before_save` hooks to the User model which compare the `password` and `password_confirmation` fields and update the `password_digest` column.
+
+
+```html
+<!--app/views/user/new.html.erb-->
+<%= form_for :user, url: '/users' do |f| %>
+  <%= f.label 'Username' %> 
+  <%= f.text_field :username %>
+  
+  <%= f.label 'Password' %>
+  <%= f.password_field :password %>
+  
+  <%= f.label 'Password_confirmation' %>
+  <%= f.password_field :password_confirmation %>
+  
+  <%= f.submit "Submit" %>
+<% end %>
+```
+
+```ruby
+# app/controllers/users_controller.rb
+class UsersController < ApplicationController
+	# user signup, also need to add the user id to the session
+  def create
+    user = User.new(user_params).save
+  end
+ 
+  private
+ 
+  def user_params
+    params.require(:user).permit(:username, :password, :password_confirmation)
+  end
+end
+
+
+# app/controllers/sessions_controller.rb
+class SessionsController < ApplicationController
+  def create
+    @user = User.find_by(username: params[:username])
+    return head(:forbidden) unless @user.authenticate(params[:password])
+    session[:user_id] = @user.id
+  end
+end
+
+
+# app/models/user.rb
+class User < ActiveRecord::Base
+  has_secure_password
+end
+```
