@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
 	# render the signup form
 	def new
+		@user = User.new
 	end
 
 	# create the user & log them in
