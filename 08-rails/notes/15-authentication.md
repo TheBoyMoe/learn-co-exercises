@@ -383,3 +383,45 @@ rails g devise User
 ```ruby
 rails generate devise:views
 ```
+
+Additional Customisation
+
+8. Install Bootstrap 3
+
+- add the following gems
+
+```ruby
+gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
+gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+```
+
+- rename `app/assets/stylesheets/application.css` to the `.scss` ext.
+- delete it's contents and add
+
+```scss
+/*
+ *= require main
+ */
+```
+
+- create `main.scss` in `app/assets/stylesheets` and import your stylesheets through it, e.g.
+
+```scss
+// Global site styles
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+// Base assets
+//@import "base/mixins";
+//@import "base/variables";
+
+
+// Plugins
+//@import "plugins/font-awesome";
+```
+
+- reference the req'd js files in `app/assets/javascripts/application.js`
+
+```javascript 1.6
+
+```
