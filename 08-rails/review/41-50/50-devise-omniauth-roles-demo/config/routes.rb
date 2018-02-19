@@ -8,4 +8,6 @@ Rails.application.routes.draw do
 	controllers: { registrations: 'registrations' }
 
 	root to: 'static#home'
+
+	get 'about', to: 'static#about'
 end

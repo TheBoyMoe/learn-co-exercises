@@ -504,7 +504,7 @@ Call it in the `application.hml.erb` template like so:
 			<li><%= link_to "Log In", new_user_session_path %></li>
 		<% end %>
 	</ul>
-</nav>
+</nav>0
 ```
 
 14. simplify devise sign_up, sign_in and sign_out paths by editing `config/routes.rb`
@@ -518,3 +518,12 @@ devise_for :users, path: '', path_names: {
 },
 controllers: { registrations: 'registrations' }
 ```
+
+15. Require that a user be logged in to use the site by adding the following line to `app/controllers/application_controller.rb`
+
+
+```ruby
+before_action :authenticate_user!
+```
+
+You will automatically redirected to the welcome page following successful authentication.
