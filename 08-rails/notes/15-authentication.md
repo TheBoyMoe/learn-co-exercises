@@ -342,35 +342,6 @@ config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 <p class="alert"><%= alert %></p>
 ```
 
-(Optionally) You can define custom devise error messages using a devise helper that will display flash messages which include bootstrap classes
-
-```ruby
-# app/helpers/devise_helper.rb
-module DeviseHelper
-	def devise_error_messages!
-		return '' if resource.errors.empty?
-
-		messages = resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join
-		html = <<-HTML
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <strong>
-       #{pluralize(resource.errors.count, "error")} must be fixed
-      </strong>
-      #{messages}
-    </div>
-		HTML
-
-		html.html_safe
-	end
-
-	def devise_error_messages?
-		!resource.errors.empty?
-	end
-end
-```
 
 6. generate the User model and run the migrations - adds the user sign in, sign out, registration routes, etc.  
 
@@ -384,7 +355,8 @@ rails g devise User
 rails generate devise:views
 ```
 
-Additional Customisation
+### Additional Customisation
+
 
 8. Install Bootstrap 3
 
@@ -423,5 +395,92 @@ gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 - reference the req'd js files in `app/assets/javascripts/application.js`
 
 ```javascript 1.6
+//
+//= require jquery
+//= require bootstrap-sprockets
+//= require rails-ujs
+//= require turbolinks
+//= require_tree .
+```
 
+
+9. You can define custom devise error messages using a devise helper that will display flash messages which include bootstrap classes.
+   
+```ruby
+# app/helpers/devise_helper.rb
+module DeviseHelper
+	def devise_error_messages!
+		return '' if resource.errors.empty?
+	
+		messages = resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join
+		html = <<-HTML
+		 <div class="alert alert-danger alert-dismissible fade show" role="alert">
+			 <button type="button" class="close" data-dismiss="alert">
+				 <span aria-hidden="true">&times;</span>
+			 </button>
+			 <strong>
+				#{pluralize(resource.errors.count, "error")} must be fixed
+			 </strong>
+			 #{messages}
+		 </div>
+		HTML
+	
+		html.html_safe
+	end
+
+	def devise_error_messages?
+		!resource.errors.empty?
+	end
+end
+```
+
+10. Apply bootstrap styles on flash messages by implementing a custom flash message template, place in the `app/views/layout` folder.
+
+```html
+<% if flash.any? %>
+	<div class="row">
+		<div class="col-xs-12">
+			<% flash.each do |name, message| %>
+				<div class="alert alert-<%= name == 'notice' ? 'success' : 'warning' %> alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<%= message %>
+				</div>
+			<% end %>
+		</div>
+	</div>
+<% end %>
+```
+
+Call it in the `application.hml.erb` template like so:
+ 
+```html
+<%= render "layouts/flash_message" %>
+```
+
+
+11. Add a navbar template which will show a login/logout link depending on whether the user is logged in. Call the partial in the application layout.
+
+```html
+<!--app/layouts/_navbar.html.erb-->
+<nav class="navbar navbar-default">
+	<ul class="nav navbar-nav navbar-right">
+		<% if user_signed_in? %>
+			<li><%= link_to current_user.name, edit_user_registration_path %></li>
+			<li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
+		<% else %>
+			<li><%= link_to "Log In", new_user_session_path %></li>
+		<% end %>
+	</ul>
+</nav>
+```
+
+12. simplify devise sign_up, sign_in and sign_out paths by editing `config/routes.rb`
+
+
+```ruby
+devise_for :users, path: '', path_names: {
+		sign_in: 'login',   # 'users/sign_in' => 'login'
+		sign_out: 'logout', # 'users/sign_out' => 'logout'
+		sign_up: 'register' # 'users/sign_up' => 'register'
+}
 ```
