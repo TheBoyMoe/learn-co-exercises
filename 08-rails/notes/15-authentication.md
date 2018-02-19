@@ -186,3 +186,96 @@ class User < ActiveRecord::Base
   has_secure_password
 end
 ```
+
+
+### Omniauth, Devise and 3rd Party Authentication
+
+The OmniAuth gem `omniauth-google` supports user signin using the OAuth protocol with 3rd party providers such a s Twitter, Facebook, Google, etc - simply add the gem to your project and include the provider specific strategy.
+
+A typical OmniAuth signup process:
+  1. User tries to access a page on `yoursite.com` that requires them to be logged in. They are redirected to the login screen.
+  2. The login screen offers the options of creating an account or logging in with Google or Twitter.
+  3. The user clicks `Log in with Google`. This momentarily sends the user to `yoursite.com/auth/google`, which quickly redirects to the Google sign-in page.
+  4. If the user is not already signed in to Google, they sign in normally. More likely, they are already signed in, so Google simply asks if it's okay to let `yoursite.com` access the user's information. The user agrees.
+  5. They are (hopefully quickly) redirected to `yoursite.com/auth/google/callback` and, from there, to the page they initially tried to access.
+  
+
+To setup Facebook:
+
+1. Logon to the Facebook developer site, create an app. Make note of the 'FACEBOOK_KEY' and 'FACEBOOK_SECRET VALUES' and set the callback url, e.g. `localhost:3000/auth/facebook/callback`.
+
+2. Add the `dotenv-rails`, `omniauth` and `omniauth-facebook` gems and run bundle.
+
+3. Create a `.env` at the root of your app(adding it to .gitignore), and add your Facebook credentials
+
+
+```text
+FACEBOOK_KEY=xxxxxxxxxxxxxx
+FACEBOOK_SECRET=xxxxxxxxxxxxxxx
+```
+
+3. Add the following file, `config/initializers/omniauth.rb` - and reference the providers credentials for your app
+
+```ruby
+Rails.application.config.middleware.use OmniAuth::Builder do
+  provider :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET']
+end
+```
+
+4. Add a link to your login page allowing users to signin - the std omniauth path is `/auth/:provider`
+
+
+```html
+<%= link_to('Log in with Facebook!', '/auth/facebook') %>
+``` 
+
+5. Create a User model with a name, email, image and uid attributes, all strings.
+
+6. Create a basic SessionController to handle user logins
+
+
+```ruby
+class SessionsController < ApplicationController
+  def create
+    @user = User.find_or_create_by(uid: auth['uid']) do |u|
+      u.name = auth['info']['name']
+      u.email = auth['info']['email']
+      u.image = auth['info']['image']
+    end
+ 
+    session[:user_id] = @user.id
+ 
+    render 'welcome/home'
+  end
+ 
+  private
+ 
+  def auth
+    request.env['omniauth.auth']
+  end
+end
+```
+
+
+7. Add a route to the routing table - if authentication succeeds we'll be redirected to the `Session#create` action via the callback route. The create action gives you access to the hash object returned by the provider which will contain the user's name, email, image link(possible), etc. Typically, if a matching User exists in your database, the client will be logged in to your application. If no match is found, a new User will be created using the data received from the provider.
+
+Note:  If authentication fails, we'll also be redirected to our server's OmniAuth callback route. The hash object received contains a series of error parameters that provide information about the failure such as error code/description etc.
+
+
+```ruby
+get '/auth/facebook/callback' => 'sessions#create'
+```
+
+8. Finally, `app/views/static/home`, will display the user's details or the link to login, depending on whether the user has logged in.
+
+
+```html
+<% if session[:user_id] %>
+  <h1><%= @user.name %></h1>
+  <h2>Email: <%= @user.email %></h2>
+  <h2>Facebook UID: <%= @user.uid %></h2>
+  <img src="<%= @user.image %>">
+<% else %>
+  <%= link_to('Log in with Facebook!', '/auth/facebook') %>
+<% end %>
+```
