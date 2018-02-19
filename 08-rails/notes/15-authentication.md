@@ -321,13 +321,13 @@ gem 'omniauth', '~> 1.8', '>= 1.8.1'
 gem 'omniauth-facebook', '~> 4.0'
 ```
 
-2. run the devise install generator
+2. Run the devise install generator
 
 ```ruby
 rails generate devise:install
 ```
 
-3. add the following line to `config/environments/development.rb`
+3. Add the following line to `config/environments/development.rb`
 
 ```ruby
 config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
@@ -343,22 +343,55 @@ config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 ```
 
 
-6. generate the User model and run the migrations - adds the user sign in, sign out, registration routes, etc.  
+6. Generate the User model and run the migrations - adds the user sign in, sign out, registration routes, etc.  
 
 ```ruby
-rails g devise User
+rails g devise User name:string
 ```
 
-7. generate the devise views
+7. Generate the devise views
 
 ```ruby
 rails generate devise:views
 ```
 
+8. We need to amend `app/views/devise/registrations/new.html.erb` and `app/views/devise/registrations/edit/html.erb` views to include the name field.
+
+9. Amend the User model requiring that the user enters a name in the sign up form. The requirement to enter an email and password is the default. If you try and register now , you'll receive the "Name can't be blank" error.
+
+```ruby
+validates :name, presence: true
+```
+
+We need to extend the `Devise::RegistrationsController`
+
+
+```ruby
+class RegistrationsController < Devise::RegistrationsController
+
+
+	private
+		def sign_up_params
+			params.require(:user).permit(:name, :email, :password, :password_confirmation)
+		end
+
+		def account_update_params
+			params.require(:user).permit(:name, :email, :password, :password_confirmation, :current_password)
+		end
+end
+```
+
+and and the routing table, enabling devise to use the name attribute
+
+```ruby
+devise_for :users, controllers: { registrations: 'registrations' }
+```
+
+
 ### Additional Customisation
 
 
-8. Install Bootstrap 3
+10. Install Bootstrap 3
 
 - add the following gems
 
@@ -404,7 +437,7 @@ gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 ```
 
 
-9. You can define custom devise error messages using a devise helper that will display flash messages which include bootstrap classes.
+11. You can define custom devise error messages using a devise helper that will display flash messages which include bootstrap classes.
    
 ```ruby
 # app/helpers/devise_helper.rb
@@ -434,7 +467,7 @@ module DeviseHelper
 end
 ```
 
-10. Apply bootstrap styles on flash messages by implementing a custom flash message template, place in the `app/views/layout` folder.
+12. Apply bootstrap styles on flash messages by implementing a custom flash message template, place in the `app/views/layout` folder.
 
 ```html
 <% if flash.any? %>
@@ -458,7 +491,7 @@ Call it in the `application.hml.erb` template like so:
 ```
 
 
-11. Add a navbar template which will show a login/logout link depending on whether the user is logged in. Call the partial in the application layout.
+13. Add a navbar template which will show a login/logout link depending on whether the user is logged in. Call the partial in the application layout.
 
 ```html
 <!--app/layouts/_navbar.html.erb-->
@@ -474,7 +507,7 @@ Call it in the `application.hml.erb` template like so:
 </nav>
 ```
 
-12. simplify devise sign_up, sign_in and sign_out paths by editing `config/routes.rb`
+14. simplify devise sign_up, sign_in and sign_out paths by editing `config/routes.rb`
 
 
 ```ruby
@@ -482,5 +515,6 @@ devise_for :users, path: '', path_names: {
 		sign_in: 'login',   # 'users/sign_in' => 'login'
 		sign_out: 'logout', # 'users/sign_out' => 'logout'
 		sign_up: 'register' # 'users/sign_up' => 'register'
-}
+},
+controllers: { registrations: 'registrations' }
 ```
