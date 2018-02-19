@@ -333,9 +333,17 @@ rails generate devise:install
 config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 ```
 
-4. Define a static route, controller action and template where users are redirected to following signup/login
+4. Configure the e-mail address which will be shown in Devise::Mailer
 
-5. Add the following flash messages to `app/views/layouts/application.html.erb`
+```ruby
+# cong/initializers/devise.rb
+config.mailer_sender = 'info@example.com'
+```
+
+
+5. Define a static route, controller action and template where users are redirected to following signup/login
+
+6. Add the following flash messages to `app/views/layouts/application.html.erb`
 
 ```html
 <p class="notice"><%= notice %></p>
@@ -343,21 +351,21 @@ config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 ```
 
 
-6. Generate the User model and run the migrations - adds the user sign in, sign out, registration routes, etc.  
+7. Generate the User model and run the migrations - adds the user sign in, sign out, registration routes, etc.  
 
 ```ruby
 rails g devise User name:string
 ```
 
-7. Generate the devise views
+8. Generate the devise views
 
 ```ruby
 rails generate devise:views
 ```
 
-8. We need to amend `app/views/devise/registrations/new.html.erb` and `app/views/devise/registrations/edit/html.erb` views to include the name field.
+9. We need to amend `app/views/devise/registrations/new.html.erb` and `app/views/devise/registrations/edit/html.erb` views to include the name field.
 
-9. Amend the User model requiring that the user enters a name in the sign up form. The requirement to enter an email and password is the default. If you try and register now , you'll receive the "Name can't be blank" error.
+10. Amend the User model requiring that the user enters a name in the sign up form. The requirement to enter an email and password is the default. If you try and register now , you'll receive the "Name can't be blank" error.
 
 ```ruby
 validates :name, presence: true
@@ -391,7 +399,7 @@ devise_for :users, controllers: { registrations: 'registrations' }
 ### Additional Customisation
 
 
-10. Install Bootstrap 3
+11. Install Bootstrap 3
 
 - add the following gems
 
@@ -437,7 +445,7 @@ gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 ```
 
 
-11. You can define custom devise error messages using a devise helper that will display flash messages which include bootstrap classes.
+12. You can define custom devise error messages using a devise helper that will display flash messages which include bootstrap classes.
    
 ```ruby
 # app/helpers/devise_helper.rb
@@ -467,7 +475,7 @@ module DeviseHelper
 end
 ```
 
-12. Apply bootstrap styles on flash messages by implementing a custom flash message template, place in the `app/views/layout` folder.
+13. Apply bootstrap styles on flash messages by implementing a custom flash message template, place in the `app/views/layout` folder.
 
 ```html
 <% if flash.any? %>
@@ -491,7 +499,7 @@ Call it in the `application.hml.erb` template like so:
 ```
 
 
-13. Add a navbar template which will show a login/logout link depending on whether the user is logged in. Call the partial in the application layout.
+14. Add a navbar template which will show a login/logout link depending on whether the user is logged in. Call the partial in the application layout.
 
 ```html
 <!--app/layouts/_navbar.html.erb-->
@@ -507,7 +515,7 @@ Call it in the `application.hml.erb` template like so:
 </nav>0
 ```
 
-14. simplify devise sign_up, sign_in and sign_out paths by editing `config/routes.rb`
+15. simplify devise sign_up, sign_in and sign_out paths by editing `config/routes.rb`
 
 
 ```ruby
@@ -519,8 +527,7 @@ devise_for :users, path: '', path_names: {
 controllers: { registrations: 'registrations' }
 ```
 
-15. Require that a user be logged in to use the site by adding the following line to `app/controllers/application_controller.rb`
-
+16. Require that a user be logged in to use the site by adding the following line to `app/controllers/application_controller.rb`
 
 ```ruby
 before_action :authenticate_user!
