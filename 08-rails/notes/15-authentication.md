@@ -310,3 +310,76 @@ Note: generate the User model through the Devise generator
 rails generate devise User name:string
 ```
 
+### Devise and Facebook Strategy Setup
+
+1. Add the following gems
+
+```ruby
+gem 'devise', '~> 4.4', '>= 4.4.1'
+gem 'dotenv-rails', '~> 2.2', '>= 2.2.1'
+gem 'omniauth', '~> 1.8', '>= 1.8.1'
+gem 'omniauth-facebook', '~> 4.0'
+```
+
+2. run the devise install generator
+
+```ruby
+rails generate devise:install
+```
+
+3. add the following line to `config/environments/development.rb`
+
+```ruby
+config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+```
+
+4. Define a static route, controller action and template where users are redirected to following signup/login
+
+5. Add the following flash messages to `app/views/layouts/application.html.erb`
+
+```html
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+```
+
+(Optionally) You can define custom devise error messages using a devise helper that will display flash messages which include bootstrap classes
+
+```ruby
+# app/helpers/devise_helper.rb
+module DeviseHelper
+	def devise_error_messages!
+		return '' if resource.errors.empty?
+
+		messages = resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join
+		html = <<-HTML
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <strong>
+       #{pluralize(resource.errors.count, "error")} must be fixed
+      </strong>
+      #{messages}
+    </div>
+		HTML
+
+		html.html_safe
+	end
+
+	def devise_error_messages?
+		!resource.errors.empty?
+	end
+end
+```
+
+6. generate the User model and run the migrations - adds the user sign in, sign out, registration routes, etc.  
+
+```ruby
+rails g devise User
+```
+
+7. generate the devise views
+
+```ruby
+rails generate devise:views
+```
