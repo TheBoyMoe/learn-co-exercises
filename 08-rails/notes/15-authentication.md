@@ -279,3 +279,34 @@ get '/auth/facebook/callback' => 'sessions#create'
   <%= link_to('Log in with Facebook!', '/auth/facebook') %>
 <% end %>
 ```
+
+
+### Authentication using the Devise gem
+
+Devise is a ruby gem that provides both authentication and authorisation(through roles). It includes views, controllers and routes.
+It also supports the following features through various modules
+- sends out confirmation emails
+- supports account lockout after a certain number of failed logon attempts
+- allows users to reset passwords
+- supports 3rd party auth through the omniauthable module
+- remembers users through cookies(manages the generating and clearing of tokens - the token is stored in the cookie)
+- can timeout a user session that has been inactive for a set period of time
+- can track a user's sign in's, their ip, number of sign ins, last sign in, current sign in. 
+
+Several of these modules are enabled by default:
+
+```ruby
+class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+end
+```
+
+Note: generate the User model through the Devise generator
+
+```ruby
+rails generate devise User name:string
+```
+
