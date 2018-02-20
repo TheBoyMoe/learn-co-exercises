@@ -361,3 +361,5 @@ user.role = :admin
 # user.role #=> 'admin'
 ```
 
+2. define filters which define what various roles can do
+
