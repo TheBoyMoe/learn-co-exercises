@@ -589,13 +589,62 @@ class DemoMailer < Devise::Mailer
 end
 ```
 
-- in `config/initializers/devise.rb`, set `config.mailer` to `"DemoMailer"`
+- in `config/initializers/devise.rb`, set `config.mailer` to `"DemoMailer"` and `config.reconfirmable` to false
 
-- we need to configure the the mailer to run in development(in production we would use a proper smtp service)
- 
+```ruby
+# config/initializers/devise.rb
+config.mailer = DemoMailer
+config.reconfirmable = false
+```
+
+- for development we'll install the `mailcatcher` gem to act as a smtp server with the following command at the command prompt
+
+```ruby
+gem install mailcatcher
+```
+
+add the following configuration to `config/environments/development.rb`
+
+```ruby
+config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.smtp_settings = {:address => "localhost", :port => 1025}
+```
+
+and start the server by entering `mailcatcher` at the command prompt. Mailcatcher will be running on port 1025 catching emails and displaying them on HTTP port 1080. After registration, go to `http://localhost:1080`, open the confirmation email and click on the link. Your account will be activated allowing you to now login.
+
+
+
+Alternatively you can configure Gmail
+- we need to configure the the mailer send out emails via Gmail in development(in production we would use a proper smtp service). Add the following configuration to `config/environments/development.rb`
+
+```ruby
+# config/environments/development.rb
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.smtp_settings = {
+		:address              => "smtp.gmail.com",
+		:port                 => 587,
+		:user_name            => ENV['GMAIL_USERNAME'],
+		:password             => ENV['GMAIL_PASSWORD'],
+		:authentication       => "plain",
+		:enable_starttls_auto => true
+}
+```
+
+Add the `GMAIL_USERNAME` and `GMAIL_PASSWORD` settings to `.env` file in the root of the app. Don't forget to add the file to `.gitignore` so it's excluded from the repository(the `dotenv-rails` gem will load the file).
+
+```text
+GMAIL_USERNAME=xxxxxxxxxxx
+GMAIL_PASSWORD=xxxxxxxxxxx
+```
+
 
 
 #### References
 
-[Configure Devise to send a confirmation email](# https://github.com/plataformatec/devise/wiki/How-To:-Use-custom-mailer)
-[Custom Mailer](# https://github.com/plataformatec/devise/wiki/How-To:-Use-custom-mailer)
+[Configure Devise to send a confirmation email](https://github.com/plataformatec/devise/wiki/How-To:-Use-custom-mailer)  
+[Custom Mailer](https://github.com/plataformatec/devise/wiki/How-To:-Use-custom-mailer)  
+[Rails ActionMailer Basics](http://guides.rubyonrails.org/action_mailer_basics.html)  
+[Sending emails using ActionMailer and Gmail](https://launchschool.com/blog/handling-emails-in-rails)  
+[Setup mailcatcher gem to capture emails](https://stackoverflow.com/questions/8186584/how-do-i-set-up-email-confirmation-with-devise)  
+
