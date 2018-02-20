@@ -361,5 +361,19 @@ user.role = :admin
 # user.role #=> 'admin'
 ```
 
-2. define filters which define what various roles can do
+2. Define filters in your controllers which define what various roles can do to that particular object
+
+```ruby
+class PostsController < ApplicationController
+  def update
+    @post = Post.find(params[:id])
+    return head(:forbidden) unless current_user.admin? ||
+          current_user.moderator? || current_user.try(:id) == @post.owner_id
+    @post.update(post_params)
+  end
+  # more down here
+end
+```
+
+`current_user.try(:id) == @post.owner_id` ensures that the current user is not a guest, i.e. is logged in and the owner of the post
 
