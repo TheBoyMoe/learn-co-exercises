@@ -399,7 +399,7 @@ devise_for :users, controllers: { registrations: 'registrations' }
 ### Additional Customisation
 
 
-11. Install Bootstrap 3
+11. Install Bootstrap 3(so that we can style the forms, flash and error messages consistently)
 
 - add the following gems
 
@@ -534,3 +534,68 @@ before_action :authenticate_user!
 ```
 
 You will automatically redirected to the welcome page following successful authentication.
+
+
+17. To enable email confirmation upon user registration through Devise(a user will not be able to logon to their account until the user has clicked on the link within the email), do the following:
+
+- add the `:confirmable` property to the user model
+
+```ruby
+# app/models/user.rb
+class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+
+  validates :name, presence: true
+end
+```
+
+- we'll need to add a series of columns to the user table, create a migration and add the following content:
+
+```ruby
+class AddConfirmableToDevise < ActiveRecord::Migration[5.1]
+  def up
+    add_column :users, :confirmation_token, :string
+    add_column :users, :confirmed_at, :datetime
+    add_column :users, :confirmation_sent_at, :datetime
+    # add_column :users, :unconfirmed_email, :string # Only if using reconfirmable
+    add_index :users, :confirmation_token, unique: true
+    # User.reset_column_information # Need for some types of updates, but not for update_all.
+    # To avoid a short time window between running the migration and updating all existing
+    # users as confirmed, do the following
+    User.all.update_all confirmed_at: DateTime.now
+    # All existing user accounts should be able to log in after this.
+  end
+
+  def down
+    remove_columns :users, :confirmation_token, :confirmed_at, :confirmation_sent_at
+    # remove_columns :users, :unconfirmed_email # Only if using reconfirmable
+  end
+end
+```
+
+- run the migration, `bundle exec rake db:migrate`
+
+- create a custom mailer that extends the `Devise::Mailer`. 
+
+```ruby
+# app/mailers/demo_mailer.rb
+class DemoMailer < Devise::Mailer   
+  helper :application # gives access to all helpers defined within `application_helper`.
+  include Devise::Controllers::UrlHelpers # Optional. eg. `confirmation_url`
+  default template_path: 'devise/mailer' # to make sure that your mailer uses the devise views
+end
+```
+
+- in `config/initializers/devise.rb`, set `config.mailer` to `"DemoMailer"`
+
+- we need to configure the the mailer to run in development(in production we would use a proper smtp service)
+ 
+
+
+#### References
+
+[Configure Devise to send a confirmation email](# https://github.com/plataformatec/devise/wiki/How-To:-Use-custom-mailer)
+[Custom Mailer](# https://github.com/plataformatec/devise/wiki/How-To:-Use-custom-mailer)
