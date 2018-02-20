@@ -316,7 +316,7 @@ Check the devise-email-facebook-demo in the Sandbox repo for a working version
 
 Devise supports user authorisation, what users are allowed to do, through the use of roles.
 
-1. Define the required role's in the User model through the use of an enum
+1. Define the required role's in the User model through the use of an enum(not the only way!).
 
 ```ruby
 class User < ApplicationRecord
@@ -325,8 +325,39 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
          
-  enum role: [:normal, :moderator, :admin]       
+  enum role: [:user, :vip, :admin]
+  after_initialize :set_default_role, if: :new_record?
+  
+  private
+    def set_default_role
+      self.role ||= :user
+    end
+      
 end
 ```
 
-Enums are stored in the database as integers, thus `user.role` 
+Enums are stored in the database as integers, add a `role` column to the users table with a datatype of integer and run the migrations
+
+```ruby
+rails g migration AddRoleToUsers role:integer
+
+# creates the following migration
+class AddRoleToUsers < ActiveRecord::Migration[5.1]
+  def change
+    add_column :users, :role, :integer
+  end
+end
+```
+
+
+This gives you a number of useful methods:
+
+```ruby
+user.admin? # true/false
+user.admin! # sets the role to 'admin'
+user.role = 1 
+# user.role => 'vip'
+user.role = :admin
+# user.role #=> 'admin'
+```
+
