@@ -1,0 +1,9 @@
+tags:
+  - devise
+  - rails
+  - engine
+  - roles
+languages:
+  - Ruby
+resources:
+  - https://github.com/plataformatec/devise
