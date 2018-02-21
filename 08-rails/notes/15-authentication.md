@@ -131,6 +131,7 @@ end
 <% end %>
 ```
 
+
 ### Securing Passwords in Rails
 
 Rails provides the `has_secure_password` method - requires the `bcrypt` gem.
