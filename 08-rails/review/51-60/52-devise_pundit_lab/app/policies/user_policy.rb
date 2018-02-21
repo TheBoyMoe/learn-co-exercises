@@ -11,12 +11,12 @@ class UserPolicy < ApplicationPolicy
 		user.admin? || user == record
 	end
 
-	# allows only admin to make updates
+	# allows the admin or owner to make updates
 	def update?
 		user.admin?
 	end
 
-	# allows only admins to delete the user
+	# allows the admin to delete the user(and not their own account)
 	def destroy?
 		user.admin? || (user != record)
 	end

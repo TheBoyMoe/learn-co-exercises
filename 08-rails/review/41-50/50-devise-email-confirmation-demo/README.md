@@ -117,11 +117,22 @@ and and the routing table, enabling devise to use the name attribute
 devise_for :users, controllers: { registrations: 'registrations' }
 ```
 
+11. Add `current_user` method to `app/helpers/sessions_helper.rb` file
+
+```ruby
+module SessionsHelper
+
+	def current_user
+		User.find_by(id: session[:user_id])
+	end
+end
+```
+
 
 ### Additional Customisation
 
 
-11. Install Bootstrap 3(so that we can style the forms, flash and error messages consistently)
+12. Install Bootstrap 3(so that we can style the forms, flash and error messages consistently)
 
 - add the following gems
 
@@ -167,7 +178,7 @@ gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 ```
 
 
-12. You can define custom devise error messages using a devise helper that will display flash messages which include bootstrap classes.
+13. You can define custom devise error messages using a devise helper that will display flash messages which include bootstrap classes.
    
 ```ruby
 # app/helpers/devise_helper.rb
@@ -197,7 +208,7 @@ module DeviseHelper
 end
 ```
 
-13. Apply bootstrap styles on flash messages by implementing a custom flash message template, place in the `app/views/layout` folder.
+14. Apply bootstrap styles on flash messages by implementing a custom flash message template, place in the `app/views/layout` folder.
 
 ```html
 <% if flash.any? %>
@@ -221,7 +232,7 @@ Call it in the `application.hml.erb` template like so:
 ```
 
 
-14. Add a navbar template which will show a login/logout link depending on whether the user is logged in. Call the partial in the application layout.
+15. Add a navbar template which will show a login/logout link depending on whether the user is logged in. Call the partial in the application layout.
 
 ```html
 <!--app/layouts/_navbar.html.erb-->
@@ -237,7 +248,7 @@ Call it in the `application.hml.erb` template like so:
 </nav>0
 ```
 
-15. simplify devise sign_up, sign_in and sign_out paths by editing `config/routes.rb`
+16. simplify devise sign_up, sign_in and sign_out paths by editing `config/routes.rb`
 
 
 ```ruby
@@ -249,7 +260,7 @@ devise_for :users, path: '', path_names: {
 controllers: { registrations: 'registrations' }
 ```
 
-16. Require that a user be logged in to use the site by adding the following line to `app/controllers/application_controller.rb`
+17. Require that a user be logged in to use the site by adding the following line to `app/controllers/application_controller.rb`
 
 ```ruby
 before_action :authenticate_user!
@@ -258,7 +269,7 @@ before_action :authenticate_user!
 You will automatically redirected to the welcome page following successful authentication.
 
 
-17. To enable email confirmation upon user registration through Devise(a user will not be able to logon to their account until the user has clicked on the link within the email), do the following:
+18. To enable email confirmation upon user registration through Devise(a user will not be able to logon to their account until the user has clicked on the link within the email), do the following:
 
 - add the `:confirmable` property to the user model
 
