@@ -189,7 +189,7 @@ end
 ```
 
 
-### Omniauth, Devise and 3rd Party Authentication
+### Omniauth and 3rd Party Authentication
 
 The OmniAuth gem `omniauth-google` supports user signin using the OAuth protocol with 3rd party providers such a s Twitter, Facebook, Google, etc - simply add the gem to your project and include the provider specific strategy.
 
@@ -387,13 +387,24 @@ The [CanCanCan](https://github.com/CanCanCommunity/cancancan) gem is an authoris
 
 The [Pundit](https://github.com/varvet/pundit) gem is focused around the notion of defining a policy class for a particular model, e.g. PostPolicy, in which you define the particular authorisation rules that users can perform with that model. This provides a modular way to separate authorisation logic from both your controllers and models. You can use Devise roles to define the different types of users, e.g. admin, editor, user, etc.
 
-To install Pundit, add the gem and include a reference to Pundit in the `ApplicationController`
-
+To install Pundit, add the gem and include a reference to Pundit in the `ApplicationController`. Include the additional `user_not_authorized`
+ method to handle `Pundit::NotAuthorizedError`
+ 
+ 
 ```ruby
 # app/controllers/application_controller.rb
 class ApplicationController < ActionController::Base
-	include Pundit  # add this line
 	protect_from_forgery
+	
+	include Pundit
+	
+	rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  
+	private
+		def user_not_authorized(exception)
+			flash[:error] = "Access denied."
+			redirect_to(request.referrer || root_path)
+		end
 end
 ```
 

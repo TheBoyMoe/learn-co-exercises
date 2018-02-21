@@ -93,7 +93,7 @@ validates :name, presence: true
 ```
 
 
-We need to extend the `Devise::RegistrationsController`
+We need to extend the `Devise::RegistrationsController` since we're adding additional attributes to the user model
 
 
 ```ruby
