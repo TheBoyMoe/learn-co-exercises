@@ -384,7 +384,7 @@ Using Devise roles to filter what users are authorised to do/access in controlle
 
 The [CanCanCan](https://github.com/CanCanCommunity/cancancan) gem is an authorisation library which implements user permissions which are checked in the app's controllers. This works fine in simple apps.
 
-The [Pundit](https://github.com/varvet/pundit) gem is focused around the notion of defining a policy class for a particular model, e.g. PostPolicy, in which you define the particular authorisation rules that users can perform with that model. This provides a modular way to separate authorisation logic from both your controllers and models. 
+The [Pundit](https://github.com/varvet/pundit) gem is focused around the notion of defining a policy class for a particular model, e.g. PostPolicy, in which you define the particular authorisation rules that users can perform with that model. This provides a modular way to separate authorisation logic from both your controllers and models. You can use Devise roles to define the different types of users, e.g. admin, editor, user, etc.
 
 To install Pundit, add the gem and include a reference to Pundit in the `ApplicationController`
 
@@ -470,4 +470,82 @@ Pundit also offers `helpers` (which can be used in views), e.g.
 policy(@post)
 # is equivalent to
 PostPolicy.new(current_user, @post) 
+```
+
+**Testing**  
+
+It's also straightforward to write unit tests that will check our authorisation rules, simply pass in the model objects and assert that the correct action occurs, e.g.
+
+```ruby
+class PostPolicyTest
+	test "users can't update others posts" do
+		amethyst = users(:amethyst)
+		post = posts(:garnet_private)
+		expect(post.user).not_to eq(amethyst)
+		expect(PostPolicy.new(amethyst, post).update?).to be false
+	end
+end
+```
+
+**Permitted Parameters**  
+
+Pundit allows you to control what attributes of a model a user can update through the `permitted_attributes` method
+
+
+```ruby
+class PostPolicy < ApplicationPolicy
+	def permitted_attributes
+		# users can update an post tag, but only admins or the posts's owner can update the title or body
+		if user.admin? || user.owner_of?(post)
+			[:title, :body, :tag_list]
+		else
+			[:tag_list]
+		end
+	end
+end
+
+
+class PostsController
+	def update
+		@post = Post.find(params[:id])
+		if @post.update_attributes(permitted_attributes(@post))
+			redirect_to @post
+		else
+			render :edit
+		end
+	end
+end
+```
+
+Pundit allows us to use `permitted_attributes` as a helper in controllers, it takes the model and returns which attributes are writable.
+
+
+**Scope**  
+
+Is a feature of Pundit that allows you to return the result of a sql query to certain users, e.g. in a blog where you have both published and draft posts, you may choose to show only published and draft posts to admin users. You define a class named Scope, which inherits from Scope, inside your policy. 
+
+```ruby
+class PostPolicy < ApplicationPolicy
+
+ class Scope < Scope
+	 def resolve
+		 if user.admin?
+			 scope.all
+		 else
+			 scope.where(:published => true)
+		 end
+	 end
+ end
+ 
+ # ... more
+end
+```
+
+
+The Scope class initializes with a user and a scope, which is an ActiveRecord::Relation - lets you chain the policy with your queries, e.g. I can query for all the posts on a particular topic which only I can see - which you can do in a view like so:
+
+```html
+<% policy_scope(@user.posts).each do |post| %>
+	<p><%= link_to post.title, post_path(post) %></p>
+<% end %>
 ```
