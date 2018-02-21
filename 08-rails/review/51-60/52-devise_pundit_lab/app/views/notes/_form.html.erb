@@ -1,0 +1,7 @@
+<%= form_for note do |f| %>
+  <%= f.label :content %>
+  <%= f.text_field :content %>
+  <%= f.label :visible_to %>
+  <%= f.text_field :visible_to %>
+  <%= f.submit 'save' %>
+<% end %>

@@ -1,0 +1,10 @@
+tags:
+  - devise
+  - pundit
+  - roles
+  - authentication
+languages:
+  - Ruby
+resources:
+  - https://github.com/platformatec/devise
+  - https://github.com/elabs/pundit
