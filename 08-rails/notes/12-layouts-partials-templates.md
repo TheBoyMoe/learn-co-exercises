@@ -85,3 +85,32 @@ This technique also allows you to handle empty collections - you must use `rende
 	<%= render(@posts) || "There are no blog posts"  %>
 ```
 
+### Example Navbar
+
+```html
+ <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		<a class="navbar-brand" href="<%= root_url %>"/>Home</a>
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<!--navigation depends on Devise being installed-->
+				<% if user_signed_in? %>
+					<li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+				<% else %>
+					<li><%= link_to 'Sign up', new_user_registration_path %></li>
+					<li><%= link_to 'Sign in', new_user_session_path %></li>
+				<% end %>
+			</ul>
+		</div><!--/.nav-collapse -->
+	</div>
+</div>
+
+```
