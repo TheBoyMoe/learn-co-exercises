@@ -330,3 +330,35 @@ Resulting html (values are empty strings on a blank form, instance values are ni
     <input type="submit" name="commit" value="Update" />
   </form>
 ```
+
+
+### Example button built using form_tag
+
+Taken from the Rails Amusement Park lab(labs/54)
+Uses hidden input fields to submit data to the controller action
+
+```html
+<!--app/views/attractions/show.html.erb-->
+<%= form_tag rides_new_path, method: 'post' do %>
+
+	<%= hidden_field_tag(:attraction_id, value = @attraction.id) %>
+	<%= hidden_field_tag(:user_id, value = current_user.id) %>
+
+	<%= submit_tag 'Go on this ride' %>
+<% end %>
+```
+
+```ruby
+# a//controllers/rides_controller.rb
+class RidesController < ApplicationController
+
+	def new
+		@ride = Ride.create(
+				user_id: params[:user_id],
+				attraction_id: params[:attraction_id]
+		)
+		message_string = @ride.take_ride
+		redirect_to user_path(@ride.user_id), notice: message_string
+	end
+end
+```
