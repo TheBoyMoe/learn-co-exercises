@@ -1,0 +1,36 @@
+{
+  "name": "js-hoisting-readme",
+  "version": "0.1.0",
+  "description": "JavaScript hoisting code-along for Learn.co",
+  "main": "hoisting.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha -R mocha-multi --reporter-options nyan=-,json=.results.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/learn-co-curriculum/js-hoisting-readme.git"
+  },
+  "keywords": [
+    "learn",
+    "javascript",
+    "hoisting",
+    "flatiron"
+  ],
+  "author": "Learn.co",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/learn-co-curriculum/js-hoisting-readme/issues"
+  },
+  "homepage": "https://github.com/learn-co-curriculum/js-hoisting-readme#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-spies": "^0.7.1",
+    "jsdom": "^8.5.0",
+    "mocha": "^2.4.5",
+    "mocha-jsdom": "^1.1.0",
+    "mocha-multi": "^0.9.0"
+  }
+}
