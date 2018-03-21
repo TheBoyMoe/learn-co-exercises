@@ -1,0 +1,41 @@
+{
+  "name": "introduction-to-array-prototype-for-each",
+  "version": "0.2.0",
+  "description": "A short intro to JavaScript&#39;s built-in forEach function",
+  "engines": {
+    "node": "8.x",
+    "npm": "4.x"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -R mocha-multi --reporter-options nyan=-,json=.results.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/learn-co-curriculum/introduction-to-array-prototype-for-each.git"
+  },
+  "keywords": [
+    "javascript",
+    "forEach",
+    "iteration",
+    "callback",
+    "looping",
+    "for loop",
+    "flatiron",
+    "learn"
+  ],
+  "author": "pletcher",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/learn-co-curriculum/introduction-to-array-prototype-for-each/issues"
+  },
+  "homepage": "https://github.com/learn-co-curriculum/introduction-to-array-prototype-for-each",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-spies": "^0.7.1",
+    "jsdom": "^9.1.0",
+    "mocha": "^2.4.5",
+    "mocha-jsdom": "^1.1.0",
+    "mocha-multi": "^0.9.0"
+  }
+}
