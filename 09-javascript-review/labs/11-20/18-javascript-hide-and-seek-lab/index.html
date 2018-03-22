@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JavaScript Hide and Seek</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="node_modules/mocha/mocha.css" />
+  </head>
+  <body>
+    <main id="app">
+      <ul class="unranked-list">
+        <li>2</li>
+        <li>5</li>
+        <li>4</li>
+      </ul>
+
+      <ul class="ranked-list">
+        <li>1</li>
+        <li>2</li>
+      </ul>
+
+      <ul class="ranked-list">
+        <li>12</li>
+        <li>11</li>
+        <li>10</li>
+      </ul>
+
+      <div id="nested">
+        <div>
+          <div>
+            <div>
+              <div class="target">
+                1
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="grand-node">
+        <div>
+          <div>
+            <div>
+              <div>
+                boo!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="index.js"></script>
+    <!-- Open this file and call `mocha.run()` in console to run tests -->
+    <div id="mocha"></div>
+    <script src="node_modules/mocha/mocha.js"></script>
+    <script src="node_modules/expect/umd/expect.min.js"></script>
+    <script>mocha.setup('bdd');</script>
+    <script src="test/index-test.js"></script>
+  </body>
+</html>
