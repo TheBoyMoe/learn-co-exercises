@@ -78,6 +78,7 @@ reduce(couponLocations, couponCounterCallback, 0)
 reduce(couponLocations, couponCounterCallback, 3)
 
 // using the reduce() method in the JS library
+// two args, callback, followed by initial value
 couponLocations.reduce(couponCounterCallback, 0)
 
 
