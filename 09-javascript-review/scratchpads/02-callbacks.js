@@ -2,6 +2,39 @@
 // First class functions
 "use strict";
 
+// using callbacks
+
+var callback = (n,i)=>{
+  if (n == 1){
+    return `found a match, index ${i}`
+  } else {
+    return n * n
+  }
+}
+
+var findOne = (array)=>{
+  return array.map(callback)
+}
+
+findOne([2,3,4,1,5,6,7,8])
+
+///////////////////////////////////////////////////////////////
+
+var matcher = (e, v)=>{
+  if (e == v) return true
+}
+
+var findMatch = (array, value, callback)=>{
+  debugger
+  for(let i = 0; i < array.length; i++){
+    if(callback(array[i], value)) return i
+  }
+  return false
+}
+
+
+////////////////////////////////////////////////////////////
+
 let liftWeights = ()=>{
 	return 'just popped a sweat pumping iron!'
 }
@@ -32,28 +65,3 @@ let morningRoutine = (exercise)=>{
 }
 
 morningRoutine(liftWeights)()
-
-////////////////////////////////////////
-// Closures
-
-let whatsForTea = (item)=>{
-  let checkItem = ()=>{
-    return (item === 'chocolate')? 'I love chocolate': (item === 'pancakes')? 'hhhmmm pancakes with syrup': (!item)? 'Someone stole my food' : `I hate ${item}, where's my food!!!!`
-  }
-
-  let stealItem = ()=> item = null
-
-  return {
-    checkItem,
-    stealItem
-  }
-}
-
-let result = whatsForTea('chocolate')
-result.checkItem()
-result["checkItem"]()
-
-// using es6 object destructuring, variable name MUST match method names
-let {checkItem, stoleItem} = whatsForTea('pancakes')
-checkItem()
-stoleItem()
