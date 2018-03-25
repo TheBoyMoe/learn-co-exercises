@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JavaScript Hand-Written Templates</title>
+    <script src="index.js" type="text/javascript" charset="utf-8"></script>
+  </head>
+  <body>
+    <article>
+      <header><h2>The Results are In!</h2></header>
+      <p>
+        After careful consideration and a generous grant from NASA, our team has determined that a woodchuck could chuck five wood, with a standard deviation of +/- .37 wood.
+      </p>
+      <footer>posted by Chuck Wooden</footer>
+      <br><br>
+      <!--<a href="#" onclick="addComment();">Add a comment</a>-->
+
+      <!--add comment form-->
+      <form id="newComment" onsubmit="addComment()">
+        <label for="commentText">Add comment</label><br>
+        <input type="text" id="commentText"><br><br>
+        <label for="commenterName">Your Name</label><br>
+        <input type="text" id="commenterName">
+        <input type="submit">
+      </form>
+
+      <div id="comments"></div>
+    </article>
+    <script src="index.js"></script>
+    <script>
+//      function addComment() {
+//        var commentDiv = document.getElementById('comments');
+//        commentDiv.innerHTML =
+//           '<div>' +
+//           '<p>This research is bold and important!</p>' +
+//           '<p>I wish to join your team</p>' +
+//           '<p>posted by: <span>I swear I am not a woodchuck</span></p>' +
+//           '</div><div></div>';
+//      }
+    </script>
+  </body>
+</html>
