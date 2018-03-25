@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JavaScript lodash Templates</title>
+  </head>
+  <body>
+    <article>
+      <header><h2>The Results are In!</h2></header>
+      <p>
+        After careful consideration and a generous grant from NASA, our team has determined that a woodchuck could chuck five wood, with a standard deviation of +/- .37 wood.
+      </p>
+      <footer>posted by Chuck Wooden</footer>
+      <br><br>
+
+      <!-- comment form-->
+      <form id="newComment" onsubmit="postComment()">
+        <label for="commentText">Add comment</label><br>
+        <textarea type="text" id="commentText"></textarea><br><br>
+        <label for="commenterName">Your Name</label><br>
+        <input type="text" id="commenterName"><br><br>
+        <input type="submit" name="Submit">
+      </form>
+      <br>
+
+      <!--display comments-->
+      <div id="comments"></div>
+
+    </article>
+    <script src="lodash.min.js"></script>
+    <!--we can avoid putting our template 'inside a string' using ths script and lodash-->
+    <!--disable the 'commentTemplate' in index.js-->
+
+    <!--using the <%- %> tag stops any code added to the input/textarea being escaped and NOT interpreted-->
+    <!--to execute some non-printing JavaScript code in our template. We can use the <% %>, or eval delimiter.-->
+
+    <script type="text/x-lodash-template" id="comment-template">
+      <div class="comment">
+        <div class="comment-body"><p><%- comment %></p></div>
+        <div class="commenter">
+          <p>
+            <span class="posted-by">Posted By: </span>
+            <% if(commenter !== ''){ %>
+              <%= commenter %>
+            <% } else { %>
+              Anonymous
+            <% } %>
+          </p>
+        </div>
+      </div>
+    </script>
+
+    <script src="index.js"></script>
+  </body>
+</html>
