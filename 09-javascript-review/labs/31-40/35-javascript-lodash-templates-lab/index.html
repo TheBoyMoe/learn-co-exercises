@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JavaScript lodash Templates Lab</title>
+  </head>
+  <body>
+    <main>
+      <h1>Add a Post</h1>
+      <form id="post-form" onsubmit="createPost()">
+        <label for="postTitle">Title</label><br>
+        <input type="text" id="postTitle"><br><br>
+        <label for="postContent">Content</label><br>
+        <textarea type="text" id="postContent"></textarea><br><br>
+        <label for="postAuthor">Name</label><br>
+        <input type="text" id="postAuthor"><br><br>
+        <input type="submit" name="Submit">
+      </form>
+      <br>
+    </main>
+    <script src="node_modules/lodash/lodash.min.js"></script>
+    <script type="text/x-lodash-template" id="page-template">
+      <div>
+        <div id="post"></div>
+        <div id="sidebar"></div>
+      </div>
+    </script>
+
+    <script type="text/x-lodash-template" id="post-template">
+      <article>
+        <header class="post-title"><%- title %></header>
+        <section class="post-content"><%- content %></section>
+        <footer class="post-author"><%- author %></footer>
+      </article>
+    </script>
+
+    <script type="text/x-lodash-template" id="comments-template">
+      <form onsubmit="postComment()">
+        <label for="commentText">Add comment</label><br>
+        <textarea type="text" id="commentText"></textarea><br><br>
+        <label for="commenterName">Your Name</label><br>
+        <input type="text" id="commenterName"><br><br>
+        <input type="submit" name="Submit">
+      </form>
+      <br>
+      <div id="comments"></div>
+    </script>
+
+    <script type="text/x-lodash-template" id="comment-template">
+      <div class="comment">
+        <div class="comment-body"><p><%- comment %></p></div>
+        <footer class="comment-author">
+          <p>
+            <span class="posted-by">Posted By: </span>
+            <%= commenter %>
+          </p>
+        </footer>
+      </div>
+    </script>
+
+    <script src="index.js"></script>
+    <!-- Open this file and call `mocha.run()` in console to run tests -->
+    <div id="mocha"></div>
+    <script src="node_modules/mocha/mocha.js"></script>
+    <script src="node_modules/expect/umd/expect.min.js"></script>
+    <!--<script src="node_modules/jquery/dist/jquery.min.js"></script>-->
+    <script>mocha.setup('bdd');</script>
+    <script src="test/index-test.js"></script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+{
+  "name": "java-script-handlebars-templates-lab",
+  "version": "0.1.0",
+  "description": "",
+  "engines": {
+    "node": "6.x",
+    "npm": "3.x"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -R mocha-multi --reporter-options nyan=-,json=.results.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/learn-co-curriculum/java-script-handlebars-templates-lab.git"
+  },
+  "keywords": [
+    "javascript",
+    "flatiron",
+    "learn"
+  ],
+  "author": "pletcher",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/learn-co-curriculum/java-script-handlebars-templates-lab/issues"
+  },
+  "homepage": "https://github.com/learn-co-curriculum/java-script-handlebars-templates-lab#readme",
+  "devDependencies": {
+    "babel-core": "^6.11.4",
+    "babel-preset-es2015": "^6.9.0",
+    "expect": "^1.20.2",
+    "jsdom": "^9.2.1",
+    "mocha": "^2.5.3",
+    "mocha-jsdom": "^1.1.0",
+    "mocha-multi": "^0.9.0"
+  },
+  "dependencies": {
+    "expect": "^1.20.2",
+    "handlebars": "^4.0.5",
+    "jsdom": "^9.4.1",
+    "mocha": "^2.5.3",
+    "mocha-jsdom": "^1.1.0"
+  }
+}
