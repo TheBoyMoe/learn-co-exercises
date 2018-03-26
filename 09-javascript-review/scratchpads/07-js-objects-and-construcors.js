@@ -1,4 +1,3 @@
-"use strict";
 
 // create an object using object literal
 var sandwich = {
