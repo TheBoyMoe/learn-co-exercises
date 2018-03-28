@@ -1,0 +1,26 @@
+{
+  "name": "space-invaders",
+  "version": "1.0.0",
+  "description":
+    "Space flight is no joke, and neither is this lab.  You're going to need to create two JS constructors, `Spaceship` and `CrewMember`. These constructors will pump out instances that are by default unable to interact with one another.  A space ship will be inactive if it is created without a crew.  And a crew member by default will be hanging out in the Cantina looking for a ride if they were not put inside a ship when it is initialized.",
+  "main": "crewMember.js",
+  "scripts": {
+    "postinstall": "gem install learn-co",
+    "test":
+      "node_modules/browser-sync/bin/browser-sync.js start --config node_modules/learn-browser/bs-config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/learn-co-curriculum/space-invaders.git"
+  },
+  "keywords": ["js", "classes", "oop"],
+  "author": "Flatiron School",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/learn-co-curriculum/space-invaders/issues"
+  },
+  "homepage": "https://github.com/learn-co-curriculum/space-invaders#readme",
+  "devDependencies": {
+    "learn-browser": "^0.1.14"
+  }
+}
