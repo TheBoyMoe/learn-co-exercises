@@ -1,0 +1,38 @@
+{
+  "name": "js-ajax-callbacks-lab",
+  "version": "1.0.0",
+  "description": "practice jquery ajax",
+  "main": "index.js",
+  "engines": {
+    "node": "6.x",
+    "npm": "3.x"
+  },
+  "scripts": {
+    "test": "mocha -R mocha-multi --reporter-options nyan=-,json=.results.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/learn-co-curriculum/js-ajax-callbacks-lab.git"
+  },
+  "keywords": [
+    "js",
+    "ajax",
+    "jquery",
+    "callbacks"
+  ],
+  "author": "scottcreynolds",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/learn-co-curriculum/js-ajax-callbacks-lab/issues"
+  },
+  "homepage": "https://github.com/learn-co-curriculum/js-ajax-callbacks-lab#readme",
+  "dependencies": {
+    "expect": "^1.20.2",
+    "jquery": "^3.1.0",
+    "jsdom": "^9.4.1",
+    "mocha": "^2.5.3",
+    "mocha-jsdom": "^1.1.0",
+    "mocha-multi": "^0.9.0",
+    "sinon": "^1.17.4"
+  }
+}
