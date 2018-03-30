@@ -13,7 +13,6 @@ function sayHeyFriend(name) {
 
 
 function favoriteIceCream(flavour) {
-  debugger
   return `I love ${flavour}`
 }
 
