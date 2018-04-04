@@ -1,0 +1,984 @@
+  [1m[36m (0.9ms)[0m  [1mCREATE TABLE "authors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "genre" varchar, "bio" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "posts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "description" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "post_status" boolean, "author_id" integer) 
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.4ms)[0m  select sqlite_version(*)
+  [1m[36m (0.6ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20160113011820')[0m
+  [1m[35m (0.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20151230232412')
+  [1m[36m (0.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20160113011041')[0m
+  [1m[35m (0.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20160113011150')
+  [1m[36m (0.7ms)[0m  [1mCREATE TABLE "authors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "genre" varchar, "bio" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "posts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "description" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "post_status" boolean, "author_id" integer) 
+  [1m[36m (0.6ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.6ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20160113011820')[0m
+  [1m[35m (0.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20151230232412')
+  [1m[36m (0.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20160113011041')[0m
+  [1m[35m (0.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20160113011150')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "posts" ("title", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["title", "Testing"], ["description", "testing"], ["created_at", "2016-01-26 15:06:03.106369"], ["updated_at", "2016-01-26 15:06:03.106369"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/" for ::1 at 2016-02-06 11:05:45 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /Users/scottcreynolds/.rvm/gems/ruby-2.1.2/gems/railties-4.2.5/lib/rails/templates/rails/welcome/index.html.erb (1.7ms)
+Completed 200 OK in 19ms (Views: 10.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/authors" for ::1 at 2016-02-06 11:05:49 -0500
+Processing by AuthorsController#index as HTML
+  [1m[35mAuthor Load (0.4ms)[0m  SELECT "authors".* FROM "authors"
+  Rendered authors/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 326ms (Views: 320.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/authors.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-02-06 11:05:50 -0500
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2016-02-06 11:05:50 -0500
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2016-02-06 11:05:50 -0500
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2016-02-06 11:05:50 -0500
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2016-02-06 11:05:50 -0500
+
+
+Started GET "/assets/authors.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-02-06 11:05:50 -0500
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2016-02-06 11:05:50 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mPost Load (0.5ms)[0m  SELECT "posts".* FROM "posts"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  DELETE FROM "posts" WHERE "posts"."id" = ?  [["id", 1]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mAuthor Load (0.5ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "authors" ("name", "genre", "bio", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Stephen King"], ["genre", "Romance"], ["bio", "Writes a lot of scary things."], ["created_at", "2016-02-06 16:05:58.242754"], ["updated_at", "2016-02-06 16:05:58.242754"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "authors" ("name", "genre", "bio", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Ariana Huffington"], ["genre", "Comedy"], ["bio", "Up and comer. One to watch."], ["created_at", "2016-02-06 16:05:58.246122"], ["updated_at", "2016-02-06 16:05:58.246122"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "authors" ("name", "genre", "bio", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Horse Ebooks"], ["genre", "?????"], ["bio", "Eclectic."], ["created_at", "2016-02-06 16:05:58.248254"], ["updated_at", "2016-02-06 16:05:58.248254"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "posts" ("title", "description", "author_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["title", "Something About Democrats"], ["description", "  Last night I dreamt there is more to life than to bully friends.\n  What has that got to do with Democrats, you probably wonder...\n  The answer is here. Right here. Back in school my hair was silly.\n  Nevermind about the details, but... In a nut-shell: And still,\n  it was strange. Using Google, I found a 12-sided dice.\n  Which would be nothing special but...\n"], ["author_id", 1], ["created_at", "2016-02-06 16:05:58.256941"], ["updated_at", "2016-02-06 16:05:58.256941"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "posts" ("title", "description", "author_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "Spam Spam Spam"], ["description", "  It occurred to me that no matter what cards you are dealt,\n  you need to enjoy the small joys. How is this related to Spam, you ask.\n  Fair enough. OK, I will tell you something here now...\n  Sometime around last year I loved movies. Yeah, just what it sounds like.\n  In a nut-shell: And still, it was strange. I collided with the powers of a my computer,\n  broken and gray. And here's why this matters...\n"], ["author_id", 2], ["created_at", "2016-02-06 16:05:58.259955"], ["updated_at", "2016-02-06 16:05:58.259955"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "posts" ("title", "description", "author_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["title", "Links! Click Links!"], ["description", "  Last night I dreamt we simply need to realize to be so competitive.\n  Does the responsibility lie with Links, you probably wonder...\n  The answer is here. Right here. About the time I broke up with my\n  ex I was totally into music. Whatever. So that's that.\n  But something wasn't right. I stumbled upon a giant banana.\n"], ["author_id", 3], ["created_at", "2016-02-06 16:05:58.262234"], ["updated_at", "2016-02-06 16:05:58.262234"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE "posts" SET "created_at" = ?, "updated_at" = ? WHERE "posts"."id" = ?  [["created_at", "2016-02-05 00:00:00.000000"], ["updated_at", "2016-02-06 16:05:58.265939"], ["id", 4]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/authors" for ::1 at 2016-02-06 11:06:04 -0500
+Processing by AuthorsController#index as HTML
+  [1m[36mAuthor Load (0.2ms)[0m  [1mSELECT "authors".* FROM "authors"[0m
+  Rendered authors/index.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 18ms (Views: 15.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2016-02-06 11:06:04 -0500
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2016-02-06 11:06:04 -0500
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2016-02-06 11:06:04 -0500
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2016-02-06 11:06:04 -0500
+
+
+Started GET "/assets/authors.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-02-06 11:06:04 -0500
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2016-02-06 11:06:04 -0500
+
+
+Started GET "/assets/authors.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-02-06 11:06:04 -0500
+
+
+Started GET "/authors" for ::1 at 2016-02-06 11:06:51 -0500
+Processing by AuthorsController#index as HTML
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT "authors".* FROM "authors"
+  Rendered authors/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 15ms (Views: 12.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/authors.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-02-06 11:06:51 -0500
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2016-02-06 11:06:51 -0500
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2016-02-06 11:06:51 -0500
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2016-02-06 11:06:51 -0500
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2016-02-06 11:06:51 -0500
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2016-02-06 11:06:51 -0500
+
+
+Started GET "/assets/authors.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-02-06 11:06:51 -0500
+
+
+Started GET "/authors/new" for ::1 at 2016-02-06 11:06:53 -0500
+Processing by AuthorsController#new as HTML
+  Rendered authors/_form.html.erb (19.0ms)
+  Rendered authors/new.html.erb within layouts/application (23.0ms)
+Completed 200 OK in 35ms (Views: 34.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/authors" for ::1 at 2016-02-06 11:06:58 -0500
+
+AbstractController::ActionNotFound (The action 'create' could not be found for AuthorsController):
+  actionpack (4.2.5) lib/abstract_controller/base.rb:132:in `process'
+  actionview (4.2.5) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.5) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.5) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.5) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.5) lib/action_dispatch/routing/route_set.rb:76:in `call'
+  actionpack (4.2.5) lib/action_dispatch/routing/route_set.rb:76:in `dispatch'
+  actionpack (4.2.5) lib/action_dispatch/routing/route_set.rb:45:in `serve'
+  actionpack (4.2.5) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.5) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.5) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.5) lib/action_dispatch/routing/route_set.rb:817:in `call'
+  rack (1.6.4) lib/rack/etag.rb:24:in `call'
+  rack (1.6.4) lib/rack/conditionalget.rb:38:in `call'
+  rack (1.6.4) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.5) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.5) lib/active_record/connection_adapters/abstract/connection_pool.rb:653:in `call'
+  activerecord (4.2.5) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.5) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.5) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.5) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.5) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.2.1) lib/web_console/middleware.rb:39:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.5) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.5) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.5) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.5) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.5) lib/rails/engine.rb:518:in `call'
+  railties (4.2.5) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/scottcreynolds/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /Users/scottcreynolds/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /Users/scottcreynolds/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Users/scottcreynolds/.rvm/gems/ruby-2.1.2/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/unknown_action.html.erb within rescues/layout (0.4ms)
+  Rendered /Users/scottcreynolds/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.2ms)
+  Rendered /Users/scottcreynolds/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/scottcreynolds/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/scottcreynolds/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/scottcreynolds/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (18.9ms)
+  Rendered /Users/scottcreynolds/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/scottcreynolds/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/scottcreynolds/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (38.7ms)
+
+
+Started POST "/authors" for ::1 at 2016-02-06 11:07:10 -0500
+Processing by AuthorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"nfJ19kYyvI1LZM6HO2pwq9jc3DxTzFbAD08EtpUZXIJp8bqQHQfuqOu9Kii9fdbpaJQTkQHM1d3YKX3014EYww==", "author"=>{"name"=>"Test", "bio"=>"man"}, "commit"=>"Create Author"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "authors" ("bio", "name", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["bio", "man"], ["name", "Test"], ["created_at", "2016-02-06 16:07:10.399317"], ["updated_at", "2016-02-06 16:07:10.399317"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/authors/4
+Completed 302 Found in 11ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/authors/4" for ::1 at 2016-02-06 11:07:10 -0500
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mPost Load (0.1ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = ?[0m  [["author_id", 4]]
+  Rendered authors/show.html.erb within layouts/application (16.5ms)
+Completed 200 OK in 35ms (Views: 28.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/authors.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-02-06 11:07:10 -0500
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2016-02-06 11:07:10 -0500
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2016-02-06 11:07:10 -0500
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2016-02-06 11:07:10 -0500
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2016-02-06 11:07:10 -0500
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2016-02-06 11:07:10 -0500
+
+
+Started GET "/assets/authors.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-02-06 11:07:10 -0500
+
+
+Started GET "/authors" for ::1 at 2016-02-06 11:07:16 -0500
+Processing by AuthorsController#index as HTML
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT "authors".* FROM "authors"
+  Rendered authors/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 18ms (Views: 17.3ms | ActiveRecord: 0.2ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mPost Load (0.3ms)[0m  SELECT "posts".* FROM "posts"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  DELETE FROM "posts" WHERE "posts"."id" = ?  [["id", 2]]
+  [1m[36m (80.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "posts" WHERE "posts"."id" = ?[0m  [["id", 3]]
+  [1m[35m (76.3ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  DELETE FROM "posts" WHERE "posts"."id" = ?  [["id", 4]]
+  [1m[36m (75.9ms)[0m  [1mcommit transaction[0m
+  [1m[35mAuthor Load (0.3ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  DELETE FROM "authors" WHERE "authors"."id" = ?  [["id", 1]]
+  [1m[36m (71.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mDELETE FROM "authors" WHERE "authors"."id" = ?[0m  [["id", 2]]
+  [1m[35m (76.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "authors" WHERE "authors"."id" = ?  [["id", 3]]
+  [1m[36m (76.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mDELETE FROM "authors" WHERE "authors"."id" = ?[0m  [["id", 4]]
+  [1m[35m (76.0ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "authors" ("name", "genre", "bio", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Stephen King"], ["genre", "Romance"], ["bio", "Writes a lot of scary things."], ["created_at", "2018-04-03 18:43:20.923266"], ["updated_at", "2018-04-03 18:43:20.923266"]]
+  [1m[36m (59.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "authors" ("name", "genre", "bio", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Ariana Huffington"], ["genre", "Comedy"], ["bio", "Up and comer. One to watch."], ["created_at", "2018-04-03 18:43:20.986404"], ["updated_at", "2018-04-03 18:43:20.986404"]]
+  [1m[35m (63.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "authors" ("name", "genre", "bio", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Horse Ebooks"], ["genre", "?????"], ["bio", "Eclectic."], ["created_at", "2018-04-03 18:43:21.053121"], ["updated_at", "2018-04-03 18:43:21.053121"]]
+  [1m[36m (63.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "posts" ("title", "description", "author_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["title", "Something About Democrats"], ["description", "  Last night I dreamt there is more to life than to bully friends.\n  What has that got to do with Democrats, you probably wonder...\n  The answer is here. Right here. Back in school my hair was silly.\n  Nevermind about the details, but... In a nut-shell: And still,\n  it was strange. Using Google, I found a 12-sided dice.\n  Which would be nothing special but...\n"], ["author_id", 5], ["created_at", "2018-04-03 18:43:21.148121"], ["updated_at", "2018-04-03 18:43:21.148121"]]
+  [1m[35m (68.4ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "posts" ("title", "description", "author_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "Spam Spam Spam"], ["description", "  It occurred to me that no matter what cards you are dealt,\n  you need to enjoy the small joys. How is this related to Spam, you ask.\n  Fair enough. OK, I will tell you something here now...\n  Sometime around last year I loved movies. Yeah, just what it sounds like.\n  In a nut-shell: And still, it was strange. I collided with the powers of a my computer,\n  broken and gray. And here's why this matters...\n"], ["author_id", 6], ["created_at", "2018-04-03 18:43:21.220637"], ["updated_at", "2018-04-03 18:43:21.220637"]]
+  [1m[36m (62.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "posts" ("title", "description", "author_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["title", "Links! Click Links!"], ["description", "  Last night I dreamt we simply need to realize to be so competitive.\n  Does the responsibility lie with Links, you probably wonder...\n  The answer is here. Right here. About the time I broke up with my\n  ex I was totally into music. Whatever. So that's that.\n  But something wasn't right. I stumbled upon a giant banana.\n"], ["author_id", 7], ["created_at", "2018-04-03 18:43:21.286655"], ["updated_at", "2018-04-03 18:43:21.286655"]]
+  [1m[35m (62.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  UPDATE "posts" SET "created_at" = ?, "updated_at" = ? WHERE "posts"."id" = ?  [["created_at", "2018-04-02 00:00:00.000000"], ["updated_at", "2018-04-03 18:43:21.353017"], ["id", 7]]
+  [1m[36m (60.9ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-03 19:44:43 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/railties-4.2.5/lib/rails/templates/rails/welcome/index.html.erb (14.8ms)
+Completed 200 OK in 95ms (Views: 73.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2018-04-03 19:45:57 +0100
+Processing by PostsController#index as HTML
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts"
+  Rendered posts/index.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 502ms (Views: 496.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/authors.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2018-04-03 19:45:57 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for 127.0.0.1 at 2018-04-03 19:45:57 +0100
+
+
+Started GET "/assets/authors.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2018-04-03 19:45:57 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for 127.0.0.1 at 2018-04-03 19:45:57 +0100
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for 127.0.0.1 at 2018-04-03 19:45:57 +0100
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2018-04-03 19:46:08 +0100
+Processing by PostsController#new as HTML
+  Rendered posts/new.html.erb within layouts/application (321.5ms)
+Completed 200 OK in 347ms (Views: 345.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2018-04-03 19:46:41 +0100
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"QSe24TSVZlq7m4DkGV0b46TPs4FQYV/Ia1F/NbT7SR7o2XZJl8IBYAdBD9Kzhw2zIavgc97PbnRKZ+ILbsm0Tg==", "post"=>{"title"=>"Just another title", "description"=>"Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring."}, "commit"=>"Create Post"}
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+ActiveRecord::UnknownAttributeError (unknown attribute 'utf8' for Post.):
+  app/controllers/posts_controller.rb:15:in `create'
+
+
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (8.6ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.7ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (31.2ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.6ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.5ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (64.1ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.7ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.7ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (172.8ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2018-04-03 19:50:45 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PostsController#new as HTML
+  Rendered posts/new.html.erb within layouts/application (11.4ms)
+Completed 200 OK in 254ms (Views: 235.8ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2018-04-03 19:50:57 +0100
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ukaWuKufy+h+U0h1JOA1n9okrTHbqk6wVjsxeNebgfgTuFYQCMis0sKJx0OOOiPPX0D+w1UEfwx3DaxGDal8qA==", "post"=>{"title"=>"title", "description"=>"description"}, "commit"=>"Create Post"}
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms)
+
+ActiveRecord::UnknownAttributeError (unknown attribute 'utf8' for Post.):
+  app/controllers/posts_controller.rb:15:in `create'
+
+
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.6ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.7ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (23.3ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (16.3ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (32.9ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddAttachmentAvatarToAuthors (20180404083057)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "authors" ADD "avatar_file_name" varchar[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "authors" ADD "avatar_content_type" varchar
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "authors" ADD "avatar_file_size" integer[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "authors" ADD "avatar_updated_at" datetime
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180404083057"]]
+  [1m[35m (86.6ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-04 09:38:52 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/railties-4.2.5/lib/rails/templates/rails/welcome/index.html.erb (15.2ms)
+Completed 200 OK in 109ms (Views: 84.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/authors/new" for 127.0.0.1 at 2018-04-04 09:39:05 +0100
+Processing by AuthorsController#new as HTML
+Completed 500 Internal Server Error in 94ms (ActiveRecord: 0.4ms)
+
+NoMethodError (undefined method `validates_attachement_content_type' for #<Class:0x00000003363578>
+Did you mean?  validates_attachment_content_type):
+  app/models/author.rb:6:in `<class:Author>'
+  app/models/author.rb:1:in `<top (required)>'
+  app/controllers/authors_controller.rb:26:in `new'
+
+
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.7ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.5ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (25.2ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (17.5ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (64.2ms)
+
+
+Started GET "/authors/new" for 127.0.0.1 at 2018-04-04 09:39:46 +0100
+Processing by AuthorsController#new as HTML
+  Rendered authors/_form.html.erb (256.8ms)
+  Rendered authors/new.html.erb within layouts/application (258.7ms)
+Completed 200 OK in 665ms (Views: 648.5ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/authors/new" for 127.0.0.1 at 2018-04-04 09:41:06 +0100
+Processing by AuthorsController#new as HTML
+  Rendered authors/_form.html.erb (5.8ms)
+  Rendered authors/new.html.erb within layouts/application (7.6ms)
+Completed 200 OK in 38ms (Views: 37.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/authors/new" for 127.0.0.1 at 2018-04-04 09:41:34 +0100
+Processing by AuthorsController#new as HTML
+  Rendered authors/_form.html.erb (4.5ms)
+  Rendered authors/new.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 34ms (Views: 32.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/authors/new" for 127.0.0.1 at 2018-04-04 09:41:55 +0100
+Processing by AuthorsController#new as HTML
+  Rendered authors/_form.html.erb (4.4ms)
+  Rendered authors/new.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 33ms (Views: 31.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/authors/new" for 127.0.0.1 at 2018-04-04 09:42:28 +0100
+Processing by AuthorsController#new as HTML
+  Rendered authors/_form.html.erb (3.0ms)
+  Rendered authors/new.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 23ms (Views: 21.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/authors" for 127.0.0.1 at 2018-04-04 09:43:40 +0100
+Processing by AuthorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"H9gUDg2qjg1txsfToxOxd1kdgoYGbBNHh9E4HQpWrYwsAAJqWaxVZJL6IIJqk0Ntfp3WnLBfw1AO+MHYNblO7A==", "author"=>{"avatar"=>#<ActionDispatch::Http::UploadedFile:0x007f7e788dac40 @tempfile=#<Tempfile:/tmp/RackMultipart20180404-10081-89qfa1.png>, @original_filename="if_malecostume_403022.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"author[avatar]\"; filename=\"if_malecostume_403022.png\"\r\nContent-Type: image/png\r\n">, "name"=>"Tom Jones", "bio"=>"Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment."}, "commit"=>"Create Author"}
+[paperclip] Trying to link /tmp/RackMultipart20180404-10081-89qfa1.png to /tmp/40315b0b54938fec1acbc3396014f15e20180404-10081-9pmaxm.png
+[paperclip] Trying to link /tmp/40315b0b54938fec1acbc3396014f15e20180404-10081-9pmaxm.png to /tmp/40315b0b54938fec1acbc3396014f15e20180404-10081-1przrg5.png
+Command :: file -b --mime '/tmp/40315b0b54938fec1acbc3396014f15e20180404-10081-1przrg5.png'
+  [1m[35m (0.1ms)[0m  begin transaction
+[paperclip] Trying to link /tmp/40315b0b54938fec1acbc3396014f15e20180404-10081-9pmaxm.png to /tmp/40315b0b54938fec1acbc3396014f15e20180404-10081-1i90ihw.png
+Command :: file -b --mime '/tmp/40315b0b54938fec1acbc3396014f15e20180404-10081-1i90ihw.png'
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "authors" ("bio", "name", "avatar_file_name", "avatar_content_type", "avatar_file_size", "avatar_updated_at", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["bio", "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment."], ["name", "Tom Jones"], ["avatar_file_name", "if_malecostume_403022.png"], ["avatar_content_type", "image/png"], ["avatar_file_size", 7942], ["avatar_updated_at", "2018-04-04 08:43:40.037762"], ["created_at", "2018-04-04 08:43:40.127587"], ["updated_at", "2018-04-04 08:43:40.127587"]]
+  [1m[35m (90.3ms)[0m  commit transaction
+Redirected to http://localhost:3000/authors/8
+Completed 302 Found in 207ms (ActiveRecord: 90.8ms)
+
+
+Started GET "/authors/8" for 127.0.0.1 at 2018-04-04 09:43:40 +0100
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mAuthor Load (0.3ms)[0m  [1mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."author_id" = ?  [["author_id", 8]]
+  Rendered authors/show.html.erb within layouts/application (68.8ms)
+Completed 200 OK in 141ms (Views: 101.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/authors/8" for 127.0.0.1 at 2018-04-04 09:49:06 +0100
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."author_id" = ?  [["author_id", 8]]
+  Rendered authors/show.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 33ms (Views: 31.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/authors" for 127.0.0.1 at 2018-04-04 09:49:13 +0100
+Processing by AuthorsController#index as HTML
+  [1m[36mAuthor Load (0.5ms)[0m  [1mSELECT "authors".* FROM "authors"[0m
+  Rendered authors/index.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 31ms (Views: 29.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/avatars/original/missing.png" for 127.0.0.1 at 2018-04-04 09:49:14 +0100
+
+ActionController::RoutingError (No route matches [GET] "/avatars/original/missing.png"):
+  actionpack (4.2.5) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.2.1) lib/web_console/middleware.rb:39:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.5) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.5) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.5) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.5) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.5) lib/rails/engine.rb:518:in `call'
+  railties (4.2.5) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/theboymo/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/theboymo/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/theboymo/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.6ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.6ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/routes/_table.html.erb (19.7ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.8ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (214.5ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (16.2ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (31.5ms)
+
+
+Started GET "/authors" for 127.0.0.1 at 2018-04-04 09:53:11 +0100
+Processing by AuthorsController#index as HTML
+  [1m[35mAuthor Load (1.1ms)[0m  SELECT "authors".* FROM "authors"
+  Rendered authors/index.html.erb within layouts/application (20.8ms)
+Completed 200 OK in 53ms (Views: 45.1ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/assets/original/default-4d452c63d330fa4ca5200c3fa437bfd595741d59846222f62704f02365fdbc6c.png" for 127.0.0.1 at 2018-04-04 09:53:11 +0100
+
+
+Started GET "/authors" for 127.0.0.1 at 2018-04-04 10:10:15 +0100
+Processing by AuthorsController#index as HTML
+  [1m[36mAuthor Load (0.4ms)[0m  [1mSELECT "authors".* FROM "authors"[0m
+  Rendered authors/index.html.erb within layouts/application (17.1ms)
+Completed 200 OK in 41ms (Views: 36.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/thumb/default-4d452c63d330fa4ca5200c3fa437bfd595741d59846222f62704f02365fdbc6c.png" for 127.0.0.1 at 2018-04-04 10:10:15 +0100
+
+
+Started GET "/system/authors/avatars/000/000/008/thumb/if_malecostume_403022.png?1522831420" for 127.0.0.1 at 2018-04-04 10:10:16 +0100
+
+ActionController::RoutingError (No route matches [GET] "/system/authors/avatars/000/000/008/thumb/if_malecostume_403022.png"):
+  actionpack (4.2.5) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.2.1) lib/web_console/middleware.rb:39:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.5) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.5) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.5) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.5) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.5) lib/rails/engine.rb:518:in `call'
+  railties (4.2.5) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/theboymo/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/theboymo/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/theboymo/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.7ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.3ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.3ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.6ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (24.8ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.6ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (18.3ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.8ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (38.1ms)
+
+
+Started GET "/authors/new" for 127.0.0.1 at 2018-04-04 10:10:25 +0100
+Processing by AuthorsController#new as HTML
+  Rendered authors/_form.html.erb (3.8ms)
+  Rendered authors/new.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 26ms (Views: 25.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/authors" for 127.0.0.1 at 2018-04-04 10:10:44 +0100
+Processing by AuthorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"c2LDZyaYSf9HmkQPYh+6Jnq+rSQUq7uVcLf1egzKfo9AutUDcp6Slrimo16rn0g8XT75PqKYa4L5ngy/MyWd7w==", "author"=>{"avatar"=>#<ActionDispatch::Http::UploadedFile:0x007f7e80d006a0 @tempfile=#<Tempfile:/tmp/RackMultipart20180404-10081-r7g8ge.png>, @original_filename="if_boy_403024.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"author[avatar]\"; filename=\"if_boy_403024.png\"\r\nContent-Type: image/png\r\n">, "name"=>"Peter Parker", "bio"=>"Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment."}, "commit"=>"Create Author"}
+[paperclip] Trying to link /tmp/RackMultipart20180404-10081-r7g8ge.png to /tmp/0eb9abd4ee1c70dd55570777238fa77a20180404-10081-1ur25u0.png
+[paperclip] Trying to link /tmp/0eb9abd4ee1c70dd55570777238fa77a20180404-10081-1ur25u0.png to /tmp/0eb9abd4ee1c70dd55570777238fa77a20180404-10081-1rin81.png
+Command :: file -b --mime '/tmp/0eb9abd4ee1c70dd55570777238fa77a20180404-10081-1rin81.png'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/0eb9abd4ee1c70dd55570777238fa77a20180404-10081-1ur25u0.png[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/0eb9abd4ee1c70dd55570777238fa77a20180404-10081-1ur25u0.png[0]'
+Command :: convert '/tmp/0eb9abd4ee1c70dd55570777238fa77a20180404-10081-1ur25u0.png[0]' -auto-orient -resize "100x100>" '/tmp/6c186792fe6f7be9e633de16231568ee20180404-10081-1cw4gu0'
+[paperclip] Trying to link /tmp/6c186792fe6f7be9e633de16231568ee20180404-10081-1cw4gu0 to /tmp/3034fe45099eb5881559ac87e6a1e03120180404-10081-10zhcps
+  [1m[35m (0.1ms)[0m  begin transaction
+[paperclip] Trying to link /tmp/0eb9abd4ee1c70dd55570777238fa77a20180404-10081-1ur25u0.png to /tmp/0eb9abd4ee1c70dd55570777238fa77a20180404-10081-1di9sgg.png
+Command :: file -b --mime '/tmp/0eb9abd4ee1c70dd55570777238fa77a20180404-10081-1di9sgg.png'
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO "authors" ("bio", "name", "avatar_file_name", "avatar_content_type", "avatar_file_size", "avatar_updated_at", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["bio", "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment."], ["name", "Peter Parker"], ["avatar_file_name", "if_boy_403024.png"], ["avatar_content_type", "image/png"], ["avatar_file_size", 7472], ["avatar_updated_at", "2018-04-04 09:10:44.760396"], ["created_at", "2018-04-04 09:10:45.230115"], ["updated_at", "2018-04-04 09:10:45.230115"]]
+  [1m[35m (77.7ms)[0m  commit transaction
+Redirected to http://localhost:3000/authors/9
+Completed 302 Found in 566ms (ActiveRecord: 78.6ms)
+
+
+Started GET "/authors/9" for 127.0.0.1 at 2018-04-04 10:10:45 +0100
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mAuthor Load (0.3ms)[0m  [1mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT 1[0m  [["id", 9]]
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."author_id" = ?  [["author_id", 9]]
+  Rendered authors/show.html.erb within layouts/application (7.9ms)
+Completed 200 OK in 30ms (Views: 28.0ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/authors" for 127.0.0.1 at 2018-04-04 10:10:50 +0100
+Processing by AuthorsController#index as HTML
+  [1m[36mAuthor Load (0.3ms)[0m  [1mSELECT "authors".* FROM "authors"[0m
+  Rendered authors/index.html.erb within layouts/application (7.4ms)
+Completed 200 OK in 32ms (Views: 30.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/system/authors/avatars/000/000/008/thumb/if_malecostume_403022.png?1522831420" for 127.0.0.1 at 2018-04-04 10:10:50 +0100
+
+ActionController::RoutingError (No route matches [GET] "/system/authors/avatars/000/000/008/thumb/if_malecostume_403022.png"):
+  actionpack (4.2.5) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.2.1) lib/web_console/middleware.rb:39:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.5) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.5) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.5) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.5) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.5) lib/rails/engine.rb:518:in `call'
+  railties (4.2.5) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/theboymo/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/theboymo/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/theboymo/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.7ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.5ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.0ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.8ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (37.5ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.6ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.5ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (22.1ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.5ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.6ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (45.5ms)
+
+
+Started GET "/authors/8" for 127.0.0.1 at 2018-04-04 10:10:57 +0100
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT 1  [["id", 8]]
+  [1m[36mPost Load (0.1ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = ?[0m  [["author_id", 8]]
+  Rendered authors/show.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 27ms (Views: 25.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/system/authors/avatars/000/000/008/thumb/if_malecostume_403022.png?1522831420" for 127.0.0.1 at 2018-04-04 10:10:57 +0100
+
+ActionController::RoutingError (No route matches [GET] "/system/authors/avatars/000/000/008/thumb/if_malecostume_403022.png"):
+  actionpack (4.2.5) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.2.1) lib/web_console/middleware.rb:39:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.5) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.5) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.5) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.5) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.5) lib/rails/engine.rb:518:in `call'
+  railties (4.2.5) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/theboymo/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/theboymo/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/theboymo/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.6ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.6ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.3ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.5ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (26.7ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (14.9ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /home/theboymo/.rvm/gems/ruby-2.3.1/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (31.2ms)
+
+
+Started GET "/authors/8/edit" for 127.0.0.1 at 2018-04-04 10:11:01 +0100
+Processing by AuthorsController#edit as HTML
+  Parameters: {"id"=>"8"}
+  [1m[35mAuthor Load (0.1ms)[0m  SELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT 1  [["id", 8]]
+  Rendered authors/_form.html.erb (2.3ms)
+  Rendered authors/edit.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 45ms (Views: 43.5ms | ActiveRecord: 0.1ms)
+
+
+Started PATCH "/authors/8" for 127.0.0.1 at 2018-04-04 10:11:10 +0100
+Processing by AuthorsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"kI5/Jh16lIW9CGipcubcisRxW+JiMTNZ/6WRTw1ctEKjVmlCSXxP7EI0j/i7Zi6Q4/EP+NQC4052jGiKMrNXIg==", "author"=>{"avatar"=>#<ActionDispatch::Http::UploadedFile:0x007f7e81823938 @tempfile=#<Tempfile:/tmp/RackMultipart20180404-10081-1bgxqq0.png>, @original_filename="if_malecostume_403022.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"author[avatar]\"; filename=\"if_malecostume_403022.png\"\r\nContent-Type: image/png\r\n">, "name"=>"Tom Jones", "bio"=>"Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment."}, "commit"=>"Update Author", "id"=>"8"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35m (0.1ms)[0m  begin transaction
+[paperclip] Trying to link /tmp/RackMultipart20180404-10081-1bgxqq0.png to /tmp/40315b0b54938fec1acbc3396014f15e20180404-10081-1vvhgrh.png
+[paperclip] Trying to link /tmp/40315b0b54938fec1acbc3396014f15e20180404-10081-1vvhgrh.png to /tmp/40315b0b54938fec1acbc3396014f15e20180404-10081-19lgjb6.png
+Command :: file -b --mime '/tmp/40315b0b54938fec1acbc3396014f15e20180404-10081-19lgjb6.png'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/40315b0b54938fec1acbc3396014f15e20180404-10081-1vvhgrh.png[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/40315b0b54938fec1acbc3396014f15e20180404-10081-1vvhgrh.png[0]'
+Command :: convert '/tmp/40315b0b54938fec1acbc3396014f15e20180404-10081-1vvhgrh.png[0]' -auto-orient -resize "100x100>" '/tmp/6a8d136f233171ce58f379aff1b7fd8920180404-10081-ckpohq'
+[paperclip] Trying to link /tmp/6a8d136f233171ce58f379aff1b7fd8920180404-10081-ckpohq to /tmp/1e35f5e03c6b4ccf1a8947c2b610416120180404-10081-fwh53s
+[paperclip] Trying to link /tmp/40315b0b54938fec1acbc3396014f15e20180404-10081-1vvhgrh.png to /tmp/40315b0b54938fec1acbc3396014f15e20180404-10081-1toywoa.png
+Command :: file -b --mime '/tmp/40315b0b54938fec1acbc3396014f15e20180404-10081-1toywoa.png'
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "authors" SET "avatar_updated_at" = ?, "avatar_file_name" = ?, "updated_at" = ? WHERE "authors"."id" = ?[0m  [["avatar_updated_at", "2018-04-04 09:11:10.518862"], ["avatar_file_name", "if_malecostume_403022.png"], ["updated_at", "2018-04-04 09:11:10.567483"], ["id", 8]]
+[paperclip] deleting /home/theboymo/WORK/WEBDEV/COURSE-WORK/LEARN-CO/10-rails-adv/labs/1-10/rails-paperclip-readme-cb-000/public/system/authors/avatars/000/000/008/original/if_malecostume_403022.png
+  [1m[35m (90.6ms)[0m  commit transaction
+Redirected to http://localhost:3000/authors/8
+Completed 302 Found in 169ms (ActiveRecord: 91.2ms)
+
+
+Started GET "/authors/8" for 127.0.0.1 at 2018-04-04 10:11:10 +0100
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mAuthor Load (0.1ms)[0m  [1mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mPost Load (0.1ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."author_id" = ?  [["author_id", 8]]
+  Rendered authors/show.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 18ms (Views: 16.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/authors" for 127.0.0.1 at 2018-04-04 10:11:14 +0100
+Processing by AuthorsController#index as HTML
+  [1m[36mAuthor Load (0.4ms)[0m  [1mSELECT "authors".* FROM "authors"[0m
+  Rendered authors/index.html.erb within layouts/application (9.2ms)
+Completed 200 OK in 33ms (Views: 32.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/authors/7" for 127.0.0.1 at 2018-04-04 10:11:17 +0100
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT 1  [["id", 7]]
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = ?[0m  [["author_id", 7]]
+  Rendered authors/show.html.erb within layouts/application (62.8ms)
+Completed 200 OK in 86ms (Views: 83.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/authors/7/edit" for 127.0.0.1 at 2018-04-04 10:11:23 +0100
+Processing by AuthorsController#edit as HTML
+  Parameters: {"id"=>"7"}
+  [1m[35mAuthor Load (0.1ms)[0m  SELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT 1  [["id", 7]]
+  Rendered authors/_form.html.erb (1.5ms)
+  Rendered authors/edit.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 17ms (Views: 16.0ms | ActiveRecord: 0.1ms)
+
+
+Started PATCH "/authors/7" for 127.0.0.1 at 2018-04-04 10:11:42 +0100
+Processing by AuthorsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"NDoCLYxxOcdogkEKrPDIzPh0+Fuwp026ho0VKZJxJAAH4hRJ2Hfirpe+pltlcDrW3/SsQQaUna0PpOzsrZ7HYA==", "author"=>{"avatar"=>#<ActionDispatch::Http::UploadedFile:0x007f7e820f4940 @tempfile=#<Tempfile:/tmp/RackMultipart20180404-10081-pb3y1d.png>, @original_filename="if_girl_403021.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"author[avatar]\"; filename=\"if_girl_403021.png\"\r\nContent-Type: image/png\r\n">, "name"=>"Melanie Sykes", "bio"=>"Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment."}, "commit"=>"Update Author", "id"=>"7"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT 1[0m  [["id", 7]]
+  [1m[35m (0.1ms)[0m  begin transaction
+[paperclip] Trying to link /tmp/RackMultipart20180404-10081-pb3y1d.png to /tmp/7aab38c41e286c8ca0b84da17c9fa3d420180404-10081-ndwlba.png
+[paperclip] Trying to link /tmp/7aab38c41e286c8ca0b84da17c9fa3d420180404-10081-ndwlba.png to /tmp/7aab38c41e286c8ca0b84da17c9fa3d420180404-10081-13xpseg.png
+Command :: file -b --mime '/tmp/7aab38c41e286c8ca0b84da17c9fa3d420180404-10081-13xpseg.png'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/7aab38c41e286c8ca0b84da17c9fa3d420180404-10081-ndwlba.png[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/7aab38c41e286c8ca0b84da17c9fa3d420180404-10081-ndwlba.png[0]'
+Command :: convert '/tmp/7aab38c41e286c8ca0b84da17c9fa3d420180404-10081-ndwlba.png[0]' -auto-orient -resize "100x100>" '/tmp/d31beb5bfc11102a0365c435d0e0944820180404-10081-1shxbkm'
+[paperclip] Trying to link /tmp/d31beb5bfc11102a0365c435d0e0944820180404-10081-1shxbkm to /tmp/bacd92067f9b15ffd45b518dfda8d4e420180404-10081-1gyvab0
+[paperclip] Trying to link /tmp/7aab38c41e286c8ca0b84da17c9fa3d420180404-10081-ndwlba.png to /tmp/7aab38c41e286c8ca0b84da17c9fa3d420180404-10081-m7s27y.png
+Command :: file -b --mime '/tmp/7aab38c41e286c8ca0b84da17c9fa3d420180404-10081-m7s27y.png'
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "authors" SET "bio" = ?, "name" = ?, "avatar_file_name" = ?, "avatar_content_type" = ?, "avatar_file_size" = ?, "avatar_updated_at" = ?, "updated_at" = ? WHERE "authors"."id" = ?[0m  [["bio", "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment."], ["name", "Melanie Sykes"], ["avatar_file_name", "if_girl_403021.png"], ["avatar_content_type", "image/png"], ["avatar_file_size", 8666], ["avatar_updated_at", "2018-04-04 09:11:42.387551"], ["updated_at", "2018-04-04 09:11:42.431680"], ["id", 7]]
+  [1m[35m (68.6ms)[0m  commit transaction
+Redirected to http://localhost:3000/authors/7
+Completed 302 Found in 134ms (ActiveRecord: 69.2ms)
+
+
+Started GET "/authors/7" for 127.0.0.1 at 2018-04-04 10:11:42 +0100
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mAuthor Load (0.1ms)[0m  [1mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT 1[0m  [["id", 7]]
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."author_id" = ?  [["author_id", 7]]
+  Rendered authors/show.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 20ms (Views: 18.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/authors" for 127.0.0.1 at 2018-04-04 10:11:49 +0100
+Processing by AuthorsController#index as HTML
+  [1m[36mAuthor Load (0.4ms)[0m  [1mSELECT "authors".* FROM "authors"[0m
+  Rendered authors/index.html.erb within layouts/application (6.6ms)
+Completed 200 OK in 31ms (Views: 29.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/authors/6" for 127.0.0.1 at 2018-04-04 10:11:52 +0100
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT 1  [["id", 6]]
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = ?[0m  [["author_id", 6]]
+  Rendered authors/show.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 29ms (Views: 26.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/authors/6/edit" for 127.0.0.1 at 2018-04-04 10:11:57 +0100
+Processing by AuthorsController#edit as HTML
+  Parameters: {"id"=>"6"}
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT 1  [["id", 6]]
+  Rendered authors/_form.html.erb (4.2ms)
+  Rendered authors/edit.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 29ms (Views: 26.9ms | ActiveRecord: 0.2ms)
+
+
+Started PATCH "/authors/6" for 127.0.0.1 at 2018-04-04 10:12:04 +0100
+Processing by AuthorsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"jPXRTrns6CK6loMWFsBjvrvJoHKgtAgTIWYqhpvwBj+/Lccq7eozS0WqZEffQJGknEn0aBaH2ASoT9NDpB/lXw==", "author"=>{"avatar"=>#<ActionDispatch::Http::UploadedFile:0x00000001319218 @tempfile=#<Tempfile:/tmp/RackMultipart20180404-10081-136okx3.png>, @original_filename="if_female1_403023.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"author[avatar]\"; filename=\"if_female1_403023.png\"\r\nContent-Type: image/png\r\n">, "name"=>"Ariana Huffington", "bio"=>"Up and comer. One to watch."}, "commit"=>"Update Author", "id"=>"6"}
+  [1m[36mAuthor Load (0.1ms)[0m  [1mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT 1[0m  [["id", 6]]
+  [1m[35m (0.1ms)[0m  begin transaction
+[paperclip] Trying to link /tmp/RackMultipart20180404-10081-136okx3.png to /tmp/d24c0ec18c58c439a3f8d0ac5e08c19c20180404-10081-t4s9a8.png
+[paperclip] Trying to link /tmp/d24c0ec18c58c439a3f8d0ac5e08c19c20180404-10081-t4s9a8.png to /tmp/d24c0ec18c58c439a3f8d0ac5e08c19c20180404-10081-djod9a.png
+Command :: file -b --mime '/tmp/d24c0ec18c58c439a3f8d0ac5e08c19c20180404-10081-djod9a.png'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/d24c0ec18c58c439a3f8d0ac5e08c19c20180404-10081-t4s9a8.png[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/d24c0ec18c58c439a3f8d0ac5e08c19c20180404-10081-t4s9a8.png[0]'
+Command :: convert '/tmp/d24c0ec18c58c439a3f8d0ac5e08c19c20180404-10081-t4s9a8.png[0]' -auto-orient -resize "100x100>" '/tmp/847a1fd7cf30f28cbe07c134953eff2120180404-10081-qqzat3'
+[paperclip] Trying to link /tmp/847a1fd7cf30f28cbe07c134953eff2120180404-10081-qqzat3 to /tmp/ee5bda0507f5a5e675b8e410ee3af4bf20180404-10081-eahu5k
+[paperclip] Trying to link /tmp/d24c0ec18c58c439a3f8d0ac5e08c19c20180404-10081-t4s9a8.png to /tmp/d24c0ec18c58c439a3f8d0ac5e08c19c20180404-10081-zwipsa.png
+Command :: file -b --mime '/tmp/d24c0ec18c58c439a3f8d0ac5e08c19c20180404-10081-zwipsa.png'
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "authors" SET "avatar_file_name" = ?, "avatar_content_type" = ?, "avatar_file_size" = ?, "avatar_updated_at" = ?, "updated_at" = ? WHERE "authors"."id" = ?[0m  [["avatar_file_name", "if_female1_403023.png"], ["avatar_content_type", "image/png"], ["avatar_file_size", 7962], ["avatar_updated_at", "2018-04-04 09:12:04.327325"], ["updated_at", "2018-04-04 09:12:04.370705"], ["id", 6]]
+  [1m[35m (67.1ms)[0m  commit transaction
+Redirected to http://localhost:3000/authors/6
+Completed 302 Found in 128ms (ActiveRecord: 67.6ms)
+
+
+Started GET "/authors/6" for 127.0.0.1 at 2018-04-04 10:12:04 +0100
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT 1[0m  [["id", 6]]
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."author_id" = ?  [["author_id", 6]]
+  Rendered authors/show.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 27ms (Views: 25.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/authors" for 127.0.0.1 at 2018-04-04 10:12:06 +0100
+Processing by AuthorsController#index as HTML
+  [1m[36mAuthor Load (0.3ms)[0m  [1mSELECT "authors".* FROM "authors"[0m
+  Rendered authors/index.html.erb within layouts/application (10.1ms)
+Completed 200 OK in 41ms (Views: 37.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/authors/5" for 127.0.0.1 at 2018-04-04 10:12:10 +0100
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT 1  [["id", 5]]
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = ?[0m  [["author_id", 5]]
+  Rendered authors/show.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 28ms (Views: 26.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/authors/5/edit" for 127.0.0.1 at 2018-04-04 10:12:13 +0100
+Processing by AuthorsController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT 1  [["id", 5]]
+  Rendered authors/_form.html.erb (3.2ms)
+  Rendered authors/edit.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 32ms (Views: 29.6ms | ActiveRecord: 0.2ms)
+
+
+Started PATCH "/authors/5" for 127.0.0.1 at 2018-04-04 10:12:21 +0100
+Processing by AuthorsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"DVbKAXhzx0isDAESUH/CbKshS+dLJr2ej84RRMxPbbU+jtxlLHUcIVMw5kOZ/zB2jKEf/f0VbYkG5+iB86CO1Q==", "author"=>{"avatar"=>#<ActionDispatch::Http::UploadedFile:0x007f7e81cdbd18 @tempfile=#<Tempfile:/tmp/RackMultipart20180404-10081-ifz8f8.png>, @original_filename="if_matureman1_628284.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"author[avatar]\"; filename=\"if_matureman1_628284.png\"\r\nContent-Type: image/png\r\n">, "name"=>"Stephen King", "bio"=>"Writes a lot of scary things."}, "commit"=>"Update Author", "id"=>"5"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT 1[0m  [["id", 5]]
+  [1m[35m (0.1ms)[0m  begin transaction
+[paperclip] Trying to link /tmp/RackMultipart20180404-10081-ifz8f8.png to /tmp/98ae385a7acb4bc9f125fc2caacee1b720180404-10081-iwefxe.png
+[paperclip] Trying to link /tmp/98ae385a7acb4bc9f125fc2caacee1b720180404-10081-iwefxe.png to /tmp/98ae385a7acb4bc9f125fc2caacee1b720180404-10081-1gdmwjf.png
+Command :: file -b --mime '/tmp/98ae385a7acb4bc9f125fc2caacee1b720180404-10081-1gdmwjf.png'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/98ae385a7acb4bc9f125fc2caacee1b720180404-10081-iwefxe.png[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/98ae385a7acb4bc9f125fc2caacee1b720180404-10081-iwefxe.png[0]'
+Command :: convert '/tmp/98ae385a7acb4bc9f125fc2caacee1b720180404-10081-iwefxe.png[0]' -auto-orient -resize "100x100>" '/tmp/ce473b98a52ce1b863876028fd8d65f520180404-10081-rffkns'
+[paperclip] Trying to link /tmp/ce473b98a52ce1b863876028fd8d65f520180404-10081-rffkns to /tmp/0f8a569ae3cd5b516c21bb2c92373f4320180404-10081-32ezeu
+[paperclip] Trying to link /tmp/98ae385a7acb4bc9f125fc2caacee1b720180404-10081-iwefxe.png to /tmp/98ae385a7acb4bc9f125fc2caacee1b720180404-10081-c5uq6.png
+Command :: file -b --mime '/tmp/98ae385a7acb4bc9f125fc2caacee1b720180404-10081-c5uq6.png'
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "authors" SET "avatar_file_name" = ?, "avatar_content_type" = ?, "avatar_file_size" = ?, "avatar_updated_at" = ?, "updated_at" = ? WHERE "authors"."id" = ?[0m  [["avatar_file_name", "if_matureman1_628284.png"], ["avatar_content_type", "image/png"], ["avatar_file_size", 8313], ["avatar_updated_at", "2018-04-04 09:12:21.271415"], ["updated_at", "2018-04-04 09:12:21.320421"], ["id", 5]]
+  [1m[35m (55.9ms)[0m  commit transaction
+Redirected to http://localhost:3000/authors/5
+Completed 302 Found in 131ms (ActiveRecord: 56.4ms)
+
+
+Started GET "/authors/5" for 127.0.0.1 at 2018-04-04 10:12:21 +0100
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mAuthor Load (0.1ms)[0m  [1mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT 1[0m  [["id", 5]]
+  [1m[35mPost Load (0.1ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."author_id" = ?  [["author_id", 5]]
+  Rendered authors/show.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 22ms (Views: 20.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/authors" for 127.0.0.1 at 2018-04-04 10:12:23 +0100
+Processing by AuthorsController#index as HTML
+  [1m[36mAuthor Load (0.3ms)[0m  [1mSELECT "authors".* FROM "authors"[0m
+  Rendered authors/index.html.erb within layouts/application (7.2ms)
+Completed 200 OK in 35ms (Views: 33.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/authors/5" for 127.0.0.1 at 2018-04-04 10:12:32 +0100
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT 1  [["id", 5]]
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = ?[0m  [["author_id", 5]]
+  Rendered authors/show.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 26ms (Views: 24.0ms | ActiveRecord: 0.4ms)
