@@ -1,0 +1,8 @@
+<h1>Blog Posts!</h1>
+<% @posts.each do |post| %>
+  <div>
+    <p><%= link_to post.title, post_path(post) %><br>
+    by: <%= post.author.name %></p>
+    <p><%= post.description %></p>
+  </div>
+<% end %>
