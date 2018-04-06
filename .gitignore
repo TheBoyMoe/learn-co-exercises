@@ -14,3 +14,12 @@ demos/04-javascript-rock-dodger/node_modules
 08-rails/review/*/*/failures.txt
 08-rails/review/*/*/examples.txt
 08-rails/review/*/*/vendor/bundle/
+
+10-rails-adv/labs/*/*/.env
+10-rails-adv/labs/*/*/log/
+10-rails-adv/labs/*/*/tmp/
+10-rails-adv/labs/*/*/db/*.sqlite3
+10-rails-adv/labs/*/*/.byebug_history
+10-rails-adv/labs/*/*/failures.txt
+10-rails-adv/labs/*/*/examples.txt
+10-rails-adv/labs/*/*/vendor/bundle/
