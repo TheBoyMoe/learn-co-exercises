@@ -4,6 +4,15 @@
 $(document).ready(function(){
   $('a.load_comments').on('click', function(e){
     e.preventDefault();
-    alert('you clicked the link')
+    url = e.target.href // or you can use 'this.href'
+    $.ajax({
+      method: 'GET',
+      url: url
+    })
+    // server response is passed to .done which executes a callback to process the response
+    .done(function(response){
+      // server responds with the page it would have rendered
+      console.log(response)
+    })
   })
 })
