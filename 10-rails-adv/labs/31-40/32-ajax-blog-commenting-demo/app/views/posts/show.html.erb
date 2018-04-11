@@ -9,7 +9,7 @@
   <strong>Content:</strong>
   <%= @post.content %>
 </p>
-<%= link_to 'Load Comments', post_comments_path(@post), class: "load_comments" %><br><br>
+<%= link_to 'Load Comments', post_comments_path(@post), remote: true, class: "load_comments" %><br><br>
 
 <div class="comments">
   <!-- added for json example  -->

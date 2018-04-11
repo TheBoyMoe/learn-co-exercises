@@ -1,0 +1,7 @@
+// THIS IS NOT PART OF THE ASSET PIPELINE, BUT A RAILS VIEW
+
+// j escapes the html chars in the _comments partial making them valid js
+// returns a string of html which you 'inject' into the DOM using jquery's .html() method
+
+var html = "<%= j(render 'comments/comments') %>"
+$("div.comments").append(html)
