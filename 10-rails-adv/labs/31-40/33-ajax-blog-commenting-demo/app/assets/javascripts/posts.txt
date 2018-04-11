@@ -1,0 +1,65 @@
+// Place all the behaviors and hooks related to the matching controller here.
+// All this logic will automatically be available in application.js.
+
+$(function(){ // equivalent to document ready
+  $("a.load_comments").on('click', function(e){
+
+    comments_url = e.target.href // or you can use 'this.href'
+   
+    // 1ST PATTERN - SERVER RESPONDING WITH HTML
+    // $.ajax({
+    //   method: 'GET',
+    //   url: comments_url,
+    //   success: function(response){
+    //     $("div.comments").html(response);
+    //   },
+    //   error: function(error){
+    //     $("div.comments").html("<p>Error retrieving data from server!</p>");
+    //   }
+    // });
+
+    // .done(function(response){
+    //   // server responds with the page it would have rendered
+    //   console.log(response)
+    //   $("div.comments").html(response)
+    // })
+    // .error(function(error){
+    //   $("div.comments").html(<p>Error retrieving data from server!</p>)
+    // });
+    
+    // simpler tech using .get()
+    // $.get(comments_url)
+    //   .success(function(response){
+    //     $("div.comments").html(response)
+    // })
+    //   .error(function(error){
+    //     $("div.comments").html("<p>Error retrieving data from server!</p>")
+    // });
+
+    // 2ND PATTERN - SERVER RESPONDS WITH JSON, jquery automatically parses json
+    // $.get(comments_url).success(function(json){
+    //   var $list = $("div.comments ul")
+    //   $list.html("") // clear contents
+    //   json.forEach(function(comment){
+    //     $list.append(`<li>${comment.content}</li>`);
+    //   });
+    // })
+
+    // 3RD PATTERN - SERVER RESPONDS WITH javascript - tells the client what to do
+    // Rails server responds with js file matching the 'controller#action' pattern, e.g index.js in this case(add index.js.erb to /app/views/comments)
+    //
+    // 1. bind a generic ajax request to the click event asking for more instructions
+    // 2. the server responds with js
+    // 3. browser executes the js received
+
+    // YOU CAN REPLACE THIS GENERIC REQUEST BY ADDING 'remote: true' to the link
+    // tells rails to bind a ajax request to the click event and fetch the js file returned by the controller action - whihc the browser will execute
+    $.ajax({
+      url: comments_url,
+      dataType: 'script'
+    })
+
+    e.preventDefault();
+  });
+})
+
