@@ -14,7 +14,9 @@
   <%= render 'comments/comments' %>
 </div>
 
-<%= form_for(@comment, url: post_comments_path(@post)) do |f| %>
+<%#= form_for(@comment, url: post_comments_path(@post)) do |f| %>
+<!-- for a nested resource you can pass in the 2 active record obj's and rails will figure out the coorect path  -->
+<%= form_for([ @post, @comment ]) do |f| %>
   <%= f.label :content %>
   <%= f.text_area :content %><br><br>
 

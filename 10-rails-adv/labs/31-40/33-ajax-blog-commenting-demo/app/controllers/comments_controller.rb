@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
   def create
     @comment = @post.comments.build(comment_params)
     if @comment.save
-      redirect_to post_path(@post)
+      render 'comments/show', layout: false
     else
       render 'posts/show'
     end
