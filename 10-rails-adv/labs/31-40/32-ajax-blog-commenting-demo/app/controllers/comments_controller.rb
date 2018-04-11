@@ -4,7 +4,8 @@ class CommentsController < ApplicationController
   def index
     @comments = @post.comments
     # ensure that the response to the ajax request is only the content and does not include the layout file
-    render 'comments/index', layout: false
+    # render 'comments/index', layout: false # responds with html
+    render json: @comments # response in json
   end
 
   private

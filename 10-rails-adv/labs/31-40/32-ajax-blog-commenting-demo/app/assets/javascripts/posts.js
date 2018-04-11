@@ -5,7 +5,8 @@ $(function(){ // equivalent to document ready
   $("a.load_comments").on('click', function(e){
 
     comments_url = e.target.href // or you can use 'this.href'
-    
+   
+    // SERVER RESPONDING WITH HTML
     // $.ajax({
     //   method: 'GET',
     //   url: comments_url,
@@ -27,13 +28,22 @@ $(function(){ // equivalent to document ready
     // });
     
     // simpler tech using .get()
-    $.get(comments_url)
-      .success(function(response){
-        $("div.comments").html(response)
-      })
-      .error(function(error){
-        $("div.comments").html("<p>Error retrieving data from server!</p>")
+    // $.get(comments_url)
+    //   .success(function(response){
+    //     $("div.comments").html(response)
+    // })
+    //   .error(function(error){
+    //     $("div.comments").html("<p>Error retrieving data from server!</p>")
+    // });
+
+    // SERVER RESPONDS WITH JSON, jquery automatically parses json
+    $.get(comments_url).success(function(json){
+      var $list = $("div.comments ul")
+      $list.html("") // clear contents
+      json.forEach(function(comment){
+        $list.append(`<li>${comment.content}</li>`);
       });
+    })
 
     e.preventDefault();
   });
