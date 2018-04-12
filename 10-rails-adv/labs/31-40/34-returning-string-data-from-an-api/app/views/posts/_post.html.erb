@@ -1,0 +1,19 @@
+<h1><%= post.id %>: <%= post.title %></h2>
+<!-- by default the rails 'truncate' helper will only show the first 30 characters -->
+<div id="body-<%= post.id %>"><%= truncate post.description %></div>
+
+<!-- use the 'js-more' class to identify the button, and the data-* attribute to pas the post id -->
+<button class="js-more" data-id="<%= post.id %>">More...</button>
+
+
+<!-- wire up the 'More' buttons to respond to a click event by executing a jquery ajax get request to fetch more data -->
+<script type="text/javascript" charset="utf-8">
+  $(function(){
+    $(".js-more").on('click', function(){
+      var id = $(this).data('id')
+        $.get("/posts/" + id + "/body", function(data){
+          $("#body-" + id).text(data)
+        })
+    })
+  })
+</script>
