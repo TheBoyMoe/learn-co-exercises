@@ -1,0 +1,61 @@
+class PostsController < ApplicationController
+  before_action :set_post, only: [:show, :edit, :update]
+
+  def index
+    @posts = Post.all
+  end
+
+  def show
+    respond_to do |format|
+      format.html {render :show}
+      format.json {
+        render json: @post.to_json(only: [:id, :title, :description],
+                include: [author: {only: [:name]}])
+      }
+    end
+  end
+
+  def new
+    @post = Post.new
+  end
+
+  def create
+    @post = Post.create(post_params)
+    @post.save
+    redirect_to post_path(@post)
+  end
+
+  def edit
+  end
+
+  def update
+    @post.update(post_params)
+    redirect_to post_path(@post)
+  end
+
+  # REPLACED BY SHOW ACTION WITH RESPOND_TO BLOCK
+  def post_data
+    post = Post.find(params[:id])
+    # render json: PostSerializer.serialize(post)
+   
+    # serialize ruby obj as json, including any associated objects tso they to are serialized
+    # by default 'to_json' only serializes the main object
+    # render json: post.to_json(include: :author)
+    
+    # we can specify what fields to_json returns
+    # check '/posts/:id/post_data'
+    render json: post.to_json(only: [:id, :title, :description],
+            include: [author: {only: [:name]}])
+  end
+
+private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def post_params
+    params.require(:post).permit(:title, :description)
+  end
+end
