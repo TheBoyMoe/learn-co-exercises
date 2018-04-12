@@ -1,0 +1,18 @@
+<div class="author_name"><%= @post.author.name %></div>
+<a href="#" class="js-next" data-id="<%= @post.id %>">Next...</a>
+<h1 class="post_title"><%= @post.title %></h1>
+<p class="post_body"><%= @post.description %></p>
+
+<script type="text/javascript" charset="utf-8">
+  $(function(){
+    $(".js-next").on("click", function(){
+      var nextId = parseInt($(".js-next").attr("data-id")) + 1
+      $.getJSON("/posts/" + nextId + "/post_data", function(data){
+        $(".author_name").text(data["author"]["name"]);
+        $(".post_title").text(data["title"]);
+        $(".post_body").text(data['description']);
+        $(".js-next").attr("data-id", data['id']);
+      })
+    })
+  })
+</script>
