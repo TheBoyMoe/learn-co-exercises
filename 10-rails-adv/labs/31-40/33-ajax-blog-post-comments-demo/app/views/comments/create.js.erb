@@ -1,0 +1,4 @@
+$("#comment_content").val("") // clear textarea
+var $list = $("div.comments ul")
+// j is a Rails helper that escapes a html string into valid javascript
+$list.append("<%= j(render "comments/comment", comment: @comment) %>")
