@@ -1,0 +1,23 @@
+<h1>Product List</h1>
+<ul>
+  <% @products.each do |product| %>
+    <li>
+      <p><%= product.name %></p>
+      <button class="js-more" data-id="<%= product.id %>">More Info</button>
+      <div id="description-<%= product.id %>"></div>
+      <p><%= product_available(product) %></p>
+    </li>
+  <% end %>
+</ul>
+
+<!-- wire up more info button -->
+<script type="text/javascript" charset="utf-8">
+  $(function(){
+    $(".js-more").on("click", function(){
+      var id = $(this).data('id')
+      $.get("/products/" + id + "/description", function(data){
+        $("#description-" + id).text(data)
+      })
+    })
+  })
+</script>
