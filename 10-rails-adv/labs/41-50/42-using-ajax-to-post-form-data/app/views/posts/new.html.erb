@@ -1,0 +1,37 @@
+<!-- use jquery and ajax to submit the post, display the json response without redirecting to posts/show  -->
+<%= form_for(@post) do |f| %>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<div id="postResult">
+  <h2 id="postTitle"></h2>
+  <p id="postBody"></p>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  $(function(){
+    $('form').submit(function(e){
+      e.preventDefault()
+      
+      // retreive the form values, serialize and post them
+      var values = $(this).serialize()
+      $.post("/posts", values)
+        .done(function(data){
+          // by default the replay from the server is the html rendered by the show action
+          // ajax can't follow redirects, otherwise the 'data' object would be lost
+          $('#postTitle').text(data['title'])
+          $('#postBody').text(data['description'])
+      })
+    })
+  })
+</script>
