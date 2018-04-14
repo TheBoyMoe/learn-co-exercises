@@ -1,0 +1,9 @@
+tags:
+  - rails api
+  - serialization
+frameworks:
+  - rails
+languages:
+  - ruby
+orms:
+  - activerecord
