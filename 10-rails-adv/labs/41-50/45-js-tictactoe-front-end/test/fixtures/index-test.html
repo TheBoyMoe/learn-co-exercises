@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>jQuery Tic-Tac-Toe!</title>
+
+    <link rel="stylesheet" href="../../node_modules/mocha/mocha.css">
+  </head>
+
+  <body>
+    <table border="1" cellpadding="40">
+      <tr>
+        <td data-x="0" data-y="0"></td>
+        <td data-x="1" data-y="0"></td>
+        <td data-x="2" data-y="0"></td>
+      </tr>
+      <tr>
+        <td data-x="0" data-y="1"></td>
+        <td data-x="1" data-y="1"></td>
+        <td data-x="2" data-y="1"></td>
+      </tr>
+      <tr>
+        <td data-x="0" data-y="2"></td>
+        <td data-x="1" data-y="2"></td>
+        <td data-x="2" data-y="2"></td>
+      </tr>
+    </table>
+
+    <div id="games"></div>
+
+    <div id="message"></div>
+
+    <button id="save">Save Game</button>
+    <button id="previous">Show Previous Games</button>
+    <button id="clear">Clear Current Game</button>
+
+    <!-- Open this file and call `mocha.run()` in console to run tests -->
+    <div id="mocha"></div>
+    <script src="../../node_modules/mocha/mocha.js"></script>
+    <script src="../../node_modules/chai/chai.js"></script>
+    <script src="../../node_modules/sinon/pkg/sinon.js"></script>
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src="../../app/assets/javascripts/tictactoe.js"></script>
+    <script src="../tictactoeTest.js"></script>
+  </body>
+</html>
