@@ -1,0 +1,35 @@
+{
+  "name": "js-tictactoe-rails-api",
+  "version": "0.1.0",
+  "description": "Second half of the final lab in Learn.co's Rails and JavaScript topic.",
+  "main": "app/assets/javascripts/tictactoe.js",
+  "scripts": {
+    "test": "mocha -R mocha-multi --reporter-options nyan=-,json=.results.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/learn-co-curriculum/js-tictactoe-rails-api.git"
+  },
+  "keywords": [
+    "javascript",
+    "jquery",
+    "rails",
+    "rails api",
+    "selectors",
+    "single-page application",
+    "tic-tac-toe"
+  ],
+  "author": "gj",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/learn-co-curriculum/js-tictactoe-rails-api/issues"
+  },
+  "homepage": "https://github.com/learn-co-curriculum/js-tictactoe-rails-api",
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "jsdom": "^11.0.0",
+    "mocha": "^3.4.2",
+    "mocha-multi": "^0.11.0",
+    "sinon": "^2.3.4"
+  }
+}
