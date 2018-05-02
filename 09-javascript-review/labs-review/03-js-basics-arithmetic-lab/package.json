@@ -1,0 +1,32 @@
+{
+  "name": "js-basics-arithmetic-lab",
+  "version": "0.1.0",
+  "description": "Lab on JavaScript numbers and arithmetic in Flatiron School's Learn.co curriculum.",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "gem install learn-co",
+    "test": "node_modules/browser-sync/bin/browser-sync.js start --config node_modules/learn-browser/bs-config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/learn-co-curriculum/js-basics-arithmetic-lab.git"
+  },
+  "keywords": [
+    "javascript",
+    "learn.co",
+    "flatiron school",
+    "arithmetic",
+    "math",
+    "number",
+    "operators"
+  ],
+  "author": "Flatiron School",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/learn-co-curriculum/js-basics-arithmetic-lab/issues"
+  },
+  "homepage": "https://github.com/learn-co-curriculum/js-basics-arithmetic-lab#readme",
+  "devDependencies": {
+    "learn-browser": "^0.1.13"
+  }
+}
