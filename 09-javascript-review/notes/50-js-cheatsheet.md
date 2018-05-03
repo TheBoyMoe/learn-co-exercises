@@ -317,3 +317,233 @@ In javascript functions are:
 - all functions in javascript return a value. You MUST use the `return` keyword to return a value, otherwise the function simply returns undefined. As soon as the js engine reaches a `return` statement that value is returned and the function exited, any following lines are not executed.
 - you MUST add a pair of parantheses after the function name to invoke it.
 
+
+**Scope & Execution Context** 
+
+Scope refers to where variables and functions are accessible/visible within out code. In javascript we also have an `Execution Context`, which creates a new scope. An `execution context` encompasses all of the variables and functions declared inmthat context. It means that any expression we write can access any variable or invoke any function in that context.
+
+`Global Scope/Execution Context` implicitly wraps all of the javascript code in a project. Any variable/function written in the `global scope` are accessible everywhere within your javascript code. A variable/function not declared inside a function or block is in the `global scope/execution context`. Any variable or function exression referenced with the `var` keyword is in the global context.
+
+NOTE: 
+- variables/functions expresions declared with `let` and `const` are NOT added to the global context - they will be accessible in the context in which thay're defined.
+- to add a variable/expression function to the global acop/context either declare it without a keyword or use `var` if out side of a function.
+
+
+`Function Scope` - execution context/scope that is created within the function's body - between the curly, {}, braces.
+- we can access any varibles/functions declared within the function's scope
+- we can access variables/functions declared in ANY OUTER contexts's (that are in the same context 'chain')
+- we CAN NOT access any variables/functions declared with 'var', 'let', or'const' within a function from outside of the function. Variables and function expressions declared without a keyword are visible/accessible.
+
+`Block Scope` - introduced by ES6/2015, applies only to variables and function expressions declared using the `let` and `const` keywords and gives these expressions block level scope( block simply refers to any code written within a pir of curly braces, e.g. loop), i.e. they are not accessible OUTSIDE the block but are accessible inside the block or to any inner blocks, whether other blocks or functions.
+- this does not apply to `var` - it DOES NOT have block level scope.
+
+REMEMBER: variables/function expressions declared WITHOUT `var`, `let` or `const` are ALWAYS GLOBALLY SCOPED regardless of where they are written in your code.
+
+
+**Scope Chain**
+
+Every function has access to a scope chain. This includes the function's oute scope (the scope in which it was declared), the outer scope's outer scope and so on up to the global context. This scope chain makes variables and functions declared in these outer scopes accessible within the inner/nested function. This chain DOES NOT go in the opposite direction, i.e inner scopes within the function are NOT accessible to it.
+
+A function declared in a js file NOT not declared in any other funciton is in the global scope. It has access to variables declared in the function body, aswell as ALL other variables and functions declared  in the global scope. When the function is invoked, if the js engine finds a variable in the function body not declared locally, it goes to the first outer scope, and continues going up the chain until it finds the variables declaration. If it does not find the declaration the variable is treated as a global variable.
+
+NOTE: 
+  - what matters in scope chain is where the function is declared, NOT where it is invoked.
+  - all variables/functions declared in outer scopes are available in inner scopes.
+	- an outer scope does NOT have access to variables/functions declared in inner scopes.
+
+
+```javascript
+const globalVar = 1;
+
+function firstFunc () {
+  const firstVar = 2;
+
+  function secondFunc () {
+    const secondVar = 3;
+
+    return secondVar + firstVar + globalVar;
+  }
+
+  const resultFromSecondFunc = secondFunc();
+
+  return resultFromSecondFunc;
+}
+
+firstFunc();
+//=> 6
+//=> variables/functions in secondFunc are not visible in firstFunc
+```
+
+**Code Execution**
+
+
+```javascript
+const myVar = 'Some string';
+
+function myFunc(){
+	return 'another string';
+}
+```
+
+The js engine performs this in two separate phases, each time the engine steps through the code line-by-line:
+compilation:
+- for variables the engine allocates memory and set's up a reference to the variable's identifier, e.g. `myVar'. The variable is NOT initialised and has a value of undefined.
+
+- for functions
+	- function is loaded into memory and a referenceto the function's identifier, e.g. myFunc, is created.
+	- a new execution context with a new scope is created
+	- adds a reference to the parent scope's scope chain making the outer environment available to the new function's scope.
+
+execution: runs the code, assigning values to variables and invoking functions. The engine will match values to coresponding identifiers in memory, looking in the current scope and then moving up the scope chain. The engine stops when a match is found. Because of this we can use the same identifier to declare a variable/function in multiple scopes. If no match is found a `ReferenceError` is thrown - variable not declared. 
+
+
+**Lexical Scoping**
+
+Lexical scoping refers to where in the code a function is actually declared, or written. The js engine does not care where a function is invoked, only where it is declared.
+
+
+```javascript
+const myVar = 'Foo';
+
+function first () {
+  console.log('Inside first()');
+  console.log('myVar is currently equal to:', myVar);
+}
+
+function second () {
+  const myVar = 'Bar';
+  first();
+}
+
+// calling second
+second();
+//=> 'Inside first()'
+//=> 'myVar is currently equal to: FOO'
+//=> undefined
+```
+
+The assignment of 'myVar = Bar' is not visible to first() function because second() is not in the first() functions parent scope. They are both found in the same global scope, with the global scope as parent, but they're not in the same scope chains.
+
+[lexical scoping](lexical_scope.png)
+'myVar' variable does not exist in the first() function, so it looks in it's outer scope, the global scope where it find it. 
+
+```javascript
+const myVar = 'Foo';
+
+function second () {
+
+	function first () {
+    console.log('Inside first()');
+    console.log('myVar is currently equal to:', myVar);
+  }
+
+  const myVar = 'Bar';
+
+  first();
+}
+```
+
+If we place the first() unction in second(), it's lexical scope changes, it now finds 'myVar' in the second() function, it's immediate outer scope is now the second() function.
+
+
+**Common Javascript Errors**
+
+`Uncaught ReferenceError: xxxxx is not defined`
+- one of the most common, you've tried to reference a variable or function that could not be found in the scope chain.
+- also occurs if you don't add quotes around a string - js engine interprets this as a variable reference, which does not exist.
+
+`Uncaught TypeError: xxxxx is not a function`
+- you've tried to invoke an object that is not a function, i.e. not invokable.
+
+`Uncaught SyntaxError: missing ) after argument list`
+- you've tried to invoke a function but forgot the closing paranthesis, e.g. myFunction(2, 4;
+
+
+`Uncaught TypeError: Assignment to constant variable.`
+- you've tried to assign a new value to a variable declared with the `const` keyword.
+
+
+When an error is thrown it is passed up the call stack, all the way to the global execution context, waiting for something to catch it. Javascript prides the `try...catch` block with which you can run js statements and try and catch any resulting errors.
+
+
+
+**Chrome browser errors**
+
+If you run javascript in the Chrome's js console you may see errors like the following:
+
+```javascript
+// ERROR: Uncaught TypeError: Assignment to constant variable.
+//  VM5412:3  at <anonymous>:3:20 (anonymous) @ VM5412:3
+```
+
+The `VM` standards for Virtual Machine, and it's Chrome's way of saying that the script didn't run in a specific file. In this case, the script ran in the JavaScript console, and Chrome arbitrarily assigned an ID of `5412` to the execution of that particular script. If you run the same code again, the number will have changed because Chrome's treating it as a new script execution and will assign it a new ID number.
+
+The `:3` piece of `VM5412:3` is, however, interesting. It's telling us which **line** within the script caused the error. In this case, it happened on the third line.
+
+The `at <anonymous>:3:20` message elaborates on the `:3`, indicating that, not only was the error on the third line, it was on the 20th **character** of the third line. The `<anonymous>` is, like the `VM` designation, telling us that the error didn't occur in a specific file.
+
+The only new piece of information on the final line is `(anonymous)`, which is slightly different from the `<anonymous>` above. While `<anonymous>` indicates that we aren't in a particular file, `(anonymous)` tells us that we're in the global scope — that the error didn't occur inside of a function.
+
+
+**Hoisting**
+
+With ES6/2015 you can simply do the following:
+- ALWAYS use `let` and `const` for declaring variables and function expressions.
+- declared functions should be placed at the top of their lexical scope, e.g global functions at the top of the js file, nested functions at the top of their parent function.
+- if you need to decclare a variable with `var`, declare it at the top of it's scope before it's used.
+
+Hoisting is the result of the two phase way in which the js engine executes js code. In the compilation phase declared functions are loaded into memory, in the 2nd, execution phase they are invoked. This means you can call a function before it's declared.
+
+NOTE: variables declared with `let` and `const` ARE hoisted, the js engine simply does not allow them to be referenced before they're initialized - causes the `ERROR: Uncaught ReferenceError: xxxxx is not defined`
+
+
+ ## Data Structures in Javascript
+
+
+**Arrays**
+
+- simplest data structure in javascipt
+- elements can be any datatype, mixed.
+- the elements are ordered, they always appear in the same order
+- access elements via bracket notation
+- destructively add (push(), unshift()) and remove (pop(), shift()) elements
+
+SPREAD OPERATOR
+We can non-destructively add elements to an array - creating a new array and pressering the old using the ES6/2015 `spread operator` - `...` adding elements either to the begining of the array or the end - added as individual values, not as a whole array.
+
+```javascript
+// adding elements to the begining of an array
+const coolCities = ['New York', 'San Francisco'];
+const allCities = ['Los Angeles', ...coolCities];
+
+coolCities;
+// => ["New York", "San Francisco"]
+allCities;
+// => ["Los Angeles", "New York", "San Francisco"]
+
+// adding elements tot he end
+const coolCats = ['Hobbes', 'Felix', 'Tom'];
+const allCats = [...coolCats, 'Garfield'];
+
+coolCats;
+// => ["Hobbes", "Felix", "Tom"]
+allCats;
+// => ["Hobbes", "Felix", "Tom", "Garfield"]
+```
+
+SLICE
+We can non-destructively remove elements from an array using the `slice()` method.
+- calling `slice()` with no args returns a copy of the original array.
+	- primitive values in the array are copied - change one in one array and it's not changed in the other array.
+	- objects in the array are not - if you make a change to on of the objects in the original array, it's changed in the copy also. js copies the references to the objects, not the objects.
+
+- we can pass two args to `slice`, first is the element to start at, the second(which is optional) is the index to stop(up to but not including that value). Without the second arg, copy continues to the end.
+- if we provide a negative index, slice starts from the end.
+
+
+SPLICE
+Removes elements destructively - mutates the orignal.
+- passing a single argument - marks the starting point. Returns a new array containing the removed elements, the original is mutated with those elements removed.
+- passing two args - 2nd arg is the number of elements to remove, begining from start.
+- passing in 3 or more arguments, and every additional arg will be inserted into the original at the start position. An array of the removed elements is returned. If the second arg is 0, we will not remove any elements.
+

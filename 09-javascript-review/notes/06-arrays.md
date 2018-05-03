@@ -27,8 +27,6 @@ var ingredient6 = "garlic"
 
 But now what if we want to make a tomato sauce? Well, we already have garlic and tomato — but we have no idea what recipe they belong to. Pretty soon, we'll have a hard time keeping our ingredients safe, and we'd end up with bread in our tomato sauce.
 
-![noooooooo](http://i.giphy.com/fIyBQtxwwZYhq.gif)
-
 This is an admittedly contrived example, but it goes to show that we can't just put everything in a variable and hope to remember what order things should go in. It also shows that sometimes it would be helpful to be able to group like items together.
 
 In JavaScript, we can group like items in an object (well, everything in JavaScript is an object — but more on that some other time) called an _array_. An array is an ordered list of items (called "elements" of the array) separated by commas.

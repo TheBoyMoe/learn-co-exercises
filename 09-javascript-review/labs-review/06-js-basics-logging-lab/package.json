@@ -1,0 +1,33 @@
+{
+  "name": "js-basics-logging-lab",
+  "version": "0.1.0",
+  "description": "Learn.co's JavaScript Logging Lab.",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "gem install learn-co",
+    "test": "node_modules/browser-sync/bin/browser-sync.js start --config node_modules/learn-browser/bs-config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/learn-co-curriculum/js-looping-and-iteration-looping-code-along.git"
+  },
+  "keywords": [
+    "javascript",
+    "logging",
+    "log",
+    "console",
+    "console.log",
+    "learn.co",
+    "flatiron school",
+    "lab"
+  ],
+  "author": "Flatiron School",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/learn-co-curriculum/js-basics-logging-lab/issues"
+  },
+  "homepage": "https://github.com/learn-co-curriculum/js-basics-logging-lab#readme",
+  "devDependencies": {
+    "learn-browser": "^0.1.13"
+  }
+}
