@@ -1,0 +1,32 @@
+{
+  "name": "js-looping-and-iteration-filter-lab",
+  "version": "0.1.0",
+  "description": "JavaScript filter lab for Learn.co",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "gem install learn-co",
+    "test": "node_modules/browser-sync/bin/browser-sync.js start --config node_modules/learn-browser/bs-config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/learn-co-curriculum/js-looping-and-iteration-filter-lab.git"
+  },
+  "keywords": [
+    "learn.co",
+    "flatiron school",
+    "javascript",
+    "filter",
+    "arrays",
+    "data structures",
+    "lab"
+  ],
+  "author": "Flatiron School",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/learn-co-curriculum/js-looping-and-iteration-filter-lab/issues"
+  },
+  "homepage": "https://github.com/learn-co-curriculum/js-looping-and-iteration-filter-lab#readme",
+  "devDependencies": {
+    "learn-browser": "^0.1.13"
+  }
+}

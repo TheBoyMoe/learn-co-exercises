@@ -317,6 +317,12 @@ In javascript functions are:
 - all functions in javascript return a value. You MUST use the `return` keyword to return a value, otherwise the function simply returns undefined. As soon as the js engine reaches a `return` statement that value is returned and the function exited, any following lines are not executed.
 - you MUST add a pair of parantheses after the function name to invoke it.
 
+NOTE: Javascipt has a notion of `pure` and `impure` functions
+- a PURE functions behaviour is prediictable. 
+- If a pure function is repeatedly invoked with the same set of arguments, the function will always return the same result.
+- Also, invoking the function has no (external) side-effects e.g. making a network or database call or altering any object(s) passed to it as an argument.
+- IMPURE functions are the opposite: the return value is not predictable, and invoking the function may have side-effects.
+
 
 **Scope & Execution Context** 
 
@@ -546,4 +552,207 @@ Removes elements destructively - mutates the orignal.
 - passing a single argument - marks the starting point. Returns a new array containing the removed elements, the original is mutated with those elements removed.
 - passing two args - 2nd arg is the number of elements to remove, begining from start.
 - passing in 3 or more arguments, and every additional arg will be inserted into the original at the start position. An array of the removed elements is returned. If the second arg is 0, we will not remove any elements.
+
+
+FILTER
+Used to filter arrays, returns an array that contains the elements that matched the condition. Filter delegates the actual comparison to a function you pass to filter.
+
+```javascript
+const numbers = [1,2,3,4,5,6,7,8,9];
+const matches =  numbers.filter(val => val % 2 === 0);
+
+
+// custom filter function should iterate over the collection passing each elm in turn to the callback
+function filter (collection, callback) {
+	const newCollection = [];
+  for (const elm of collection) {
+    if (callback(elm)) {
+      newCollection.push(elm);
+    }
+  }
+	return newCollection;
+}
+
+// customise the callback for each particular case
+function callback(elm){
+	return elm >= 5;
+}
+```
+
+MAP
+Iterates over every element in an array, transforming the element before return the elements in a new array. `map()` delegates transforming the array elements to a callback function, which is passed to map as the sole argument.
+
+```javascript
+
+// creating a custom mapping function
+function map(collection, callback){
+	const newCollection = [];
+	// iterate over array and pass elm to callback
+	for(const elm of collection){
+		collection.push(callback(elm));	
+	}
+	return collection;	
+}
+
+// transform the value
+function callback(elm){
+	return elm * 2;
+}
+```
+
+
+
+**Objects**
+
+In javascript objects are a collection of key/value pairs bounded by curly braces.
+- access/set property values using dot/bracket notation
+- all keys are strings - use camelCase, with no spaces or punctuation
+- use bracket notation when defining non-standard key, .e.g  string with spaces or other puntuation, or accessing a dynamic property, e.g. when iterating over an object and when programmatically accessing and assigning properties.
+
+```javascript
+const name = 'my name'
+obj.name //=> property set to 'name'
+obj[name] //=> property set to 'my name'
+```
+
+Bracket notation is useful when we need to compute the value of variables on the fly:
+
+```javascript
+const meals = {
+  breakfast: 'Oatmeal',
+  lunch: 'Caesar salad',
+  dinner: 'Chimichangas'
+};
+
+let mealName = 'lunch';
+
+meals[mealName];
+// => "Caesar salad"
+
+// if we try to call the 'mealName' property using dot notation
+meals.mealName
+//=> undefined, the object has no propert with that identifier
+```
+
+Assigning properties using dot/bracket notation is destructive, it overwrites the value if it already exists. We can non-destructively assign properties to objects using ES2015 spread operator and Object.assign().
+
+SPREAD OPERATOR
+- copy all the objects's properties into a new obj, old remains unchanged
+
+```javascript
+const obj = {
+  name: 'Max',
+  age: 23
+}
+
+// newObj is a clone of obj, we can now change or add new properties to newObj
+const newObj = {
+  ...obj
+}
+
+newObj.name = "peter';
+newObj.gender = 'male';
+newObj['age'] = 45;
+```
+
+OBJECT.ASSIGN()
+- method of the global `Object` object
+- merge the properties of two or more objects into the initial object
+- set the initial object as {} to create a new obj, other objects are unchanged.
+- if multiple objects have the same key, the last applied wins out.
+- use this method to clone objects, create a clone with new properties, or change an objects properties
+- 
+
+```javascript
+const newerObj = Object.assign({}, obj, newObj, {street: '1 the street', city: 'London'});
+```
+
+OBJECT.KEYS()
+- returns an array of all the top level keys of the object passed in as an argument.
+- the sequence of the keys in the returned arrray varies between browsers
+
+NOTE: any keys of objects declared as values of top level keys are NOT returned.
+
+
+DELETING PROPERTIES
+- use the `delete` operator
+
+```javascript
+delete newerObj.age;
+delete newerObj['street'];
+```
+
+**Looping and iterating**
+
+Looping is the process of executing a set of statements repeatedly until a condition is met. In javascript we have `for` and `while` loops.
+- use `for` loops when you need to repeat the process for a set number of times
+- use `while` loop when there is no set number of times, loop while a condition holds true. Make sure the condition updates every iteration o make sure the loop terminates.
+
+Iteration is the process of executing a set of statements once for each element in a collection. Prior to ES2015 `for` and `while` loops were used. 
+
+ES2015 introduced the `for...of` statement to iterate over arrays:
+
+```javascript
+const myArray = ['a', 'b', 'c', 'd', 'e'];
+
+for(const element of myArray){
+  console.log(element);
+}
+```
+
+There's no need to initialize a counter, increment it, check a condition, or use bracket notation to access the array element. We can use `const` instead of `let` since each iteration we're assigning a new array value to the element variable.
+
+NOTE: we can also use `for...of` to iterate over strings, since they are array's of characters.
+
+
+ES2015 introduced the `for...in` statement to iterate over objects:
+
+```javascript
+for(const <KEY> in <OBJECT>){
+  // do something
+}
+```
+
+`for...in` passes in each object key in turn, you can use bracket notation to access each value in turn. dot notation does not work(returning undefined), returning undefined since there are no properties on the object called 'key'
+
+```javascript
+const address = {
+  street1: '11 Broadway',
+  street2: '2nd Floor',
+  city: 'New York',
+  state: 'NY',
+  zipCode: 10004
+};
+
+for (const key in address) {
+  console.log(key); //=> returns the key
+}
+
+for (const key in address) {
+  console.log(address[key]); // returns the value
+}
+```
+
+NOTE: DO NOT use `for...in` to iterate over arrays. Arrays are ordered objects, so we would expect to iterate over the elements in order. `for...in` is not guarenteed to iterate over the elements in order.
+
+
+ITERATING OVER NESTED ARRAYS AND OBJECTS
+
+the `for...of` and for...in` statements iterate over the top level elements of an array or object. In order to traverse over nested arrays and objects we have to user recursion. A recursive function is one that calls itself.
+
+```javascript
+function deepIterator (target) {
+  if (typeof target === 'object') {
+    for (const key in target) {
+      deepIterator(target[key]);
+    }
+  } else {
+    console.log(target);
+  }
+}
+```
+
+When we invoke deepIterator() with an argument, the function first checks if the argument is an object or array (recall that the typeof operator returns "object" for arrays as well). 
+If the argument isn't an object, deepIterator() simply console.log()s out the argument and exits. 
+However, if the argument is an object, we iterate over the properties (or elements) in the object, passing each to deepIterator() and re-invoking the function.
 
