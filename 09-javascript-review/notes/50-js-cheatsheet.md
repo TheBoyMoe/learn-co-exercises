@@ -449,7 +449,20 @@ function second () {
 }
 ```
 
-If we place the first() unction in second(), it's lexical scope changes, it now finds 'myVar' in the second() function, it's immediate outer scope is now the second() function.
+If we place the first() function in second(), it's lexical scope changes, it now finds 'myVar' in the second() function, it's immediate outer scope is now the second() function.
+
+
+**First Class Functions**
+
+Re-cap statements vs expressions
+- statement -> unit of code that does someting
+- expression -> unit of code that produces a value
+
+First-class functions can:
+- be assigned to a variable as a value
+- be passed to a function as an arg
+- can be returned from a function as a value
+- can be stored as a data structure, as elements within an array or as properties of an object.
 
 
 **Common Javascript Errors**
@@ -503,6 +516,7 @@ Hoisting is the result of the two phase way in which the js engine executes js c
 NOTE: variables declared with `let` and `const` ARE hoisted, the js engine simply does not allow them to be referenced before they're initialized - causes the `ERROR: Uncaught ReferenceError: xxxxx is not defined`
 
 
+
  ## Data Structures in Javascript
 
 
@@ -537,7 +551,7 @@ allCats;
 // => ["Hobbes", "Felix", "Tom", "Garfield"]
 ```
 
-SLICE
+SLICE()
 We can non-destructively remove elements from an array using the `slice()` method.
 - calling `slice()` with no args returns a copy of the original array.
 	- primitive values in the array are copied - change one in one array and it's not changed in the other array.
@@ -547,14 +561,14 @@ We can non-destructively remove elements from an array using the `slice()` metho
 - if we provide a negative index, slice starts from the end.
 
 
-SPLICE
+SPLICE()
 Removes elements destructively - mutates the orignal.
 - passing a single argument - marks the starting point. Returns a new array containing the removed elements, the original is mutated with those elements removed.
 - passing two args - 2nd arg is the number of elements to remove, begining from start.
 - passing in 3 or more arguments, and every additional arg will be inserted into the original at the start position. An array of the removed elements is returned. If the second arg is 0, we will not remove any elements.
 
 
-FILTER
+FILTER()
 Used to filter arrays, returns an array that contains the elements that matched the condition. Filter delegates the actual comparison to a function you pass to filter.
 
 ```javascript
@@ -579,8 +593,9 @@ function callback(elm){
 }
 ```
 
-MAP
+MAP()
 Iterates over every element in an array, transforming the element before return the elements in a new array. `map()` delegates transforming the array elements to a callback function, which is passed to map as the sole argument.
+- map passess the elm, it's index and a copy of the array on each iteration to the callback function.
 
 ```javascript
 
@@ -598,6 +613,104 @@ function map(collection, callback){
 function callback(elm){
 	return elm * 2;
 }
+ ```
+
+FOREACH()
+Iterates over every element in the array once, taking one argument - the callback function, to which it delegates the action to be performed to the element.
+- like `map()`, `forEach()` passes the elm, it's index and the array.
+
+```javascript
+
+// creating a custom forEach
+function myForEach(arr, cb){
+  for(const elm of arr){
+    cb(elm, arr.indexOf(elm), arr);
+  }
+}
+
+function callback(elm, i, array){
+  // do some thing
+}
+
+```
+
+SORT()
+Sorts arrays 'in-place' - destructively re-arrange the elements in the original array.
+- works by coercing each element into a string and comparing the Unicode value of each character, 'A' comes before 'B'.
+- fine if all you're sorting are strings of the same case.
+- sort takes one arg, a callback, which you can use to customise it's behaviour.
+- the callback(comparator) itself takes two elements which it compares each time the comparison is invoked
+
+```javascript
+// sort strings
+const array = ['John', 'ian', 'brian', 'Bob', 'Simon', 'adam'];
+
+function comparator(a, b){
+  return a.localeCompare(b);
+}
+
+array.sort(comparator);
+//=> [ 'adam', 'Bob', 'brian', 'ian', 'John', 'Simon' ]
+
+
+// sort numbers
+const numArray = [0,12,2,1,5,10,23,4,56,32];
+
+// sort numbers in ASC order
+function ascComparator(a, b){
+  return a - b;
+}
+
+numArray.sort(ascComparator);
+//=> [ 0, 1, 2, 4, 5, 10, 12, 23, 32, 56 ]
+
+
+// sort numbers in DESC order
+function descComparator(a, b){
+  return b - a;
+}
+numArray.sort(desComparator);
+//=> [ 56, 32, 23, 12, 10, 5, 4, 2, 1, 0 ]
+```
+
+READUCE()
+Iterates through an array, applying a callback function against an accumulator and each element in turn, reducing the array to a single value.
+- it takes two args, the callback function and the initial value.
+- to sum a series of values, the initial value would be 0.
+- to reduce an array of values to a single object, pass in {}.
+- to reduce an array of objects to a simpler array of values, pass in [].
+
+The callback function takes four args:
+- the reduced value as it curently stands/initial value,
+- the current element,
+- it's index, and
+- the original array.
+
+```javascript
+const products = [
+  { name: 'Head & Shoulders Shampoo', price: 4.99 },
+  { name: 'Twinkies', price: 7.99 },
+  { name: 'Oreos', price: 6.49 },
+  { name: 'Jasmine-scented bath pearls', price: 13.99 }
+];
+
+const stringify = function (agg, el, i, arr) {
+  let stringifiedElement = el.name + ' is $' + el.price + '. ';
+
+  if (i === arr.length - 1) {
+    stringifiedElement += 'The total price is $' + (agg.totalPrice + el.price) + '.';
+    return agg.string + stringifiedElement;
+  }
+
+  return {
+    string: agg.string + stringifiedElement,
+    totalPrice: agg.totalPrice + el.price
+  };
+};
+
+products.reduce(stringify, { string: '', totalPrice: 0 });
+
+// => "Head & Shoulders Shampoo is $4.99. Twinkies is $7.99. Oreos is $6.49. Jasmine-scented bath pearls is $13.99. The total price is $33.46."
 ```
 
 
@@ -755,4 +868,95 @@ function deepIterator (target) {
 When we invoke deepIterator() with an argument, the function first checks if the argument is an object or array (recall that the typeof operator returns "object" for arrays as well). 
 If the argument isn't an object, deepIterator() simply console.log()s out the argument and exits. 
 However, if the argument is an object, we iterate over the properties (or elements) in the object, passing each to deepIterator() and re-invoking the function.
+
+
+**Creating Objects with Constructor Functions**
+
+Using object literals and setting properties results in a lot of repeated code. Using the `constructor function` we can create objects with the same attributes while assigning different values to those attributes.
+- by convention the name is capitalized
+- needs to be called with the `new` keyword - results in an object being created, properties set on that object and the object being returned.
+- NO explicit return is required
+- use the args passed in to set the obj's attributes
+- `this` is set to the actual object, allowing us to reference the object being instantiated inside the function.
+
+ADDING BEHAVIOURS
+
+We could define methods in the constructor function itself, e.g.
+
+```javasctipt
+function User (name, email){
+  this.name = name;
+  this.email = email;
+  this.info = function(){
+    return `my name is ${this.name}`;
+  }
+	this.details = ()=>{
+		return `my age is ${ this.age }`;
+	}
+}
+
+//=> when defining methods in the actual constructor, whether using the classical function(){} syntax or ES2015 arrow function syntax, `this` is set to the object, so prperties resolve properly.
+```
+
+Using PROTOTYPES is the preferred technique. In the technique above every object instantiated from the constructor will posses a copy of each defined method(the objects posses an actual copy of each method and not merley a reference to a shared method), increaing it's memory footprint.
+- every instantiated object has a reference to every method defined on the `prototype`
+
+
+```javascript
+User.prototype.info = function(){
+  return `my name is ${this.name}`;
+}
+
+// this does not work -> `this` is undefined
+User.prototype.details = ()=>{
+	return `my age is ${ this.age }`;
+}
+```
+
+**Creating Objects using Classes**
+
+The `class` keyword introduced in ES2015 uses function constructors and prototypes to create objects and define their methods - it's just an abstraction to make things easier, 'syntactic sugar'.
+- we now have a constructor which is run each time a new object is instantiated.
+- methods are declared in the class (defines the method on the Objet's prototype) - the word `function` is not used.
+- objects are instantiated in the same way as before with the `new` keyword.
+
+```javascript
+
+class User {
+	constructor(name, email){
+	  this.name = name;
+  	this.email = email;
+	}
+
+  info(){
+    return `my name is ${this.name}`;
+  }
+}
+
+const tom = new User('tom', 'tom@ex.com');
+```
+
+**Inheritance with Classes**
+
+One class can inherit from another through the `extends` keyword.
+- the new class inherits all the methods of it's 'parent'
+- is initialized with the same properties
+- we can override the parent's methods by defining another method with the same name, plus declare new ones.
+- we can also override those methods while calling the method of the `superclass` using the `super` keyword. This preserves the behaviour of the parent, while adding to it.
+
+```javascript
+class Teacher extends User {
+
+	info(){
+		// return `my name is ${ this.name }, I teach Math`;
+		return `${ super.info() }, I teach Math`;
+	}
+
+	teachMath(){
+		return 'I teach Math';
+	}
+}
+
+const teacher = new Teacher('sam', 'sam@ex.com');
+```
 

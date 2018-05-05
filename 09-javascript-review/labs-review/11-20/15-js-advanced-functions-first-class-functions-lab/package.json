@@ -1,0 +1,32 @@
+{
+  "name": "js-advanced-functions-first-class-functions-lab",
+  "version": "0.1.0",
+  "description": "First-Class Functions Lab for Learn.co",
+  "main": "index.js",
+  "scripts": {
+   "postinstall": "gem install learn-co",
+   "test": "node_modules/browser-sync/bin/browser-sync.js start --config node_modules/learn-browser/bs-config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/learn-co-curriculum/js-advanced-functions-first-class-functions-lab.git"
+  },
+  "keywords": [
+    "learn",
+    "flatiron school",
+    "javascript",
+    "functions",
+    "functional",
+    "first-class",
+    "code-along"
+  ],
+  "author": "Flatiron School",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/learn-co-curriculum/js-advanced-functions-first-class-functions-lab/issues"
+  },
+  "homepage": "https://github.com/learn-co-curriculum/js-advanced-functions-first-class-functions-lab#readme",
+  "devDependencies": {
+    "learn-browser": "^0.1.13"
+  }
+}
