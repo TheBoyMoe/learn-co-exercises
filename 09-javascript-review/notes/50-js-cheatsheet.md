@@ -686,6 +686,7 @@ The callback function takes four args:
 - it's index, and
 - the original array.
 
+
 ```javascript
 const products = [
   { name: 'Head & Shoulders Shampoo', price: 4.99 },
@@ -712,7 +713,6 @@ products.reduce(stringify, { string: '', totalPrice: 0 });
 
 // => "Head & Shoulders Shampoo is $4.99. Twinkies is $7.99. Oreos is $6.49. Jasmine-scented bath pearls is $13.99. The total price is $33.46."
 ```
-
 
 
 **Objects**
@@ -936,6 +936,51 @@ class User {
 const tom = new User('tom', 'tom@ex.com');
 ```
 
+**Using Classes with Closures**
+
+```javascript
+
+let ItemId = 0
+class Item {
+  constructor(manufacturePrice){
+    this.name = name
+    this.manufacturePrice = manufacturePrice
+    this.id = ++ItemId;
+  }
+  retailPrice(marketType){
+    return marketMultiplier * manufacturePrice
+  }
+}
+```
+
+In the example above we've placed `ItemId` ouside of the class(where everything else can reference it too) since classes do not allow private variables, only public methods. We can get around this with the use of a closure. In javascript functions keep a reference to the scope in which they are declared - means they have access to any variables declared there.
+
+```javascript
+
+function createItem(){
+
+  let ItemId = 0; // accessible only from within the class
+
+  // return the class
+  return class {
+    constructor(manufacturePrice){
+      this.name = name
+      this.manufacturePrice = manufacturePrice
+      this.id = ++ItemId;
+    }
+ 
+    retailPrice(marketType){
+      return marketMultiplier * manufacturePrice;
+    }
+  }
+}
+
+const Item = new CreateItem();
+let shirt = new Item('shirt', 12); //=> id: 1
+let shoe = new Item('shoe', 34); //=> id: 2
+```
+
+
 **Inheritance with Classes**
 
 One class can inherit from another through the `extends` keyword.
@@ -958,5 +1003,189 @@ class Teacher extends User {
 }
 
 const teacher = new Teacher('sam', 'sam@ex.com');
+```
+
+**this**
+
+One simple rule:
+If `this` is referenced directly inside a method, it equals the object that received the method call.  Otherwise this is global.
+
+In javascript a method is a property of an object that points to a function.
+
+STUFF TO REMEMBER:
+
+```javascript
+const person = {
+  myFunc: function(){
+    return this; //=> person object, called directly on the object - actual method since it's a property of an object
+  }
+
+  myArrowFunc: ()=>{
+    return this; //=> global object
+  }
+
+  myInnerFunc: function(){
+    function innerFunc(){
+      return this; //=> global object, since the function is not called on the object, it's called by the method - IT'S JUST A FUNCTION
+    }
+
+    return innerFunc();
+  }
+
+  myInnerArrowFunc: function(){
+    let innerArrow = ()=>{
+      return this;
+    }
+
+    return innerArrow(); //=> person object, arrow function encloses the outer functions `this` - closure
+  }
+
+}
+
+
+// This is the same if we use classes
+
+```javascript
+
+class Sandwich {
+	constructor(name, ingredients){
+		this.name = name;
+		this.ingredients = ingredients;
+	}
+
+	myFunc(){
+		return this; //=> sandwith object
+	}
+
+	myNestedFunc(){
+		return function(){
+			return this; //=> global object
+		}
+	}
+
+	myNestedArrowFunc(){
+		return ()=>{
+			return this; //=> sandwith object
+		}
+	}
+
+	items(){
+		return this.ingredients.map(function(item){
+			return this; //=> global object
+		}
+	}
+
+	itemsWithArrow(){
+		return this.ingredients.map((item)=>{
+			return this; //=> sandwich object
+		}
+	}
+}
+
+
+/////// summary
+
+const person = {
+  myFunc: function(){
+    return this; //=> person object
+    return innerFunc();
+  },
+
+  myInnerArrowFunc: function(){
+    let innerArrow = ()=>{
+      return this;
+    }
+    return innerArrow(); //=> person object
+  }
+
+}
+
+//// This explains why `this` is global when callback functions are invoked, e.g
+[1,2,3,4,5].map(function(elm){
+  console.log(this); //=> global object
+});
+
+[1,2,3,4,5].map(()=> {
+  return this; //=> global object
+});
+
+// map/filter/etc are methods called on an array object, but the callback is just a function called by the method, it's not called as a property on the object.
+// We can use the `bind()` to overvome this
+```
+
+NOTE: when using an arrow function as a callback within a object method, the arraw function retains the context of the outer method.
+
+```javascript
+
+const person = {
+  firstName: 'bob',
+  greet: function() {
+    return [1, 2, 3].map(() => this); //=> person object
+  }
+}
+```
+
+
+**Apply(), Call() and Bind()**
+
+We can use `call()` and `apply()` to set the value of `this`. `this` is equal to the first arg passed to `apply` and `call`.
+If the function takes args of it's own, pass them in order to `call()` following the first arg. With `apply()` wrap them in an array.
+
+```javascript
+const person = {
+  this.name: 'Tom'
+}
+
+
+function myFunc(){
+  return this;
+}
+
+myFunc(); //=> global object
+myFunc.call(person); //=> person object
+myFunc.apply(person); //=> person object
+```
+
+We can borrow functions from one object and invoke them against another.
+
+```javascript
+function items(){
+	const array = Array.prototype.slice.call(arguments);
+	//.......
+}
+
+`arguments` is an array-like object provided by javascript which gives us access to all the args passed into a function. By 'borrowing' the `slice()` method we can convert `arguments` into an array.
+
+
+`bind()` allows us to set the value of `this` but delay the calling of the function till later - allowing the function to be executed asynchronously.
+- used in the same way as `call()`, except the function is not called but instead returns a new function object, to be called later.
+
+```javascript
+const newFunc = myFunc.bind(myFunc);
+newFunc(); //=> person object
+```
+
+Another useful feature of `bind()`, it allows us to set the value of `this` inside callback functions to the object:
+NOTE: you can also use the arrow function as the callback.
+
+
+``javascript
+class User {
+  constructor(name, favoriteBand){
+    this.name = name
+    this.favoriteBand = favoriteBand
+  }
+  favoriteBandMatches(bands){
+    // here this is the User instance
+    bands.filter(function(band){
+      // here, this is global
+      return band == this.favoriteBand
+    }.bind(this))
+  }
+}
+
+let billy = new User('billy', 'paul simon')
+billy.favoriteBandMatches(['paul simon', 'the kooks'])
+// 'paul simon'
 ```
 

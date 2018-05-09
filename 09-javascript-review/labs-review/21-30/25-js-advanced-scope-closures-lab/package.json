@@ -1,0 +1,30 @@
+{
+  "name": "js-advanced-scope-closures-lab",
+  "version": "0.1.0",
+  "description": "Javascript Closures Lab for Learn.co",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/learn-co-curriculum/js-advanced-scope-closures-lab.git"
+  },
+  "scripts": {
+   "postinstall": "gem install learn-co",
+   "test": "node_modules/browser-sync/bin/browser-sync.js start --config node_modules/learn-browser/bs-config.js"
+ },
+  "keywords": [
+    "learn",
+    "flatiron school",
+    "javascript",
+    "closures",
+    "lab"
+  ],
+  "author": "Flatiron School",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/learn-co-curriculum/js-advanced-scope-closures-lab/issues"
+  },
+  "homepage": "https://github.com/learn-co-curriculum/js-advanced-scope-closures-lab#readme",
+  "devDependencies": {
+    "learn-browser": "^0.1.13"
+  }
+}
