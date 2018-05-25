@@ -4,7 +4,8 @@ require('isomorphic-fetch');
 require('es6-promise').polyfill();
 
 
-const NYT_API_KEY = '91acd1323e694da8b4548f80a4f8ffc8';
+const NYT_API_KEY = 'xxxxxx-xxxx-xxxxx';
+
 const URL = 'https://api.nytimes.com/svc/movies/v2/reviews/all.json?'
             + `api-key=${NYT_API_KEY}`;
 

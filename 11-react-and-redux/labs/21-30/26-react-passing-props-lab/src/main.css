@@ -1,0 +1,18 @@
+#main {
+  padding: 15px;
+}
+.fruit-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  list-style: none;
+}
+.fruit-list li {
+  font-size: 35px;
+}
