@@ -1,0 +1,340 @@
+{
+  "stats": {
+    "suites": 8,
+    "tests": 23,
+    "passes": 23,
+    "pending": 0,
+    "failures": 0,
+    "start": "2018-05-30T13:31:12.239Z",
+    "end": "2018-05-30T13:31:12.412Z",
+    "duration": 173
+  },
+  "tests": [
+    {
+      "title": "should return an Object with a type of \"ADD_QUOTE\" and a quote object",
+      "fullTitle": "Quotes Actions addQuote(quote: {}) should return an Object with a type of \"ADD_QUOTE\" and a quote object",
+      "duration": 2,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should return an Object with a type of \"REMOVE_QUOTE\" and a quoteId",
+      "fullTitle": "Quotes Actions removeQuote(quoteId: Integer) should return an Object with a type of \"REMOVE_QUOTE\" and a quoteId",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should return an Object with a type of \"UPVOTE_QUOTE\" and a quoteId",
+      "fullTitle": "Quotes Actions upvoteQuote(quoteId: Integer) should return an Object with a type of \"UPVOTE_QUOTE\" and a quoteId",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should return an Object with a type of \"DOWNVOTE_QUOTE\" and a quoteId",
+      "fullTitle": "Quotes Actions downvoteQuote(quoteId: INteger) should return an Object with a type of \"DOWNVOTE_QUOTE\" and a quoteId",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "renders without crashing",
+      "fullTitle": "App Component renders without crashing",
+      "duration": 8,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "always renders an h1 tag with \"Quote Maker\"",
+      "fullTitle": "App Component always renders an h1 tag with \"Quote Maker\"",
+      "duration": 4,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "always renders a `QuoteForm` component",
+      "fullTitle": "App Component always renders a `QuoteForm` component",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "always renders a `Quotes` components",
+      "fullTitle": "App Component always renders a `Quotes` components",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "renders without crashing",
+      "fullTitle": "QuoteForm Component renders without crashing",
+      "duration": 4,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "has a default state",
+      "fullTitle": "QuoteForm Component has a default state",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "always renders a form tag",
+      "fullTitle": "QuoteForm Component always renders a form tag",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "always renders a textarea[name=\"content\"] tag for quote content",
+      "fullTitle": "QuoteForm Component always renders a textarea[name=\"content\"] tag for quote content",
+      "duration": 2,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "always renders a input[name=\"author\"] tag for quote author",
+      "fullTitle": "QuoteForm Component always renders a input[name=\"author\"] tag for quote author",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should pass a new value to state using the handleOnChange function",
+      "fullTitle": "QuoteForm Component should pass a new value to state using the handleOnChange function",
+      "duration": 5,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should handleOnSubmit and preventDefault()",
+      "fullTitle": "QuoteForm Component should handleOnSubmit and preventDefault()",
+      "duration": 4,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should reset state after form handleOnSubmit",
+      "fullTitle": "QuoteForm Component should reset state after form handleOnSubmit",
+      "duration": 2,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should call addQuote prop on handleOnSubmit",
+      "fullTitle": "QuoteForm Component should call addQuote prop on handleOnSubmit",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should return the initial state",
+      "fullTitle": "Quotes Reducer should return the initial state",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should handle ADD_QUOTE",
+      "fullTitle": "Quotes Reducer should handle ADD_QUOTE",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should handle REMOVE_QUOTE",
+      "fullTitle": "Quotes Reducer should handle REMOVE_QUOTE",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should handle UPVOTE_QUOTE",
+      "fullTitle": "Quotes Reducer should handle UPVOTE_QUOTE",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should handle DOWNVOTE_QUOTE and decrement vote count down 1 if vote count is positive",
+      "fullTitle": "Quotes Reducer should handle DOWNVOTE_QUOTE and decrement vote count down 1 if vote count is positive",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should handle DOWNVOTE_QUOTE and do nothing if vote count is 0",
+      "fullTitle": "Quotes Reducer should handle DOWNVOTE_QUOTE and do nothing if vote count is 0",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    }
+  ],
+  "pending": [],
+  "failures": [],
+  "passes": [
+    {
+      "title": "should return an Object with a type of \"ADD_QUOTE\" and a quote object",
+      "fullTitle": "Quotes Actions addQuote(quote: {}) should return an Object with a type of \"ADD_QUOTE\" and a quote object",
+      "duration": 2,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should return an Object with a type of \"REMOVE_QUOTE\" and a quoteId",
+      "fullTitle": "Quotes Actions removeQuote(quoteId: Integer) should return an Object with a type of \"REMOVE_QUOTE\" and a quoteId",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should return an Object with a type of \"UPVOTE_QUOTE\" and a quoteId",
+      "fullTitle": "Quotes Actions upvoteQuote(quoteId: Integer) should return an Object with a type of \"UPVOTE_QUOTE\" and a quoteId",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should return an Object with a type of \"DOWNVOTE_QUOTE\" and a quoteId",
+      "fullTitle": "Quotes Actions downvoteQuote(quoteId: INteger) should return an Object with a type of \"DOWNVOTE_QUOTE\" and a quoteId",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "renders without crashing",
+      "fullTitle": "App Component renders without crashing",
+      "duration": 8,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "always renders an h1 tag with \"Quote Maker\"",
+      "fullTitle": "App Component always renders an h1 tag with \"Quote Maker\"",
+      "duration": 4,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "always renders a `QuoteForm` component",
+      "fullTitle": "App Component always renders a `QuoteForm` component",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "always renders a `Quotes` components",
+      "fullTitle": "App Component always renders a `Quotes` components",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "renders without crashing",
+      "fullTitle": "QuoteForm Component renders without crashing",
+      "duration": 4,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "has a default state",
+      "fullTitle": "QuoteForm Component has a default state",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "always renders a form tag",
+      "fullTitle": "QuoteForm Component always renders a form tag",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "always renders a textarea[name=\"content\"] tag for quote content",
+      "fullTitle": "QuoteForm Component always renders a textarea[name=\"content\"] tag for quote content",
+      "duration": 2,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "always renders a input[name=\"author\"] tag for quote author",
+      "fullTitle": "QuoteForm Component always renders a input[name=\"author\"] tag for quote author",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should pass a new value to state using the handleOnChange function",
+      "fullTitle": "QuoteForm Component should pass a new value to state using the handleOnChange function",
+      "duration": 5,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should handleOnSubmit and preventDefault()",
+      "fullTitle": "QuoteForm Component should handleOnSubmit and preventDefault()",
+      "duration": 4,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should reset state after form handleOnSubmit",
+      "fullTitle": "QuoteForm Component should reset state after form handleOnSubmit",
+      "duration": 2,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should call addQuote prop on handleOnSubmit",
+      "fullTitle": "QuoteForm Component should call addQuote prop on handleOnSubmit",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should return the initial state",
+      "fullTitle": "Quotes Reducer should return the initial state",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should handle ADD_QUOTE",
+      "fullTitle": "Quotes Reducer should handle ADD_QUOTE",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should handle REMOVE_QUOTE",
+      "fullTitle": "Quotes Reducer should handle REMOVE_QUOTE",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should handle UPVOTE_QUOTE",
+      "fullTitle": "Quotes Reducer should handle UPVOTE_QUOTE",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should handle DOWNVOTE_QUOTE and decrement vote count down 1 if vote count is positive",
+      "fullTitle": "Quotes Reducer should handle DOWNVOTE_QUOTE and decrement vote count down 1 if vote count is positive",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should handle DOWNVOTE_QUOTE and do nothing if vote count is 0",
+      "fullTitle": "Quotes Reducer should handle DOWNVOTE_QUOTE and do nothing if vote count is 0",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    }
+  ]
+}
